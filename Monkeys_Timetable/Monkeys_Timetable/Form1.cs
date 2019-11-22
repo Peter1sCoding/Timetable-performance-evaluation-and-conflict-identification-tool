@@ -13,7 +13,6 @@ namespace Monkeys_Timetable
     {
         Button b;
         Button a;
-        Button c;
         public Form1()
         {
             InitializeComponent();
