@@ -11,8 +11,10 @@ namespace Monkeys_Timetable
 {
     public partial class Form1 : Form
     {
-        Button b;
-        Button ef;
+        Button xk;
+        Button yzy;
+        Button lsq;
+        Button jyt;
 
         public Form1()
         {
