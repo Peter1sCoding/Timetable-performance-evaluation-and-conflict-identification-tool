@@ -12,7 +12,7 @@ namespace Monkeys_Timetable
     public partial class Form1 : Form
     {
         Button b;
-        Button a;
+
         public Form1()
         {
             InitializeComponent();
