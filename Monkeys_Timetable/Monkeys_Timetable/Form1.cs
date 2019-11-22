@@ -20,7 +20,6 @@ namespace Monkeys_Timetable
             InitializeComponent();
             this.Size = new Size(400,400);
             this.Text = "Timetable";
-
             
         }
     }
