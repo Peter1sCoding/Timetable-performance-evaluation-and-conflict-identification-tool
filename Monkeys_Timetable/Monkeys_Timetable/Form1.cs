@@ -17,7 +17,7 @@ namespace Monkeys_Timetable
         public Form1()
         {
             InitializeComponent();
-            this.Size = new Size(400,4244);
+            this.Size = new Size(4020,4244);
             this.Text = "JYT123";           
         }
     }
