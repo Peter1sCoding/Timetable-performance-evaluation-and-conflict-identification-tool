@@ -13,7 +13,7 @@ namespace Monkeys_Timetable
     {
         Button xk;
         Button yzy;
-        Button lsq;
+        
         
 
         public Form1()
