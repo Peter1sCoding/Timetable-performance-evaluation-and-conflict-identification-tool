@@ -47,11 +47,17 @@
     <Compile Include="Assessment.cs" />
     <Compile Include="Conflict_Indentification.cs" />
     <Compile Include="DataManager.cs" />
-    <Compile Include="DrawTimetable.cs">
+    <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DrawTimetable.Designer.cs">
-      <DependentUpon>DrawTimetable.cs</DependentUpon>
+    <Compile Include="LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PaintForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PaintForm.Designer.cs">
+      <DependentUpon>PaintForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
