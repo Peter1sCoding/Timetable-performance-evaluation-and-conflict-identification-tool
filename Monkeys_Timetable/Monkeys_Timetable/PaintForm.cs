@@ -11,6 +11,7 @@ namespace Monkeys_Timetable
 {
     public partial class PaintForm : Form //实现绘制运行图的界面
     {
+        Button a;
         public PaintForm()
         {
             InitializeComponent();
