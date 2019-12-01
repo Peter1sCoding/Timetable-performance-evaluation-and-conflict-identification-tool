@@ -71,6 +71,7 @@ namespace Monkeys_Timetable
                 //{
                 //    ServiceFrequency += 1;
                 //}
+                //如果需要划分时间 可以通过if判断 每个时段分别Count
             }
             return StationServiceCount;
         }
