@@ -45,7 +45,6 @@ namespace Monkeys_Timetable
                 x_DesSta = value;
             }
         }
-
         private Dictionary<string, List<int>> x_ArrDepTime; //封装列车在各站的到达出发时间以及是否停站 key为车站名，索引的List依次为到达时间、出发时间、是否停站(0、1)
         public Dictionary<string,List<int>> ArrDepTime
         {
@@ -58,8 +57,6 @@ namespace Monkeys_Timetable
                 x_ArrDepTime = value;
             }
         }
-
-        public int Conflict;//0,1,3,4,5,6,7
-        
+        public int Conflict;//0,1,3,4,5,6,7        
     }
 }
