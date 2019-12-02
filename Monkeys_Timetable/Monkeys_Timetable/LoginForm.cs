@@ -69,16 +69,5 @@ namespace Monkeys_Timetable
                 MessageBox.Show("密码错误！");
             }
         }
-        /*public void openFile_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Multiselect = true;
-            dialog.Title = "请选择文件夹";
-            dialog.Filter = "所有文件(*.*)|*.*";
-            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                file = dialog.FileName;
-            }
-        }*/
     }
 }

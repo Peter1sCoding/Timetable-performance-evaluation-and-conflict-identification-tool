@@ -8,6 +8,9 @@ namespace Monkeys_Timetable
     class Train //存入各列车的到发时刻及停站信息
     {
         private string x_trainNo; //车次信息
+
+        public bool newbool = true; //判断是否初次生成trainDic
+
         public string trainNo
         {
             get
@@ -45,18 +48,19 @@ namespace Monkeys_Timetable
                 x_DesSta = value;
             }
         }
-        private Dictionary<string, List<int>> x_ArrDepTime; //封装列车在各站的到达出发时间以及是否停站 key为车站名，索引的List依次为到达时间、出发时间、是否停站(0、1)
-        public Dictionary<string,List<int>> ArrDepTime
+        private Dictionary<string, List<string>> x_staTimeDic; //存放列车在各站时刻信息
+        public Dictionary<string, List<string>> staTimeDic
         {
             get
             {
-                return x_ArrDepTime;
+                return x_staTimeDic;
             }
             set
             {
-                x_ArrDepTime = value;
+                x_staTimeDic = value;
             }
         }
+
         public int Conflict;//0,1,3,4,5,6,7        
     }
 }
