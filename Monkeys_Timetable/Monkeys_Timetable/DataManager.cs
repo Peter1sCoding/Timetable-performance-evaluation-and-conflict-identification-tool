@@ -46,7 +46,22 @@ namespace Monkeys_Timetable
             }
         }
 
-        public void ReadFile(string Filename)
+        private List<String> x_stationStringList;//车站列表
+        public List<String> stationStringList
+        {
+            get
+            {
+                return x_stationStringList;
+            }
+            set
+            {
+                x_stationStringList = value;
+            }
+        }
+
+
+
+        public void ReadTrain(string Filename)
         {
             trainDic.Clear();
             StreamReader sr = new StreamReader(Filename, Encoding.UTF8);
@@ -89,6 +104,14 @@ namespace Monkeys_Timetable
             {
                 trainList.Add(trainDic[trainNumber.Key]);
             }
+            for(int i = 0; i < trainList.Count(); i++)
+            {
+                trainList[i].staList = new List<string>();
+                foreach (KeyValuePair<string, List<string>> trainNumber in trainList[i].staTimeDic)
+                {
+                    trainList[i].staList.Add(trainNumber.Key);
+                }
+            }
         }
 
         public void ReadStation(string Filename)
@@ -96,6 +119,7 @@ namespace Monkeys_Timetable
             StreamReader sr = new StreamReader(Filename, Encoding.UTF8);
             string str = sr.ReadLine();
             stationList = new List<Station>();
+            stationStringList = new List<String>();
             while (str != null)
             {
                 Station sta = new Station();
@@ -104,57 +128,60 @@ namespace Monkeys_Timetable
                 sta.stationName = strr[1];
                 sta.totalMile = int.Parse(strr[2]);
                 stationList.Add(sta);
+                stationStringList.Add(sta.stationName);
 
                 str = sr.ReadLine();
             }
             sr.Close();
         }
-        /*public void OutPutTimetable(List<Train> trainList, List<Station> stationlist)
+        public void OutPutTimetable(List<Train> trainList,List<string> stationlist)
         {
             FileStream fs = new FileStream(Environment.CurrentDirectory + @"\\运行图输出.csv", System.IO.FileMode.Open, System.IO.FileAccess.Write);
             StreamWriter sw = new StreamWriter(fs, Encoding.UTF8);
+
             sw.Write("车次,");
             for (int i = 0; i < stationlist.Count; i++)
             {
                 if (i == 0)
                 {
-                    sw.Write(stationlist[i].stationName + "出发,");
+                    sw.Write(stationlist[i] + "出发,");
                 }
                 else if (i == (stationlist.Count() - 1))
                 {
-                    sw.Write(stationlist[i].stationName + "到达,");
+                    sw.Write(stationlist[i] + "到达,");
                 }
                 else
                 {
-                    sw.Write(stationlist[i].stationName + "到达," + stationlist[i].stationName + "出发,");
+                    sw.Write(stationlist[i] + "到达," + stationlist[i] + "出发,");
                 }
             }
             sw.Write("\r\n");
             for (int i = 0; i < trainList.Count(); i++)
-            {
-                sw.Write(trainList[i].TrainNo + ",");
-                foreach (ModelTrainStation sta in trainList[i].StaList)
+            {               
+                sw.Write(trainList[i].trainNo + ",");
+                int begin = stationStringList.IndexOf(trainList[i].staList[0]);
+                int end = stationStringList.IndexOf(trainList[i].staList[trainList[i].staList.Count() - 1]);
+                string front = "";
+                for (int j = 0; j < begin; j++)
                 {
-                    DateTime Arrdate = ModelTrain.GetTimeFromIntValue(sta.ArrIntTime);
-                    DateTime Depdate = ModelTrain.GetTimeFromIntValue(sta.DepIntTime);
-                    if (stationlist.IndexOf(sta.StaName) == 0)
+                    if (j == 1)
                     {
-                        sw.Write(Depdate.Hour + ":" + Depdate.Minute + ":" + Depdate.Second + ",");
+                        front += "0,";
                     }
-                    else if (stationlist.IndexOf(sta.StaName) == (stationlist.Count() - 1))
+                    else if (j != 1)
                     {
-                        sw.Write(Arrdate.Hour + ":" + Arrdate.Minute + ":" + Arrdate.Second + ",");
-                    }
-                    else
-                    {
-                        sw.Write(Arrdate.Hour + ":" + Arrdate.Minute + ":" + Arrdate.Second + ",");
-                        sw.Write(Depdate.Hour + ":" + Depdate.Minute + ":" + Depdate.Second + ",");
+                        front += "0,0,";
                     }
                 }
+                foreach (string station in trainList[i].staList)
+                {
+                    sw.Write(trainList[i].staTimeDic[station][0] + ",");
+                    sw.Write(trainList[i].staTimeDic[station][1] + ",");                                  
+                }              
                 sw.Write("\r\n");
             }
             sw.Close();
             fs.Close();
-        }*/
+        }
     }
 }

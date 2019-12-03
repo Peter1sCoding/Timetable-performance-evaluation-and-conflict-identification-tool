@@ -61,6 +61,19 @@ namespace Monkeys_Timetable
             }
         }
 
+        private List<string> x_staList; //存放列车在各站时刻信息
+        public List<string> staList
+        {
+            get
+            {
+                return x_staList;
+            }
+            set
+            {
+                x_staList = value;
+            }
+        }
+
         public int Conflict;//0,1,3,4,5,6,7        
     }
 }

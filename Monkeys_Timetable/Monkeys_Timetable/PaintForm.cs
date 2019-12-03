@@ -59,7 +59,8 @@ namespace Monkeys_Timetable
             {
                 traFileName = dialog.FileName;
             }
-            dm.ReadFile(traFileName);
+            dm.ReadTrain(traFileName);
+            dm.OutPutTimetable(dm.trainList, dm.stationStringList);
         }
     }
 }
