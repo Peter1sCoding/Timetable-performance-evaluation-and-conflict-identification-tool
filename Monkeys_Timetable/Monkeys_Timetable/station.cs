@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Monkeys_Timetable
 {
-    class station
+    class Station
     {
         private string x_stationNo;//车站序号
         public string stationNo
@@ -16,7 +16,7 @@ namespace Monkeys_Timetable
             }
             set
             {
-                value = x_stationNo;
+                x_stationNo = value;
             }
         }
 
@@ -29,7 +29,7 @@ namespace Monkeys_Timetable
             }
             set
             {
-                value = x_stationName;
+                x_stationName = value;
             }
         }
 
@@ -42,7 +42,7 @@ namespace Monkeys_Timetable
             }
             set
             {
-                value = x_totalMile;
+                x_totalMile = value;
             }
         }
     }

@@ -30,6 +30,9 @@
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.读取文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.读取时刻表信息ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.读取车站信息ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip2 = new System.Windows.Forms.MenuStrip();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -38,7 +41,7 @@
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(22, 22);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.读取文件ToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Location = new System.Drawing.Point(0, 24);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1768, 31);
             this.menuStrip1.TabIndex = 0;
@@ -47,10 +50,36 @@
             // 
             // 读取文件ToolStripMenuItem
             // 
+            this.读取文件ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.读取时刻表信息ToolStripMenuItem,
+            this.读取车站信息ToolStripMenuItem1});
             this.读取文件ToolStripMenuItem.Name = "读取文件ToolStripMenuItem";
             this.读取文件ToolStripMenuItem.Size = new System.Drawing.Size(90, 27);
             this.读取文件ToolStripMenuItem.Text = "读取文件";
             this.读取文件ToolStripMenuItem.Click += new System.EventHandler(this.读取文件ToolStripMenuItem_Click);
+            // 
+            // 读取时刻表信息ToolStripMenuItem
+            // 
+            this.读取时刻表信息ToolStripMenuItem.Name = "读取时刻表信息ToolStripMenuItem";
+            this.读取时刻表信息ToolStripMenuItem.Size = new System.Drawing.Size(238, 28);
+            this.读取时刻表信息ToolStripMenuItem.Text = "读取时刻表信息";
+            this.读取时刻表信息ToolStripMenuItem.Click += new System.EventHandler(this.读取时刻表信息ToolStripMenuItem_Click);
+            // 
+            // 读取车站信息ToolStripMenuItem1
+            // 
+            this.读取车站信息ToolStripMenuItem1.Name = "读取车站信息ToolStripMenuItem1";
+            this.读取车站信息ToolStripMenuItem1.Size = new System.Drawing.Size(238, 28);
+            this.读取车站信息ToolStripMenuItem1.Text = "读取车站信息";
+            this.读取车站信息ToolStripMenuItem1.Click += new System.EventHandler(this.读取车站信息ToolStripMenuItem1_Click);
+            // 
+            // menuStrip2
+            // 
+            this.menuStrip2.ImageScalingSize = new System.Drawing.Size(22, 22);
+            this.menuStrip2.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip2.Name = "menuStrip2";
+            this.menuStrip2.Size = new System.Drawing.Size(1768, 24);
+            this.menuStrip2.TabIndex = 1;
+            this.menuStrip2.Text = "menuStrip2";
             // 
             // PaintForm
             // 
@@ -58,6 +87,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1768, 688);
             this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.menuStrip2);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "PaintForm";
             this.Load += new System.EventHandler(this.PaintForm_Load);
@@ -72,5 +102,8 @@
 
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem 读取文件ToolStripMenuItem;
+        private System.Windows.Forms.MenuStrip menuStrip2;
+        private System.Windows.Forms.ToolStripMenuItem 读取时刻表信息ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 读取车站信息ToolStripMenuItem1;
     }
 }
