@@ -11,11 +11,11 @@ namespace Monkeys_Timetable
         public double GetTravelSpeed()
         {
             double SumMile = 0;
-            foreach (Train aTrain in aDataManager.trainList)
+            foreach (Train aTrain in aDataManager.TrainList)
             {
                 SumMile += Convert.ToDouble(aTrain.trainNo);//添加方法后改为SumMile += aTrain.GetMile();
             }
-            double TravelSpeed = SumMile / aDataManager.trainList.Count();//添加方法后改为 RunningTime += trainlaststation.ArriveTime -  trainfirststation.DeptureTime;
+            double TravelSpeed = SumMile / aDataManager.TrainList.Count();//添加方法后改为 RunningTime += trainlaststation.ArriveTime -  trainfirststation.DeptureTime;
             return TravelSpeed;
         }
 
@@ -23,11 +23,11 @@ namespace Monkeys_Timetable
         {
             double SumMile = 0;
             double RunningTime = 0;
-            foreach (Train aTrain in aDataManager.trainList)
+            foreach (Train aTrain in aDataManager.TrainList)
             {
                 SumMile += Convert.ToDouble(aTrain.trainNo);//添加方法后改为SumMile += aTrain.GetMile();
             }
-            foreach (Train aTrain in aDataManager.trainList)
+            foreach (Train aTrain in aDataManager.TrainList)
             {
                 RunningTime += Convert.ToDouble(aTrain.trainNo);//添加方法后改为 RunningTime += trainNo.ArriveTime - trainNo+1.DeptureTime;(for i从开始到最后)
             }
@@ -60,7 +60,7 @@ namespace Monkeys_Timetable
         {
             //输入数字得到需要查看哪一个站的服务次数
             int StationServiceCount = 0;
-            foreach (Train aTrain in aDataManager.trainList)
+            foreach (Train aTrain in aDataManager.TrainList)
             {
                 //每一辆车在这个站的出发时间-到达时间>0 
                 //if(trainNo.DeptureTime or trainNo.ArriveTime == null)

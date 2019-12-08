@@ -61,6 +61,7 @@ namespace Monkeys_Timetable
                 traFileName = dialog.FileName;
             }
             dm.ReadTrain(traFileName);
+            dm.DivideUpDown();
         }
 
         private void 读取列车间隔信息ToolStripMenuItem_Click(object sender, EventArgs e)
