@@ -58,7 +58,7 @@
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 1, 0, 1);
             this.menuStrip1.Size = new System.Drawing.Size(913, 24);
-            this.menuStrip1.TabIndex = 0;
+            this.menuStrip1.TabIndex = 6;
             this.menuStrip1.Text = "menuStrip1";
             this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
             // 
@@ -137,32 +137,29 @@
             // 
             // checkBox1
             // 
-            this.checkBox1.AutoSize = true;
             this.checkBox1.Location = new System.Drawing.Point(680, 5);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(48, 16);
-            this.checkBox1.TabIndex = 2;
+            this.checkBox1.TabIndex = 0;
             this.checkBox1.Text = "上行";
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // checkBox2
             // 
-            this.checkBox2.AutoSize = true;
             this.checkBox2.Location = new System.Drawing.Point(734, 5);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(48, 16);
-            this.checkBox2.TabIndex = 3;
+            this.checkBox2.TabIndex = 0;
             this.checkBox2.Text = "下行";
             this.checkBox2.UseVisualStyleBackColor = true;
-            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
             // 
             // panel2
             // 
             this.panel2.Location = new System.Drawing.Point(12, 27);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(889, 447);
-            this.panel2.TabIndex = 4;
+            this.panel2.TabIndex = 0;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
             // panel3
@@ -170,7 +167,7 @@
             this.panel3.Location = new System.Drawing.Point(12, 27);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(889, 447);
-            this.panel3.TabIndex = 5;
+            this.panel3.TabIndex = 0;
             this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
             // 
             // PaintForm

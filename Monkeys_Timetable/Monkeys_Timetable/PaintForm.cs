@@ -101,26 +101,21 @@ namespace Monkeys_Timetable
         private void panel1_Paint_1(object sender, PaintEventArgs e)
         {
 
-        }//底图绘图区
+        }
 
         private void panel2_Paint(object sender, PaintEventArgs e)
         {
 
-        }//上行运行线绘图区
+        }
 
         private void panel3_Paint(object sender, PaintEventArgs e)
         {
 
-        }//下行运行线绘图区
+        }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
 
-        }//上行线
-
-        private void checkBox2_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }//下行线
+        }
     }
 }

@@ -55,9 +55,12 @@ namespace Monkeys_Timetable
                 gs.DrawLine(pp1, p1, p2);
             }
         }//运行图框架图
-        public void TrainLine()
+        public void TrainLine(Dictionary<string,List<string>> staTimeDic,double WinWidth, double WinHeight, double TotalMile, List<double> StationMile, Graphics gs)
         {
+            foreach(string s in staTimeDic.Keys)
+            {
 
+            }
         }//运行线铺画方法
 
     }
