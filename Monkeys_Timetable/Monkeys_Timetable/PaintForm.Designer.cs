@@ -144,6 +144,7 @@
             this.checkBox1.TabIndex = 2;
             this.checkBox1.Text = "上行";
             this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // checkBox2
             // 
@@ -154,6 +155,7 @@
             this.checkBox2.TabIndex = 3;
             this.checkBox2.Text = "下行";
             this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
             // 
             // panel2
             // 
