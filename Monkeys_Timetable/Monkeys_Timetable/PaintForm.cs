@@ -13,6 +13,7 @@ namespace Monkeys_Timetable
     {
         string traFileName;
         string staFileName;
+        string headFileName;
         DataManager dm;
         public PaintForm()
         {
@@ -60,7 +61,19 @@ namespace Monkeys_Timetable
                 traFileName = dialog.FileName;
             }
             dm.ReadTrain(traFileName);
-            dm.OutPutTimetable(dm.trainList, dm.stationStringList);
+        }
+
+        private void 读取列车间隔信息ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Multiselect = true;
+            dialog.Title = "请选择文件夹";
+            dialog.Filter = "所有文件(*.*)|*.*";
+            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                headFileName = dialog.FileName;
+            }
+            dm.ReadHeadway(headFileName);
         }
     }
 }

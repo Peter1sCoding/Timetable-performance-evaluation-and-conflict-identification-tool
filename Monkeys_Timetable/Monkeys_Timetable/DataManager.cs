@@ -59,6 +59,18 @@ namespace Monkeys_Timetable
             }
         }
 
+        private Dictionary<string, Dictionary<string,int>> x_HeadwayDic; //通过"站名+上下行+间隔类型"索引间隔时间标准
+        public Dictionary<string, Dictionary<string, int>> HeadwayDic
+        {
+            get
+            {
+                return x_HeadwayDic;
+            }
+            set
+            {
+                x_HeadwayDic = value;
+            }
+        }
 
 
         public void ReadTrain(string Filename)
@@ -182,6 +194,135 @@ namespace Monkeys_Timetable
             }
             sw.Close();
             fs.Close();
+        }
+
+        public void ReadHeadway(string FileName)//读取车站列车安全间隔
+        {
+            HeadwayDic = new Dictionary<string, Dictionary<string,int>>();
+            StreamReader sr = new StreamReader(FileName, Encoding.Default);
+            string[] speed = sr.ReadLine().Replace("\r", string.Empty).Replace("\"", string.Empty).Replace("\t", string.Empty).Replace("'", string.Empty).Replace("\\", string.Empty).Replace("\0", string.Empty).Replace("?", string.Empty).Replace("*", string.Empty).Split(',');
+
+            string speed1 = speed[2].Substring(2, 3);
+            string speed2 = speed[11].Substring(2, 3);
+            sr.ReadLine();
+            string str = sr.ReadLine();
+            while (str != null)
+            {
+                str = str.Replace("\r", string.Empty).Replace("\"", string.Empty).Replace("\t", string.Empty).Replace("'", string.Empty).Replace("\\", string.Empty).Replace("\0", string.Empty).Replace("?", string.Empty).Replace("*", string.Empty);
+                string[] strr = str.Split(',');
+                if (Convert.ToInt32(strr[1]) == 1) //判断上下行，存到不同的索引值中
+                {
+                    string key = ConcatenateAllString(strr[0], "down", speed1);
+                    if (!HeadwayDic.ContainsKey(key))
+                    {
+                        Dictionary<string, int> TrainHeadway = new Dictionary<string, int>();
+                        int dd = Convert.ToInt32(strr[2]);
+                        int df = Convert.ToInt32(strr[3]);
+                        int dt = Convert.ToInt32(strr[4]);
+                        int fd = Convert.ToInt32(strr[5]);
+                        int ff = Convert.ToInt32(strr[6]);
+                        int ft = Convert.ToInt32(strr[7]);
+                        int td = Convert.ToInt32(strr[8]);
+                        int tf = Convert.ToInt32(strr[9]);
+                        int tt = Convert.ToInt32(strr[10]);
+
+                        TrainHeadway.Add("到到", dd);
+                        TrainHeadway.Add("到发", df);
+                        TrainHeadway.Add("到通", dt);
+                        TrainHeadway.Add("发到", fd);
+                        TrainHeadway.Add("发发", ff);
+                        TrainHeadway.Add("发通", ft);
+                        TrainHeadway.Add("通到", td);
+                        TrainHeadway.Add("通发", tf);
+                        TrainHeadway.Add("通通", tt);
+                        HeadwayDic.Add(key, TrainHeadway);
+                    }
+                    string key1 = ConcatenateAllString(strr[0], "down", speed2);//存入第二个速度等级的间隔时分
+                    if (!HeadwayDic.ContainsKey(key1))
+                    {
+                        Dictionary<string, int> TrainHeadway = new Dictionary<string, int>();
+                        int dd = Convert.ToInt32(strr[11]);
+                        int df = Convert.ToInt32(strr[12]);
+                        int dt = Convert.ToInt32(strr[13]);
+                        int fd = Convert.ToInt32(strr[14]);
+                        int ff = Convert.ToInt32(strr[15]);
+                        int ft = Convert.ToInt32(strr[16]);
+                        int td = Convert.ToInt32(strr[17]);
+                        int tf = Convert.ToInt32(strr[18]);
+                        int tt = Convert.ToInt32(strr[19]);
+
+                        TrainHeadway.Add("到到", dd);
+                        TrainHeadway.Add("到发", df);
+                        TrainHeadway.Add("到通", dt);
+                        TrainHeadway.Add("发到", fd);
+                        TrainHeadway.Add("发发", ff);
+                        TrainHeadway.Add("发通", ft);
+                        TrainHeadway.Add("通到", td);
+                        TrainHeadway.Add("通发", tf);
+                        TrainHeadway.Add("通通", tt);
+                        HeadwayDic.Add(key1, TrainHeadway);
+                    }
+                }
+                else if (Convert.ToInt32(strr[1]) == 0)
+                {
+                    string key = ConcatenateAllString(strr[0], "up", speed1);
+                    if (!HeadwayDic.ContainsKey(key))
+                    {
+                        Dictionary<string, int> TrainHeadway = new Dictionary<string, int>();
+                        int dd = Convert.ToInt32(strr[2]);
+                        int df = Convert.ToInt32(strr[3]);
+                        int dt = Convert.ToInt32(strr[4]);
+                        int fd = Convert.ToInt32(strr[5]);
+                        int ff = Convert.ToInt32(strr[6]);
+                        int ft = Convert.ToInt32(strr[7]);
+                        int td = Convert.ToInt32(strr[8]);
+                        int tf = Convert.ToInt32(strr[9]);
+                        int tt = Convert.ToInt32(strr[10]);
+                        TrainHeadway.Add("到到", dd);
+                        TrainHeadway.Add("到发", df);
+                        TrainHeadway.Add("到通", dt);
+                        TrainHeadway.Add("发到", fd);
+                        TrainHeadway.Add("发发", ff);
+                        TrainHeadway.Add("发通", ft);
+                        TrainHeadway.Add("通到", td);
+                        TrainHeadway.Add("通发", tf);
+                        TrainHeadway.Add("通通", tt);
+                        HeadwayDic.Add(key, TrainHeadway);
+                    }
+                    string key1 = ConcatenateAllString(strr[0], "up", speed2);
+                    if (!HeadwayDic.ContainsKey(key1))
+                    {
+                        Dictionary<string, int> TrainHeadway = new Dictionary<string, int>();
+                        int dd = Convert.ToInt32(strr[11]);
+                        int df = Convert.ToInt32(strr[12]);
+                        int dt = Convert.ToInt32(strr[13]);
+                        int fd = Convert.ToInt32(strr[14]);
+                        int ff = Convert.ToInt32(strr[15]);
+                        int ft = Convert.ToInt32(strr[16]);
+                        int td = Convert.ToInt32(strr[17]);
+                        int tf = Convert.ToInt32(strr[18]);
+                        int tt = Convert.ToInt32(strr[19]);
+                        TrainHeadway.Add("到到", dd);
+                        TrainHeadway.Add("到发", df);
+                        TrainHeadway.Add("到通", dt);
+                        TrainHeadway.Add("发到", fd);
+                        TrainHeadway.Add("发发", ff);
+                        TrainHeadway.Add("发通", ft);
+                        TrainHeadway.Add("通到", td);
+                        TrainHeadway.Add("通发", tf);
+                        TrainHeadway.Add("通通", tt);
+                        HeadwayDic.Add(key1, TrainHeadway);
+                    }
+                }
+                str = sr.ReadLine();
+            }
+            sr.Close();
+        }
+
+        public string ConcatenateAllString(string a1,string a2,string a3)
+        {
+            string s = a1 + a2 + a3;
+            return s;
         }
     }
 }

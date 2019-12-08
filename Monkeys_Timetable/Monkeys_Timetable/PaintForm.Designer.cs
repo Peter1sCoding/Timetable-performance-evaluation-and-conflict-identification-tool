@@ -33,6 +33,7 @@
             this.读取时刻表信息ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.读取车站信息ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip2 = new System.Windows.Forms.MenuStrip();
+            this.读取列车间隔信息ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,7 +53,8 @@
             // 
             this.读取文件ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.读取时刻表信息ToolStripMenuItem,
-            this.读取车站信息ToolStripMenuItem1});
+            this.读取车站信息ToolStripMenuItem1,
+            this.读取列车间隔信息ToolStripMenuItem});
             this.读取文件ToolStripMenuItem.Name = "读取文件ToolStripMenuItem";
             this.读取文件ToolStripMenuItem.Size = new System.Drawing.Size(90, 27);
             this.读取文件ToolStripMenuItem.Text = "读取文件";
@@ -81,6 +83,13 @@
             this.menuStrip2.TabIndex = 1;
             this.menuStrip2.Text = "menuStrip2";
             // 
+            // 读取列车间隔信息ToolStripMenuItem
+            // 
+            this.读取列车间隔信息ToolStripMenuItem.Name = "读取列车间隔信息ToolStripMenuItem";
+            this.读取列车间隔信息ToolStripMenuItem.Size = new System.Drawing.Size(238, 28);
+            this.读取列车间隔信息ToolStripMenuItem.Text = "读取列车间隔信息";
+            this.读取列车间隔信息ToolStripMenuItem.Click += new System.EventHandler(this.读取列车间隔信息ToolStripMenuItem_Click);
+            // 
             // PaintForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 17F);
@@ -105,5 +114,6 @@
         private System.Windows.Forms.MenuStrip menuStrip2;
         private System.Windows.Forms.ToolStripMenuItem 读取时刻表信息ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 读取车站信息ToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem 读取列车间隔信息ToolStripMenuItem;
     }
 }
