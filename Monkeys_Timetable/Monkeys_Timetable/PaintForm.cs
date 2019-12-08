@@ -92,5 +92,10 @@ namespace Monkeys_Timetable
         {
 
         }
+
+        private void 绘制ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
