@@ -90,6 +90,7 @@
     </Compile>
     <None Include="沪宁时刻图.csv" />
     <None Include="沪宁车站信息.csv" />
+    <None Include="车站列车安全间隔.csv" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
