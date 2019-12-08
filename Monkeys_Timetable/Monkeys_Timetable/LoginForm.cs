@@ -69,5 +69,10 @@ namespace Monkeys_Timetable
                 MessageBox.Show("密码错误！");
             }
         }
+
+        private void LoginForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

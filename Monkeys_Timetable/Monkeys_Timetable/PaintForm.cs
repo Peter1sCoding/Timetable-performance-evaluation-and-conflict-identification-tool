@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 namespace Monkeys_Timetable
 {
@@ -61,6 +62,21 @@ namespace Monkeys_Timetable
             }
             dm.ReadTrain(traFileName);
             dm.OutPutTimetable(dm.trainList, dm.stationStringList);
+        }
+
+        private void 图像ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        public void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void 绘制运行图ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
