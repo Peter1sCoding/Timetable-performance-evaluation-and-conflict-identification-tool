@@ -24,7 +24,7 @@ namespace Monkeys_Timetable
             p2.X = 60;
             p2.Y = (int)(60 + Height);
             double add = Width / 18;
-            for (int i=6; i<=24;i++)
+            for (int i = 6; i<= 24;i++)
             {
                 gs.DrawLine(pp1, p1, p2);
                 p1.X = (int)(p1.X + add);

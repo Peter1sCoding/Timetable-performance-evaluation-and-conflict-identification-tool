@@ -117,6 +117,7 @@ namespace Monkeys_Timetable
                         List<string> timelist = new List<string>();
                         timelist.Add(strr[3]);
                         timelist.Add(strr[4]);
+                        timelist.Add(strr[5]);
                         tra.staTimeDic.Add(staname, timelist);
                     }
                     TrainDic.Add(tra.trainNo, tra);
@@ -128,6 +129,7 @@ namespace Monkeys_Timetable
                         List<string> timelist = new List<string>();
                         timelist.Add(strr[3]);
                         timelist.Add(strr[4]);
+                        timelist.Add(strr[5]);
                         TrainDic[tra.trainNo].staTimeDic.Add(staname, timelist);
                     }
                 }
@@ -182,7 +184,6 @@ namespace Monkeys_Timetable
                 sta.totalMile = int.Parse(strr[2]);
                 stationList.Add(sta);
                 stationStringList.Add(sta.stationName);
-
                 str = sr.ReadLine();
             }
             sr.Close();
