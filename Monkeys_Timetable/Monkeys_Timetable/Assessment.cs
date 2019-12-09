@@ -127,22 +127,29 @@ namespace Monkeys_Timetable
             }
             return StationService;
         }
-      
-       
-        //public int GetServiceFrequency()
-        //{
-        //    int ServiceFrequency = 0;
-        //    //输入数字得到需要查看哪一辆车的服务频率
-        //    //if(trainNo.DeptureTime or trainNo.ArriveTime == null)
-        //    //{
-        //    //    ServiceFrequency += 1;
-        //    //}
-        //    //elseif(trainNo.DeptureTime - trainNo.ArriveTime > 0)
-        //    //{
-        //    //    ServiceFrequency += 1;
-        //    //}
-        //    return ServiceFrequency;
-        //}
+
+        public List<int> GetServiceFrequency()//所有车的服务频率（停站次数及列车级别）级别还没有加
+        {
+            List<int> ServiceFrequency = new List<int>();
+            int aCount = 2;
+            foreach (Train aTrain in aDataManager.TrainList)
+            {
+                int stationNum = aTrain.staList.Count - 1;
+                for (int i = 1; i < stationNum; i++)
+                {
+                    List<string> staDicValue1 = new List<string>();
+                    staDicValue1 = aTrain.staTimeDic[aTrain.staList[i]];//车站的信息列表
+                    double aTime1 = getMinute(staDicValue1[0]);//列车在该站的到达时间
+                    double aTime2 = getMinute(staDicValue1[1]);//列车在该站的出发时间
+                    if (aTime2 - aTime1 != 0)
+                    {
+                        aCount += 1;
+                    }
+                }
+                 ServiceFrequency.Add(aCount);
+            }
+            return ServiceFrequency;
+        }
 
      
     }
