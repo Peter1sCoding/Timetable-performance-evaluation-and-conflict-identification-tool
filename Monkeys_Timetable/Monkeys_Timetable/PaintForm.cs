@@ -63,8 +63,7 @@ namespace Monkeys_Timetable
             }
             dm.ReadTrain(traFileName);
             dm.DivideUpDown();
-            dm.ToMinute();
-            Console.WriteLine(dm.TrainList[0].MinuteDic["阳澄湖"][0]);
+            Console.WriteLine(dm.TrainList[1].staTimeDic[dm.TrainList[1].staList[dm.TrainList[1].staList.Count - 1]][2]);
         }
 
         private void 读取列车间隔信息ToolStripMenuItem_Click(object sender, EventArgs e)
