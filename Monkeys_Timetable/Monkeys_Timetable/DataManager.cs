@@ -150,6 +150,7 @@ namespace Monkeys_Timetable
                     TrainList[i].staList.Add(trainNumber.Key);
                 }
             }
+            ToMinute();
         }
         public void DivideUpDown()
         {
