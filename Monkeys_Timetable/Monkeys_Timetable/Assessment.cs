@@ -31,7 +31,7 @@ namespace Monkeys_Timetable
                 double aMile = Convert.ToDouble(staDicValue2[2]);
                 double aTime2 = getMinute(staDicValue2[0]);//终到站的到达时间
                 double aTime = aTime2 - aTime1;
-                double aSpeed = aMile / aTime;
+                double aSpeed = 60 * aMile / aTime;
                 TravelSpeed.Add(aSpeed);
             }
             return TravelSpeed;
@@ -56,8 +56,8 @@ namespace Monkeys_Timetable
                 }
                 List<string> staDicValue3 = new List<string>();
                 staDicValue3 = aTrain.staTimeDic[aTrain.staList[aTrain.staList.Count - 1]];//终到站的信息列表
-                double aMile = Convert.ToDouble(staDicValue3[2]);
-                double aSpeed = aMile / aTime;
+                double aMile = Convert.ToDouble(staDicValue3[2]);//终到站的累计里程
+                double aSpeed = 60 * aMile / aTime;
                 TechnicalSpeed.Add(aSpeed);
             }
             return TechnicalSpeed;
@@ -76,14 +76,18 @@ namespace Monkeys_Timetable
             return SpeedIndex;
         }
 
-        public int GetHour(string aTime)//获得出发到达时刻在哪一个小时里
+        public int GetHour(string aTime)//获得出发或者到达时刻是在哪一个小时里
         {
-            string[] str = aTime.Split(':');
-            int aHour = Convert.ToInt32(str[0]);
+            int aHour = 0;
+            if (aTime != "")
+            {
+                string[] str = aTime.Split(':');
+                aHour = Convert.ToInt32(str[0]);
+            }
             return aHour;
         }
 
-        public Dictionary<string, int[]> GetStationServiceCount()//车站服务次数
+        public Dictionary<string, int[]> GetStationServiceCount()//车站服务次数，即有多少趟列车在本站进行服务，并按3小时为间隔将6-24点划分为6个时间段
         {
             Dictionary<string, int[]> StationService = new Dictionary<string, int[]>();
             foreach (string sta in aDataManager.stationStringList)
@@ -96,10 +100,27 @@ namespace Monkeys_Timetable
                         List<string> aList1 = aTrain.staTimeDic[sta];
                         int aHour1 = GetHour(aList1[0]);
                         int aHour2 = GetHour(aList1[1]);
-                        if (aHour1 >= (3 * i + 6) && aHour1 <= (3 * i + 9))
-                            aCount[i]++;
-                        if (aHour2 >= (3 * i + 6) && aHour2 <= (3 * i + 9))
-                            aCount[i]++;
+                        if (sta == aTrain.staList[0])
+                        {                       
+                            if (aHour2 >= (3 * i + 6) && aHour2 <= (3 * i + 9))
+                            {
+                                aCount[i]++;
+                            }
+                        }
+                        else if (sta == aTrain.staList[aTrain.staList.Count-1])
+                        {
+                            if (aHour1 >= (3 * i + 6) && aHour1 <= (3 * i + 9))
+                            {
+                                aCount[i]++;
+                            }
+                        }
+                        else if (aHour2 - aHour1 != 0)
+                        {
+                            if (aHour1 >= (3 * i + 6) && aHour1 <= (3 * i + 9))
+                            {
+                                aCount[i]++;
+                            }
+                        }
                     }
                 }
                 StationService.Add(sta, aCount);
