@@ -72,6 +72,18 @@ namespace Monkeys_Timetable
             {
                 x_staList = value;
             }
-        } 
+        }
+        private Dictionary<string, List<int>> x_MinuteDic; //存放列车在各站时刻int信息
+        public Dictionary<string, List<int>> MinuteDic
+        {
+            get
+            {
+                return x_MinuteDic;
+            }
+            set
+            {
+                x_MinuteDic = value;
+            }
+        }
     }
 }
