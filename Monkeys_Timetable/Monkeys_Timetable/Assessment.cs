@@ -9,7 +9,7 @@ namespace Monkeys_Timetable
     {
         public DataManager aDataManager = new DataManager();
 
-        public double getMinute(string aTime)//将时间字符串转化为分钟
+        public double GetMinute(string aTime)//将时间字符串转化为分钟
         {
             string[] str = aTime.Split(':');
             double aMinute1 = Convert.ToDouble(str[0]);
@@ -25,11 +25,11 @@ namespace Monkeys_Timetable
             {
                 List<string> staDicValue1 = new List<string>();
                 staDicValue1 = aTrain.staTimeDic[aTrain.staList[0]];//始发站的信息列表
-                double aTime1 = getMinute(staDicValue1[1]);//始发站的出发时间
+                double aTime1 = GetMinute(staDicValue1[1]);//始发站的出发时间
                 List<string> staDicValue2 = new List<string>();
                 staDicValue2 = aTrain.staTimeDic[aTrain.staList[aTrain.staList.Count - 1]];//终到站的信息列表
                 double aMile = Convert.ToDouble(staDicValue2[2]);
-                double aTime2 = getMinute(staDicValue2[0]);//终到站的到达时间
+                double aTime2 = GetMinute(staDicValue2[0]);//终到站的到达时间
                 double aTime = aTime2 - aTime1;
                 double aSpeed = 60 * aMile / aTime;
                 TravelSpeed.Add(aSpeed);
@@ -48,10 +48,10 @@ namespace Monkeys_Timetable
                 {
                 List<string> staDicValue1 = new List<string>();
                 staDicValue1 = aTrain.staTimeDic[aTrain.staList[i]];//出发站的信息列表
-                double aTime1 = getMinute(staDicValue1[1]);//出发站的出发时间
+                double aTime1 = GetMinute(staDicValue1[1]);//出发站的出发时间
                 List<string> staDicValue2 = new List<string>();
                 staDicValue2 = aTrain.staTimeDic[aTrain.staList[i+1]];//到达站的信息列表
-                double aTime2 = getMinute(staDicValue2[0]);//到达站的到达时间
+                double aTime2 = GetMinute(staDicValue2[0]);//到达站的到达时间
                 aTime = aTime + aTime2 - aTime1;
                 }
                 List<string> staDicValue3 = new List<string>();
@@ -139,8 +139,8 @@ namespace Monkeys_Timetable
                 {
                     List<string> staDicValue1 = new List<string>();
                     staDicValue1 = aTrain.staTimeDic[aTrain.staList[i]];//车站的信息列表
-                    double aTime1 = getMinute(staDicValue1[0]);//列车在该站的到达时间
-                    double aTime2 = getMinute(staDicValue1[1]);//列车在该站的出发时间
+                    double aTime1 = GetMinute(staDicValue1[0]);//列车在该站的到达时间
+                    double aTime2 = GetMinute(staDicValue1[1]);//列车在该站的出发时间
                     if (aTime2 - aTime1 != 0)
                     {
                         aCount += 1;
