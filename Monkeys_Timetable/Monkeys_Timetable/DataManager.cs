@@ -364,5 +364,31 @@ namespace Monkeys_Timetable
             string s = a1 + a2 + a3;
             return s;
         }
+
+        public void ToMinute()
+        {
+            foreach (Train train in TrainList)
+            {
+                train.MinuteDic = new Dictionary<string, List<int>>();
+                foreach (KeyValuePair<string, List<string>> time in train.staTimeDic)
+                {
+                    List<int> minutelist = new List<int>();
+                    if (train.staTimeDic[time.Key][0] != "")
+                    {
+                        string[] trainarrminute = train.staTimeDic[time.Key][0].Split(':');
+                        minutelist.Add(int.Parse(trainarrminute[0]) * 60 + int.Parse(trainarrminute[1]));
+                    }
+                    else minutelist.Add(0);
+
+                    if (train.staTimeDic[time.Key][1] != "")
+                    {
+                        string[] traindepminute = train.staTimeDic[time.Key][1].Split(':');
+                        minutelist.Add(int.Parse(traindepminute[0]) * 60 + int.Parse(traindepminute[1]));
+                    }
+                    else minutelist.Add(0);
+                    train.MinuteDic.Add(time.Key, minutelist);
+                }                                                                                                  
+            }
+        }
     }
 }
