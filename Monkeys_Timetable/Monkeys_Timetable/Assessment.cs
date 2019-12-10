@@ -93,15 +93,15 @@ namespace Monkeys_Timetable
             foreach (string sta in aDataManager.stationStringList)
             {
                 int[] aCount = new int[] { 0, 0, 0, 0, 0, 0 };
-                for (int i = 0; i < 6; i++)
+                foreach (Train aTrain in aDataManager.TrainList)
                 {
-                    foreach (Train aTrain in aDataManager.TrainList)
+                    List<string> aList1 = aTrain.staTimeDic[sta];
+                    int aHour1 = GetHour(aList1[0]);
+                    int aHour2 = GetHour(aList1[1]);
+                    for (int i = 0; i < 6; i++)
                     {
-                        List<string> aList1 = aTrain.staTimeDic[sta];
-                        int aHour1 = GetHour(aList1[0]);
-                        int aHour2 = GetHour(aList1[1]);
-                        if (aHour1 == 0)//始发站
-                        {                       
+                         if (aHour1 == 0)//始发站
+                        {
                             if (aHour2 >= (3 * i + 6) && aHour2 <= (3 * i + 9))
                             {
                                 aCount[i]++;
@@ -150,13 +150,6 @@ namespace Monkeys_Timetable
             }
             return ServiceFrequency;
         }
-        public Dictionary<List<string>,int> GetTrainDensity()
-        {
-            Dictionary<List<string>, int> TrainDensity = new Dictionary<List<string>, int>();
-
-            return TrainDensity;
-        }
-           
 
      
     }
