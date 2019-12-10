@@ -151,6 +151,44 @@ namespace Monkeys_Timetable
             return ServiceFrequency;
         }
 
-     
+        public Dictionary<List<string>, List<int>> GetTrainDensity()//列车密度表_返回形式(<站名，站名> -> <上行列车数，下行列车数>)
+        {
+            Dictionary<List<string>, List<int>> TrainDensity = new Dictionary<List<string>, List<int>>();
+            List<string> StationName = aDataManager.stationStringList;
+            for (int i = 0; i < StationName.Count - 1; i++)
+            {
+                List<string> Section = new List<string>();
+                Section.Add(StationName[i]);
+                Section.Add(StationName[i + 1]);//以上行区间站顺名为Key，可以得到上下行两者的密度
+                List<int> Density = new List<int>();
+                int DensityUp = 0;
+                int DensityDown = 0;
+                foreach (Train aTrain in aDataManager.UpTrainDic.Values)//遍历上行列车
+                {
+                    for (int j = 0; j < aTrain.staList.Count - 1; j++)//遍历该车经过的所有站
+                    {
+                        if (StationName[i] == aTrain.staList[j] && StationName[i + 1] == aTrain.staList[j + 1])
+                        {
+                            DensityUp++;
+                        }
+                    }
+                }
+                Density.Add(DensityUp);
+                foreach (Train aTrain in aDataManager.DownTrainDic.Values)//遍历下行列车
+                {
+                    for (int j = 0; j < aTrain.staList.Count - 1; j++)
+                    {
+                        if (StationName[i + 1] == aTrain.staList[j] && StationName[i] == aTrain.staList[j + 1])
+                        {
+                            DensityDown++;
+                        }
+                    }
+                }
+                Density.Add(DensityDown);
+                TrainDensity.Add(Section, Density);
+            }
+            return TrainDensity;
+        }
+
     }
 }
