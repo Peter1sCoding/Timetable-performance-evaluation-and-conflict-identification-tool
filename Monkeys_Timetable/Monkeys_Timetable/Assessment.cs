@@ -100,21 +100,21 @@ namespace Monkeys_Timetable
                         List<string> aList1 = aTrain.staTimeDic[sta];
                         int aHour1 = GetHour(aList1[0]);
                         int aHour2 = GetHour(aList1[1]);
-                        if (sta == aTrain.staList[0])
+                        if (aHour1 == 0)//始发站
                         {                       
                             if (aHour2 >= (3 * i + 6) && aHour2 <= (3 * i + 9))
                             {
                                 aCount[i]++;
                             }
                         }
-                        else if (sta == aTrain.staList[aTrain.staList.Count-1])
+                        else if (aHour2 == 0)//终到站
                         {
                             if (aHour1 >= (3 * i + 6) && aHour1 <= (3 * i + 9))
                             {
                                 aCount[i]++;
                             }
                         }
-                        else if (aHour2 - aHour1 != 0)
+                        else if (aList1[0] != aList1[1])//非通过的中间车站
                         {
                             if (aHour1 >= (3 * i + 6) && aHour1 <= (3 * i + 9))
                             {
@@ -150,6 +150,13 @@ namespace Monkeys_Timetable
             }
             return ServiceFrequency;
         }
+        public Dictionary<List<string>,int> GetTrainDensity()
+        {
+            Dictionary<List<string>, int> TrainDensity = new Dictionary<List<string>, int>();
+
+            return TrainDensity;
+        }
+           
 
      
     }
