@@ -25,10 +25,12 @@ namespace Monkeys_Timetable
             this.Height = 800;
             this.Width = 1200;
             this.splitContainer1.Dock = DockStyle.Fill;
+            splitContainer1.SplitterDistance = 499;
+            splitContainer1.SplitterWidth = 2;
+            splitContainer2.SplitterDistance = 399;
+            splitContainer2.SplitterWidth = 2;
             splitContainer1.IsSplitterFixed = true;
             splitContainer2.IsSplitterFixed = true;
-            this.splitContainer1.Panel1.Width = 500;
-            splitContainer2.Panel1.Height = splitContainer2.Height / 2;
             ShowPanel2();
         }
 
