@@ -45,5 +45,53 @@ namespace Monkeys_Timetable
                 x_totalMile = value;
             }
         }
+        private List<Train> x_upStaTraArrList;
+        public List<Train> upStaTraArrList
+        {
+            get
+            {
+                return x_upStaTraArrList;
+            }
+            set
+            {
+                x_upStaTraArrList = value;
+            }
+        }
+        private List<Train> x_upStaTraDepList;
+        public List<Train> upStaTraDepList
+        {
+            get
+            {
+                return x_upStaTraDepList;
+            }
+            set
+            {
+                x_upStaTraDepList = value;
+            }
+        }
+        private List<Train> x_downStaTraArrList;
+        public List<Train> downStaTraArrList
+        {
+            get
+            {
+                return x_downStaTraArrList;
+            }
+            set
+            {
+                x_downStaTraArrList = value;
+            }
+        }
+        private List<Train> x_downStaTraDepList;
+        public List<Train> downStaTraDepList
+        {
+            get
+            {
+                return x_downStaTraDepList;
+            }
+            set
+            {
+                x_downStaTraDepList = value;
+            }
+        }
     }
 }

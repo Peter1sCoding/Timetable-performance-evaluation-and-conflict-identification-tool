@@ -85,7 +85,6 @@ namespace Monkeys_Timetable
                 x_MinuteDic = value;
             }
         }
-
         private Dictionary<string, bool> x_isStopDic; //存放列车是否停站信息，true为停，false为不停
         public Dictionary<string, bool> isStopDic
         {
@@ -98,5 +97,43 @@ namespace Monkeys_Timetable
                 x_isStopDic = value;
             }
         }
+        private string x_ConflictString; //终到站
+        public string ConflictString
+        {
+            get
+            {
+                return x_ConflictString;
+            }
+            set
+            {
+                x_ConflictString = value;
+            }
+        }
+        private Dictionary<string,Train> x_ConflictTrain;
+        public Dictionary<string, Train> ConflictTrain
+        {
+            get
+            {
+                return x_ConflictTrain;
+            }
+            set
+            {
+                x_ConflictTrain = value;
+            }
+        }
+
+        private string x_speed;
+        public string speed
+        {
+            get
+            {
+                return x_speed;
+            }
+            set
+            {
+                x_speed = value;
+            }
+        }
+    
     }
 }

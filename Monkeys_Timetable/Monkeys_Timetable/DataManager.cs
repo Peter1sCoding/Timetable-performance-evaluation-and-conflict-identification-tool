@@ -481,5 +481,36 @@ namespace Monkeys_Timetable
                 }
             }
         }
+
+        public void AddTra2sta()
+        {
+            for(int i = 0; i < stationList.Count; i++)
+            {
+                stationList[i].upStaTraArrList = new List<Train>();
+                stationList[i].upStaTraDepList = new List<Train>();
+                for (int j = 0; j < upTrainList.Count; j++)
+                {
+                    if (upTrainList[j].staList.Contains(stationList[i].stationName))
+                    {
+                        stationList[i].upStaTraArrList.Add(upTrainList[j]);
+                        stationList[i].upStaTraDepList.Add(upTrainList[j]);
+                    }
+                }
+                stationList[i].upStaTraArrList.Sort();
+            }
+            for (int i = 0; i < stationList.Count; i++)
+            {
+                stationList[i].downStaTraArrList = new List<Train>();
+                stationList[i].downStaTraDepList = new List<Train>();
+                for (int j = 0; j < downTrainList.Count; j++)
+                {
+                    if (downTrainList[j].staList.Contains(stationList[i].stationName))
+                    {
+                        stationList[i].downStaTraArrList.Add(downTrainList[j]);
+                        stationList[i].downStaTraDepList.Add(downTrainList[j]);
+                    }
+                }
+            }
+        }
     }
 }

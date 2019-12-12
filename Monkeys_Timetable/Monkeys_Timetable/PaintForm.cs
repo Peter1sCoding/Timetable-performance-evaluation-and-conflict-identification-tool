@@ -63,8 +63,7 @@ namespace Monkeys_Timetable
             }
             dm.ReadTrain(traFileName);
             dm.DivideUpDown();
-            Console.WriteLine(dm.upTrainList.Count);
-            Console.WriteLine(dm.downTrainList.Count);
+            dm.AddTra2sta();
         }
 
         private void 读取列车间隔信息ToolStripMenuItem_Click(object sender, EventArgs e)
