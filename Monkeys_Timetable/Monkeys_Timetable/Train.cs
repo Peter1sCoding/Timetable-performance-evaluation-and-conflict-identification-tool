@@ -85,5 +85,18 @@ namespace Monkeys_Timetable
                 x_MinuteDic = value;
             }
         }
+
+        private Dictionary<string, bool> x_isStopDic; //存放列车是否停站信息，true为停，false为不停
+        public Dictionary<string, bool> isStopDic
+        {
+            get
+            {
+                return x_isStopDic;
+            }
+            set
+            {
+                x_isStopDic = value;
+            }
+        }
     }
 }

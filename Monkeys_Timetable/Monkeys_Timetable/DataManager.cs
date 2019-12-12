@@ -9,16 +9,40 @@ namespace Monkeys_Timetable
 {
     class DataManager  //读入到发时刻及车站等数据的类，封装读取列车、车站等方法
     {
-        private List<Train> x_TtrainList; //列车列表
+        private List<Train> x_TrainList; //列车列表
         public List<Train> TrainList
         {
             get
             {
-                return x_TtrainList;
+                return x_TrainList;
             }
             set
             {
-                x_TtrainList = value;
+                x_TrainList = value;
+            }
+        }
+        private List<Train> x_upTrainList; //列车列表
+        public List<Train> upTrainList
+        {
+            get
+            {
+                return x_upTrainList;
+            }
+            set
+            {
+                x_upTrainList = value;
+            }
+        }
+        private List<Train> x_downTrainList; //列车列表
+        public List<Train> downTrainList
+        {
+            get
+            {
+                return x_downTrainList;
+            }
+            set
+            {
+                x_downTrainList = value;
             }
         }
         private Dictionary<string, Train> m_TrainDic; //列车字典
@@ -150,7 +174,7 @@ namespace Monkeys_Timetable
                     TrainList[i].staList.Add(trainNumber.Key);
                 }
             }
-            ToMinute();
+            ToMinute(TrainList);
         }
         public void DivideUpDown()
         {
@@ -168,6 +192,38 @@ namespace Monkeys_Timetable
                     DownTrainDic.Add(TrainList[i].trainNo, TrainList[i]);
                 }
             }
+
+            upTrainList = new List<Train>();
+
+            foreach (KeyValuePair<string, Train> trainNumber in UpTrainDic)//给uptrainList赋值
+            {
+                upTrainList.Add(UpTrainDic[trainNumber.Key]);
+            }
+            for (int i = 0; i < upTrainList.Count(); i++)
+            {
+                upTrainList[i].staList = new List<string>();
+                foreach (KeyValuePair<string, List<string>> trainNumber in upTrainList[i].staTimeDic)
+                {
+                    upTrainList[i].staList.Add(trainNumber.Key);
+                }
+            }
+           ToMinute(upTrainList);
+
+            downTrainList = new List<Train>();
+
+            foreach (KeyValuePair<string, Train> trainNumber in DownTrainDic)//给uptrainList赋值
+            {
+                downTrainList.Add(DownTrainDic[trainNumber.Key]);
+            }
+            for (int i = 0; i < downTrainList.Count(); i++)
+            {
+                downTrainList[i].staList = new List<string>();
+                foreach (KeyValuePair<string, List<string>> trainNumber in downTrainList[i].staTimeDic)
+                {
+                    downTrainList[i].staList.Add(trainNumber.Key);
+                }
+            }
+            ToMinute(downTrainList);
         }
 
         public void ReadStation(string Filename)
@@ -367,7 +423,7 @@ namespace Monkeys_Timetable
             return s;
         }
 
-        public void ToMinute()
+        public void ToMinute(List<Train> trainList)
         {
             foreach (Train train in TrainList)
             {
@@ -389,7 +445,40 @@ namespace Monkeys_Timetable
                     }
                     else minutelist.Add(0);
                     train.MinuteDic.Add(time.Key, minutelist);
-                }                                                                                                  
+                }
+            }
+        }
+
+        public void GetStop()
+        {
+            for(int i = 0; i < upTrainList.Count; i++)
+            {
+                for (int j = 0; j < upTrainList[i].staList.Count; j++)
+                {
+                    if (upTrainList[i].staTimeDic[upTrainList[i].staList[j]][0] == upTrainList[i].staTimeDic[upTrainList[i].staList[j]][1])
+                    {
+                        upTrainList[i].isStopDic[upTrainList[i].staList[j]] = false;
+                    }
+                    else
+                    {
+                        upTrainList[i].isStopDic[upTrainList[i].staList[j]] = true;
+                    }
+                }
+            }
+
+            for (int i = 0; i < downTrainList.Count; i++)
+            {
+                for (int j = 0; j < downTrainList[i].staList.Count; j++)
+                {
+                    if (downTrainList[i].staTimeDic[downTrainList[i].staList[j]][0] == downTrainList[i].staTimeDic[downTrainList[i].staList[j]][1])
+                    {
+                        downTrainList[i].isStopDic[downTrainList[i].staList[j]] = false;
+                    }
+                    else
+                    {
+                        downTrainList[i].isStopDic[downTrainList[i].staList[j]] = true;
+                    }
+                }
             }
         }
     }
