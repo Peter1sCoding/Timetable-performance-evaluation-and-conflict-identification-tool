@@ -35,17 +35,16 @@
             this.读取列车间隔信息ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.绘制ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.绘制运行图ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.检测ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.计算ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.冲突检测ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.冲突检测数据ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.运行图显示冲突ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.计算ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.冲突检测数据ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.运行图显示冲突ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -55,7 +54,6 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.读取文件ToolStripMenuItem,
             this.绘制ToolStripMenuItem,
-            this.检测ToolStripMenuItem,
             this.计算ToolStripMenuItem1,
             this.冲突检测ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -113,12 +111,6 @@
             this.绘制运行图ToolStripMenuItem.Size = new System.Drawing.Size(175, 28);
             this.绘制运行图ToolStripMenuItem.Text = "绘制运行图";
             // 
-            // 检测ToolStripMenuItem
-            // 
-            this.检测ToolStripMenuItem.Name = "检测ToolStripMenuItem";
-            this.检测ToolStripMenuItem.Size = new System.Drawing.Size(56, 27);
-            this.检测ToolStripMenuItem.Text = "检测";
-            // 
             // 计算ToolStripMenuItem1
             // 
             this.计算ToolStripMenuItem1.Name = "计算ToolStripMenuItem1";
@@ -134,6 +126,19 @@
             this.冲突检测ToolStripMenuItem.Size = new System.Drawing.Size(90, 27);
             this.冲突检测ToolStripMenuItem.Text = "冲突检测";
             this.冲突检测ToolStripMenuItem.Click += new System.EventHandler(this.冲突检测ToolStripMenuItem_Click);
+            // 
+            // 冲突检测数据ToolStripMenuItem
+            // 
+            this.冲突检测数据ToolStripMenuItem.Name = "冲突检测数据ToolStripMenuItem";
+            this.冲突检测数据ToolStripMenuItem.Size = new System.Drawing.Size(209, 28);
+            this.冲突检测数据ToolStripMenuItem.Text = "冲突检测数据";
+            this.冲突检测数据ToolStripMenuItem.Click += new System.EventHandler(this.冲突检测数据ToolStripMenuItem_Click);
+            // 
+            // 运行图显示冲突ToolStripMenuItem
+            // 
+            this.运行图显示冲突ToolStripMenuItem.Name = "运行图显示冲突ToolStripMenuItem";
+            this.运行图显示冲突ToolStripMenuItem.Size = new System.Drawing.Size(209, 28);
+            this.运行图显示冲突ToolStripMenuItem.Text = "运行图显示冲突";
             // 
             // 计算ToolStripMenuItem
             // 
@@ -189,19 +194,6 @@
             this.panel3.TabIndex = 0;
             this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
             // 
-            // 冲突检测数据ToolStripMenuItem
-            // 
-            this.冲突检测数据ToolStripMenuItem.Name = "冲突检测数据ToolStripMenuItem";
-            this.冲突检测数据ToolStripMenuItem.Size = new System.Drawing.Size(238, 28);
-            this.冲突检测数据ToolStripMenuItem.Text = "冲突检测数据";
-            this.冲突检测数据ToolStripMenuItem.Click += new System.EventHandler(this.冲突检测数据ToolStripMenuItem_Click);
-            // 
-            // 运行图显示冲突ToolStripMenuItem
-            // 
-            this.运行图显示冲突ToolStripMenuItem.Name = "运行图显示冲突ToolStripMenuItem";
-            this.运行图显示冲突ToolStripMenuItem.Size = new System.Drawing.Size(238, 28);
-            this.运行图显示冲突ToolStripMenuItem.Text = "运行图显示冲突";
-            // 
             // PaintForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 17F);
@@ -232,7 +224,6 @@
         private System.Windows.Forms.ToolStripMenuItem 读取列车间隔信息ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 绘制ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 绘制运行图ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 检测ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 计算ToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem 计算ToolStripMenuItem;
         private System.Windows.Forms.Panel panel1;
