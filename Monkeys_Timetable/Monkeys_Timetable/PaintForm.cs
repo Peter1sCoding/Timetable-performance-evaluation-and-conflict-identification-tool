@@ -66,9 +66,9 @@ namespace Monkeys_Timetable
             dm.DivideUpDown();
             dm.AddTra2sta();
             dm.GetStop();
-            for(int i = 0; i < dm.stationList[0].upStaTraArrList.Count; i++)
+            for(int i = 0; i < dm.stationList[15].upStaTraArrList.Count; i++)
             {
-                Console.WriteLine(dm.stationList[0].upStaTraArrList[i].trainNo + "," + dm.stationList[0].upStaTraArrList[i].MinuteDic[dm.stationList[0].stationName][0] + "," + dm.stationList[0].upStaTraArrList[i].MinuteDic[dm.stationList[0].stationName][1]);
+                Console.WriteLine(dm.stationList[15].upStaTraArrList[i].trainNo + "," + dm.stationList[15].upStaTraArrList[i].MinuteDic[dm.stationList[15].stationName][0] + "," + dm.stationList[15].upStaTraArrList[i].MinuteDic[dm.stationList[15].stationName][1]);
             }
         }
 
@@ -129,17 +129,16 @@ namespace Monkeys_Timetable
         {
             ci = new Conflict_Indentification(dm.stationList, dm.HeadwayDic);
             ci.Conflict_Judge();
-            for(int i = 0; i < ci.stationList.Count; i++)
-            {
-                for(int j = 0; j < ci.stationList[i].upStaTraArrList.Count; j++)
+            //for(int i = 0; i < ci.stationList.Count; i++)
+            //
+                for(int j = 0; j < ci.stationList[0].upStaTraArrList.Count; j++)
                 {
-                    foreach (KeyValuePair<string, Train> Conflict in ci.stationList[i].upStaTraArrList[j].ConflictTrain)//给trainList赋值
+                    foreach (KeyValuePair<string, Train> Conflict in ci.stationList[0].upStaTraArrList[j].ConflictTrain)//给trainList赋值
                     {
                         Console.WriteLine(Conflict.Key);
                     }
-
                 }
-            }
+            //}
         }
     }
 }
