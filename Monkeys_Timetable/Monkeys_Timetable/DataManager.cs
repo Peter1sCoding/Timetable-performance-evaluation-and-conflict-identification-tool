@@ -132,6 +132,7 @@ namespace Monkeys_Timetable
                 str = str.Replace("\r", string.Empty).Replace("\"", string.Empty).Replace("\t", string.Empty).Replace("'", string.Empty).Replace("\\", string.Empty).Replace("\0", string.Empty).Replace("?", string.Empty).Replace("*", string.Empty);
                 String[] strr = str.Split(',');
                 tra.trainNo = strr[0];
+                tra.speed = "350";
                 string staname = strr[2];
                 if (!TrainDic.ContainsKey(tra.trainNo))
                 {
@@ -143,7 +144,7 @@ namespace Monkeys_Timetable
                         timelist.Add(strr[4]);
                         timelist.Add(strr[5]);
                         tra.staTimeDic.Add(staname, timelist);
-                    }
+                    }                  
                     TrainDic.Add(tra.trainNo, tra);
                 }
                 else
@@ -453,30 +454,32 @@ namespace Monkeys_Timetable
         {
             for(int i = 0; i < upTrainList.Count; i++)
             {
+                upTrainList[i].isStopDic = new Dictionary<string, bool>();
                 for (int j = 0; j < upTrainList[i].staList.Count; j++)
                 {
                     if (upTrainList[i].staTimeDic[upTrainList[i].staList[j]][0] == upTrainList[i].staTimeDic[upTrainList[i].staList[j]][1])
                     {
-                        upTrainList[i].isStopDic[upTrainList[i].staList[j]] = false;
+                        upTrainList[i].isStopDic.Add(upTrainList[i].staList[j], false);
                     }
                     else
                     {
-                        upTrainList[i].isStopDic[upTrainList[i].staList[j]] = true;
+                        upTrainList[i].isStopDic.Add(upTrainList[i].staList[j], true);
                     }
                 }
             }
 
             for (int i = 0; i < downTrainList.Count; i++)
             {
+                downTrainList[i].isStopDic = new Dictionary<string, bool>();
                 for (int j = 0; j < downTrainList[i].staList.Count; j++)
                 {
                     if (downTrainList[i].staTimeDic[downTrainList[i].staList[j]][0] == downTrainList[i].staTimeDic[downTrainList[i].staList[j]][1])
                     {
-                        downTrainList[i].isStopDic[downTrainList[i].staList[j]] = false;
+                        downTrainList[i].isStopDic.Add(downTrainList[i].staList[j], false);
                     }
                     else
                     {
-                        downTrainList[i].isStopDic[downTrainList[i].staList[j]] = true;
+                        downTrainList[i].isStopDic.Add(downTrainList[i].staList[j], true);
                     }
                 }
             }
@@ -496,7 +499,14 @@ namespace Monkeys_Timetable
                         stationList[i].upStaTraDepList.Add(upTrainList[j]);
                     }
                 }
-                stationList[i].upStaTraArrList.Sort();
+                stationList[i].upStaTraArrList.Sort(delegate (Train x, Train y)
+                {
+                    return x.MinuteDic[stationList[i].stationName][0].CompareTo(y.MinuteDic[stationList[i].stationName][0]);
+                });
+                stationList[i].upStaTraDepList.Sort(delegate (Train x, Train y)
+                {
+                    return x.MinuteDic[stationList[i].stationName][1].CompareTo(y.MinuteDic[stationList[i].stationName][1]);
+                });
             }
             for (int i = 0; i < stationList.Count; i++)
             {
@@ -510,6 +520,14 @@ namespace Monkeys_Timetable
                         stationList[i].downStaTraDepList.Add(downTrainList[j]);
                     }
                 }
+                stationList[i].downStaTraArrList.Sort(delegate (Train x, Train y)
+                {
+                    return x.MinuteDic[stationList[i].stationName][0].CompareTo(y.MinuteDic[stationList[i].stationName][0]);
+                });
+                stationList[i].downStaTraDepList.Sort(delegate (Train x, Train y)
+                {
+                    return x.MinuteDic[stationList[i].stationName][1].CompareTo(y.MinuteDic[stationList[i].stationName][1]);
+                });
             }
         }
     }

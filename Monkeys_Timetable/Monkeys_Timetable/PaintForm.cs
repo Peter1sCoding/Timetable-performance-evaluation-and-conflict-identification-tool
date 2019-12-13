@@ -16,6 +16,7 @@ namespace Monkeys_Timetable
         string staFileName;
         string headFileName;
         DataManager dm;
+        Conflict_Indentification ci;
         public PaintForm()
         {
             InitializeComponent();
@@ -64,6 +65,11 @@ namespace Monkeys_Timetable
             dm.ReadTrain(traFileName);
             dm.DivideUpDown();
             dm.AddTra2sta();
+            dm.GetStop();
+            for(int i = 0; i < dm.stationList[0].upStaTraArrList.Count; i++)
+            {
+                Console.WriteLine(dm.stationList[0].upStaTraArrList[i].trainNo + "," + dm.stationList[0].upStaTraArrList[i].MinuteDic[dm.stationList[0].stationName][0] + "," + dm.stationList[0].upStaTraArrList[i].MinuteDic[dm.stationList[0].stationName][1]);
+            }
         }
 
         private void 读取列车间隔信息ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -117,6 +123,23 @@ namespace Monkeys_Timetable
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void 冲突检测ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ci = new Conflict_Indentification(dm.stationList, dm.HeadwayDic);
+            ci.Conflict_Judge();
+            for(int i = 0; i < ci.stationList.Count; i++)
+            {
+                for(int j = 0; j < ci.stationList[i].upStaTraArrList.Count; j++)
+                {
+                    foreach (KeyValuePair<string, Train> Conflict in ci.stationList[i].upStaTraArrList[j].ConflictTrain)//给trainList赋值
+                    {
+                        Console.WriteLine(Conflict.Key);
+                    }
+
+                }
+            }
         }
     }
 }
