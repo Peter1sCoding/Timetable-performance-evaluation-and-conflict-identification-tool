@@ -35,6 +35,71 @@ namespace Monkeys_Timetable
             ShowPanel_2();
         }
 
+        #region Panel_1全局变量
+        Label lbTrain = new Label();
+        ComboBox cbTrain = new ComboBox();
+        Label lbTravalSpeed = new Label();
+        TextBox tbTravalSpeed = new TextBox();
+        Label lbTechicalSpeed = new Label();
+        TextBox tbTechicalSpeed = new TextBox();
+        Label lbSpeedIndex = new Label();
+        TextBox tbSpeedIndex = new TextBox();
+        Label lbTrainServe = new Label();
+        TextBox tbTrainServe = new TextBox();
+        #endregion
+
+        public void ShowPanel_1()
+        {
+            lbTrain.Text = "选择列车";
+            lbTrain.Font = new Font("宋体", 10, FontStyle.Bold);
+            lbTrain.Size = new Size(80, 30);
+            lbTrain.Location = new Point(130, 55);
+            //lbTrain.TextAlign = ContentAlignment.MiddleCenter;
+            this.splitContainer2.Panel1.Controls.Add(lbTrain);
+
+            cbTrain.Items.AddRange(new object[] { 1, 2, 3 });
+            //foreach (Train tra in aDataManager.TrainList)
+            //{
+            //    string trainName = tra.trainNo;
+            //    cbStation.Items.Add(trainName);
+            //}
+            cbTrain.Size = new Size(100, 30);
+            cbTrain.Location = new Point(210, 50);
+            splitContainer2.Panel1.Controls.Add(cbTrain);
+
+            lbTravalSpeed.Text = "旅行速度";
+            lbTravalSpeed.Size = new Size(80, 20);
+            lbTravalSpeed.Location = new Point(100, 100);
+            splitContainer2.Panel1.Controls.Add(lbTravalSpeed);
+            tbTravalSpeed.Size = new Size(80, 50);
+            tbTravalSpeed.Location = new Point(100, 100 + 20);
+            splitContainer2.Panel1.Controls.Add(tbTravalSpeed);
+
+            lbTechicalSpeed.Text = "技术速度";
+            lbTechicalSpeed.Size = new Size(80, 20);
+            lbTechicalSpeed.Location = new Point(300, 100);
+            splitContainer2.Panel1.Controls.Add(lbTechicalSpeed);
+            tbTechicalSpeed.Size = new Size(80, 50);
+            tbTechicalSpeed.Location = new Point(300, 100 + 20);
+            splitContainer2.Panel1.Controls.Add(tbTechicalSpeed);
+
+            lbSpeedIndex.Text = "速度系数";
+            lbSpeedIndex.Size = new Size(80, 20);
+            lbSpeedIndex.Location = new Point(100, 200);
+            splitContainer2.Panel1.Controls.Add(lbSpeedIndex);
+            tbSpeedIndex.Size = new Size(80, 50);
+            tbSpeedIndex.Location = new Point(100, 200 + 20);
+            splitContainer2.Panel1.Controls.Add(tbSpeedIndex);
+
+            lbTrainServe.Text = "列车服务频率";
+            lbTrainServe.Size = new Size(80, 20);
+            lbTrainServe.Location = new Point(300, 200);
+            splitContainer2.Panel1.Controls.Add(lbTrainServe);
+            tbTrainServe.Size = new Size(80, 50);
+            tbTrainServe.Location = new Point(300, 200 + 20);
+            splitContainer2.Panel1.Controls.Add(tbTrainServe);
+        }
+
         #region Panel_2 全局变量
         Label lbStation;
         ComboBox cbStation;
