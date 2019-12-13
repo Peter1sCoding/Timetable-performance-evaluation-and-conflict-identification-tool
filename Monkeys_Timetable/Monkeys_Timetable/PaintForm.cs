@@ -25,7 +25,7 @@ namespace Monkeys_Timetable
             dm = new DataManager();
             dm.ReadHeadway(Application.StartupPath + @"\\车站列车安全间隔.csv");
             dm.ReadStation(Application.StartupPath + @"\\沪宁车站信息.csv");
-            dm.ReadTrain(Application.StartupPath + @"\\沪宁城际标准格式数据最终版5.csv");
+            dm.ReadTrain(Application.StartupPath + @"\\沪宁时刻图.csv");
             dm.DivideUpDown();
             dm.AddTra2sta();
             dm.GetStop();
