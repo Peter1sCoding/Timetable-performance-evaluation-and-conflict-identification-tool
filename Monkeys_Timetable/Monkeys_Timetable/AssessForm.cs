@@ -32,6 +32,7 @@ namespace Monkeys_Timetable
             splitContainer2.SplitterWidth = 2;
             splitContainer1.IsSplitterFixed = true;
             splitContainer2.IsSplitterFixed = true;
+            ShowPanel_1();
             ShowPanel_2();
         }
 
