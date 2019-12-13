@@ -37,13 +37,15 @@
             this.绘制运行图ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.检测ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.计算ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.冲突检测ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.计算ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.冲突检测ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.冲突检测数据ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.运行图显示冲突ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -123,6 +125,16 @@
             this.计算ToolStripMenuItem1.Size = new System.Drawing.Size(56, 27);
             this.计算ToolStripMenuItem1.Text = "计算";
             // 
+            // 冲突检测ToolStripMenuItem
+            // 
+            this.冲突检测ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.冲突检测数据ToolStripMenuItem,
+            this.运行图显示冲突ToolStripMenuItem});
+            this.冲突检测ToolStripMenuItem.Name = "冲突检测ToolStripMenuItem";
+            this.冲突检测ToolStripMenuItem.Size = new System.Drawing.Size(90, 27);
+            this.冲突检测ToolStripMenuItem.Text = "冲突检测";
+            this.冲突检测ToolStripMenuItem.Click += new System.EventHandler(this.冲突检测ToolStripMenuItem_Click);
+            // 
             // 计算ToolStripMenuItem
             // 
             this.计算ToolStripMenuItem.Name = "计算ToolStripMenuItem";
@@ -132,7 +144,7 @@
             // panel1
             // 
             this.panel1.Location = new System.Drawing.Point(18, 38);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1334, 633);
             this.panel1.TabIndex = 1;
@@ -141,7 +153,7 @@
             // checkBox1
             // 
             this.checkBox1.Location = new System.Drawing.Point(1020, 7);
-            this.checkBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.checkBox1.Margin = new System.Windows.Forms.Padding(4);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(72, 23);
             this.checkBox1.TabIndex = 0;
@@ -152,7 +164,7 @@
             // checkBox2
             // 
             this.checkBox2.Location = new System.Drawing.Point(1101, 7);
-            this.checkBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.checkBox2.Margin = new System.Windows.Forms.Padding(4);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(72, 23);
             this.checkBox2.TabIndex = 0;
@@ -162,7 +174,7 @@
             // panel2
             // 
             this.panel2.Location = new System.Drawing.Point(18, 38);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1334, 633);
             this.panel2.TabIndex = 0;
@@ -171,18 +183,24 @@
             // panel3
             // 
             this.panel3.Location = new System.Drawing.Point(18, 38);
-            this.panel3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel3.Margin = new System.Windows.Forms.Padding(4);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1334, 633);
             this.panel3.TabIndex = 0;
             this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
             // 
-            // 冲突检测ToolStripMenuItem
+            // 冲突检测数据ToolStripMenuItem
             // 
-            this.冲突检测ToolStripMenuItem.Name = "冲突检测ToolStripMenuItem";
-            this.冲突检测ToolStripMenuItem.Size = new System.Drawing.Size(90, 27);
-            this.冲突检测ToolStripMenuItem.Text = "冲突检测";
-            this.冲突检测ToolStripMenuItem.Click += new System.EventHandler(this.冲突检测ToolStripMenuItem_Click);
+            this.冲突检测数据ToolStripMenuItem.Name = "冲突检测数据ToolStripMenuItem";
+            this.冲突检测数据ToolStripMenuItem.Size = new System.Drawing.Size(238, 28);
+            this.冲突检测数据ToolStripMenuItem.Text = "冲突检测数据";
+            this.冲突检测数据ToolStripMenuItem.Click += new System.EventHandler(this.冲突检测数据ToolStripMenuItem_Click);
+            // 
+            // 运行图显示冲突ToolStripMenuItem
+            // 
+            this.运行图显示冲突ToolStripMenuItem.Name = "运行图显示冲突ToolStripMenuItem";
+            this.运行图显示冲突ToolStripMenuItem.Size = new System.Drawing.Size(238, 28);
+            this.运行图显示冲突ToolStripMenuItem.Text = "运行图显示冲突";
             // 
             // PaintForm
             // 
@@ -223,5 +241,7 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.ToolStripMenuItem 冲突检测ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 冲突检测数据ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 运行图显示冲突ToolStripMenuItem;
     }
 }

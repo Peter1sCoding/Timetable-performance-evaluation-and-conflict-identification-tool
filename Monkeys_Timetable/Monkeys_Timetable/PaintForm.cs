@@ -17,11 +17,22 @@ namespace Monkeys_Timetable
         string headFileName;
         DataManager dm;
         Conflict_Indentification ci;
+        DataTable dt;
         public PaintForm()
         {
             InitializeComponent();
             this.Size = new Size(1300, 650);
             dm = new DataManager();
+            dm.ReadHeadway(Application.StartupPath + @"\\车站列车安全间隔.csv");
+            dm.ReadStation(Application.StartupPath + @"\\沪宁车站信息.csv");
+            dm.ReadTrain(Application.StartupPath + @"\\沪宁时刻图.csv");
+            dm.DivideUpDown();
+            dm.AddTra2sta();
+            dm.GetStop();
+            for(int i = 0; i < dm.stationList[3].upStaTraArrList.Count; i++)
+            {
+             Console.WriteLine(dm.stationList[3].upStaTraArrList[i].trainNo + "," + dm.stationList[3].upStaTraArrList[i].MinuteDic[dm.stationList[3].stationName][0] + "," + dm.stationList[3].upStaTraArrList[i].MinuteDic[dm.stationList[3].stationName][1]);
+            }
         }
 
         private void PaintForm_Load(object sender, EventArgs e)
@@ -66,10 +77,7 @@ namespace Monkeys_Timetable
             dm.DivideUpDown();
             dm.AddTra2sta();
             dm.GetStop();
-            for(int i = 0; i < dm.stationList[15].upStaTraArrList.Count; i++)
-            {
-                Console.WriteLine(dm.stationList[15].upStaTraArrList[i].trainNo + "," + dm.stationList[15].upStaTraArrList[i].MinuteDic[dm.stationList[15].stationName][0] + "," + dm.stationList[15].upStaTraArrList[i].MinuteDic[dm.stationList[15].stationName][1]);
-            }
+            
         }
 
         private void 读取列车间隔信息ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -127,18 +135,15 @@ namespace Monkeys_Timetable
 
         private void 冲突检测ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ci = new Conflict_Indentification(dm.stationList, dm.HeadwayDic);
+        }
+
+        private void 冲突检测数据ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ci = new Conflict_Indentification(dm.stationList, dm.HeadwayDic, dm.TrainDic);
             ci.Conflict_Judge();
-            //for(int i = 0; i < ci.stationList.Count; i++)
-            //
-                for(int j = 0; j < ci.stationList[0].upStaTraArrList.Count; j++)
-                {
-                    foreach (KeyValuePair<string, Train> Conflict in ci.stationList[0].upStaTraArrList[j].ConflictTrain)//给trainList赋值
-                    {
-                        Console.WriteLine(Conflict.Key);
-                    }
-                }
-            //}
+            dt = ci.ToDataTable();
+            ConflictForm cf = new ConflictForm(dt);
+            cf.Show();
         }
     }
 }

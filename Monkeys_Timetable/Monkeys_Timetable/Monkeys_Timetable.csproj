@@ -51,6 +51,12 @@
       <DependentUpon>AssessForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Assessment.cs" />
+    <Compile Include="ConflictForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConflictForm.Designer.cs">
+      <DependentUpon>ConflictForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Conflict_Indentification.cs" />
     <Compile Include="DataManager.cs" />
     <Compile Include="LoginForm.cs">
@@ -72,6 +78,9 @@
     <Compile Include="Train.cs" />
     <EmbeddedResource Include="AssessForm.resx">
       <DependentUpon>AssessForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConflictForm.resx">
+      <DependentUpon>ConflictForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>

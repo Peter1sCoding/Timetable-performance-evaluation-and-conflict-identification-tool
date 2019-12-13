@@ -109,19 +109,6 @@ namespace Monkeys_Timetable
                 x_ConflictString = value;
             }
         }
-        private Dictionary<string,Train> x_ConflictTrain;
-        public Dictionary<string, Train> ConflictTrain
-        {
-            get
-            {
-                return x_ConflictTrain;
-            }
-            set
-            {
-                x_ConflictTrain = value;
-            }
-        }
-
         private string x_speed;
         public string speed
         {
