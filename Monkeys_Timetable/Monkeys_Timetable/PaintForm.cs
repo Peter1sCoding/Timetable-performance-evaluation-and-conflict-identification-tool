@@ -16,7 +16,7 @@ namespace Monkeys_Timetable
         string staFileName;
         string headFileName;
         DataManager dm;
-        Conflict_Indentification ci;
+        Conflict_Identification ci;
         DataTable dt;
         public PaintForm()
         {
@@ -25,7 +25,7 @@ namespace Monkeys_Timetable
             dm = new DataManager();
             dm.ReadHeadway(Application.StartupPath + @"\\车站列车安全间隔.csv");
             dm.ReadStation(Application.StartupPath + @"\\沪宁车站信息.csv");
-            dm.ReadTrain(Application.StartupPath + @"\\沪宁时刻图.csv");
+            dm.ReadTrain(Application.StartupPath + @"\\沪宁城际标准格式数据最终版5.csv");
             dm.DivideUpDown();
             dm.AddTra2sta();
             dm.GetStop();
@@ -139,7 +139,7 @@ namespace Monkeys_Timetable
 
         private void 冲突检测数据ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ci = new Conflict_Indentification(dm.stationList, dm.HeadwayDic, dm.TrainDic);
+            ci = new Conflict_Identification(dm.stationList, dm.HeadwayDic, dm.TrainDic);
             ci.Conflict_Judge();
             dt = ci.ToDataTable();
             ConflictForm cf = new ConflictForm(dt);

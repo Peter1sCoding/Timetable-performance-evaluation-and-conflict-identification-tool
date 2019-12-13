@@ -7,7 +7,7 @@ using System.Data;
 namespace Monkeys_Timetable
 {
 
-    class Conflict_Indentification //封装判断各类间隔时间的方法
+    class Conflict_Identification //封装判断各类间隔时间的方法
     {
         public List<Station> stationList;
         public Dictionary<string, Dictionary<string, int>> HeadwayDic;
@@ -26,7 +26,7 @@ namespace Monkeys_Timetable
             }
         }
 
-        public Conflict_Indentification (List<Station> stationList, Dictionary<string, Dictionary<string, int>> HeadwayDic,Dictionary<string,Train> TrainDic)
+        public Conflict_Identification (List<Station> stationList, Dictionary<string, Dictionary<string, int>> HeadwayDic,Dictionary<string,Train> TrainDic)
         {
             this.stationList = stationList;
             this.HeadwayDic = HeadwayDic;
