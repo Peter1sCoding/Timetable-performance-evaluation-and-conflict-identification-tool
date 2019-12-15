@@ -85,8 +85,8 @@ namespace Monkeys_Timetable
                     {                    
                         int index1 = StaionList.IndexOf(train.staList[i]);
                         int index2 = StaionList.IndexOf(train.staList[i + 1]);
-                        int i1 = train.MinuteDic[train.staList[i]][1];
-                        int i2 = train.MinuteDic[train.staList[i + 1]][0];
+                        int i1 = train.MinuteDic[train.staList[i]][1] - 360;
+                        int i2 = train.MinuteDic[train.staList[i + 1]][0]-360;
                         p1.X = TimeX[i1];
                         p2.X = TimeX[i2];
                         p1.Y = staY[index1];
@@ -99,8 +99,8 @@ namespace Monkeys_Timetable
                     if (StaionList.IndexOf(train.staList[i]) != -1)
                     {
                         int index1 = StaionList.IndexOf(train.staList[i]);
-                        int i1 = train.MinuteDic[train.staList[i]][0];
-                        int i2 = train.MinuteDic[train.staList[i]][1];
+                        int i1 = train.MinuteDic[train.staList[i]][0]-360;
+                        int i2 = train.MinuteDic[train.staList[i]][1]-360;
                         p1.X = TimeX[i1];
                         p2.X = TimeX[i2];
                         p1.Y = staY[index1];
