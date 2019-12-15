@@ -31,7 +31,7 @@ namespace Monkeys_Timetable
             double add1 = Width / (18 * 60);
             int add = (int)Math.Round(add1);
             int xx = 0;
-            for (int j = 6 * 60; j < 1440; j++)
+            for (int j = 6 * 60; j <= 1440; j++)
             {
                 if(j%10==0)
                 {
