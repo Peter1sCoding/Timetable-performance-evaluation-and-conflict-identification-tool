@@ -17,6 +17,7 @@ namespace Monkeys_Timetable
         string headFileName;
         DataManager dm;
         Conflict_Identification ci;
+        LinePlan lp;
         DataTable dt;
         public PaintForm()
         {
@@ -144,6 +145,13 @@ namespace Monkeys_Timetable
             dt = ci.ToDataTable();
             ConflictForm cf = new ConflictForm(dt);
             cf.Show();
+        }
+
+        private void 查看开行方案ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DataTable dt2 = new DataTable();
+            lp = new LinePlan();
+            lp.Show();
         }
     }
 }

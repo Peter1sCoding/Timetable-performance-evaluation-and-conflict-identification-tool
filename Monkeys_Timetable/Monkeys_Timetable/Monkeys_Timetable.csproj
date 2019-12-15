@@ -59,6 +59,12 @@
     </Compile>
     <Compile Include="Conflict_Indentification.cs" />
     <Compile Include="DataManager.cs" />
+    <Compile Include="LinePlan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LinePlan.Designer.cs">
+      <DependentUpon>LinePlan.cs</DependentUpon>
+    </Compile>
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -81,6 +87,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ConflictForm.resx">
       <DependentUpon>ConflictForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LinePlan.resx">
+      <DependentUpon>LinePlan.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
