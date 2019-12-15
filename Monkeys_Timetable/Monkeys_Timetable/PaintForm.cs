@@ -18,6 +18,7 @@ namespace Monkeys_Timetable
         DataManager dm;
         Conflict_Identification ci;
         DataTable dt;
+        PaintTool pt = new PaintTool();
         public PaintForm()
         {
             InitializeComponent();
@@ -128,10 +129,7 @@ namespace Monkeys_Timetable
 
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
+        
 
         private void 冲突检测ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -145,5 +143,44 @@ namespace Monkeys_Timetable
             ConflictForm cf = new ConflictForm(dt);
             cf.Show();
         }
+
+        private void 绘制运行图ToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            Graphics gs;
+            gs = this.panel1.CreateGraphics();
+            int ix = dm.stationList.Count;
+            double total = dm.stationList[ix - 1].totalMile;
+            List<double> staMile = new List<double>();
+            for(int i=0;i<ix;i++)
+            {
+                staMile.Add(dm.stationList[i].totalMile);
+            }
+            pt.TimetableFrame(this.panel1.Width, this.panel1.Height, total, staMile, gs);
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if(checkBox1.Checked==true)
+            {
+
+            }
+            else
+            {
+
+            }
+
+        }//上行运行图的绘制
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox2.Checked == true)
+            {
+
+            }
+            else
+            {
+
+            }
+        }//下行运行图的绘制
     }
 }

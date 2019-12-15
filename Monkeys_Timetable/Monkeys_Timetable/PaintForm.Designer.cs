@@ -106,8 +106,9 @@
             // 绘制运行图ToolStripMenuItem
             // 
             this.绘制运行图ToolStripMenuItem.Name = "绘制运行图ToolStripMenuItem";
-            this.绘制运行图ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.绘制运行图ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.绘制运行图ToolStripMenuItem.Text = "绘制运行图";
+            this.绘制运行图ToolStripMenuItem.Click += new System.EventHandler(this.绘制运行图ToolStripMenuItem_Click_1);
             // 
             // 检测ToolStripMenuItem
             // 
@@ -153,6 +154,7 @@
             this.checkBox2.TabIndex = 0;
             this.checkBox2.Text = "下行";
             this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
             // 
             // panel2
             // 
