@@ -93,5 +93,17 @@ namespace Monkeys_Timetable
                 x_downStaTraDepList = value;
             }
         }
+        private float x_x; //LinePlan中的坐标
+        public float x
+        {
+            get
+            {
+                return x_x;
+            }
+            set
+            {
+                x_x = value;
+            }
+        }
     }
 }

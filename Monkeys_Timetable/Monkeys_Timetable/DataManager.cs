@@ -238,6 +238,7 @@ namespace Monkeys_Timetable
                 Station sta = new Station();
                 str = str.Replace("\r", string.Empty).Replace("\"", string.Empty).Replace("\t", string.Empty).Replace("'", string.Empty).Replace("\\", string.Empty).Replace("\0", string.Empty).Replace("?", string.Empty).Replace("*", string.Empty);
                 String[] strr = str.Split(',');
+                sta.stationNo = strr[0];
                 sta.stationName = strr[1];
                 sta.totalMile = int.Parse(strr[2]);
                 stationList.Add(sta);
