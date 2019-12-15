@@ -17,8 +17,8 @@ namespace Monkeys_Timetable
         string headFileName;
         DataManager dm;
         Conflict_Identification ci;
-        LinePlan lp;
         DataTable dt;
+        PaintTool pt = new PaintTool();
         public PaintForm()
         {
             InitializeComponent();
@@ -129,10 +129,7 @@ namespace Monkeys_Timetable
 
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
+        
 
         private void 冲突检测ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -147,11 +144,49 @@ namespace Monkeys_Timetable
             cf.Show();
         }
 
-        private void 查看开行方案ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void 绘制运行图ToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            DataTable dt2 = new DataTable();
-            lp = new LinePlan();
-            lp.Show();
+            Graphics gs;
+            gs = this.panel1.CreateGraphics();
+            int ix = dm.stationList.Count;
+            double total = dm.stationList[ix - 1].totalMile;
+            List<double> staMile = new List<double>();
+            for(int i=0;i<ix;i++)
+            {
+                staMile.Add(dm.stationList[i].totalMile);
+            }
+            pt.TimetableFrame(this.panel1.Width, this.panel1.Height, total, staMile, gs);
         }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            Graphics gs;
+            gs = this.panel2.CreateGraphics();
+            if (checkBox1.Checked==true)
+            {
+                panel2.Visible = true;
+                pt.TrainLine(gs, dm.upTrainList, dm.stationStringList);
+            }
+            else
+            {
+                panel2.Visible = false;
+            }
+
+        }//上行运行图的绘制
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            Graphics gs;
+            gs = this.panel3.CreateGraphics();
+            if (checkBox2.Checked == true)
+            {
+                panel3.Visible = true;
+                pt.TrainLine(gs, dm.upTrainList, dm.stationStringList);
+            }
+            else
+            {
+                panel3.Visible = false;
+            }
+        }//下行运行图的绘制
     }
 }
