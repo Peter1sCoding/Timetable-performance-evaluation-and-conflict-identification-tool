@@ -161,15 +161,23 @@ namespace Monkeys_Timetable
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             Graphics gs;
-            gs = this.panel2.CreateGraphics();
+            gs = this.panel1.CreateGraphics();
+            int ix = dm.stationList.Count;
+            double total = dm.stationList[ix - 1].totalMile;
+            List<double> staMile = new List<double>();
+            for (int i = 0; i < ix; i++)
+            {
+                staMile.Add(dm.stationList[i].totalMile);
+            }
             if (checkBox1.Checked==true)
             {
-                panel2.Visible = true;
+                pt.TimetableFrame(this.panel1.Width, this.panel1.Height, total, staMile, gs);
                 pt.TrainLine(gs, dm.upTrainList, dm.stationStringList);
             }
             else
             {
-                panel2.Visible = false;
+                gs.Clear(this.panel1.BackColor);
+                pt.TimetableFrame(this.panel1.Width, this.panel1.Height, total, staMile, gs);
             }
 
         }//上行运行图的绘制
@@ -177,16 +185,29 @@ namespace Monkeys_Timetable
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
             Graphics gs;
-            gs = this.panel3.CreateGraphics();
+            gs = this.panel1.CreateGraphics();
+            int ix = dm.stationList.Count;
+            double total = dm.stationList[ix - 1].totalMile;
+            List<double> staMile = new List<double>();
+            for (int i = 0; i < ix; i++)
+            {
+                staMile.Add(dm.stationList[i].totalMile);
+            }            
             if (checkBox2.Checked == true)
             {
-                panel3.Visible = true;
-                pt.TrainLine(gs, dm.upTrainList, dm.stationStringList);
+                pt.TimetableFrame(this.panel1.Width, this.panel1.Height, total, staMile, gs);
+                pt.TrainLine(gs, dm.downTrainList, dm.stationStringList);
             }
             else
             {
-                panel3.Visible = false;
+                gs.Clear(this.panel1.BackColor);
+                pt.TimetableFrame(this.panel1.Width, this.panel1.Height, total, staMile, gs);
             }
         }//下行运行图的绘制
+
+        private void panel3_Paint_1(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

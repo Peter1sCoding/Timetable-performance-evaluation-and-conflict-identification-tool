@@ -41,8 +41,6 @@
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -150,32 +148,22 @@
             // 
             // panel1
             // 
+            this.panel1.AutoScroll = true;
+            this.panel1.BackColor = System.Drawing.Color.Black;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Cursor = System.Windows.Forms.Cursors.Cross;
             this.panel1.Location = new System.Drawing.Point(12, 27);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1346, 710);
             this.panel1.TabIndex = 7;
             // 
-            // panel2
-            // 
-            this.panel2.Location = new System.Drawing.Point(12, 27);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1346, 710);
-            this.panel2.TabIndex = 8;
-            // 
-            // panel3
-            // 
-            this.panel3.Location = new System.Drawing.Point(12, 27);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1346, 710);
-            this.panel3.TabIndex = 9;
-            // 
             // PaintForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
+            this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1370, 749);
-            this.Controls.Add(this.panel3);
-            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.checkBox2);
             this.Controls.Add(this.checkBox1);
@@ -183,6 +171,9 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "PaintForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "运行图显示及检测分析工具V1.0";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.PaintForm_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -206,7 +197,5 @@
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel panel3;
     }
 }

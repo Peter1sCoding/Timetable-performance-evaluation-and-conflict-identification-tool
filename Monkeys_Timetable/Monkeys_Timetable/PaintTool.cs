@@ -28,14 +28,14 @@ namespace Monkeys_Timetable
             p2.X = 30;
             int a = StationMile.Count;
             p2.Y = (int)(5 + Height * StationMile[a - 1] / TotalMile);
-            double add1 = Width / (18 * 60);
+            double add1 = Width / (24 * 60);
             int add = (int)Math.Round(add1);
             int xx = 0;
-            for (int j = 6 * 60; j <= 1440; j++)
+            for (int j = 0; j <= 1440; j++)
             {
                 if(j%10==0)
                 {
-                    if (j % 6 == 0)
+                    if (j % 60 == 0)
                     {
                         gs.DrawLine(pp2, p1, p2);
                         TimeX.Add(p1.X);
@@ -85,8 +85,8 @@ namespace Monkeys_Timetable
                     {                    
                         int index1 = StaionList.IndexOf(train.staList[i]);
                         int index2 = StaionList.IndexOf(train.staList[i + 1]);
-                        int i1 = train.MinuteDic[train.staList[i]][1] - 360;
-                        int i2 = train.MinuteDic[train.staList[i + 1]][0]-360;
+                        int i1 = train.MinuteDic[train.staList[i]][1];
+                        int i2 = train.MinuteDic[train.staList[i + 1]][0];
                         p1.X = TimeX[i1];
                         p2.X = TimeX[i2];
                         p1.Y = staY[index1];
@@ -99,8 +99,8 @@ namespace Monkeys_Timetable
                     if (StaionList.IndexOf(train.staList[i]) != -1)
                     {
                         int index1 = StaionList.IndexOf(train.staList[i]);
-                        int i1 = train.MinuteDic[train.staList[i]][0]-360;
-                        int i2 = train.MinuteDic[train.staList[i]][1]-360;
+                        int i1 = train.MinuteDic[train.staList[i]][0];
+                        int i2 = train.MinuteDic[train.staList[i]][1];
                         p1.X = TimeX[i1];
                         p2.X = TimeX[i2];
                         p1.Y = staY[index1];
