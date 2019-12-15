@@ -15,13 +15,15 @@ namespace Monkeys_Timetable
 
         DataManager dm;
         Bitmap bmp;
-        DataTable PlanTable;
+        DataTable UpPlanTable;
+        DataTable DownPlanTable;
         Graphics g;
         Brush b;
         Font font;
         Pen p;
-        Dictionary<string, int> PlanDic;
-            
+        Dictionary<string, int> UpPlanDic;
+        Dictionary<string, int> DownPlanDic;
+
         public LinePlan()
         {
             InitializeComponent();
@@ -44,36 +46,57 @@ namespace Monkeys_Timetable
         }
         public void GetPlanTable()
         {
-            PlanTable = new DataTable();
-            PlanDic = new Dictionary<string, int>();
-            for(int i = 0; i < dm.stationList.Count; i++)
-            {
-                PlanTable.Columns.Add(dm.stationList[i].stationName);
-            }
-            for(int i = 0; i < dm.TrainList.Count; i++)
+            UpPlanTable = new DataTable();
+            UpPlanDic = new Dictionary<string, int>();
+            DownPlanTable = new DataTable();
+            DownPlanDic = new Dictionary<string, int>();
+
+            for(int i = 0; i < dm.upTrainList.Count; i++)
             {
                 string StaConList = "";
-                for (int j = 0; j < dm.TrainList[i].staList.Count; j++)
+                for (int j = 0; j < dm.upTrainList[i].staList.Count; j++)
                 {                    
                     if (j == 0)
                     {
-                        StaConList = dm.TrainList[i].staList[j];
+                        StaConList = dm.upTrainList[i].staList[j];
                     }
                     else
                     {
-                        StaConList = StaConList + "," + dm.TrainList[i].staList[j];
+                        StaConList = StaConList + "," + dm.upTrainList[i].staList[j];
                     }                    
                 }
-                if (!PlanDic.Keys.Contains(StaConList))
+                if (!UpPlanDic.Keys.Contains(StaConList))
                 {
-                    PlanDic.Add(StaConList, 1);
+                    UpPlanDic.Add(StaConList, 1);
                 }
-                else if (PlanDic.Keys.Contains(StaConList))
+                else if (UpPlanDic.Keys.Contains(StaConList))
                 {
-                    PlanDic[StaConList] += 1;
+                    UpPlanDic[StaConList] += 1;
                 }
             }
-            Console.WriteLine(PlanDic.Count);
+            for (int i = 0; i < dm.downTrainList.Count; i++)
+            {
+                string StaConList = "";
+                for (int j = 0; j < dm.downTrainList[i].staList.Count; j++)
+                {
+                    if (j == 0)
+                    {
+                        StaConList = dm.downTrainList[i].staList[j];
+                    }
+                    else
+                    {
+                        StaConList = StaConList + "," + dm.downTrainList[i].staList[j];
+                    }
+                }
+                if (!DownPlanDic.Keys.Contains(StaConList))
+                {
+                    DownPlanDic.Add(StaConList, 1);
+                }
+                else if (DownPlanDic.Keys.Contains(StaConList))
+                {
+                    DownPlanDic[StaConList] += 1;
+                }
+            }
         }
         public void GetStaX()
         {
@@ -91,7 +114,7 @@ namespace Monkeys_Timetable
             {
                 dt.Columns.Add(dm.stationStringList[i]);
             }
-            foreach (KeyValuePair<string, int> PlanNumber in PlanDic)
+            foreach (KeyValuePair<string, int> PlanNumber in UpPlanDic)
             {
                 string[] str = PlanNumber.Key.Split(',');
                 DataRow dr = dt.NewRow();
@@ -109,11 +132,35 @@ namespace Monkeys_Timetable
                 dt.Rows.Add(dr);
             }
             dataGridView1.DataSource = dt;
+
+            DataTable dt1 = new DataTable();
+            for (int i = 0; i < dm.stationStringList.Count; i++)
+            {
+                dt1.Columns.Add(dm.stationStringList[dm.stationList.Count - 1 - i]);
+            }
+            foreach (KeyValuePair<string, int> PlanNumber in UpPlanDic)
+            {
+                string[] str = PlanNumber.Key.Split(',');
+                DataRow dr = dt1.NewRow();
+                for (int i = 0; i < dm.stationStringList.Count; i++)
+                {
+                    if (str.Contains(dm.stationStringList[i]))
+                    {
+                        dr[dm.stationStringList[i]] = "1";
+                    }
+                    else
+                    {
+                        dr[dm.stationStringList[i]] = "0";
+                    }
+                }
+                dt1.Rows.Add(dr);
+            }
+            dataGridView2.DataSource = dt1;
         }
         /*public void DrawStation()
         {
             GetPlanTable();
-            bmp = new Bitmap(1000, PlanTable.Rows.Count * 15 + 600);
+            bmp = new Bitmap(1000, UpPlanTable.Rows.Count * 15 + 600);
             g = Graphics.FromImage(bmp);
            
             GetStaX();

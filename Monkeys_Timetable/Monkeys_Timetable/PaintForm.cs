@@ -188,5 +188,11 @@ namespace Monkeys_Timetable
                 panel3.Visible = false;
             }
         }//下行运行图的绘制
+
+        private void 开行方案表格ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LinePlan lp = new LinePlan();
+            lp.Show();
+        }
     }
 }
