@@ -8,72 +8,187 @@ namespace Monkeys_Timetable
     class Assessment//封装各类运行图指标计算方法
     {
         public DataManager aDataManager = new DataManager();
-        public double GetTravelSpeed()
+
+        public double GetMinute(string aTime)//将时间字符串转化为分钟
         {
-            double SumMile = 0;
+            string[] str = aTime.Split(':');
+            double aMinute1 = Convert.ToDouble(str[0]);
+            double aMinute2 = Convert.ToDouble(str[1]);
+            double aMinute = aMinute1 * 60 + aMinute2;
+            return aMinute;
+        }
+
+        public List<double> GetTravelSpeed()//所有车的旅行速度
+        {
+            List<double> TravelSpeed = new List<double>();
             foreach (Train aTrain in aDataManager.TrainList)
             {
-                SumMile += Convert.ToDouble(aTrain.trainNo);//添加方法后改为SumMile += aTrain.GetMile();
+                List<string> staDicValue1 = new List<string>();
+                staDicValue1 = aTrain.staTimeDic[aTrain.staList[0]];//始发站的信息列表
+                double aTime1 = GetMinute(staDicValue1[1]);//始发站的出发时间
+                List<string> staDicValue2 = new List<string>();
+                staDicValue2 = aTrain.staTimeDic[aTrain.staList[aTrain.staList.Count - 1]];//终到站的信息列表
+                double aMile = Convert.ToDouble(staDicValue2[2]);
+                double aTime2 = GetMinute(staDicValue2[0]);//终到站的到达时间
+                double aTime = aTime2 - aTime1;
+                double aSpeed = 60 * aMile / aTime;
+                TravelSpeed.Add(aSpeed);
             }
-            double TravelSpeed = SumMile / aDataManager.TrainList.Count();//添加方法后改为 RunningTime += trainlaststation.ArriveTime -  trainfirststation.DeptureTime;
             return TravelSpeed;
         }
 
-        public double GetTechnicalSpeed()
+        public List<double> GetTechnicalSpeed()//所有车的技术速度
         {
-            double SumMile = 0;
-            double RunningTime = 0;
+            List<double> TechnicalSpeed = new List<double>();
             foreach (Train aTrain in aDataManager.TrainList)
             {
-                SumMile += Convert.ToDouble(aTrain.trainNo);//添加方法后改为SumMile += aTrain.GetMile();
+                int stationNum = aTrain.staList.Count-1;
+                double aTime = 0;
+                for (int i = 0; i < stationNum; i++)
+                {
+                List<string> staDicValue1 = new List<string>();
+                staDicValue1 = aTrain.staTimeDic[aTrain.staList[i]];//出发站的信息列表
+                double aTime1 = GetMinute(staDicValue1[1]);//出发站的出发时间
+                List<string> staDicValue2 = new List<string>();
+                staDicValue2 = aTrain.staTimeDic[aTrain.staList[i+1]];//到达站的信息列表
+                double aTime2 = GetMinute(staDicValue2[0]);//到达站的到达时间
+                aTime = aTime + aTime2 - aTime1;
+                }
+                List<string> staDicValue3 = new List<string>();
+                staDicValue3 = aTrain.staTimeDic[aTrain.staList[aTrain.staList.Count - 1]];//终到站的信息列表
+                double aMile = Convert.ToDouble(staDicValue3[2]);//终到站的累计里程
+                double aSpeed = 60 * aMile / aTime;
+                TechnicalSpeed.Add(aSpeed);
             }
-            foreach (Train aTrain in aDataManager.TrainList)
-            {
-                RunningTime += Convert.ToDouble(aTrain.trainNo);//添加方法后改为 RunningTime += trainNo.ArriveTime - trainNo+1.DeptureTime;(for i从开始到最后)
-            }
-            double TechnicalSpeed = SumMile / RunningTime;
             return TechnicalSpeed;
         }
 
-        public double GetIndexOfSpeed()
+        public List<double> GetSpeedIndex()//速度系数
         {
-            double IndexOfSpeed = GetTravelSpeed() / GetTechnicalSpeed();
-            return IndexOfSpeed;
+            List<double> SpeedIndex = new List<double>();
+            List<double> Speed1 = GetTravelSpeed();
+            List<double> Speed2 = GetTechnicalSpeed();
+            for (int i = 0; i < Speed1.Count; i++)
+            {
+                double aSpeedIndex = Speed1[i] / Speed2[i];
+                SpeedIndex.Add(aSpeedIndex);
+            }
+            return SpeedIndex;
         }
 
-        public int GetServiceFrequency()
+        public int GetHour(string aTime)//获得出发或者到达时刻是在哪一个小时里
         {
-            int ServiceFrequency = 0;
-            //输入数字得到需要查看哪一辆车的服务频率
-            //if(trainNo.DeptureTime or trainNo.ArriveTime == null)
-            //{
-            //    ServiceFrequency += 1;
-            //}
-            //elseif(trainNo.DeptureTime - trainNo.ArriveTime > 0)
-            //{
-            //    ServiceFrequency += 1;
-            //}
+            int aHour = 0;
+            if (aTime != "")
+            {
+                string[] str = aTime.Split(':');
+                aHour = Convert.ToInt32(str[0]);
+            }
+            return aHour;
+        }
+
+        public Dictionary<string, int[]> GetStationServiceCount()//车站服务次数，即有多少趟列车在本站进行服务，并按3小时为间隔将6-24点划分为6个时间段
+        {
+            Dictionary<string, int[]> StationService = new Dictionary<string, int[]>();
+            foreach (string sta in aDataManager.stationStringList)
+            {
+                int[] aCount = new int[] { 0, 0, 0, 0, 0, 0 };
+                foreach (Train aTrain in aDataManager.TrainList)
+                {
+                    List<string> aList1 = aTrain.staTimeDic[sta];
+                    int aHour1 = GetHour(aList1[0]);
+                    int aHour2 = GetHour(aList1[1]);
+                    for (int i = 0; i < 6; i++)
+                    {
+                         if (aHour1 == 0)//始发站
+                        {
+                            if (aHour2 >= (3 * i + 6) && aHour2 <= (3 * i + 9))
+                            {
+                                aCount[i]++;
+                            }
+                        }
+                        else if (aHour2 == 0)//终到站
+                        {
+                            if (aHour1 >= (3 * i + 6) && aHour1 <= (3 * i + 9))
+                            {
+                                aCount[i]++;
+                            }
+                        }
+                        else if (aList1[0] != aList1[1])//非通过的中间车站
+                        {
+                            if (aHour1 >= (3 * i + 6) && aHour1 <= (3 * i + 9))
+                            {
+                                aCount[i]++;
+                            }
+                        }
+                    }
+                }
+                StationService.Add(sta, aCount);
+            }
+            return StationService;
+        }
+
+        public List<int> GetServiceFrequency()//所有车的服务频率（停站次数及列车级别）级别还没有加
+        {
+            List<int> ServiceFrequency = new List<int>();
+            int aCount = 2;
+            foreach (Train aTrain in aDataManager.TrainList)
+            {
+                int stationNum = aTrain.staList.Count - 1;
+                for (int i = 1; i < stationNum; i++)
+                {
+                    List<string> staDicValue1 = new List<string>();
+                    staDicValue1 = aTrain.staTimeDic[aTrain.staList[i]];//车站的信息列表
+                    double aTime1 = GetMinute(staDicValue1[0]);//列车在该站的到达时间
+                    double aTime2 = GetMinute(staDicValue1[1]);//列车在该站的出发时间
+                    if (aTime2 - aTime1 != 0)
+                    {
+                        aCount += 1;
+                    }
+                }
+                 ServiceFrequency.Add(aCount);
+            }
             return ServiceFrequency;
         }
 
-        public int GetStationServiceCount()
+        public Dictionary<List<string>, List<int>> GetTrainDensity()//列车密度表_返回形式(<站名，站名> -> <上行列车数，下行列车数>)
         {
-            //输入数字得到需要查看哪一个站的服务次数
-            int StationServiceCount = 0;
-            foreach (Train aTrain in aDataManager.TrainList)
+            Dictionary<List<string>, List<int>> TrainDensity = new Dictionary<List<string>, List<int>>();
+            List<string> StationName = aDataManager.stationStringList;
+            for (int i = 0; i < StationName.Count - 1; i++)
             {
-                //每一辆车在这个站的出发时间-到达时间>0 
-                //if(trainNo.DeptureTime or trainNo.ArriveTime == null)
-                //{
-                //    ServiceFrequency += 1;
-                //}
-                //elseif(trainNo.DeptureTime - trainNo.ArriveTime > 0)
-                //{
-                //    ServiceFrequency += 1;
-                //}
-                //如果需要划分时间 可以通过if判断 每个时段分别Count
+                List<string> Section = new List<string>();
+                Section.Add(StationName[i]);
+                Section.Add(StationName[i + 1]);//以上行区间站顺名为Key，可以得到上下行两者的密度
+                List<int> Density = new List<int>();
+                int DensityUp = 0;
+                int DensityDown = 0;
+                foreach (Train aTrain in aDataManager.UpTrainDic.Values)//遍历上行列车
+                {
+                    for (int j = 0; j < aTrain.staList.Count - 1; j++)//遍历该车经过的所有站
+                    {
+                        if (StationName[i] == aTrain.staList[j] && StationName[i + 1] == aTrain.staList[j + 1])
+                        {
+                            DensityUp++;
+                        }
+                    }
+                }
+                Density.Add(DensityUp);
+                foreach (Train aTrain in aDataManager.DownTrainDic.Values)//遍历下行列车
+                {
+                    for (int j = 0; j < aTrain.staList.Count - 1; j++)
+                    {
+                        if (StationName[i + 1] == aTrain.staList[j] && StationName[i] == aTrain.staList[j + 1])
+                        {
+                            DensityDown++;
+                        }
+                    }
+                }
+                Density.Add(DensityDown);
+                TrainDensity.Add(Section, Density);
             }
-            return StationServiceCount;
+            return TrainDensity;
         }
+        
     }
 }

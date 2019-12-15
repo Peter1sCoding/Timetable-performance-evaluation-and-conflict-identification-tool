@@ -73,7 +73,54 @@ namespace Monkeys_Timetable
                 x_staList = value;
             }
         }
-
-        public int Conflict;//0,1,3,4,5,6,7        
+        private Dictionary<string, List<int>> x_MinuteDic; //存放列车在各站时刻int信息
+        public Dictionary<string, List<int>> MinuteDic
+        {
+            get
+            {
+                return x_MinuteDic;
+            }
+            set
+            {
+                x_MinuteDic = value;
+            }
+        }
+        private Dictionary<string, bool> x_isStopDic; //存放列车是否停站信息，true为停，false为不停
+        public Dictionary<string, bool> isStopDic
+        {
+            get
+            {
+                return x_isStopDic;
+            }
+            set
+            {
+                x_isStopDic = value;
+            }
+        }
+        private string x_ConflictString; //终到站
+        public string ConflictString
+        {
+            get
+            {
+                return x_ConflictString;
+            }
+            set
+            {
+                x_ConflictString = value;
+            }
+        }
+        private string x_speed;
+        public string speed
+        {
+            get
+            {
+                return x_speed;
+            }
+            set
+            {
+                x_speed = value;
+            }
+        }
+    
     }
 }

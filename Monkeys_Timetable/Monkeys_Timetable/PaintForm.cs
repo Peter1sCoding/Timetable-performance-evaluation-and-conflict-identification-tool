@@ -16,11 +16,23 @@ namespace Monkeys_Timetable
         string staFileName;
         string headFileName;
         DataManager dm;
+        Conflict_Identification ci;
+        DataTable dt;
         public PaintForm()
         {
             InitializeComponent();
             this.Size = new Size(1300, 650);
             dm = new DataManager();
+            dm.ReadHeadway(Application.StartupPath + @"\\车站列车安全间隔.csv");
+            dm.ReadStation(Application.StartupPath + @"\\沪宁车站信息.csv");
+            dm.ReadTrain(Application.StartupPath + @"\\沪宁时刻图.csv");
+            dm.DivideUpDown();
+            dm.AddTra2sta();
+            dm.GetStop();
+            for(int i = 0; i < dm.stationList[3].upStaTraArrList.Count; i++)
+            {
+             Console.WriteLine(dm.stationList[3].upStaTraArrList[i].trainNo + "," + dm.stationList[3].upStaTraArrList[i].MinuteDic[dm.stationList[3].stationName][0] + "," + dm.stationList[3].upStaTraArrList[i].MinuteDic[dm.stationList[3].stationName][1]);
+            }
         }
 
         private void PaintForm_Load(object sender, EventArgs e)
@@ -63,6 +75,9 @@ namespace Monkeys_Timetable
             }
             dm.ReadTrain(traFileName);
             dm.DivideUpDown();
+            dm.AddTra2sta();
+            dm.GetStop();
+            
         }
 
         private void 读取列车间隔信息ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -116,6 +131,19 @@ namespace Monkeys_Timetable
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void 冲突检测ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void 冲突检测数据ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ci = new Conflict_Identification(dm.stationList, dm.HeadwayDic, dm.TrainDic);
+            ci.Conflict_Judge();
+            dt = ci.ToDataTable();
+            ConflictForm cf = new ConflictForm(dt);
+            cf.Show();
         }
     }
 }
