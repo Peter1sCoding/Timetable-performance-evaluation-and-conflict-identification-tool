@@ -38,9 +38,9 @@
             this.检测ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.计算ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.计算ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
@@ -106,7 +106,7 @@
             // 绘制运行图ToolStripMenuItem
             // 
             this.绘制运行图ToolStripMenuItem.Name = "绘制运行图ToolStripMenuItem";
-            this.绘制运行图ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.绘制运行图ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.绘制运行图ToolStripMenuItem.Text = "绘制运行图";
             this.绘制运行图ToolStripMenuItem.Click += new System.EventHandler(this.绘制运行图ToolStripMenuItem_Click_1);
             // 
@@ -128,14 +128,6 @@
             this.计算ToolStripMenuItem.Size = new System.Drawing.Size(32, 19);
             this.计算ToolStripMenuItem.Text = "计算";
             // 
-            // panel1
-            // 
-            this.panel1.Location = new System.Drawing.Point(12, 27);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(889, 447);
-            this.panel1.TabIndex = 1;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint_1);
-            // 
             // checkBox1
             // 
             this.checkBox1.Location = new System.Drawing.Point(915, 5);
@@ -156,21 +148,26 @@
             this.checkBox2.UseVisualStyleBackColor = true;
             this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
             // 
+            // panel1
+            // 
+            this.panel1.Location = new System.Drawing.Point(12, 27);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1346, 710);
+            this.panel1.TabIndex = 7;
+            // 
             // panel2
             // 
             this.panel2.Location = new System.Drawing.Point(12, 27);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(889, 447);
-            this.panel2.TabIndex = 0;
-            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
+            this.panel2.Size = new System.Drawing.Size(1346, 710);
+            this.panel2.TabIndex = 8;
             // 
             // panel3
             // 
             this.panel3.Location = new System.Drawing.Point(12, 27);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1346, 710);
-            this.panel3.TabIndex = 0;
-            this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
+            this.panel3.TabIndex = 9;
             // 
             // PaintForm
             // 
@@ -179,9 +176,9 @@
             this.ClientSize = new System.Drawing.Size(1370, 749);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.checkBox2);
             this.Controls.Add(this.checkBox1);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(2);
@@ -206,9 +203,9 @@
         private System.Windows.Forms.ToolStripMenuItem 检测ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 计算ToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem 计算ToolStripMenuItem;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
     }
