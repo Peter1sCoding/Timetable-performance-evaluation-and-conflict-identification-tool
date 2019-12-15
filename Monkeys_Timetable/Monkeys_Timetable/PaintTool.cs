@@ -81,26 +81,33 @@ namespace Monkeys_Timetable
                 int a = train.staList.Count;
                 for (int i=0;i<a-1;i++)
                 {
-                    int index1 = StaionList.IndexOf(train.staList[i]);
-                    int index2 = StaionList.IndexOf(train.staList[i + 1]);
-                    int i1 = train.MinuteDic[train.staList[i]][1];
-                    int i2 = train.MinuteDic[train.staList[i+1]][0];
-                    p1.X = TimeX[i1];
-                    p2.X = TimeX[i2];
-                    p1.Y = staY[index1];
-                    p2.Y = staY[index2];
-                    gs.DrawLine(pp, p1, p2);
+                    if (StaionList.IndexOf(train.staList[i]) != -1&& StaionList.IndexOf(train.staList[i + 1]) != -1)
+                    {                    
+                        int index1 = StaionList.IndexOf(train.staList[i]);
+                        int index2 = StaionList.IndexOf(train.staList[i + 1]);
+                        int i1 = train.MinuteDic[train.staList[i]][1];
+                        int i2 = train.MinuteDic[train.staList[i + 1]][0];
+                        p1.X = TimeX[i1];
+                        p2.X = TimeX[i2];
+                        p1.Y = staY[index1];
+                        p2.Y = staY[index2];
+                        gs.DrawLine(pp, p1, p2);
+                    }
                 }
                 for (int i = 1; i < a - 1; i++)
                 {
-                    int index1 = StaionList.IndexOf(train.staList[i]);
-                    int i1 = train.MinuteDic[train.staList[i]][0];
-                    int i2 = train.MinuteDic[train.staList[i]][1];
-                    p1.X = TimeX[i1];
-                    p2.X = TimeX[i2];
-                    p1.Y = staY[index1];
-                    p2.Y = staY[index1];
-                    gs.DrawLine(pp, p1, p2);
+                    if (StaionList.IndexOf(train.staList[i]) != -1)
+                    {
+                        int index1 = StaionList.IndexOf(train.staList[i]);
+                        int i1 = train.MinuteDic[train.staList[i]][0];
+                        int i2 = train.MinuteDic[train.staList[i]][1];
+                        p1.X = TimeX[i1];
+                        p2.X = TimeX[i2];
+                        p1.Y = staY[index1];
+                        p2.Y = staY[index1];
+                        gs.DrawLine(pp, p1, p2);
+                    }
+                    
                 }
             }
         }//运行线铺画方法
