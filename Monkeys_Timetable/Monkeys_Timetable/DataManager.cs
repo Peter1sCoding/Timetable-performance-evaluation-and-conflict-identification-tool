@@ -134,6 +134,16 @@ namespace Monkeys_Timetable
                 tra.trainNo = strr[0];
                 tra.speed = "350";
                 string staname = strr[2];
+                string LastNumber = tra.trainNo.Substring(tra.trainNo.Length - 1, 1);
+                if (( LastNumber == "0")||(LastNumber == "2") || (LastNumber == "4") || (LastNumber == "6") || (LastNumber == "8"))
+                {
+                    tra.Dir = "up";
+                }
+                else
+                {
+                    tra.Dir = "down";
+                }
+
                 if (!TrainDic.ContainsKey(tra.trainNo))
                 {
                     tra.staTimeDic = new Dictionary<string, List<string>>();

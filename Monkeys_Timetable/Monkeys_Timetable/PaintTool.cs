@@ -14,7 +14,7 @@ namespace Monkeys_Timetable
     {
         List<int> TimeX = new List<int>();
         List<int> staY = new List<int>();
-        Bitmap bmp;
+        DataTable ct = new DataTable();
 
         public void TimetableFrame(double WinWidth, double WinHeight, double TotalMile, List<double> StationMile, Graphics gs)
         {
@@ -112,6 +112,52 @@ namespace Monkeys_Timetable
                 }
             }
         }//运行线铺画方法
+
+        public void ConflictDrawUp(Graphics gs,DataTable ct,Dictionary<string,Train> TrainDic, List<string> StaionList)
+        {
+            Pen pp = new Pen(Color.Yellow, 1);
+            Point p1 = new Point();
+            Point p2 = new Point();
+
+            for(int i = 0; i < ct.Rows.Count; i++)
+            {
+                string No = ct.Rows[i]["前车"].ToString();
+                if (TrainDic[No].Dir == "up")
+                {
+                    int cPoint = 0;
+                    if ((ct.Rows[i]["冲突类型"].ToString() == "到发") || (ct.Rows[i]["冲突类型"].ToString() == "到到") || (ct.Rows[i]["冲突类型"].ToString() == "到通") || (ct.Rows[i]["冲突类型"].ToString() == "通通"))
+                    {
+                        cPoint = TrainDic[ct.Rows[i]["前车"].ToString()].MinuteDic[ct.Rows[i]["车站"].ToString()][0];
+                        p1.X = TimeX[cPoint];
+                        p1.Y = staY[StaionList.IndexOf(ct.Rows[i]["车站"].ToString())];
+                        gs.DrawEllipse(pp, p1.X, p1.Y, 5, 5);
+                    }
+                }                
+            }              
+        }
+
+        public void ConflictDrawDown(Graphics gs, DataTable ct, Dictionary<string, Train> TrainDic, List<string> StaionList)
+        {
+            Pen pp = new Pen(Color.Yellow, 1);
+            Point p1 = new Point();
+            Point p2 = new Point();
+
+            for (int i = 0; i < ct.Rows.Count; i++)
+            {
+                string No = ct.Rows[i]["前车"].ToString();
+                if(TrainDic[No].Dir == "down")
+                {
+                    int cPoint = 0;
+                    if ((ct.Rows[i]["冲突类型"].ToString() == "到发") || (ct.Rows[i]["冲突类型"].ToString() == "到到") || (ct.Rows[i]["冲突类型"].ToString() == "到通") || (ct.Rows[i]["冲突类型"].ToString() == "通通"))
+                    {
+                        cPoint = TrainDic[ct.Rows[i]["前车"].ToString()].MinuteDic[ct.Rows[i]["车站"].ToString()][0];
+                        p1.X = TimeX[cPoint];
+                        p1.Y = staY[StaionList.IndexOf(ct.Rows[i]["车站"].ToString())];
+                        gs.DrawEllipse(pp, p1.X, p1.Y, 5, 5);
+                    }
+                }                
+            }
+        }
 
     }
 }

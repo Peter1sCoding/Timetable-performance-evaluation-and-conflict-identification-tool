@@ -121,6 +121,18 @@ namespace Monkeys_Timetable
                 x_speed = value;
             }
         }
+        private string x_Dir;
+        public string Dir
+        {
+            get
+            {
+                return x_Dir;
+            }
+            set
+            {
+                x_Dir = value;
+            }
+        }
     
     }
 }

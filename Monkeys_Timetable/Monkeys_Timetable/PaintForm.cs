@@ -234,5 +234,19 @@ namespace Monkeys_Timetable
             LinePlan lp = new LinePlan();
             lp.Show();
         }
+
+        private void 运行图标记冲突ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Graphics gs = this.panel1.CreateGraphics();
+            if (checkBox1.Checked)
+            {
+                pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
+            }
+            else if (checkBox2.Checked)
+            {
+                pt.ConflictDrawDown(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
+            }
+
+        }
     }
 }

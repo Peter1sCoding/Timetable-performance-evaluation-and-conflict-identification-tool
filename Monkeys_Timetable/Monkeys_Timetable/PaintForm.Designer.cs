@@ -134,8 +134,9 @@
             // 运行图标记冲突ToolStripMenuItem
             // 
             this.运行图标记冲突ToolStripMenuItem.Name = "运行图标记冲突ToolStripMenuItem";
-            this.运行图标记冲突ToolStripMenuItem.Size = new System.Drawing.Size(226, 28);
+            this.运行图标记冲突ToolStripMenuItem.Size = new System.Drawing.Size(238, 28);
             this.运行图标记冲突ToolStripMenuItem.Text = "运行图标记冲突";
+            this.运行图标记冲突ToolStripMenuItem.Click += new System.EventHandler(this.运行图标记冲突ToolStripMenuItem_Click);
             // 
             // 计算ToolStripMenuItem1
             // 
