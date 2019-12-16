@@ -246,7 +246,6 @@ namespace Monkeys_Timetable
             {
                 pt.ConflictDrawDown(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
             }
-
         }
     }
 }
