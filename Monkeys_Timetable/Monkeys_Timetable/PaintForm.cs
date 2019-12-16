@@ -19,6 +19,8 @@ namespace Monkeys_Timetable
         Conflict_Identification ci;
         DataTable dt;
         PaintTool pt = new PaintTool();
+        DataTable ConflictTable;
+
         public PaintForm()
         {
             InitializeComponent();
@@ -30,10 +32,10 @@ namespace Monkeys_Timetable
             dm.DivideUpDown();
             dm.AddTra2sta();
             dm.GetStop();
-            for(int i = 0; i < dm.stationList[3].upStaTraArrList.Count; i++)
-            {
-             Console.WriteLine(dm.stationList[3].upStaTraArrList[i].trainNo + "," + dm.stationList[3].upStaTraArrList[i].MinuteDic[dm.stationList[3].stationName][0] + "," + dm.stationList[3].upStaTraArrList[i].MinuteDic[dm.stationList[3].stationName][1]);
-            }
+            
+            this.panel1.HorizontalScroll.Visible = true;
+            this.panel1.VerticalScroll.Visible = true;
+
         }
 
         private void PaintForm_Load(object sender, EventArgs e)
@@ -162,6 +164,9 @@ namespace Monkeys_Timetable
         {
             Graphics gs;
             gs = this.panel1.CreateGraphics();
+
+
+
             int ix = dm.stationList.Count;
             double total = dm.stationList[ix - 1].totalMile;
             List<double> staMile = new List<double>();
@@ -214,6 +219,19 @@ namespace Monkeys_Timetable
         {
             LinePlan lp = new LinePlan();
             lp.Show();
+        }
+
+        private void 检测ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Conflict_Identification ci = new Conflict_Identification(dm.stationList,dm.HeadwayDic,dm.TrainDic);
+            ci.Conflict_Judge();
+            ConflictTable = ci.ToDataTable();
+        }
+
+        private void 显示冲突列车数据ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ConflictForm cf = new ConflictForm(ConflictTable);
+            cf.Show();
         }
     }
 }

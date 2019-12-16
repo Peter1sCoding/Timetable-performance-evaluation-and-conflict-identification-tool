@@ -57,7 +57,7 @@
     <Compile Include="ConflictForm.Designer.cs">
       <DependentUpon>ConflictForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Conflict_Indentification.cs" />
+    <Compile Include="Conflict_Identification.cs" />
     <Compile Include="DataManager.cs" />
     <Compile Include="LinePlan.cs">
       <SubType>Form</SubType>

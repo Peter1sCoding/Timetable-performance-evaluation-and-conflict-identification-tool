@@ -14,6 +14,7 @@ namespace Monkeys_Timetable
     {
         List<int> TimeX = new List<int>();
         List<int> staY = new List<int>();
+        Bitmap bmp;
 
         public void TimetableFrame(double WinWidth, double WinHeight, double TotalMile, List<double> StationMile, Graphics gs)
         {
