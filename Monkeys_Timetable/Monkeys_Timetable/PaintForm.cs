@@ -209,5 +209,11 @@ namespace Monkeys_Timetable
         {
 
         }
+
+        private void 开行方案数据ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LinePlan lp = new LinePlan();
+            lp.Show();
+        }
     }
 }
