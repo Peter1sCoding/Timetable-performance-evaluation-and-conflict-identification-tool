@@ -228,5 +228,11 @@ namespace Monkeys_Timetable
             ConflictForm cf = new ConflictForm(ConflictTable);
             cf.Show();
         }
+
+        private void 显示开行方案数据ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LinePlan lp = new LinePlan();
+            lp.Show();
+        }
     }
 }

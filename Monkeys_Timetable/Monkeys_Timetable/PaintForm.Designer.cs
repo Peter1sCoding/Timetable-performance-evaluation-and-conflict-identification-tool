@@ -36,13 +36,16 @@
             this.绘制ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.绘制运行图ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.检测ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.显示冲突列车数据ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.运行图标记冲突ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.计算ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.计算ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.显示冲突列车数据ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.运行图标记冲突ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.开行方案ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.显示开行方案数据ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.开行方案图ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -53,7 +56,8 @@
             this.读取文件ToolStripMenuItem,
             this.绘制ToolStripMenuItem,
             this.检测ToolStripMenuItem,
-            this.计算ToolStripMenuItem1});
+            this.计算ToolStripMenuItem1,
+            this.开行方案ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(6, 1, 0, 1);
@@ -120,6 +124,19 @@
             this.检测ToolStripMenuItem.Text = "检测";
             this.检测ToolStripMenuItem.Click += new System.EventHandler(this.检测ToolStripMenuItem_Click);
             // 
+            // 显示冲突列车数据ToolStripMenuItem
+            // 
+            this.显示冲突列车数据ToolStripMenuItem.Name = "显示冲突列车数据ToolStripMenuItem";
+            this.显示冲突列车数据ToolStripMenuItem.Size = new System.Drawing.Size(226, 28);
+            this.显示冲突列车数据ToolStripMenuItem.Text = "显示冲突列车数据";
+            this.显示冲突列车数据ToolStripMenuItem.Click += new System.EventHandler(this.显示冲突列车数据ToolStripMenuItem_Click);
+            // 
+            // 运行图标记冲突ToolStripMenuItem
+            // 
+            this.运行图标记冲突ToolStripMenuItem.Name = "运行图标记冲突ToolStripMenuItem";
+            this.运行图标记冲突ToolStripMenuItem.Size = new System.Drawing.Size(226, 28);
+            this.运行图标记冲突ToolStripMenuItem.Text = "运行图标记冲突";
+            // 
             // 计算ToolStripMenuItem1
             // 
             this.计算ToolStripMenuItem1.Name = "计算ToolStripMenuItem1";
@@ -166,18 +183,27 @@
             this.panel1.Size = new System.Drawing.Size(2018, 1005);
             this.panel1.TabIndex = 7;
             // 
-            // 显示冲突列车数据ToolStripMenuItem
+            // 开行方案ToolStripMenuItem
             // 
-            this.显示冲突列车数据ToolStripMenuItem.Name = "显示冲突列车数据ToolStripMenuItem";
-            this.显示冲突列车数据ToolStripMenuItem.Size = new System.Drawing.Size(238, 28);
-            this.显示冲突列车数据ToolStripMenuItem.Text = "显示冲突列车数据";
-            this.显示冲突列车数据ToolStripMenuItem.Click += new System.EventHandler(this.显示冲突列车数据ToolStripMenuItem_Click);
+            this.开行方案ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.显示开行方案数据ToolStripMenuItem,
+            this.开行方案图ToolStripMenuItem});
+            this.开行方案ToolStripMenuItem.Name = "开行方案ToolStripMenuItem";
+            this.开行方案ToolStripMenuItem.Size = new System.Drawing.Size(90, 27);
+            this.开行方案ToolStripMenuItem.Text = "开行方案";
             // 
-            // 运行图标记冲突ToolStripMenuItem
+            // 显示开行方案数据ToolStripMenuItem
             // 
-            this.运行图标记冲突ToolStripMenuItem.Name = "运行图标记冲突ToolStripMenuItem";
-            this.运行图标记冲突ToolStripMenuItem.Size = new System.Drawing.Size(238, 28);
-            this.运行图标记冲突ToolStripMenuItem.Text = "运行图标记冲突";
+            this.显示开行方案数据ToolStripMenuItem.Name = "显示开行方案数据ToolStripMenuItem";
+            this.显示开行方案数据ToolStripMenuItem.Size = new System.Drawing.Size(238, 28);
+            this.显示开行方案数据ToolStripMenuItem.Text = "开行方案数据";
+            this.显示开行方案数据ToolStripMenuItem.Click += new System.EventHandler(this.显示开行方案数据ToolStripMenuItem_Click);
+            // 
+            // 开行方案图ToolStripMenuItem
+            // 
+            this.开行方案图ToolStripMenuItem.Name = "开行方案图ToolStripMenuItem";
+            this.开行方案图ToolStripMenuItem.Size = new System.Drawing.Size(238, 28);
+            this.开行方案图ToolStripMenuItem.Text = "开行方案图";
             // 
             // PaintForm
             // 
@@ -220,5 +246,8 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ToolStripMenuItem 显示冲突列车数据ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 运行图标记冲突ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 开行方案ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 显示开行方案数据ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 开行方案图ToolStripMenuItem;
     }
 }
