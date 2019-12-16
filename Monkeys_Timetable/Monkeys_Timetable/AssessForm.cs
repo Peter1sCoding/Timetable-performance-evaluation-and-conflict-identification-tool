@@ -132,12 +132,12 @@ namespace Monkeys_Timetable
 
             cbStation = new ComboBox();
             cbStation.Name = "cbStation";
-            //cbStation.Items.AddRange(new object[] { 1, 2, 3 });
-            foreach (Train tra in aDataManager.TrainList)
-            {
-                string trainName = tra.trainNo;
-                cbStation.Items.Add(trainName);
-            }
+            cbStation.Items.AddRange(new object[] { 1, 2, 3 });
+            //foreach (Train tra in aDataManager.TrainList)
+            //{
+            //    string trainName = tra.trainNo;
+            //    cbStation.Items.Add(trainName);
+            //}
             cbStation.Size = new Size(100, 30);
             cbStation.Location = new Point(210, 50);
             splitContainer2.Panel2.Controls.Add(cbStation);

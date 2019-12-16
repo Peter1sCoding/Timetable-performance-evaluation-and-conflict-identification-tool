@@ -247,5 +247,11 @@ namespace Monkeys_Timetable
                 pt.ConflictDrawDown(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
             }
         }
+
+        private void 计算ToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            AssessForm af = new AssessForm();
+            af.Show();
+        }
     }
 }
