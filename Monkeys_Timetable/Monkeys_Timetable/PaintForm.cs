@@ -79,8 +79,7 @@ namespace Monkeys_Timetable
             dm.ReadTrain(traFileName);
             dm.DivideUpDown();
             dm.AddTra2sta();
-            dm.GetStop();
-            
+            dm.GetStop();            
         }
 
         private void 读取列车间隔信息ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -95,7 +94,6 @@ namespace Monkeys_Timetable
             }
             dm.ReadHeadway(headFileName);
         }
-
         private void 图像ToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
@@ -163,10 +161,7 @@ namespace Monkeys_Timetable
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             Graphics gs;
-            gs = this.panel1.CreateGraphics();
-
-
-
+            gs = this.panel1.CreateGraphics();        
             int ix = dm.stationList.Count;
             double total = dm.stationList[ix - 1].totalMile;
             List<double> staMile = new List<double>();
