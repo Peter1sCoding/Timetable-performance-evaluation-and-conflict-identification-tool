@@ -55,15 +55,15 @@ namespace Monkeys_Timetable
             {
                 string StaConList = "";
                 for (int j = 0; j < dm.upTrainList[i].staList.Count; j++)
-                {                    
-                    if (j == 0)
+                {
+                    if ((j == 0) && (dm.upTrainList[i].isStopDic[dm.upTrainList[i].staList[j]] == true))
                     {
                         StaConList = dm.upTrainList[i].staList[j];
                     }
-                    else
+                    else if (dm.upTrainList[i].isStopDic[dm.upTrainList[i].staList[j]] == true)
                     {
                         StaConList = StaConList + "," + dm.upTrainList[i].staList[j];
-                    }                    
+                    }
                 }
                 if (!UpPlanDic.Keys.Contains(StaConList))
                 {
@@ -79,11 +79,11 @@ namespace Monkeys_Timetable
                 string StaConList = "";
                 for (int j = 0; j < dm.downTrainList[i].staList.Count; j++)
                 {
-                    if (j == 0)
+                    if ((j == 0) && (dm.downTrainList[i].isStopDic[dm.downTrainList[i].staList[j]] == true))
                     {
                         StaConList = dm.downTrainList[i].staList[j];
-                    }
-                    else
+                    }                                      
+                    else if(dm.downTrainList[i].isStopDic[dm.downTrainList[i].staList[j]] == true)
                     {
                         StaConList = StaConList + "," + dm.downTrainList[i].staList[j];
                     }
@@ -110,15 +110,19 @@ namespace Monkeys_Timetable
         public void ToDataGridView()
         {
             DataTable dt = new DataTable();
+            dt.Columns.Add("开行数量");
             for (int i = 0; i < dm.stationStringList.Count; i++)
             {
                 dt.Columns.Add(dm.stationStringList[i]);
             }
+            int total = 0;
             foreach (KeyValuePair<string, int> PlanNumber in UpPlanDic)
-            {
+            {                
                 string[] str = PlanNumber.Key.Split(',');
                 DataRow dr = dt.NewRow();
-                for(int i = 0; i < dm.stationStringList.Count; i++)
+                dr["开行数量"] = UpPlanDic[PlanNumber.Key];
+                total += UpPlanDic[PlanNumber.Key];
+                for (int i = 0; i < dm.stationStringList.Count; i++)
                 {
                     if (str.Contains(dm.stationStringList[i]))
                     {
@@ -132,16 +136,20 @@ namespace Monkeys_Timetable
                 dt.Rows.Add(dr);
             }
             dataGridView1.DataSource = dt;
+            Console.WriteLine(total);
+
 
             DataTable dt1 = new DataTable();
+            dt1.Columns.Add("开行数量");
             for (int i = 0; i < dm.stationStringList.Count; i++)
             {
                 dt1.Columns.Add(dm.stationStringList[dm.stationList.Count - 1 - i]);
             }
-            foreach (KeyValuePair<string, int> PlanNumber in UpPlanDic)
+            foreach (KeyValuePair<string, int> PlanNumber in DownPlanDic)
             {
                 string[] str = PlanNumber.Key.Split(',');
                 DataRow dr = dt1.NewRow();
+                dr["开行数量"] = DownPlanDic[PlanNumber.Key];
                 for (int i = 0; i < dm.stationStringList.Count; i++)
                 {
                     if (str.Contains(dm.stationStringList[i]))
