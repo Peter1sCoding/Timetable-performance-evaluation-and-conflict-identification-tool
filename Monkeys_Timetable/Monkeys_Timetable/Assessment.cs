@@ -151,6 +151,7 @@ namespace Monkeys_Timetable
             return ServiceFrequency;
         }
 
+        public List<int> AllDensity = new List<int>();//读取所有密度值，用来在Assessform中判断可视化条形图大小
         public Dictionary<List<string>, List<int>> GetTrainDensity()//列车密度表_返回形式(<站名，站名> -> <上行列车数，下行列车数>)
         {
             Dictionary<List<string>, List<int>> TrainDensity = new Dictionary<List<string>, List<int>>();
@@ -174,6 +175,7 @@ namespace Monkeys_Timetable
                     }
                 }
                 Density.Add(DensityUp);
+                AllDensity.Add(DensityUp);
                 foreach (Train aTrain in aDataManager.DownTrainDic.Values)//遍历下行列车
                 {
                     for (int j = 0; j < aTrain.staList.Count - 1; j++)
@@ -186,6 +188,7 @@ namespace Monkeys_Timetable
                 }
                 Density.Add(DensityDown);
                 TrainDensity.Add(Section, Density);
+                AllDensity.Add(DensityDown);
             }
             return TrainDensity;
         }

@@ -14,11 +14,16 @@ namespace Monkeys_Timetable
         DataManager aDataManager = new DataManager();
         Assessment ass = new Assessment();
         Dictionary<string, int[]> serviceCount = new Dictionary<string, int[]>();
-        
+        List<int> allDen = new List<int>();
+        int maxDensity;
+
         public AssessForm()
         {
             InitializeComponent();
             ShowFirst();
+            allDen = ass.AllDensity;
+            maxDensity = allDen.Max();
+            serviceCount = ass.GetStationServiceCount();
         }
         
         public void ShowFirst()
