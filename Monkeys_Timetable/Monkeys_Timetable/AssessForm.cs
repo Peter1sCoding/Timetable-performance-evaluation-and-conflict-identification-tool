@@ -11,7 +11,7 @@ namespace Monkeys_Timetable
 {
     public partial class AssessForm : Form
     {
-        DataManager aDataManager = new DataManager();
+        DataManager dm = new DataManager();
         Assessment ass = new Assessment();
         Dictionary<string, int[]> serviceCount = new Dictionary<string, int[]>();
         List<int> allDen = new List<int>();
@@ -21,9 +21,10 @@ namespace Monkeys_Timetable
         {
             InitializeComponent();
             ShowFirst();
+            ass.GetTrainDensity(dm);
             allDen = ass.AllDensity;
             maxDensity = allDen.Max();
-            serviceCount = ass.GetStationServiceCount();
+            serviceCount = ass.GetStationServiceCount(dm);
         }
         
         public void ShowFirst()
@@ -39,6 +40,14 @@ namespace Monkeys_Timetable
             splitContainer2.IsSplitterFixed = true;
             ShowPanel_1();
             ShowPanel_2();
+
+            dm.ReadHeadway(Application.StartupPath + @"\\车站列车安全间隔.csv");
+            dm.ReadStation(Application.StartupPath + @"\\沪宁车站信息.csv");
+            dm.ReadTrain(Application.StartupPath + @"\\沪宁时刻图.csv");
+            dm.DivideUpDown();
+            dm.AddTra2sta();
+            dm.GetStop();
+            
         }
 
         #region Panel_1全局变量

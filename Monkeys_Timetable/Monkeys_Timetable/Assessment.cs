@@ -7,7 +7,9 @@ namespace Monkeys_Timetable
 {
     class Assessment//封装各类运行图指标计算方法
     {
-        public DataManager aDataManager = new DataManager();
+        public DataManager dm = new DataManager();
+        
+       
 
         public double GetMinute(string aTime)//将时间字符串转化为分钟
         {
@@ -21,7 +23,7 @@ namespace Monkeys_Timetable
         public List<double> GetTravelSpeed()//所有车的旅行速度
         {
             List<double> TravelSpeed = new List<double>();
-            foreach (Train aTrain in aDataManager.TrainList)
+            foreach (Train aTrain in dm.TrainList)
             {
                 List<string> staDicValue1 = new List<string>();
                 staDicValue1 = aTrain.staTimeDic[aTrain.staList[0]];//始发站的信息列表
@@ -40,7 +42,7 @@ namespace Monkeys_Timetable
         public List<double> GetTechnicalSpeed()//所有车的技术速度
         {
             List<double> TechnicalSpeed = new List<double>();
-            foreach (Train aTrain in aDataManager.TrainList)
+            foreach (Train aTrain in dm.TrainList)
             {
                 int stationNum = aTrain.staList.Count-1;
                 double aTime = 0;
@@ -87,14 +89,18 @@ namespace Monkeys_Timetable
             return aHour;
         }
 
-        public Dictionary<string, int[]> GetStationServiceCount()//车站服务次数，即有多少趟列车在本站进行服务，并按3小时为间隔将6-24点划分为6个时间段
+        public Dictionary<string, int[]> GetStationServiceCount(DataManager dmm)//车站服务次数，即有多少趟列车在本站进行服务，并按3小时为间隔将6-24点划分为6个时间段
         {
+            DataManager dm = dmm;
             Dictionary<string, int[]> StationService = new Dictionary<string, int[]>();
-            foreach (string sta in aDataManager.stationStringList)
+            foreach (string sta in dm.stationStringList)
             {
                 int[] aCount = new int[] { 0, 0, 0, 0, 0, 0 };
-                foreach (Train aTrain in aDataManager.TrainList)
+                foreach (Train aTrain in dm.TrainList)
                 {
+                    if (!aTrain.staTimeDic.Keys.Contains(sta))
+                        continue;
+                    
                     List<string> aList1 = aTrain.staTimeDic[sta];
                     int aHour1 = GetHour(aList1[0]);
                     int aHour2 = GetHour(aList1[1]);
@@ -132,7 +138,7 @@ namespace Monkeys_Timetable
         {
             List<int> ServiceFrequency = new List<int>();
             int aCount = 2;
-            foreach (Train aTrain in aDataManager.TrainList)
+            foreach (Train aTrain in dm.TrainList)
             {
                 int stationNum = aTrain.staList.Count - 1;
                 for (int i = 1; i < stationNum; i++)
@@ -152,21 +158,22 @@ namespace Monkeys_Timetable
         }
 
         public List<int> AllDensity = new List<int>();//读取所有密度值，用来在Assessform中判断可视化条形图大小
-        public Dictionary<List<string>, List<int>> GetTrainDensity()//列车密度表_返回形式(<站名，站名> -> <上行列车数，下行列车数>)
+        public Dictionary<List<string>, List<int>> GetTrainDensity(DataManager dmm)//列车密度表_返回形式(<站名，站名> -> <上行列车数，下行列车数>)
         {
+            DataManager dm = dmm;
             Dictionary<List<string>, List<int>> TrainDensity = new Dictionary<List<string>, List<int>>();
-            List<string> StationName = aDataManager.stationStringList;
+            List<string> StationName = dm.stationStringList;
             for (int i = 0; i < StationName.Count - 1; i++)
             {
                 List<string> Section = new List<string>();
                 Section.Add(StationName[i]);
-                Section.Add(StationName[i + 1]);//以上行区间站顺名为Key，可以得到上下行两者的密度
+                Section.Add(StationName[i + 1]);
                 List<int> Density = new List<int>();
                 int DensityUp = 0;
                 int DensityDown = 0;
-                foreach (Train aTrain in aDataManager.UpTrainDic.Values)//遍历上行列车
+                foreach (Train aTrain in dm.UpTrainDic.Values)
                 {
-                    for (int j = 0; j < aTrain.staList.Count - 1; j++)//遍历该车经过的所有站
+                    for (int j = 0; j < aTrain.staList.Count - 1; j++)
                     {
                         if (StationName[i] == aTrain.staList[j] && StationName[i + 1] == aTrain.staList[j + 1])
                         {
@@ -176,7 +183,7 @@ namespace Monkeys_Timetable
                 }
                 Density.Add(DensityUp);
                 AllDensity.Add(DensityUp);
-                foreach (Train aTrain in aDataManager.DownTrainDic.Values)//遍历下行列车
+                foreach (Train aTrain in dm.DownTrainDic.Values)
                 {
                     for (int j = 0; j < aTrain.staList.Count - 1; j++)
                     {
@@ -187,8 +194,8 @@ namespace Monkeys_Timetable
                     }
                 }
                 Density.Add(DensityDown);
-                TrainDensity.Add(Section, Density);
                 AllDensity.Add(DensityDown);
+                TrainDensity.Add(Section, Density);
             }
             return TrainDensity;
         }
