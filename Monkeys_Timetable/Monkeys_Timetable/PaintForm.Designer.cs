@@ -46,6 +46,9 @@
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.绘制运行图上行ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.绘制运行图下行ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.绘制运行图上下行ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -102,7 +105,10 @@
             // 绘制ToolStripMenuItem
             // 
             this.绘制ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.绘制运行图ToolStripMenuItem});
+            this.绘制运行图ToolStripMenuItem,
+            this.绘制运行图上行ToolStripMenuItem,
+            this.绘制运行图下行ToolStripMenuItem,
+            this.绘制运行图上下行ToolStripMenuItem});
             this.绘制ToolStripMenuItem.Name = "绘制ToolStripMenuItem";
             this.绘制ToolStripMenuItem.Size = new System.Drawing.Size(44, 22);
             this.绘制ToolStripMenuItem.Text = "绘制";
@@ -111,8 +117,8 @@
             // 绘制运行图ToolStripMenuItem
             // 
             this.绘制运行图ToolStripMenuItem.Name = "绘制运行图ToolStripMenuItem";
-            this.绘制运行图ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
-            this.绘制运行图ToolStripMenuItem.Text = "绘制运行图";
+            this.绘制运行图ToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.绘制运行图ToolStripMenuItem.Text = "绘制运行图底图";
             this.绘制运行图ToolStripMenuItem.Click += new System.EventHandler(this.绘制运行图ToolStripMenuItem_Click_1);
             // 
             // 检测ToolStripMenuItem
@@ -205,6 +211,27 @@
             this.pictureBox2.TabIndex = 8;
             this.pictureBox2.TabStop = false;
             // 
+            // 绘制运行图上行ToolStripMenuItem
+            // 
+            this.绘制运行图上行ToolStripMenuItem.Name = "绘制运行图上行ToolStripMenuItem";
+            this.绘制运行图上行ToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.绘制运行图上行ToolStripMenuItem.Text = "绘制运行图（上行）";
+            this.绘制运行图上行ToolStripMenuItem.Click += new System.EventHandler(this.绘制运行图上行ToolStripMenuItem_Click);
+            // 
+            // 绘制运行图下行ToolStripMenuItem
+            // 
+            this.绘制运行图下行ToolStripMenuItem.Name = "绘制运行图下行ToolStripMenuItem";
+            this.绘制运行图下行ToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.绘制运行图下行ToolStripMenuItem.Text = "绘制运行图（下行）";
+            this.绘制运行图下行ToolStripMenuItem.Click += new System.EventHandler(this.绘制运行图下行ToolStripMenuItem_Click);
+            // 
+            // 绘制运行图上下行ToolStripMenuItem
+            // 
+            this.绘制运行图上下行ToolStripMenuItem.Name = "绘制运行图上下行ToolStripMenuItem";
+            this.绘制运行图上下行ToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.绘制运行图上下行ToolStripMenuItem.Text = "绘制运行图（上下行）";
+            this.绘制运行图上下行ToolStripMenuItem.Click += new System.EventHandler(this.绘制运行图上下行ToolStripMenuItem_Click);
+            // 
             // PaintForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -251,5 +278,8 @@
         private System.Windows.Forms.ToolStripMenuItem 开行方案图ToolStripMenuItem;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.ToolStripMenuItem 绘制运行图上行ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 绘制运行图下行ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 绘制运行图上下行ToolStripMenuItem;
     }
 }

@@ -136,6 +136,10 @@ namespace Monkeys_Timetable
         {
             Graphics gs;
             gs = Graphics.FromImage(bmp);
+            gs.Clear(this.pictureBox2.BackColor);
+            checkBox1.Checked = false;
+            checkBox2.Checked = false;
+            pictureBox2.BackgroundImage = null;
             int ix = dm.stationList.Count;
             double total = dm.stationList[ix - 1].totalMile;
             List<double> staMile = new List<double>();
@@ -146,7 +150,7 @@ namespace Monkeys_Timetable
             pt.TimetableFrame(this.pictureBox2.Width, this.pictureBox2.Height, total, staMile, gs, dm.stationStringList);
             this.pictureBox2.BackgroundImage = bmp;
         }
-        public void DrawUp()
+        public void DrawPicture()
         {
             Graphics gs;
             gs = Graphics.FromImage(bmp);
@@ -158,42 +162,53 @@ namespace Monkeys_Timetable
                 staMile.Add(dm.stationList[i].totalMile);
             }
             pictureBox2.BackgroundImage = null;
-            if (checkBox1.Checked == true)
+            gs.Clear(this.pictureBox2.BackColor);
+            if (checkBox1.Checked == true && checkBox2.Checked == true)
+            {
+                pt.TimetableFrame(this.pictureBox2.Width, this.pictureBox2.Height, total, staMile, gs, dm.stationStringList);
+                pt.TrainLine(gs, dm.upTrainList, dm.stationStringList);
+                pt.TrainLine(gs, dm.downTrainList, dm.stationStringList);
+            }
+            else if (checkBox1.Checked == true && checkBox2.Checked == false)
             {
                 pt.TimetableFrame(this.pictureBox2.Width, this.pictureBox2.Height, total, staMile, gs, dm.stationStringList);
                 pt.TrainLine(gs, dm.upTrainList, dm.stationStringList);
             }
-            else
-            {
-                gs.Clear(this.pictureBox2.BackColor);
-                pt.TimetableFrame(this.pictureBox2.Width, this.pictureBox2.Height, total, staMile, gs, dm.stationStringList);
-            }
-            this.pictureBox2.BackgroundImage = bmp;
-        }
-        public void DrawDown()
-        {
-            Graphics gs;
-            gs = Graphics.FromImage(bmp);
-            int ix = dm.stationList.Count;
-            double total = dm.stationList[ix - 1].totalMile;
-            List<double> staMile = new List<double>();
-            for (int i = 0; i < ix; i++)
-            {
-                staMile.Add(dm.stationList[i].totalMile);
-            }
-            pictureBox2.BackgroundImage = null;
-            if (checkBox2.Checked == true)
+            else if (checkBox1.Checked == false && checkBox2.Checked == true)
             {
                 pt.TimetableFrame(this.pictureBox2.Width, this.pictureBox2.Height, total, staMile, gs, dm.stationStringList);
                 pt.TrainLine(gs, dm.downTrainList, dm.stationStringList);
             }
             else
             {
-                gs.Clear(this.pictureBox2.BackColor);
                 pt.TimetableFrame(this.pictureBox2.Width, this.pictureBox2.Height, total, staMile, gs, dm.stationStringList);
             }
             this.pictureBox2.BackgroundImage = bmp;
         }
+        //public void Draw()
+        //{
+        //    Graphics gs;
+        //    gs = Graphics.FromImage(bmp);
+        //    int ix = dm.stationList.Count;
+        //    double total = dm.stationList[ix - 1].totalMile;
+        //    List<double> staMile = new List<double>();
+        //    for (int i = 0; i < ix; i++)
+        //    {
+        //        staMile.Add(dm.stationList[i].totalMile);
+        //    }
+        //    pictureBox2.BackgroundImage = null;
+        //    if (checkBox2.Checked == true)
+        //    {
+        //        pt.TimetableFrame(this.pictureBox2.Width, this.pictureBox2.Height, total, staMile, gs, dm.stationStringList);
+        //        pt.TrainLine(gs, dm.downTrainList, dm.stationStringList);
+        //    }
+        //    else
+        //    {
+        //        gs.Clear(this.pictureBox2.BackColor);
+        //        pt.TimetableFrame(this.pictureBox2.Width, this.pictureBox2.Height, total, staMile, gs, dm.stationStringList);
+        //    }
+        //    this.pictureBox2.BackgroundImage = bmp;
+        //}
         private void 绘制运行图ToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             DrawFrame();
@@ -201,12 +216,12 @@ namespace Monkeys_Timetable
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            DrawUp();
+            DrawPicture();
         }//上行运行图的绘制
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
-            DrawDown();
+            DrawPicture();
         }//下行运行图的绘制
 
         private void 开行方案数据ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -258,5 +273,26 @@ namespace Monkeys_Timetable
 
         }
 
+        private void 绘制运行图上行ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            checkBox1.Checked = false;
+            checkBox2.Checked = false;
+            checkBox1.Checked = true;
+        }
+
+        private void 绘制运行图下行ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            checkBox2.Checked = false;
+            checkBox1.Checked = false;
+            checkBox2.Checked = true;
+        }
+
+        private void 绘制运行图上下行ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            checkBox2.Checked = false;
+            checkBox1.Checked = false;
+            checkBox2.Checked = true;
+            checkBox1.Checked = true;
+        }
     }
 }
