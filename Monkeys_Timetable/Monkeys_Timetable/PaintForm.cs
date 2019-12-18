@@ -155,7 +155,7 @@ namespace Monkeys_Timetable
             {
                 staMile.Add(dm.stationList[i].totalMile);
             }
-            pt.TimetableFrame(this.panel1.Width, this.panel1.Height, total, staMile, gs);
+            pt.TimetableFrame(this.panel1.Width, this.panel1.Height, total, staMile, gs,dm.stationStringList);
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -171,13 +171,13 @@ namespace Monkeys_Timetable
             }
             if (checkBox1.Checked==true)
             {
-                pt.TimetableFrame(this.panel1.Width, this.panel1.Height, total, staMile, gs);
+                pt.TimetableFrame(this.panel1.Width, this.panel1.Height, total, staMile, gs, dm.stationStringList);
                 pt.TrainLine(gs, dm.upTrainList, dm.stationStringList);
             }
             else
             {
                 gs.Clear(this.panel1.BackColor);
-                pt.TimetableFrame(this.panel1.Width, this.panel1.Height, total, staMile, gs);
+                pt.TimetableFrame(this.panel1.Width, this.panel1.Height, total, staMile, gs, dm.stationStringList);
             }
 
         }//上行运行图的绘制
@@ -195,13 +195,13 @@ namespace Monkeys_Timetable
             }            
             if (checkBox2.Checked == true)
             {
-                pt.TimetableFrame(this.panel1.Width, this.panel1.Height, total, staMile, gs);
+                pt.TimetableFrame(this.panel1.Width, this.panel1.Height, total, staMile, gs, dm.stationStringList);
                 pt.TrainLine(gs, dm.downTrainList, dm.stationStringList);
             }
             else
             {
                 gs.Clear(this.panel1.BackColor);
-                pt.TimetableFrame(this.panel1.Width, this.panel1.Height, total, staMile, gs);
+                pt.TimetableFrame(this.panel1.Width, this.panel1.Height, total, staMile, gs, dm.stationStringList);
             }
         }//下行运行图的绘制
 

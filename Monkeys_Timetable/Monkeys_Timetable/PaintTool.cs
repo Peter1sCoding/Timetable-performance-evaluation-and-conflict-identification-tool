@@ -12,11 +12,13 @@ namespace Monkeys_Timetable
 {
     class PaintTool//封装绘制运行图所需的方法
     {
+        Font font=new Font("宋体",5f);
+        Brush brush=new SolidBrush(Color.Green);
         List<int> TimeX = new List<int>();
         List<int> staY = new List<int>();
         DataTable ct = new DataTable();
 
-        public void TimetableFrame(double WinWidth, double WinHeight, double TotalMile, List<double> StationMile, Graphics gs)
+        public void TimetableFrame(double WinWidth, double WinHeight, double TotalMile, List<double> StationMile, Graphics gs,List<string> StationName)
         {
             Point p1 = new Point();
             Point p2 = new Point();
@@ -43,7 +45,8 @@ namespace Monkeys_Timetable
                         TimeX.Add(p1.X);
                         p1.X = (int)(p1.X + add);
                         p2.X = (int)(p2.X + add);
-                        //在这添加插入时间语句
+                        gs.DrawString(Convert.ToString(Hour),font,brush,p2.X-2,p2.Y+5);//在这添加插入时间语句
+                        Hour++;
                     }
                     else
                     {
@@ -71,7 +74,7 @@ namespace Monkeys_Timetable
                 p1.Y = (int)(5 + Height * StationMile[k] / TotalMile);
                 p2.Y = (int)(5 + Height * StationMile[k] / TotalMile);
                 gs.DrawLine(pp1, p1, p2);
-                //在这插入车站标签语句
+                gs.DrawString(StationName[k], font, brush, p1.X-30, p1.Y-3);//在这插入车站标签语句
                 staY.Add(p1.Y);
             }
         }//运行图框架图
