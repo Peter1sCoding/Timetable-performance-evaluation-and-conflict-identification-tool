@@ -26,7 +26,7 @@ namespace Monkeys_Timetable
         {
             pictureBox2 = new PictureBox();
             InitializeComponent();
-            this.Size = new Size(2048, 1800);
+            this.Size = new Size(bmp.Width,bmp.Height);
             dm = new DataManager();
             dm.ReadHeadway(Application.StartupPath + @"\\车站列车安全间隔.csv");
             dm.ReadStation(Application.StartupPath + @"\\沪宁车站信息.csv");
@@ -157,6 +157,7 @@ namespace Monkeys_Timetable
             {
                 staMile.Add(dm.stationList[i].totalMile);
             }
+            pictureBox2.BackgroundImage = null;
             if (checkBox1.Checked == true)
             {
                 pt.TimetableFrame(this.pictureBox2.Width, this.pictureBox2.Height, total, staMile, gs, dm.stationStringList);
@@ -180,6 +181,7 @@ namespace Monkeys_Timetable
             {
                 staMile.Add(dm.stationList[i].totalMile);
             }
+            pictureBox2.BackgroundImage = null;
             if (checkBox2.Checked == true)
             {
                 pt.TimetableFrame(this.pictureBox2.Width, this.pictureBox2.Height, total, staMile, gs, dm.stationStringList);
@@ -255,5 +257,6 @@ namespace Monkeys_Timetable
         { 
 
         }
+
     }
 }
