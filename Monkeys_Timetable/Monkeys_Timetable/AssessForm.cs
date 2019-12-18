@@ -14,6 +14,7 @@ namespace Monkeys_Timetable
         DataManager dm = new DataManager();
         Assessment ass = new Assessment();
         Dictionary<string, int[]> serviceCount = new Dictionary<string, int[]>();
+        Dictionary<List<string>, List<int>> TrainDensity = new Dictionary<List<string>, List<int>>();
         List<int> allDen = new List<int>();
         int maxDensity;
 
@@ -21,7 +22,7 @@ namespace Monkeys_Timetable
         {
             InitializeComponent();
             ShowFirst();
-            ass.GetTrainDensity(dm);
+            TrainDensity = ass.GetTrainDensity(dm);
             allDen = ass.AllDensity;
             maxDensity = allDen.Max();
             serviceCount = ass.GetStationServiceCount(dm);
@@ -294,7 +295,6 @@ namespace Monkeys_Timetable
 
         public void drawDensity()
         {
-            int height = 650, width = 600;
             Graphics g = splitContainer1.Panel2.CreateGraphics();
             try
             {
@@ -302,7 +302,7 @@ namespace Monkeys_Timetable
                 Font font = new Font("Arial", 10, FontStyle.Regular);
                 Font font1 = new Font("宋体", 14, FontStyle.Bold);
                 SolidBrush brush = new SolidBrush(Color.Blue);
-                //g.FillRectangle(Brushes.LightBlue, 50, 0, width, height);
+               
                 g.DrawString("区间列车密度统计", font1, brush, new PointF(270, 30));
                 // Up Down
                 Font font2 = new Font("宋体", 10, FontStyle.Bold);
@@ -316,29 +316,48 @@ namespace Monkeys_Timetable
                 g.DrawLine(new Pen(brush2), new Point(70, 70), new Point(70, 650));// 最长的bar
                 g.DrawLine(new Pen(brush2), new Point(350 + 280, 70), new Point(350 + 280, 650));// 最长的bar
 
-                float aa;//绘图的比例系数 aa =  280/maxDen
-                // 每个bar的长度w等于 对应区间密度d * aa
+                float aa = 280 / maxDensity;//绘图的比例系数 
+                
                 float w = 40;
-                float d;
+               
                 Font font3 = new Font("宋体", 10);
-                #region 上行 橘色
-                SolidBrush brush3 = new SolidBrush(Color.Orange);
-                g.FillRectangle(brush3, 345 - w, 75, w, 20);
-                g.DrawString(w.ToString(), font3, brush2, new PointF(345 - w - 25, 75 + 5));
-                g.FillRectangle(brush3, 345 - 80, 100, 80, 20);//bar间距是5
-                g.DrawString("80", font3, brush2, new PointF(345 - 80 - 30, 100 + 5));
+                int i = 0;
+                foreach (List<string> sec in TrainDensity.Keys)
+                {
+                    List<int> den = TrainDensity[sec];
+                    int d_up = den[0];
+                    int d_down = den[1];
+                    
+
+                    #region 上行 橘色
+
+                    float barLength1 = Convert.ToSingle(d_up * aa);// 每个bar的长度等于对应区间密度d * aa
+                    SolidBrush brush3 = new SolidBrush(Color.Orange);
+
+                    g.FillRectangle(brush3, 345 - w, 75, w, 20);
+                    g.DrawString(w.ToString(), font3, brush2, new PointF(345 - w - 25, 75 + 5));
+                    g.FillRectangle(brush3, 345 - 80, 100, 80, 20);//bar间距是5
+                    g.DrawString("80", font3, brush2, new PointF(345 - 80 - 30, 100 + 5));
+
+                    g.FillRectangle(brush3, 345 - barLength1, 75+25*i, barLength1, 20);
+                    g.DrawString(w.ToString(), font3, brush2, new PointF(345 - barLength1 - 25, 75 + 5));
 
 
-                #endregion
 
-                #region 下行 浅绿色
-                SolidBrush brush4 = new SolidBrush(Color.LightGreen);
-                g.FillRectangle(brush4, 355, 75, w, 20);
-                g.DrawString(w.ToString(), font3, brush2, new PointF(355 + w + 25, 75 + 5));
-                g.FillRectangle(brush4, 355, 75 + 20 + 5, 87, 20);//87这个位置的数字为每个bar的宽度
-                g.DrawString("87", font3, brush2, new PointF(355 + 87 + 25, 75 + 20 + 5 + 5));
+                    #endregion
 
-                #endregion
+                    #region 下行 浅绿色
+                    float barLength2 = Convert.ToSingle(d_down * aa);
+                    SolidBrush brush4 = new SolidBrush(Color.LightGreen);
+                    g.FillRectangle(brush4, 355, 75, w, 20);
+                    g.DrawString(w.ToString(), font3, brush2, new PointF(355 + w + 25, 75 + 5));
+                    g.FillRectangle(brush4, 355, 75 + 20 + 5, 87, 20);//87这个位置的数字为每个bar的宽度
+                    g.DrawString("87", font3, brush2, new PointF(355 + 87 + 25, 75 + 20 + 5 + 5));
+
+                    #endregion
+                    i++;
+                }
+
 
             }
             finally
