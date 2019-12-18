@@ -317,9 +317,6 @@ namespace Monkeys_Timetable
                 g.DrawLine(new Pen(brush2), new Point(350 + 280, 70), new Point(350 + 280, 650));// 最长的bar
 
                 float aa = 280 / maxDensity;//绘图的比例系数 
-                
-                float w = 40;
-               
                 Font font3 = new Font("宋体", 10);
                 int i = 0;
                 foreach (List<string> sec in TrainDensity.Keys)
@@ -330,31 +327,21 @@ namespace Monkeys_Timetable
                     
 
                     #region 上行 橘色
-
                     float barLength1 = Convert.ToSingle(d_up * aa);// 每个bar的长度等于对应区间密度d * aa
                     SolidBrush brush3 = new SolidBrush(Color.Orange);
 
-                    //g.FillRectangle(brush3, 345 - w, 75, w, 20);
-                    //g.DrawString(w.ToString(), font3, brush2, new PointF(345 - w - 25, 75 + 5));
-                    //g.FillRectangle(brush3, 345 - 80, 100, 80, 20);//bar间距是5
-                    //g.DrawString("80", font3, brush2, new PointF(345 - 80 - 30, 100 + 5));
-
                     g.FillRectangle(brush3, 345 - barLength1, 75 + 25 * i, barLength1, 20);
                     g.DrawString(barLength1.ToString(), font3, brush2, new PointF(345 - barLength1 - 25, 75 + 25 * i + 5));
-
-
-
                     #endregion
 
                     #region 下行 浅绿色
                     float barLength2 = Convert.ToSingle(d_down * aa);
                     SolidBrush brush4 = new SolidBrush(Color.LightGreen);
-                    g.FillRectangle(brush4, 355, 75, w, 20);
-                    g.DrawString(w.ToString(), font3, brush2, new PointF(355 + w + 25, 75 + 5));
-                    g.FillRectangle(brush4, 355, 75 + 20 + 5, 87, 20);//87这个位置的数字为每个bar的宽度
-                    g.DrawString("87", font3, brush2, new PointF(355 + 87 + 25, 75 + 20 + 5 + 5));
 
+                    g.FillRectangle(brush4, 355, 25 * i + 75, barLength2, 20);
+                    g.DrawString(barLength2.ToString(), font3, brush2, new PointF(355 + barLength2, 25 * i + 75+5));
                     #endregion
+
                     i++;
                 }
 

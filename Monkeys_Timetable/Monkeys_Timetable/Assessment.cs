@@ -187,7 +187,7 @@ namespace Monkeys_Timetable
                 {
                     for (int j = 0; j < aTrain.staList.Count - 1; j++)
                     {
-                        if (StationName[i] == aTrain.staList[j] && StationName[i + 1] == aTrain.staList[j + 1])
+                        if (StationName[i+1] == aTrain.staList[j] && StationName[i] == aTrain.staList[j + 1])
                         {
                             DensityUp++;
                         }
@@ -199,7 +199,7 @@ namespace Monkeys_Timetable
                 {
                     for (int j = 0; j < aTrain.staList.Count - 1; j++)
                     {
-                        if (StationName[i + 1] == aTrain.staList[j] && StationName[i] == aTrain.staList[j + 1])
+                        if (StationName[i] == aTrain.staList[j] && StationName[i+1] == aTrain.staList[j + 1])
                         {
                             DensityDown++;
                         }
