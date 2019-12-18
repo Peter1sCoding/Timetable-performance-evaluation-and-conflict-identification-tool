@@ -7,10 +7,7 @@ namespace Monkeys_Timetable
 {
     class Assessment//封装各类运行图指标计算方法
     {
-        public DataManager dm = new DataManager();
         
-       
-
         public double GetMinute(string aTime)//将时间字符串转化为分钟
         {
             string[] str = aTime.Split(':');
@@ -20,8 +17,9 @@ namespace Monkeys_Timetable
             return aMinute;
         }
 
-        public List<double> GetTravelSpeed()//所有车的旅行速度
+        public List<double> GetTravelSpeed(DataManager dmm)//所有车的旅行速度
         {
+            DataManager dm = dmm;
             List<double> TravelSpeed = new List<double>();
             foreach (Train aTrain in dm.TrainList)
             {
@@ -39,8 +37,9 @@ namespace Monkeys_Timetable
             return TravelSpeed;
         }
 
-        public List<double> GetTechnicalSpeed()//所有车的技术速度
+        public List<double> GetTechnicalSpeed(DataManager dmm)//所有车的技术速度
         {
+            DataManager dm = dmm;
             List<double> TechnicalSpeed = new List<double>();
             foreach (Train aTrain in dm.TrainList)
             {
@@ -65,11 +64,12 @@ namespace Monkeys_Timetable
             return TechnicalSpeed;
         }
 
-        public List<double> GetSpeedIndex()//速度系数
+        public List<double> GetSpeedIndex(DataManager dmm)//速度系数
         {
+            DataManager dm = dmm;
             List<double> SpeedIndex = new List<double>();
-            List<double> Speed1 = GetTravelSpeed();
-            List<double> Speed2 = GetTechnicalSpeed();
+            List<double> Speed1 = GetTravelSpeed(dm);
+            List<double> Speed2 = GetTechnicalSpeed(dm);
             for (int i = 0; i < Speed1.Count; i++)
             {
                 double aSpeedIndex = Speed1[i] / Speed2[i];
@@ -134,8 +134,9 @@ namespace Monkeys_Timetable
             return StationService;
         }
 
-        public List<int> GetServiceFrequency()//所有车的服务频率（停站次数及列车级别）级别还没有加
+        public List<int> GetServiceFrequency(DataManager dmm)//所有车的服务频率（停站次数及列车级别）级别还没有加
         {
+            DataManager dm = dmm;
             List<int> ServiceFrequency = new List<int>();
             int aCount = 2;
             foreach (Train aTrain in dm.TrainList)
