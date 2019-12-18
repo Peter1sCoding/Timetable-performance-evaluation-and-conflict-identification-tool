@@ -21,7 +21,7 @@ namespace Monkeys_Timetable
         List<float> staY = new List<float>();
         DataTable ct = new DataTable();
         
-
+        
         public void TimetableFrame(double WinWidth, double WinHeight, double TotalMile, List<double> StationMile, Graphics gs,List<string> StationName)
         {
             SF.Alignment = StringAlignment.Far;
