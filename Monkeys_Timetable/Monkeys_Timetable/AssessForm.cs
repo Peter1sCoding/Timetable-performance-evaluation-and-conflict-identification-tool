@@ -138,8 +138,8 @@ namespace Monkeys_Timetable
                 {
                     if(strtrain == dm.TrainList[i].trainNo)
                     {
-                        tbTravalSpeed.Text = ass.GetTravelSpeed(dm)[i].ToString();
-                        tbTechicalSpeed.Text = ass.GetTechnicalSpeed(dm)[i].ToString();
+                        tbTravalSpeed.Text = ass.GetTravelSpeed(dm)[i].ToString()+"km/h";
+                        tbTechicalSpeed.Text = ass.GetTechnicalSpeed(dm)[i].ToString()+"km/h";
                         tbSpeedIndex.Text = ass.GetSpeedIndex(dm)[i].ToString();
                         tbTrainServe.Text = ass.GetServiceFrequency(dm)[i].ToString();
                     }
