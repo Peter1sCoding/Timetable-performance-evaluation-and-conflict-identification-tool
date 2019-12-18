@@ -334,13 +334,13 @@ namespace Monkeys_Timetable
                     float barLength1 = Convert.ToSingle(d_up * aa);// 每个bar的长度等于对应区间密度d * aa
                     SolidBrush brush3 = new SolidBrush(Color.Orange);
 
-                    g.FillRectangle(brush3, 345 - w, 75, w, 20);
-                    g.DrawString(w.ToString(), font3, brush2, new PointF(345 - w - 25, 75 + 5));
-                    g.FillRectangle(brush3, 345 - 80, 100, 80, 20);//bar间距是5
-                    g.DrawString("80", font3, brush2, new PointF(345 - 80 - 30, 100 + 5));
+                    //g.FillRectangle(brush3, 345 - w, 75, w, 20);
+                    //g.DrawString(w.ToString(), font3, brush2, new PointF(345 - w - 25, 75 + 5));
+                    //g.FillRectangle(brush3, 345 - 80, 100, 80, 20);//bar间距是5
+                    //g.DrawString("80", font3, brush2, new PointF(345 - 80 - 30, 100 + 5));
 
-                    g.FillRectangle(brush3, 345 - barLength1, 75+25*i, barLength1, 20);
-                    g.DrawString(w.ToString(), font3, brush2, new PointF(345 - barLength1 - 25, 75 + 5));
+                    g.FillRectangle(brush3, 345 - barLength1, 75 + 25 * i, barLength1, 20);
+                    g.DrawString(barLength1.ToString(), font3, brush2, new PointF(345 - barLength1 - 25, 75 + 25 * i + 5));
 
 
 
