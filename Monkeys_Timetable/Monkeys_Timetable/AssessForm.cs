@@ -30,6 +30,13 @@ namespace Monkeys_Timetable
         
         public void ShowFirst()
         {
+            dm.ReadHeadway(Application.StartupPath + @"\\车站列车安全间隔.csv");
+            dm.ReadStation(Application.StartupPath + @"\\沪宁车站信息.csv");
+            dm.ReadTrain(Application.StartupPath + @"\\沪宁时刻图.csv");
+            dm.DivideUpDown();
+            dm.AddTra2sta();
+            dm.GetStop();
+
             this.Height = 700;
             this.Width = 1200;
             this.splitContainer1.Dock = DockStyle.Fill;
@@ -41,13 +48,6 @@ namespace Monkeys_Timetable
             splitContainer2.IsSplitterFixed = true;
             ShowPanel_1();
             ShowPanel_2();
-
-            dm.ReadHeadway(Application.StartupPath + @"\\车站列车安全间隔.csv");
-            dm.ReadStation(Application.StartupPath + @"\\沪宁车站信息.csv");
-            dm.ReadTrain(Application.StartupPath + @"\\沪宁时刻图.csv");
-            dm.DivideUpDown();
-            dm.AddTra2sta();
-            dm.GetStop();
             
         }
 
@@ -178,12 +178,13 @@ namespace Monkeys_Timetable
 
             cbStation = new ComboBox();
             cbStation.Name = "cbStation";
-            cbStation.Items.AddRange(new object[] { 1, 2, 3 });
-            //foreach (Train tra in aDataManager.TrainList)
-            //{
-            //    string trainName = tra.trainNo;
-            //    cbStation.Items.Add(trainName);
-            //}
+            //cbStation.Items.AddRange(new object[] { 1, 2, 3 });
+            
+            foreach(string strr in dm.stationStringList)
+            {
+                string strr2 = strr;
+                cbStation.Items.Add(strr2);
+            }
             cbStation.Size = new Size(100, 30);
             cbStation.Location = new Point(165, 50);
             splitContainer2.Panel2.Controls.Add(cbStation);
@@ -274,15 +275,16 @@ namespace Monkeys_Timetable
             else
             {
                 String str = cbStation.SelectedItem.ToString();
+                int[] tbnums = serviceCount[str];//选中车站的6个时间段的服务次数
                 for (int i = 1; i < 7; i++)
                 {
-                    string str1 = "lbTime" + i.ToString();
-                    string str2 = "tbTime" + i.ToString();
+                    string str1 = "tbTime" + i.ToString();
                     foreach (Control control in this.splitContainer2.Panel2.Controls)
                     {
-                        if (control is TextBox && control.Name == str2)
+                        if (control is TextBox && control.Name == str1)
                         {
-                            (control as TextBox).Text = str + "+" + i.ToString();
+                            string tbnum = tbnums[i-1].ToString();
+                            (control as TextBox).Text = tbnum;
                             break;
                         }
                     }
@@ -300,7 +302,7 @@ namespace Monkeys_Timetable
                 Font font = new Font("Arial", 10, FontStyle.Regular);
                 Font font1 = new Font("宋体", 14, FontStyle.Bold);
                 SolidBrush brush = new SolidBrush(Color.Blue);
-                g.FillRectangle(Brushes.LightBlue, 50, 0, width, height);
+                //g.FillRectangle(Brushes.LightBlue, 50, 0, width, height);
                 g.DrawString("区间列车密度统计", font1, brush, new PointF(270, 30));
                 // Up Down
                 Font font2 = new Font("宋体", 10, FontStyle.Bold);
@@ -311,6 +313,32 @@ namespace Monkeys_Timetable
                 g.DrawLine(new Pen(brush2), new Point(0, 70), new Point(650, 70));
                 g.DrawLine(new Pen(brush2), new Point(0, 650), new Point(650, 650));
                 g.DrawLine(new Pen(brush2), new Point(350, 70), new Point(350, 650));
+                g.DrawLine(new Pen(brush2), new Point(70, 70), new Point(70, 650));// 最长的bar
+                g.DrawLine(new Pen(brush2), new Point(350 + 280, 70), new Point(350 + 280, 650));// 最长的bar
+
+                float aa;//绘图的比例系数 aa =  280/maxDen
+                // 每个bar的长度w等于 对应区间密度d * aa
+                float w = 40;
+                float d;
+                Font font3 = new Font("宋体", 10);
+                #region 上行 橘色
+                SolidBrush brush3 = new SolidBrush(Color.Orange);
+                g.FillRectangle(brush3, 345 - w, 75, w, 20);
+                g.DrawString(w.ToString(), font3, brush2, new PointF(345 - w - 25, 75 + 5));
+                g.FillRectangle(brush3, 345 - 80, 100, 80, 20);//bar间距是5
+                g.DrawString("80", font3, brush2, new PointF(345 - 80 - 30, 100 + 5));
+
+
+                #endregion
+
+                #region 下行 浅绿色
+                SolidBrush brush4 = new SolidBrush(Color.LightGreen);
+                g.FillRectangle(brush4, 355, 75, w, 20);
+                g.DrawString(w.ToString(), font3, brush2, new PointF(355 + w + 25, 75 + 5));
+                g.FillRectangle(brush4, 355, 75 + 20 + 5, 87, 20);//87这个位置的数字为每个bar的宽度
+                g.DrawString("87", font3, brush2, new PointF(355 + 87 + 25, 75 + 20 + 5 + 5));
+
+                #endregion
 
             }
             finally
