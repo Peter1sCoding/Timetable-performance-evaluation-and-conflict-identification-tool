@@ -31,6 +31,13 @@ namespace Monkeys_Timetable
         
         public void ShowFirst()
         {
+            dm.ReadHeadway(Application.StartupPath + @"\\车站列车安全间隔.csv");
+            dm.ReadStation(Application.StartupPath + @"\\沪宁车站信息.csv");
+            dm.ReadTrain(Application.StartupPath + @"\\沪宁时刻图.csv");
+            dm.DivideUpDown();
+            dm.AddTra2sta();
+            dm.GetStop();
+
             this.Height = 700;
             this.Width = 1200;
             this.splitContainer1.Dock = DockStyle.Fill;
@@ -42,13 +49,6 @@ namespace Monkeys_Timetable
             splitContainer2.IsSplitterFixed = true;
             ShowPanel_1();
             ShowPanel_2();
-
-            dm.ReadHeadway(Application.StartupPath + @"\\车站列车安全间隔.csv");
-            dm.ReadStation(Application.StartupPath + @"\\沪宁车站信息.csv");
-            dm.ReadTrain(Application.StartupPath + @"\\沪宁时刻图.csv");
-            dm.DivideUpDown();
-            dm.AddTra2sta();
-            dm.GetStop();
             
         }
 
@@ -148,12 +148,13 @@ namespace Monkeys_Timetable
 
             cbStation = new ComboBox();
             cbStation.Name = "cbStation";
-            cbStation.Items.AddRange(new object[] { 1, 2, 3 });
-            //foreach (Train tra in aDataManager.TrainList)
-            //{
-            //    string trainName = tra.trainNo;
-            //    cbStation.Items.Add(trainName);
-            //}
+            //cbStation.Items.AddRange(new object[] { 1, 2, 3 });
+            
+            foreach(string strr in dm.stationStringList)
+            {
+                string strr2 = strr;
+                cbStation.Items.Add(strr2);
+            }
             cbStation.Size = new Size(100, 30);
             cbStation.Location = new Point(210, 50);
             splitContainer2.Panel2.Controls.Add(cbStation);
@@ -244,15 +245,16 @@ namespace Monkeys_Timetable
             else
             {
                 String str = cbStation.SelectedItem.ToString();
+                int[] tbnums = serviceCount[str];//选中车站的6个时间段的服务次数
                 for (int i = 1; i < 7; i++)
                 {
-                    string str1 = "lbTime" + i.ToString();
-                    string str2 = "tbTime" + i.ToString();
+                    string str1 = "tbTime" + i.ToString();
                     foreach (Control control in this.splitContainer2.Panel2.Controls)
                     {
-                        if (control is TextBox && control.Name == str2)
+                        if (control is TextBox && control.Name == str1)
                         {
-                            (control as TextBox).Text = str + "+" + i.ToString();
+                            string tbnum = tbnums[i-1].ToString();
+                            (control as TextBox).Text = tbnum;
                             break;
                         }
                     }
