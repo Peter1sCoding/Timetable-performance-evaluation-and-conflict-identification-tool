@@ -18,7 +18,7 @@ namespace Monkeys_Timetable
         TextBox password;
         Label IDLabel;
         Label pasLabel;
-        string file;
+        //string file;
         public LoginForm()
         {
             InitializeComponent();

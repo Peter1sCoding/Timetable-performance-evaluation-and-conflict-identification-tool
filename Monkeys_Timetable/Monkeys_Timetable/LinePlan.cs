@@ -14,10 +14,10 @@ namespace Monkeys_Timetable
         
 
         DataManager dm;
-        Bitmap bmp;
+        //Bitmap bmp;
         DataTable UpPlanTable;
         DataTable DownPlanTable;
-        Graphics g;
+        //Graphics g;
         Brush b;
         Font font;
         Pen p;
