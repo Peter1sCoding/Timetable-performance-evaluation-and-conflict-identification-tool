@@ -32,6 +32,7 @@ namespace Monkeys_Timetable
             double add1 = Width / (24 * 60);
             int add = (int)Math.Round(add1);
             int xx = 0;
+            int Hour = 0;
             for (int j = 0; j <= 1440; j++)
             {
                 if(j%10==0)
@@ -42,6 +43,7 @@ namespace Monkeys_Timetable
                         TimeX.Add(p1.X);
                         p1.X = (int)(p1.X + add);
                         p2.X = (int)(p2.X + add);
+                        //在这添加插入时间语句
                     }
                     else
                     {
@@ -69,6 +71,7 @@ namespace Monkeys_Timetable
                 p1.Y = (int)(5 + Height * StationMile[k] / TotalMile);
                 p2.Y = (int)(5 + Height * StationMile[k] / TotalMile);
                 gs.DrawLine(pp1, p1, p2);
+                //在这插入车站标签语句
                 staY.Add(p1.Y);
             }
         }//运行图框架图
