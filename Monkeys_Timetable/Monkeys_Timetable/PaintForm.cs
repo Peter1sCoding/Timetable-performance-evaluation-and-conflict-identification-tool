@@ -99,22 +99,12 @@ namespace Monkeys_Timetable
 
         }
 
-        public void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
         private void 绘制运行图ToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }
 
         private void 绘制ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel1_Paint_1(object sender, PaintEventArgs e)
         {
 
         }
@@ -143,25 +133,10 @@ namespace Monkeys_Timetable
             ConflictForm cf = new ConflictForm(dt);
             cf.Show();
         }
-
-        private void 绘制运行图ToolStripMenuItem_Click_1(object sender, EventArgs e)
+        public void DrawFrame()
         {
             Graphics gs;
             gs = this.panel1.CreateGraphics();
-            int ix = dm.stationList.Count;
-            double total = dm.stationList[ix - 1].totalMile;
-            List<double> staMile = new List<double>();
-            for(int i=0;i<ix;i++)
-            {
-                staMile.Add(dm.stationList[i].totalMile);
-            }
-            pt.TimetableFrame(this.panel1.Width, this.panel1.Height, total, staMile, gs,dm.stationStringList);
-        }
-
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            Graphics gs;
-            gs = this.panel1.CreateGraphics();        
             int ix = dm.stationList.Count;
             double total = dm.stationList[ix - 1].totalMile;
             List<double> staMile = new List<double>();
@@ -169,7 +144,20 @@ namespace Monkeys_Timetable
             {
                 staMile.Add(dm.stationList[i].totalMile);
             }
-            if (checkBox1.Checked==true)
+            pt.TimetableFrame(this.panel1.Width, this.panel1.Height, total, staMile, gs, dm.stationStringList);
+        }
+        public void DrawUp()
+        {
+            Graphics gs;
+            gs = this.panel1.CreateGraphics();
+            int ix = dm.stationList.Count;
+            double total = dm.stationList[ix - 1].totalMile;
+            List<double> staMile = new List<double>();
+            for (int i = 0; i < ix; i++)
+            {
+                staMile.Add(dm.stationList[i].totalMile);
+            }
+            if (checkBox1.Checked == true)
             {
                 pt.TimetableFrame(this.panel1.Width, this.panel1.Height, total, staMile, gs, dm.stationStringList);
                 pt.TrainLine(gs, dm.upTrainList, dm.stationStringList);
@@ -179,10 +167,8 @@ namespace Monkeys_Timetable
                 gs.Clear(this.panel1.BackColor);
                 pt.TimetableFrame(this.panel1.Width, this.panel1.Height, total, staMile, gs, dm.stationStringList);
             }
-
-        }//上行运行图的绘制
-
-        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        }
+        public void DrawDown()
         {
             Graphics gs;
             gs = this.panel1.CreateGraphics();
@@ -192,7 +178,7 @@ namespace Monkeys_Timetable
             for (int i = 0; i < ix; i++)
             {
                 staMile.Add(dm.stationList[i].totalMile);
-            }            
+            }
             if (checkBox2.Checked == true)
             {
                 pt.TimetableFrame(this.panel1.Width, this.panel1.Height, total, staMile, gs, dm.stationStringList);
@@ -203,12 +189,21 @@ namespace Monkeys_Timetable
                 gs.Clear(this.panel1.BackColor);
                 pt.TimetableFrame(this.panel1.Width, this.panel1.Height, total, staMile, gs, dm.stationStringList);
             }
-        }//下行运行图的绘制
-
-        private void panel3_Paint_1(object sender, PaintEventArgs e)
-        {
-
         }
+        private void 绘制运行图ToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            DrawFrame();
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            DrawUp();
+        }//上行运行图的绘制
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            DrawDown();
+        }//下行运行图的绘制
 
         private void 开行方案数据ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -254,8 +249,8 @@ namespace Monkeys_Timetable
             af.Show();
         }
 
-        private void panel1_Paint_2(object sender, PaintEventArgs e)
-        {
+        private void PaintForm_Scroll(object sender, ScrollEventArgs e)
+        { 
 
         }
     }
