@@ -32,7 +32,7 @@ namespace Monkeys_Timetable
             int a = StationMile.Count;
             p2.Y = (int)(5 + Height * StationMile[a - 1] / TotalMile);
             double add1 = Width / (24 * 60);
-            int add = (int)Math.Floor(add1);
+            int add = (int)Math.Round(add1);
             int xx = 0;
             int Hour = 0;
             for (int j = 0; j <= 1440; j++)

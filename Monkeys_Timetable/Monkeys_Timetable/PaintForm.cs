@@ -20,7 +20,7 @@ namespace Monkeys_Timetable
         DataTable dt;
         PaintTool pt = new PaintTool();
         DataTable ConflictTable;
-        Bitmap bmp = new Bitmap(1500,400);
+        Bitmap bmp = new Bitmap(2048,1800);
 
         public PaintForm()
         {
