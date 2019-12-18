@@ -127,7 +127,7 @@ namespace Monkeys_Timetable
 
         private void BtRunTrain_Click(object sender, EventArgs e)
         {
-            if (cbStation.SelectedItem == null)
+            if (cbTrain.SelectedItem == null)
             {
                 MessageBox.Show("请先选择列车！");
             }
