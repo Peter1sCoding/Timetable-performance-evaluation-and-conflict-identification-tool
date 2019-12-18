@@ -7,33 +7,43 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
+using System.Drawing.Drawing2D;
 
 namespace Monkeys_Timetable
 {
     class PaintTool//封装绘制运行图所需的方法
     {
-        Font font=new Font("宋体",5f);
+        Font font=new Font("宋体",8f);
         Brush brush=new SolidBrush(Color.Green);
-        List<int> TimeX = new List<int>();
-        List<int> staY = new List<int>();
+        StringFormat SF = new StringFormat();
+        StringFormat SF1 = new StringFormat();
+        List<float> TimeX = new List<float>();
+        List<float> staY = new List<float>();
         DataTable ct = new DataTable();
+        
 
         public void TimetableFrame(double WinWidth, double WinHeight, double TotalMile, List<double> StationMile, Graphics gs,List<string> StationName)
         {
-            Point p1 = new Point();
-            Point p2 = new Point();
+            SF.Alignment = StringAlignment.Far;
+            SF1.Alignment = StringAlignment.Center;
+            float Left = 55;
+            float Right = 10;
+            float Up = 5;
+            float Down = 15;
+            PointF p1 = new PointF();
+            PointF p2 = new PointF();
             Pen pp1 = new Pen(Color.Green, 1);
             Pen pp2 = new Pen(Color.Green, 2);
-            double Width = WinWidth - 35;
-            double Height = WinHeight - 15;
-            p1.X = 30;
-            p1.Y = 5;
-            p2.X = 30;
+            double Width = WinWidth - (Left + Right);
+            double Height = WinHeight - (Up + Down);
+            p1.X = Left;
+            p1.Y = Up;
+            p2.X = Left;
             int a = StationMile.Count;
-            p2.Y = (int)(5 + Height * StationMile[a - 1] / TotalMile);
+            p2.Y = (float)(Up + Height * StationMile[a - 1] / TotalMile);
             double add1 = Width / (24 * 60);
-            int add = (int)Math.Round(add1);
-            int xx = 0;
+            float add = (float)add1;
+            float xx = 0;
             int Hour = 0;
             for (int j = 0; j <= 1440; j++)
             {
@@ -43,46 +53,46 @@ namespace Monkeys_Timetable
                     {
                         gs.DrawLine(pp2, p1, p2);
                         TimeX.Add(p1.X);
-                        p1.X = (int)(p1.X + add);
-                        p2.X = (int)(p2.X + add);
-                        gs.DrawString(Convert.ToString(Hour),font,brush,p2.X-2,p2.Y+5);//在这添加插入时间语句
+                        p1.X = (float)(p1.X + add);
+                        p2.X = (float)(p2.X + add);
+                        gs.DrawString(Convert.ToString(Hour),font,brush,p2.X,p2.Y+5,SF1);//在这添加插入时间语句
                         Hour++;
                     }
                     else
                     {
                         gs.DrawLine(pp1, p1, p2);
                         TimeX.Add(p1.X);
-                        p1.X = (int)(p1.X + add);
-                        p2.X = (int)(p2.X + add);
+                        p1.X = (float)(p1.X + add);
+                        p2.X = (float)(p2.X + add);
                     }
                 }
                 else
                 {
                     TimeX.Add(p1.X);
-                    p1.X = (int)(p1.X + add);
-                    p2.X = (int)(p2.X + add);
+                    p1.X = (float)(p1.X + add);
+                    p2.X = (float)(p2.X + add);
                 }
             }
             xx = p1.X-add;
             ////////////////////////////////////////////////以上是时间线
             pp1 = new Pen(Color.Green, 2);
-            p1.X = 30;
+            p1.X = Left;
             p2.X = xx;
             int n = StationMile.Count();
             for (int k = 0; k < n; k++)
             {
-                p1.Y = (int)(5 + Height * StationMile[k] / TotalMile);
-                p2.Y = (int)(5 + Height * StationMile[k] / TotalMile);
+                p1.Y = (float)(Up + Height * StationMile[k] / TotalMile);
+                p2.Y = (float)(Up + Height * StationMile[k] / TotalMile);
                 gs.DrawLine(pp1, p1, p2);
-                gs.DrawString(StationName[k], font, brush, p1.X-30, p1.Y-3);//在这插入车站标签语句
+                gs.DrawString(StationName[k], font, brush, p1.X-5, p1.Y-5,SF);//在这插入车站标签语句
                 staY.Add(p1.Y);
             }
         }//运行图框架图
         public void TrainLine(Graphics gs,List<Train> TrainList,List<string> StaionList)
         {
             Pen pp = new Pen(Color.Red, 1);
-            Point p1 = new Point();
-            Point p2 = new Point();
+            PointF p1 = new PointF();
+            PointF p2 = new PointF();
             foreach (Train train in TrainList)
             {
                 int a = train.staList.Count;
@@ -122,8 +132,8 @@ namespace Monkeys_Timetable
         public void ConflictDrawUp(Graphics gs,DataTable ct,Dictionary<string,Train> TrainDic, List<string> StaionList)
         {
             Pen pp = new Pen(Color.Yellow, 1);
-            Point p1 = new Point();
-            Point p2 = new Point();
+            PointF p1 = new PointF();
+            PointF p2 = new PointF();
 
             for(int i = 0; i < ct.Rows.Count; i++)
             {
@@ -145,8 +155,8 @@ namespace Monkeys_Timetable
         public void ConflictDrawDown(Graphics gs, DataTable ct, Dictionary<string, Train> TrainDic, List<string> StaionList)
         {
             Pen pp = new Pen(Color.Yellow, 1);
-            Point p1 = new Point();
-            Point p2 = new Point();
+            PointF p1 = new PointF();
+            PointF p2 = new PointF();
 
             for (int i = 0; i < ct.Rows.Count; i++)
             {
