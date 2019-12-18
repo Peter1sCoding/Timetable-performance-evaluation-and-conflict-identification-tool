@@ -26,7 +26,6 @@ namespace Monkeys_Timetable
             maxDensity = allDen.Max();
             serviceCount = ass.GetStationServiceCount(dm);
 
-            
         }
         
         public void ShowFirst()
@@ -63,25 +62,26 @@ namespace Monkeys_Timetable
         TextBox tbSpeedIndex = new TextBox();
         Label lbTrainServe = new Label();
         TextBox tbTrainServe = new TextBox();
+        Button btRunTrain;
         #endregion
 
         public void ShowPanel_1()
         {
             lbTrain.Text = "选择列车";
             lbTrain.Font = new Font("宋体", 10, FontStyle.Bold);
-            lbTrain.Size = new Size(80, 30);
-            lbTrain.Location = new Point(130, 55);
+            lbTrain.Size = new Size(70, 30);
+            lbTrain.Location = new Point(90, 55);
             //lbTrain.TextAlign = ContentAlignment.MiddleCenter;
             this.splitContainer2.Panel1.Controls.Add(lbTrain);
 
-            cbTrain.Items.AddRange(new object[] { 1, 2, 3 });
-            //foreach (Train tra in aDataManager.TrainList)
-            //{
-            //    string trainName = tra.trainNo;
-            //    cbStation.Items.Add(trainName);
-            //}
+            //cbTrain.Items.AddRange(new object[] { 1, 2, 3 });
+            foreach (Train tra in dm.TrainList)
+            {
+                string trainName = tra.trainNo;
+                cbTrain.Items.Add(trainName);
+            }
             cbTrain.Size = new Size(100, 30);
-            cbTrain.Location = new Point(210, 50);
+            cbTrain.Location = new Point(165, 50);
             splitContainer2.Panel1.Controls.Add(cbTrain);
 
             lbTravalSpeed.Text = "旅行速度";
@@ -115,6 +115,36 @@ namespace Monkeys_Timetable
             tbTrainServe.Size = new Size(80, 50);
             tbTrainServe.Location = new Point(300, 200 + 20);
             splitContainer2.Panel1.Controls.Add(tbTrainServe);
+
+            btRunTrain = new Button();
+            btRunTrain.Text = "查询列车信息";
+            btRunTrain.Font = new Font("宋体", 10, FontStyle.Bold);
+            btRunTrain.Size = new Size(120, 30);
+            btRunTrain.Location = new Point(280, 40);
+            this.splitContainer2.Panel1.Controls.Add(btRunTrain);
+            btRunTrain.Click += BtRunTrain_Click;
+        }
+
+        private void BtRunTrain_Click(object sender, EventArgs e)
+        {
+            if (cbStation.SelectedItem == null)
+            {
+                MessageBox.Show("请先选择列车！");
+            }
+            else
+            {
+                String strtrain = cbTrain.SelectedItem.ToString();
+                for (int i = 0; i < dm.TrainList.Count-1; i++)
+                {
+                    if(strtrain == dm.TrainList[i].trainNo)
+                    {
+                        tbTravalSpeed.Text = ass.GetTravelSpeed(dm)[i].ToString();
+                        tbTechicalSpeed.Text = ass.GetTechnicalSpeed(dm)[i].ToString();
+                        tbSpeedIndex.Text = ass.GetSpeedIndex(dm)[i].ToString();
+                        tbTrainServe.Text = ass.GetServiceFrequency(dm)[i].ToString();
+                    }
+                }
+            }
         }
 
         #region Panel_2 全局变量
@@ -132,7 +162,7 @@ namespace Monkeys_Timetable
         TextBox tbTime5;
         Label lbTime6;
         TextBox tbTime6;
-        Button btRun;
+        Button btRunStation;
         #endregion
 
         public void ShowPanel_2()
@@ -141,8 +171,8 @@ namespace Monkeys_Timetable
             lbStation.Name = "lbStation";
             lbStation.Text = "选择车站";
             lbStation.Font = new Font("宋体", 10, FontStyle.Bold);
-            lbStation.Size = new Size(80, 30);
-            lbStation.Location = new Point(130, 55);
+            lbStation.Size = new Size(70, 30);
+            lbStation.Location = new Point(90, 55);
             this.splitContainer2.Panel2.Controls.Add(lbStation);
 
 
@@ -155,7 +185,7 @@ namespace Monkeys_Timetable
             //    cbStation.Items.Add(trainName);
             //}
             cbStation.Size = new Size(100, 30);
-            cbStation.Location = new Point(210, 50);
+            cbStation.Location = new Point(165, 50);
             splitContainer2.Panel2.Controls.Add(cbStation);
 
 
@@ -225,16 +255,16 @@ namespace Monkeys_Timetable
             tbTime6.Location = new Point(50 + 150 * 2 + 10 * 2, 100 + 30 * 2 + 50);
             splitContainer2.Panel2.Controls.Add(tbTime6);
 
-            btRun = new Button();
-            btRun.Text = "查询车站服务次数";
-            btRun.Font = new Font("宋体", 10, FontStyle.Bold);
-            btRun.Size = new Size(150, 40);
-            btRun.Location = new Point(180, 100 + 30 * 2 + 50 * 2);
-            this.splitContainer2.Panel2.Controls.Add(btRun);
-            btRun.Click += BtRun_Click;
+            btRunStation = new Button();
+            btRunStation.Text = "查询车站服务次数";
+            btRunStation.Font = new Font("宋体", 10, FontStyle.Bold);
+            btRunStation.Size = new Size(150, 30);
+            btRunStation.Location = new Point(280, 40);
+            this.splitContainer2.Panel2.Controls.Add(btRunStation);
+            btRunStation.Click += BtRunStation_Click;
         }
 
-        private void BtRun_Click(object sender, EventArgs e)
+        private void BtRunStation_Click(object sender, EventArgs e)
         {
             //throw new NotImplementedException();
             if (cbStation.SelectedItem == null)
