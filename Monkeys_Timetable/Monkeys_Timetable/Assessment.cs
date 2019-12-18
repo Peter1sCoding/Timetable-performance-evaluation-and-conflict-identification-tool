@@ -10,10 +10,18 @@ namespace Monkeys_Timetable
         
         public double GetMinute(string aTime)//将时间字符串转化为分钟
         {
-            string[] str = aTime.Split(':');
-            double aMinute1 = Convert.ToDouble(str[0]);
-            double aMinute2 = Convert.ToDouble(str[1]);
-            double aMinute = aMinute1 * 60 + aMinute2;
+            double aMinute1, aMinute2, aMinute;
+            if (aTime != "")
+            {
+                string[] str = aTime.Split(':');
+                aMinute1 = Convert.ToDouble(str[0]);
+                aMinute2 = Convert.ToDouble(str[1]);
+                aMinute = aMinute1 * 60 + aMinute2;
+            }
+            else
+            {
+                aMinute = 0;
+            }
             return aMinute;
         }
 
