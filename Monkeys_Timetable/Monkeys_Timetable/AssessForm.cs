@@ -262,16 +262,25 @@ namespace Monkeys_Timetable
 
         public void drawDensity()
         {
-            int height = 650, width = 650;
+            int height = 650, width = 600;
             Graphics g = splitContainer1.Panel2.CreateGraphics();
             try
             {
                 // title
                 Font font = new Font("Arial", 10, FontStyle.Regular);
-                Font font1 = new Font("宋体", 16, FontStyle.Bold);
+                Font font1 = new Font("宋体", 14, FontStyle.Bold);
                 SolidBrush brush = new SolidBrush(Color.Blue);
-                g.FillRectangle(Brushes.LightBlue, 0, 0, width, height);
-                g.DrawString("区间列车密度统计", font1, brush, new PointF(250, 30));
+                g.FillRectangle(Brushes.LightBlue, 50, 0, width, height);
+                g.DrawString("区间列车密度统计", font1, brush, new PointF(270, 30));
+                // Up Down
+                Font font2 = new Font("宋体", 10, FontStyle.Bold);
+                SolidBrush brush2 = new SolidBrush(Color.Black);
+                g.DrawString("上行", font2, brush2, new PointF(280, 55));
+                g.DrawString("下行", font2, brush2, new PointF(380, 55));
+                // 画个水平线找位置 圈出区域为绘图的地方
+                g.DrawLine(new Pen(brush2), new Point(0, 70), new Point(650, 70));
+                g.DrawLine(new Pen(brush2), new Point(0, 650), new Point(650, 650));
+                g.DrawLine(new Pen(brush2), new Point(350, 70), new Point(350, 650));
 
             }
             finally
