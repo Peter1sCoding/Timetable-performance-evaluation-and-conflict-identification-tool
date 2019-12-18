@@ -65,7 +65,7 @@ namespace Monkeys_Timetable
             }
             xx = p1.X-add;
             ////////////////////////////////////////////////以上是时间线
-            pp1 = new Pen(Color.Green, 2);
+            pp1 = new Pen(Color.Green, 1);
             p1.X = 30;
             p2.X = xx;
             int n = StationMile.Count();
