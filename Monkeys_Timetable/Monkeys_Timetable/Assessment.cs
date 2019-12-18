@@ -10,10 +10,18 @@ namespace Monkeys_Timetable
         
         public double GetMinute(string aTime)//将时间字符串转化为分钟
         {
-            string[] str = aTime.Split(':');
-            double aMinute1 = Convert.ToDouble(str[0]);
-            double aMinute2 = Convert.ToDouble(str[1]);
-            double aMinute = aMinute1 * 60 + aMinute2;
+            double aMinute1, aMinute2, aMinute;
+            if (aTime != "")
+            {
+                string[] str = aTime.Split(':');
+                aMinute1 = Convert.ToDouble(str[0]);
+                aMinute2 = Convert.ToDouble(str[1]);
+                aMinute = aMinute1 * 60 + aMinute2;
+            }
+            else
+            {
+                aMinute = 0;
+            }
             return aMinute;
         }
 
@@ -32,6 +40,7 @@ namespace Monkeys_Timetable
                 double aTime2 = GetMinute(staDicValue2[0]);//终到站的到达时间
                 double aTime = aTime2 - aTime1;
                 double aSpeed = 60 * aMile / aTime;
+                aSpeed = Math.Round(aSpeed, 2);
                 TravelSpeed.Add(aSpeed);
             }
             return TravelSpeed;
@@ -59,6 +68,7 @@ namespace Monkeys_Timetable
                 staDicValue3 = aTrain.staTimeDic[aTrain.staList[aTrain.staList.Count - 1]];//终到站的信息列表
                 double aMile = Convert.ToDouble(staDicValue3[2]);//终到站的累计里程
                 double aSpeed = 60 * aMile / aTime;
+                aSpeed = Math.Round(aSpeed, 2);
                 TechnicalSpeed.Add(aSpeed);
             }
             return TechnicalSpeed;
@@ -73,6 +83,7 @@ namespace Monkeys_Timetable
             for (int i = 0; i < Speed1.Count; i++)
             {
                 double aSpeedIndex = Speed1[i] / Speed2[i];
+                aSpeedIndex = Math.Round(aSpeedIndex, 2);
                 SpeedIndex.Add(aSpeedIndex);
             }
             return SpeedIndex;
