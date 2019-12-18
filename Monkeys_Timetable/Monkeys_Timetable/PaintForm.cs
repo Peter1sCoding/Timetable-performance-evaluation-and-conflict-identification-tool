@@ -253,5 +253,10 @@ namespace Monkeys_Timetable
             AssessForm af = new AssessForm();
             af.Show();
         }
+
+        private void panel1_Paint_2(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

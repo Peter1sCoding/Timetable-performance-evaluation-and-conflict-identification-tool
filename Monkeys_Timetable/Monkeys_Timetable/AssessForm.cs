@@ -26,7 +26,7 @@ namespace Monkeys_Timetable
             maxDensity = allDen.Max();
             serviceCount = ass.GetStationServiceCount(dm);
 
-            drawDensity();
+            
         }
         
         public void ShowFirst()
@@ -262,22 +262,27 @@ namespace Monkeys_Timetable
 
         public void drawDensity()
         {
-            int height = 600, width = 600;
+            int height = 650, width = 650;
             Graphics g = splitContainer1.Panel2.CreateGraphics();
             try
             {
                 // title
                 Font font = new Font("Arial", 10, FontStyle.Regular);
-                Font font1 = new Font("宋体", 20, FontStyle.Bold);
+                Font font1 = new Font("宋体", 16, FontStyle.Bold);
                 SolidBrush brush = new SolidBrush(Color.Blue);
                 g.FillRectangle(Brushes.LightBlue, 0, 0, width, height);
-                g.DrawString( "区间列车密度统计" , font1, brush, new PointF(60, 10));
+                g.DrawString("区间列车密度统计", font1, brush, new PointF(250, 30));
 
             }
             finally
             {
                 g.Dispose();
             }
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            drawDensity();
         }
     }
     
