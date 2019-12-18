@@ -20,11 +20,13 @@ namespace Monkeys_Timetable
         DataTable dt;
         PaintTool pt = new PaintTool();
         DataTable ConflictTable;
+        Bitmap bmp = new Bitmap(1500,400);
 
         public PaintForm()
         {
+            pictureBox2 = new PictureBox();
             InitializeComponent();
-            this.Size = new Size(1300, 650);
+            this.Size = new Size(2048, 1800);
             dm = new DataManager();
             dm.ReadHeadway(Application.StartupPath + @"\\车站列车安全间隔.csv");
             dm.ReadStation(Application.StartupPath + @"\\沪宁车站信息.csv");
@@ -33,9 +35,6 @@ namespace Monkeys_Timetable
             dm.AddTra2sta();
             dm.GetStop();
             
-            this.panel1.HorizontalScroll.Visible = true;
-            this.panel1.VerticalScroll.Visible = true;
-
         }
 
         private void PaintForm_Load(object sender, EventArgs e)
@@ -136,7 +135,7 @@ namespace Monkeys_Timetable
         public void DrawFrame()
         {
             Graphics gs;
-            gs = this.panel1.CreateGraphics();
+            gs = Graphics.FromImage(bmp);
             int ix = dm.stationList.Count;
             double total = dm.stationList[ix - 1].totalMile;
             List<double> staMile = new List<double>();
@@ -144,12 +143,13 @@ namespace Monkeys_Timetable
             {
                 staMile.Add(dm.stationList[i].totalMile);
             }
-            pt.TimetableFrame(this.panel1.Width, this.panel1.Height, total, staMile, gs, dm.stationStringList);
+            pt.TimetableFrame(this.pictureBox2.Width, this.pictureBox2.Height, total, staMile, gs, dm.stationStringList);
+            this.pictureBox2.BackgroundImage = bmp;
         }
         public void DrawUp()
         {
             Graphics gs;
-            gs = this.panel1.CreateGraphics();
+            gs = Graphics.FromImage(bmp);
             int ix = dm.stationList.Count;
             double total = dm.stationList[ix - 1].totalMile;
             List<double> staMile = new List<double>();
@@ -159,19 +159,20 @@ namespace Monkeys_Timetable
             }
             if (checkBox1.Checked == true)
             {
-                pt.TimetableFrame(this.panel1.Width, this.panel1.Height, total, staMile, gs, dm.stationStringList);
+                pt.TimetableFrame(this.pictureBox2.Width, this.pictureBox2.Height, total, staMile, gs, dm.stationStringList);
                 pt.TrainLine(gs, dm.upTrainList, dm.stationStringList);
             }
             else
             {
-                gs.Clear(this.panel1.BackColor);
-                pt.TimetableFrame(this.panel1.Width, this.panel1.Height, total, staMile, gs, dm.stationStringList);
+                gs.Clear(this.pictureBox2.BackColor);
+                pt.TimetableFrame(this.pictureBox2.Width, this.pictureBox2.Height, total, staMile, gs, dm.stationStringList);
             }
+            this.pictureBox2.BackgroundImage = bmp;
         }
         public void DrawDown()
         {
             Graphics gs;
-            gs = this.panel1.CreateGraphics();
+            gs = Graphics.FromImage(bmp);
             int ix = dm.stationList.Count;
             double total = dm.stationList[ix - 1].totalMile;
             List<double> staMile = new List<double>();
@@ -181,14 +182,15 @@ namespace Monkeys_Timetable
             }
             if (checkBox2.Checked == true)
             {
-                pt.TimetableFrame(this.panel1.Width, this.panel1.Height, total, staMile, gs, dm.stationStringList);
+                pt.TimetableFrame(this.pictureBox2.Width, this.pictureBox2.Height, total, staMile, gs, dm.stationStringList);
                 pt.TrainLine(gs, dm.downTrainList, dm.stationStringList);
             }
             else
             {
-                gs.Clear(this.panel1.BackColor);
-                pt.TimetableFrame(this.panel1.Width, this.panel1.Height, total, staMile, gs, dm.stationStringList);
+                gs.Clear(this.pictureBox2.BackColor);
+                pt.TimetableFrame(this.pictureBox2.Width, this.pictureBox2.Height, total, staMile, gs, dm.stationStringList);
             }
+            this.pictureBox2.BackgroundImage = bmp;
         }
         private void 绘制运行图ToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
@@ -232,7 +234,7 @@ namespace Monkeys_Timetable
 
         private void 运行图标记冲突ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Graphics gs = this.panel1.CreateGraphics();
+            Graphics gs = this.pictureBox2.CreateGraphics();
             if (checkBox1.Checked)
             {
                 pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
