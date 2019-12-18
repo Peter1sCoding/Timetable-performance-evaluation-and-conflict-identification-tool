@@ -39,7 +39,7 @@ namespace Monkeys_Timetable
             dm.GetStop();
 
             this.Height = 700;
-            this.Width = 1200;
+            this.Width = 1300;
             this.splitContainer1.Dock = DockStyle.Fill;
             splitContainer1.SplitterDistance = 499;
             splitContainer1.SplitterWidth = 2;
@@ -194,12 +194,12 @@ namespace Monkeys_Timetable
             lbTime1 = new Label();
             lbTime1.Text = "6:00-9:00";
             lbTime1.Size = new Size(80, 20);
-            lbTime1.Location = new Point(50, 100);
+            lbTime1.Location = new Point(60, 100);
             splitContainer2.Panel2.Controls.Add(lbTime1);
             tbTime1 = new TextBox();
             tbTime1.Name = "tbTime1";
             tbTime1.Size = new Size(80, 50);
-            tbTime1.Location = new Point(50, 100 + 20);
+            tbTime1.Location = new Point(60, 100 + 20);
             splitContainer2.Panel2.Controls.Add(tbTime1);
 
             lbTime2 = new Label();
@@ -216,23 +216,23 @@ namespace Monkeys_Timetable
             lbTime3 = new Label();
             lbTime3.Text = "12:00-15:00";
             lbTime3.Size = new Size(80, 20);
-            lbTime3.Location = new Point(50 + 150 * 2 + 10 * 2, 100);
+            lbTime3.Location = new Point(50 + 150 * 2 + 10 , 100);
             splitContainer2.Panel2.Controls.Add(lbTime3);
             tbTime3 = new TextBox();
             tbTime3.Name = "tbTime3";
             tbTime3.Size = new Size(80, 50);
-            tbTime3.Location = new Point(50 + 150 * 2 + 10 * 2, 100 + 20);
+            tbTime3.Location = new Point(50 + 150 * 2 + 10, 100 + 20);
             splitContainer2.Panel2.Controls.Add(tbTime3);
 
             lbTime4 = new Label();
             lbTime4.Text = "15:00-18:00";
             lbTime4.Size = new Size(80, 20);
-            lbTime4.Location = new Point(50, 100 + 30 + 50 + 5);
+            lbTime4.Location = new Point(60, 100 + 30 + 50 + 5);
             splitContainer2.Panel2.Controls.Add(lbTime4);
             tbTime4 = new TextBox();
             tbTime4.Name = "tbTime4";
             tbTime4.Size = new Size(80, 50);
-            tbTime4.Location = new Point(50, 100 + 30 * 2 + 50);
+            tbTime4.Location = new Point(60, 100 + 30 * 2 + 50);
             splitContainer2.Panel2.Controls.Add(tbTime4);
 
             lbTime5 = new Label();
@@ -249,12 +249,12 @@ namespace Monkeys_Timetable
             lbTime6 = new Label();
             lbTime6.Text = "21:00-24:00";
             lbTime6.Size = new Size(80, 20);
-            lbTime6.Location = new Point(50 + 150 * 2 + 10 * 2, 100 + 30 + 50 + 5);
+            lbTime6.Location = new Point(50 + 150 * 2 + 10, 100 + 30 + 50 + 5);
             splitContainer2.Panel2.Controls.Add(lbTime6);
             tbTime6 = new TextBox();
             tbTime6.Name = "tbTime6";
             tbTime6.Size = new Size(80, 50);
-            tbTime6.Location = new Point(50 + 150 * 2 + 10 * 2, 100 + 30 * 2 + 50);
+            tbTime6.Location = new Point(50 + 150 * 2 + 10 , 100 + 30 * 2 + 50);
             splitContainer2.Panel2.Controls.Add(tbTime6);
 
             btRunStation = new Button();
@@ -310,11 +310,11 @@ namespace Monkeys_Timetable
                 g.DrawString("上行", font2, brush2, new PointF(280, 55));
                 g.DrawString("下行", font2, brush2, new PointF(380, 55));
                 // 画个水平线找位置 圈出区域为绘图的地方
-                g.DrawLine(new Pen(brush2), new Point(0, 70), new Point(650, 70));
-                g.DrawLine(new Pen(brush2), new Point(0, 650), new Point(650, 650));
-                g.DrawLine(new Pen(brush2), new Point(350, 70), new Point(350, 650));
-                g.DrawLine(new Pen(brush2), new Point(70, 70), new Point(70, 650));// 最长的bar
-                g.DrawLine(new Pen(brush2), new Point(350 + 280, 70), new Point(350 + 280, 650));// 最长的bar
+                g.DrawLine(new Pen(brush2), new Point(0, 70), new Point(750, 70));
+                g.DrawLine(new Pen(brush2), new Point(0, 650), new Point(750, 650));
+                g.DrawLine(new Pen(brush2), new Point(400, 70), new Point(400, 650));
+                g.DrawLine(new Pen(brush2), new Point(120, 70), new Point(120, 650));// 最长的bar
+                g.DrawLine(new Pen(brush2), new Point(400 + 280, 70), new Point(400 + 280, 650));// 最长的bar
 
                 float aa = 280 / maxDensity;//绘图的比例系数 
                 Font font3 = new Font("宋体", 10);
@@ -324,23 +324,31 @@ namespace Monkeys_Timetable
                     List<int> den = TrainDensity[sec];
                     int d_up = den[0];
                     int d_down = den[1];
-                    
 
-                    #region 上行 橘色
-                    float barLength1 = Convert.ToSingle(d_up * aa);// 每个bar的长度等于对应区间密度d * aa
-                    SolidBrush brush3 = new SolidBrush(Color.Orange);
+                    if (sec[0] == "上海" && sec[1] == "上海虹桥")
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        g.DrawString(sec[0].ToString() + "-" + sec[1].ToString(), font3, brush2, new PointF(0, 75 + 25 * i + 5));
 
-                    g.FillRectangle(brush3, 345 - barLength1, 75 + 25 * i, barLength1, 20);
-                    g.DrawString(barLength1.ToString(), font3, brush2, new PointF(345 - barLength1 - 25, 75 + 25 * i + 5));
+                        #region 上行 橘色
+                        float barLength1 = Convert.ToSingle(d_up * aa);// 每个bar的长度等于对应区间密度d * aa
+                        SolidBrush brush3 = new SolidBrush(Color.Orange);
+
+                        g.FillRectangle(brush3, 400 - barLength1-5, 75 + 25 * i, barLength1, 20);
+                        g.DrawString(barLength1.ToString(), font3, brush2, new PointF(400 - barLength1 - 30, 75 + 25 * i + 5));
+                        #endregion
+
+                        #region 下行 浅绿色
+                        float barLength2 = Convert.ToSingle(d_down * aa);
+                        SolidBrush brush4 = new SolidBrush(Color.LightGreen);
+
+                        g.FillRectangle(brush4, 400+5, 25 * i + 75, barLength2, 20);
+                        g.DrawString(barLength2.ToString(), font3, brush2, new PointF(400 + barLength2+5, 25 * i + 75+5));
                     #endregion
-
-                    #region 下行 浅绿色
-                    float barLength2 = Convert.ToSingle(d_down * aa);
-                    SolidBrush brush4 = new SolidBrush(Color.LightGreen);
-
-                    g.FillRectangle(brush4, 355, 25 * i + 75, barLength2, 20);
-                    g.DrawString(barLength2.ToString(), font3, brush2, new PointF(355 + barLength2, 25 * i + 75+5));
-                    #endregion
+                    }
 
                     i++;
                 }
