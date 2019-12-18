@@ -25,6 +25,8 @@ namespace Monkeys_Timetable
             allDen = ass.AllDensity;
             maxDensity = allDen.Max();
             serviceCount = ass.GetStationServiceCount(dm);
+
+            drawDensity();
         }
         
         public void ShowFirst()
@@ -258,6 +260,25 @@ namespace Monkeys_Timetable
             }
         }
 
+        public void drawDensity()
+        {
+            int height = 600, width = 600;
+            Graphics g = splitContainer1.Panel2.CreateGraphics();
+            try
+            {
+                // title
+                Font font = new Font("Arial", 10, FontStyle.Regular);
+                Font font1 = new Font("宋体", 20, FontStyle.Bold);
+                SolidBrush brush = new SolidBrush(Color.Blue);
+                g.FillRectangle(Brushes.LightBlue, 0, 0, width, height);
+                g.DrawString( "区间列车密度统计" , font1, brush, new PointF(60, 10));
+
+            }
+            finally
+            {
+                g.Dispose();
+            }
+        }
     }
     
 }
