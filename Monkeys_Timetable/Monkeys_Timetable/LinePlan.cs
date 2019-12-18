@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 namespace Monkeys_Timetable
 {
-    public partial class LinePlan : Form
+    public partial class LinePlan : Form//显示开行方案
     {
-        //显示开行方案
+        
 
         DataManager dm;
         Bitmap bmp;
