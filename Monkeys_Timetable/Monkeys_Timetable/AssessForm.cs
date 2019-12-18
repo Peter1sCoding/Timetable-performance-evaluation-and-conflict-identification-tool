@@ -281,6 +281,26 @@ namespace Monkeys_Timetable
                 g.DrawLine(new Pen(brush2), new Point(0, 70), new Point(650, 70));
                 g.DrawLine(new Pen(brush2), new Point(0, 650), new Point(650, 650));
                 g.DrawLine(new Pen(brush2), new Point(350, 70), new Point(350, 650));
+                g.DrawLine(new Pen(brush2), new Point(70, 70), new Point(70, 650));// 最长的bar
+                g.DrawLine(new Pen(brush2), new Point(350 + 280, 70), new Point(350 + 280, 650));// 最长的bar
+
+                float aa;//绘图的比例系数 aa =  280/maxDen
+                // 每个bar的长度w等于 对应区间密度d * aa
+                float w = 40;
+                float d;
+                #region 上行 橘色
+                SolidBrush brush3 = new SolidBrush(Color.Orange);
+                g.FillRectangle(brush3, 345 - w, 75, w, 20);
+
+
+                #endregion
+
+                #region 下行 浅绿色
+                SolidBrush brush4 = new SolidBrush(Color.LightGreen);
+                g.FillRectangle(brush4, 355, 75, w, 20);
+
+
+                #endregion
 
             }
             finally
