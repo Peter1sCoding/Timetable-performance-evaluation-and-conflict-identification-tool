@@ -195,6 +195,7 @@ namespace Monkeys_Timetable
                 }
                 Density.Add(DensityUp);
                 AllDensity.Add(DensityUp);
+
                 foreach (Train aTrain in dm.DownTrainDic.Values)
                 {
                     for (int j = 0; j < aTrain.staList.Count - 1; j++)
@@ -208,6 +209,40 @@ namespace Monkeys_Timetable
                 Density.Add(DensityDown);
                 AllDensity.Add(DensityDown);
                 TrainDensity.Add(Section, Density);
+
+                #region 安亭北-上海虹桥
+                int ForkDensityUp = 0;
+                foreach (Train aTrain in dm.UpTrainDic.Values)
+                {
+                    for (int j = 0; j < aTrain.staList.Count - 1; j++)
+                    {
+                        if (aTrain.staList[j] == "安亭北" && aTrain.staList[j + 1] == "上海虹桥")
+                        {
+                            ForkDensityUp++;
+                        }
+                    }
+                }
+                AllDensity.Add(ForkDensityUp);
+                //Density.Add(ForkDensityUp);
+
+                int ForkDensityDown = 0;
+                foreach (Train aTrain in dm.DownTrainDic.Values)
+                {
+                    for (int j = 0; j < aTrain.staList.Count - 1; j++)
+                    {
+                        if (aTrain.staList[j] == "上海虹桥" && aTrain.staList[j + 1] == "安亭北")
+                        {
+                            ForkDensityDown++;
+                        }
+                    }
+                }
+                AllDensity.Add(ForkDensityDown);
+                //Density.Add(ForkDensityDown);
+
+                //Section.Add("安亭北");
+                //Section.Add("上海虹桥");
+                #endregion
+
             }
             return TrainDensity;
         }
