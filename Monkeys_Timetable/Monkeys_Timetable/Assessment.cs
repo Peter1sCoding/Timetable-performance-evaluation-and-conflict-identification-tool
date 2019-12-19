@@ -214,6 +214,10 @@ namespace Monkeys_Timetable
                 TrainDensity.Add(Section, Density);
             }
             #region 安亭北-上海虹桥
+            List<string> Section2 = new List<string>();
+            Section2.Add("安亭北");
+            Section2.Add("上海虹桥");
+            List<int> Density2 = new List<int>();
             int ForkDensityUp = 0;
             foreach (Train aTrain in dm.UpTrainDic.Values)
             {
@@ -225,6 +229,7 @@ namespace Monkeys_Timetable
                     }
                 }
             }
+            Density2.Add(ForkDensityUp);
             AllDensity.Add(ForkDensityUp);
            
             int ForkDensityDown = 0;
@@ -238,15 +243,10 @@ namespace Monkeys_Timetable
                     }
                 }
             }
+            Density2.Add(ForkDensityDown);
             AllDensity.Add(ForkDensityDown);
             #endregion
 
-            List<string> Section2 = new List<string>();
-            Section2.Add("安亭北");
-            Section2.Add("上海虹桥");
-            List<int> Density2 = new List<int>();
-            Density2.Add(ForkDensityUp);
-            Density2.Add(ForkDensityDown);
             TrainDensity.Add(Section2,Density2);
 
             return TrainDensity;
