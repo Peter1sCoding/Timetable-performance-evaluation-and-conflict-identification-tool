@@ -316,7 +316,9 @@ namespace Monkeys_Timetable
                 g.DrawLine(new Pen(brush2), new Point(120, 70), new Point(120, 650));// 最长的bar
                 g.DrawLine(new Pen(brush2), new Point(400 + 280, 70), new Point(400 + 280, 650));// 最长的bar
 
-                float aa = 280 / maxDensity;//绘图的比例系数 
+                float aa =(float)0;//绘图的比例系数 
+                if(maxDensity!=0)
+                    aa = 280 / maxDensity;
                 Font font3 = new Font("宋体", 10);
                 int i = 0;
                 foreach (List<string> sec in TrainDensity.Keys)
@@ -338,7 +340,7 @@ namespace Monkeys_Timetable
                         SolidBrush brush3 = new SolidBrush(Color.Orange);
 
                         g.FillRectangle(brush3, 400 - barLength1-5, 75 + 25 * i, barLength1, 20);
-                        g.DrawString(barLength1.ToString(), font3, brush2, new PointF(400 - barLength1 - 30, 75 + 25 * i + 5));
+                        g.DrawString(d_up.ToString(), font3, brush2, new PointF(400 - barLength1 - 30, 75 + 25 * i + 5));
                         #endregion
 
                         #region 下行 浅绿色
@@ -346,8 +348,8 @@ namespace Monkeys_Timetable
                         SolidBrush brush4 = new SolidBrush(Color.LightGreen);
 
                         g.FillRectangle(brush4, 400+5, 25 * i + 75, barLength2, 20);
-                        g.DrawString(barLength2.ToString(), font3, brush2, new PointF(400 + barLength2+5, 25 * i + 75+5));
-                    #endregion
+                        g.DrawString(d_down.ToString(), font3, brush2, new PointF(400 + barLength2+5, 25 * i + 75+5));
+                        #endregion
                     }
 
                     i++;
