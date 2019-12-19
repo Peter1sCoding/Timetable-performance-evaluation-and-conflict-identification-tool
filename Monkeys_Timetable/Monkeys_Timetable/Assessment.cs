@@ -210,9 +210,9 @@ namespace Monkeys_Timetable
                 }
                 Density.Add(DensityDown);
                 AllDensity.Add(DensityDown);
-
                 TrainDensity.Add(Section, Density);
             }
+
             #region 安亭北-上海虹桥
             List<string> Section2 = new List<string>();
             Section2.Add("安亭北");

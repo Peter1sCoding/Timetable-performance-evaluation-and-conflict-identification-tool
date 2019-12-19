@@ -303,12 +303,12 @@ namespace Monkeys_Timetable
                 Font font1 = new Font("宋体", 14, FontStyle.Bold);
                 SolidBrush brush = new SolidBrush(Color.Blue);
                
-                g.DrawString("区间列车密度统计", font1, brush, new PointF(270, 30));
+                g.DrawString("区间列车密度统计", font1, brush, new PointF(320, 30));
                 // Up Down
                 Font font2 = new Font("宋体", 10, FontStyle.Bold);
                 SolidBrush brush2 = new SolidBrush(Color.Black);
-                g.DrawString("上行", font2, brush2, new PointF(280, 55));
-                g.DrawString("下行", font2, brush2, new PointF(380, 55));
+                g.DrawString("上行", font2, brush2, new PointF(350, 55));
+                g.DrawString("下行", font2, brush2, new PointF(420, 55));
                 // 画个水平线找位置 圈出区域为绘图的地方
                 g.DrawLine(new Pen(brush2), new Point(0, 70), new Point(750, 70));
                 g.DrawLine(new Pen(brush2), new Point(0, 650), new Point(750, 650));
@@ -363,7 +363,7 @@ namespace Monkeys_Timetable
             }
         }
 
-        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        private void 绘制区间列车密度图ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             drawDensity();
         }
