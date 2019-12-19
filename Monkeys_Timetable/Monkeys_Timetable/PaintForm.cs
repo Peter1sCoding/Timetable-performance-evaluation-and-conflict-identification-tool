@@ -15,18 +15,20 @@ namespace Monkeys_Timetable
         string traFileName;
         string staFileName;
         string headFileName;
+        static int TD_Width = 4800;
+        static int TD_Height = 1800;
         DataManager dm;
         Conflict_Identification ci;
         DataTable dt;
         PaintTool pt = new PaintTool();
         DataTable ConflictTable;
-        Bitmap bmp = new Bitmap(2048,1800);
+        Bitmap bmp = new Bitmap(TD_Width, TD_Height);
 
         public PaintForm()
         {
             pictureBox2 = new PictureBox();
             InitializeComponent();
-            this.Size = new Size(bmp.Width,bmp.Height);
+            this.Size = new Size(TD_Width, TD_Height);
             dm = new DataManager();
             dm.ReadHeadway(Application.StartupPath + @"\\车站列车安全间隔.csv");
             dm.ReadStation(Application.StartupPath + @"\\沪宁车站信息.csv");
