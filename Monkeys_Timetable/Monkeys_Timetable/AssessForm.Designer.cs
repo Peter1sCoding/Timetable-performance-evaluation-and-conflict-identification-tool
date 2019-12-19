@@ -88,6 +88,7 @@
             this.查询列车停站信息ToolStripMenuItem.Name = "查询列车停站信息ToolStripMenuItem";
             this.查询列车停站信息ToolStripMenuItem.Size = new System.Drawing.Size(143, 24);
             this.查询列车停站信息ToolStripMenuItem.Text = "查询列车停站信息";
+            this.查询列车停站信息ToolStripMenuItem.Click += new System.EventHandler(this.查询列车停站信息ToolStripMenuItem_Click);
             // 
             // AssessForm
             // 
