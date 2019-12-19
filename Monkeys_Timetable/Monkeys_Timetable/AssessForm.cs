@@ -173,7 +173,7 @@ namespace Monkeys_Timetable
             lbStation.Text = "选择车站";
             lbStation.Font = new Font("宋体", 10, FontStyle.Bold);
             lbStation.Size = new Size(70, 30);
-            lbStation.Location = new Point(90, 55);
+            lbStation.Location = new Point(90, 35);
             this.splitContainer2.Panel2.Controls.Add(lbStation);
 
 
@@ -187,81 +187,81 @@ namespace Monkeys_Timetable
                 cbStation.Items.Add(strr2);
             }
             cbStation.Size = new Size(100, 30);
-            cbStation.Location = new Point(165, 50);
+            cbStation.Location = new Point(165, 30);
             splitContainer2.Panel2.Controls.Add(cbStation);
 
 
             lbTime1 = new Label();
             lbTime1.Text = "6:00-9:00";
             lbTime1.Size = new Size(80, 20);
-            lbTime1.Location = new Point(60, 100);
+            lbTime1.Location = new Point(60, 80);
             splitContainer2.Panel2.Controls.Add(lbTime1);
             tbTime1 = new TextBox();
             tbTime1.Name = "tbTime1";
             tbTime1.Size = new Size(80, 50);
-            tbTime1.Location = new Point(60, 100 + 20);
+            tbTime1.Location = new Point(60, 100);
             splitContainer2.Panel2.Controls.Add(tbTime1);
 
             lbTime2 = new Label();
             lbTime2.Text = "9:00-12:00";
             lbTime2.Size = new Size(80, 20);
-            lbTime2.Location = new Point(50 + 150 + 10, 100);
+            lbTime2.Location = new Point(50 + 150 + 10, 80);
             splitContainer2.Panel2.Controls.Add(lbTime2);
             tbTime2 = new TextBox();
             tbTime2.Name = "tbTime2";
             tbTime2.Size = new Size(80, 50);
-            tbTime2.Location = new Point(50 + 150 + 10, 100 + 20);
+            tbTime2.Location = new Point(50 + 150 + 10, 100);
             splitContainer2.Panel2.Controls.Add(tbTime2);
 
             lbTime3 = new Label();
             lbTime3.Text = "12:00-15:00";
             lbTime3.Size = new Size(80, 20);
-            lbTime3.Location = new Point(50 + 150 * 2 + 10 , 100);
+            lbTime3.Location = new Point(50 + 150 * 2 + 10 , 80);
             splitContainer2.Panel2.Controls.Add(lbTime3);
             tbTime3 = new TextBox();
             tbTime3.Name = "tbTime3";
             tbTime3.Size = new Size(80, 50);
-            tbTime3.Location = new Point(50 + 150 * 2 + 10, 100 + 20);
+            tbTime3.Location = new Point(50 + 150 * 2 + 10, 100);
             splitContainer2.Panel2.Controls.Add(tbTime3);
 
             lbTime4 = new Label();
             lbTime4.Text = "15:00-18:00";
             lbTime4.Size = new Size(80, 20);
-            lbTime4.Location = new Point(60, 100 + 30 + 50 + 5);
+            lbTime4.Location = new Point(60, 165);
             splitContainer2.Panel2.Controls.Add(lbTime4);
             tbTime4 = new TextBox();
             tbTime4.Name = "tbTime4";
             tbTime4.Size = new Size(80, 50);
-            tbTime4.Location = new Point(60, 100 + 30 * 2 + 50);
+            tbTime4.Location = new Point(60, 190);
             splitContainer2.Panel2.Controls.Add(tbTime4);
 
             lbTime5 = new Label();
             lbTime5.Text = "18:00-21:00";
             lbTime5.Size = new Size(80, 20);
-            lbTime5.Location = new Point(50 + 150 + 10, 100 + 30 + 50 + 5);
+            lbTime5.Location = new Point(50 + 150 + 10, 165);
             splitContainer2.Panel2.Controls.Add(lbTime5);
             tbTime5 = new TextBox();
             tbTime5.Name = "tbTime5";
             tbTime5.Size = new Size(80, 50);
-            tbTime5.Location = new Point(50 + 150 + 10, 100 + 30 * 2 + 50);
+            tbTime5.Location = new Point(50 + 150 + 10, 190);
             splitContainer2.Panel2.Controls.Add(tbTime5);
 
             lbTime6 = new Label();
             lbTime6.Text = "21:00-24:00";
             lbTime6.Size = new Size(80, 20);
-            lbTime6.Location = new Point(50 + 150 * 2 + 10, 100 + 30 + 50 + 5);
+            lbTime6.Location = new Point(50 + 150 * 2 + 10, 165);
             splitContainer2.Panel2.Controls.Add(lbTime6);
             tbTime6 = new TextBox();
             tbTime6.Name = "tbTime6";
             tbTime6.Size = new Size(80, 50);
-            tbTime6.Location = new Point(50 + 150 * 2 + 10 , 100 + 30 * 2 + 50);
+            tbTime6.Location = new Point(50 + 150 * 2 + 10 , 190);
             splitContainer2.Panel2.Controls.Add(tbTime6);
 
             btRunStation = new Button();
             btRunStation.Text = "查询车站服务次数";
             btRunStation.Font = new Font("宋体", 10, FontStyle.Bold);
             btRunStation.Size = new Size(150, 30);
-            btRunStation.Location = new Point(280, 40);
+            btRunStation.Location = new Point(280, 20);
             this.splitContainer2.Panel2.Controls.Add(btRunStation);
             btRunStation.Click += BtRunStation_Click;
         }
@@ -311,10 +311,10 @@ namespace Monkeys_Timetable
                 g.DrawString("下行", font2, brush2, new PointF(420, 55));
                 // 画个水平线找位置 圈出区域为绘图的地方
                 g.DrawLine(new Pen(brush2), new Point(0, 70), new Point(750, 70));
-                g.DrawLine(new Pen(brush2), new Point(0, 650), new Point(750, 650));
-                g.DrawLine(new Pen(brush2), new Point(400, 70), new Point(400, 650));
-                g.DrawLine(new Pen(brush2), new Point(120, 70), new Point(120, 650));// 最长的bar
-                g.DrawLine(new Pen(brush2), new Point(400 + 280, 70), new Point(400 + 280, 650));// 最长的bar
+                g.DrawLine(new Pen(brush2), new Point(0, 620), new Point(750, 620));
+                g.DrawLine(new Pen(brush2), new Point(400, 70), new Point(400, 620));
+                g.DrawLine(new Pen(brush2), new Point(120, 70), new Point(120, 620));// 最长的bar
+                g.DrawLine(new Pen(brush2), new Point(400 + 280, 70), new Point(400 + 280, 620));// 最长的bar
 
                 float aa =(float)0;//绘图的比例系数 
                 if(maxDensity!=0)
