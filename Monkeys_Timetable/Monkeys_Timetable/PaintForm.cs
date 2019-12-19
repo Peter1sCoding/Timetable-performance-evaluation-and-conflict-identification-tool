@@ -15,8 +15,8 @@ namespace Monkeys_Timetable
         string traFileName;
         string staFileName;
         string headFileName;
-        static int TD_Width = 4800;
-        static int TD_Height = 1800;
+        static int TD_Width = 4800;//运行图总宽度
+        static int TD_Height = 1800;//运行图总高度
         DataManager dm;
         Conflict_Identification ci;
         DataTable dt;

@@ -24,10 +24,10 @@ namespace Monkeys_Timetable
         {
             SF.Alignment = StringAlignment.Far;
             SF1.Alignment = StringAlignment.Center;
-            float Left = 55;
-            float Right = 10;
-            float Up = 5;
-            float Down = 15;
+            float Left = 55;//运行图左边留白
+            float Right = 10;//运行图右边留白
+            float Up = 5;//运行图上边留白
+            float Down = 15;//运行图下边留白
             PointF p1 = new PointF();
             PointF p2 = new PointF();
             Pen pp1 = new Pen(Color.Green, 1);
