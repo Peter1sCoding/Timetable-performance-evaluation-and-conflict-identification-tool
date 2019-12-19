@@ -370,15 +370,15 @@ namespace Monkeys_Timetable
 
         private void 查询列车停站信息ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DataManager dmm = dm;
-           for(int i = 0; i < dmm.TrainList.Count; i++)
+           for(int i = 0; i < dm.TrainList.Count; i++)
            {
                 string strsta = "";
-                if (dmm.TrainList[i].trainNo == cbTrain.SelectedItem)
+                
+                if (dm.TrainList[i].trainNo == cbTrain.SelectedItem.ToString())
                 {
-                    for (int j = 0; j < dmm.TrainList[70].staList.Count - 1; j++)
+                    for (int j = 0; j < dm.TrainList[i].staList.Count; j++)
                     {
-                        strsta = strsta + "\n" + dmm.TrainList[70].staList[j];
+                        strsta = strsta + "\n" + dm.TrainList[i].staList[j];
                     }
                     MessageBox.Show(strsta);
                     break;
