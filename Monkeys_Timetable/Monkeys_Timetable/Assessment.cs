@@ -177,8 +177,6 @@ namespace Monkeys_Timetable
             List<string> StationName = dm.stationStringList;
             for (int i = 0; i < StationName.Count - 1; i++)
             {
-                if (StationName[i] == "安亭北"|| StationName[i] == "上海虹桥")
-                    continue;
                 List<string> Section = new List<string>();
                 Section.Add(StationName[i]);
                 Section.Add(StationName[i + 1]);
@@ -189,6 +187,8 @@ namespace Monkeys_Timetable
                 {
                     for (int j = 0; j < aTrain.staList.Count - 1; j++)
                     {
+                        if (StationName[i] == "上海虹桥" && StationName[i + 1] == "安亭北")
+                            continue;
                         if (StationName[i+1] == aTrain.staList[j] && StationName[i] == aTrain.staList[j + 1])
                         {
                             DensityUp++;
@@ -202,6 +202,8 @@ namespace Monkeys_Timetable
                 {
                     for (int j = 0; j < aTrain.staList.Count - 1; j++)
                     {
+                        if (StationName[i] == "安亭北" && StationName[i + 1] == "上海虹桥")
+                            continue;
                         if (StationName[i] == aTrain.staList[j] && StationName[i+1] == aTrain.staList[j + 1])
                         {
                             DensityDown++;
@@ -223,7 +225,7 @@ namespace Monkeys_Timetable
             {
                 for (int j = 0; j < aTrain.staList.Count - 1; j++)
                 {
-                    if (aTrain.staList[j] == "安亭北" && aTrain.staList[j + 1] == "上海虹桥")
+                    if (aTrain.staList[j] == "上海虹桥" && aTrain.staList[j + 1] == "安亭北")
                     {
                         ForkDensityUp++;
                     }
@@ -237,7 +239,7 @@ namespace Monkeys_Timetable
             {
                 for (int j = 0; j < aTrain.staList.Count - 1; j++)
                 {
-                    if (aTrain.staList[j] == "上海虹桥" && aTrain.staList[j + 1] == "安亭北")
+                    if (aTrain.staList[j] == "安亭北" && aTrain.staList[j + 1] == "上海虹桥")
                     {
                         ForkDensityDown++;
                     }
