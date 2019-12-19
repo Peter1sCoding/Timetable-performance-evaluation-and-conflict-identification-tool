@@ -32,6 +32,9 @@ namespace Monkeys_Timetable
             PointF p2 = new PointF();
             Pen pp1 = new Pen(Color.Green, 1);
             Pen pp2 = new Pen(Color.Green, 2);
+            Pen pp3 = new Pen(Color.Green, 1);
+            pp3.DashStyle = DashStyle.Custom;
+            pp3.DashPattern = new float[] { 10f, 5f };
             double Width = WinWidth - (Left + Right);
             double Height = WinHeight - (Up + Down);
             p1.X = Left;
@@ -55,6 +58,13 @@ namespace Monkeys_Timetable
                         p2.X = (float)(p2.X + add);
                         gs.DrawString(Convert.ToString(Hour),font,brush,p2.X,p2.Y+5,SF1);//在这添加插入时间语句
                         Hour++;
+                    }
+                    else if (j % 60 != 0 && j % 30 == 0)
+                    {
+                        gs.DrawLine(pp3, p1, p2);
+                        TimeX.Add(p1.X);
+                        p1.X = (float)(p1.X + add);
+                        p2.X = (float)(p2.X + add);
                     }
                     else
                     {
