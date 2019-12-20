@@ -376,13 +376,18 @@ namespace Monkeys_Timetable
                 for (int i = 0; i < dm.TrainList.Count; i++)
                 {
                     string strsta = "";
+                    string arrivetime = "";
+                    string depturetime = "";
+                    string title = "车站名" + "\t" + "到达时刻" + "\t" + "出发时刻" + "\n";
                     if (dm.TrainList[i].trainNo == cbTrain.SelectedItem.ToString())
                     {
                         for (int j = 0; j < dm.TrainList[i].staList.Count; j++)
                         {
-                            strsta = strsta + "\n" + dm.TrainList[i].staList[j];
+                            arrivetime = dm.TrainList[i].staTimeDic[dm.TrainList[i].staList[j]][0];
+                            depturetime = dm.TrainList[i].staTimeDic[dm.TrainList[i].staList[j]][1];
+                            strsta = strsta + dm.TrainList[i].staList[j] + "\t" + arrivetime + "\t" + depturetime + "\n";
                         }
-                        MessageBox.Show(strsta);
+                        MessageBox.Show(title+strsta);
                         break;
                     }
                 }
