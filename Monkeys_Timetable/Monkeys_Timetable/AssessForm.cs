@@ -128,13 +128,14 @@ namespace Monkeys_Timetable
 
         private void BtRunTrain_Click(object sender, EventArgs e)
         {
-            if (cbTrain.SelectedItem == null)
+            String strtrain;
+            if (cbTrain.SelectedItem == null && cbTrain.Text =="")
             {
                 MessageBox.Show("请先选择列车！");
             }
-            else
+            else if (cbTrain.SelectedItem != null)
             {
-                String strtrain = cbTrain.SelectedItem.ToString();
+                strtrain = cbTrain.SelectedItem.ToString();
                 for (int i = 0; i < dm.TrainList.Count-1; i++)
                 {
                     if(strtrain == dm.TrainList[i].trainNo)
@@ -144,6 +145,27 @@ namespace Monkeys_Timetable
                         tbSpeedIndex.Text = ass.GetSpeedIndex(dm)[i].ToString();
                         tbTrainServe.Text = ass.GetServiceFrequency(dm)[i].ToString();
                     }
+                }
+            }
+            else
+            {
+                int judge = 0;
+                strtrain = cbTrain.Text;
+                for (int i = 0; i < dm.TrainList.Count - 1; i++)
+                {
+                    if (strtrain == dm.TrainList[i].trainNo)
+                    {
+                        tbTravalSpeed.Text = ass.GetTravelSpeed(dm)[i].ToString() + "km/h";
+                        tbTechicalSpeed.Text = ass.GetTechnicalSpeed(dm)[i].ToString() + "km/h";
+                        tbSpeedIndex.Text = ass.GetSpeedIndex(dm)[i].ToString();
+                        tbTrainServe.Text = ass.GetServiceFrequency(dm)[i].ToString();
+                        judge = 1;
+                        break;
+                    }
+                }
+                if (judge == 0)
+                {
+                    MessageBox.Show("未找到目标列车！");
                 }
             }
         }
@@ -268,14 +290,15 @@ namespace Monkeys_Timetable
 
         private void BtRunStation_Click(object sender, EventArgs e)
         {
+            string str;
             //throw new NotImplementedException();
-            if (cbStation.SelectedItem == null)
+            if (cbStation.SelectedItem == null && cbStation.Text=="")
             {
                 MessageBox.Show("请先选择车站！");
             }
-            else
+            else if(cbStation.SelectedItem != null)
             {
-                String str = cbStation.SelectedItem.ToString();
+                str = cbStation.SelectedItem.ToString();
                 int[] tbnums = serviceCount[str];//选中车站的6个时间段的服务次数
                 for (int i = 1; i < 7; i++)
                 {
@@ -284,11 +307,41 @@ namespace Monkeys_Timetable
                     {
                         if (control is TextBox && control.Name == str1)
                         {
-                            string tbnum = tbnums[i-1].ToString();
+                            string tbnum = tbnums[i - 1].ToString();
                             (control as TextBox).Text = tbnum;
                             break;
                         }
                     }
+                }
+            }
+            else
+            {
+                int judge = 0;
+                str = cbStation.Text;
+                for(int j = 0; j < dm.stationStringList.Count; j++)
+                {
+                    if (str == dm.stationStringList[j])
+                    {
+                        int[] tbnums = serviceCount[str];//选中车站的6个时间段的服务次数
+                        for (int i = 1; i < 7; i++)
+                        {
+                            string str1 = "tbTime" + i.ToString();
+                            foreach (Control control in this.splitContainer2.Panel2.Controls)
+                            {
+                                if (control is TextBox && control.Name == str1)
+                                {
+                                    string tbnum = tbnums[i - 1].ToString();
+                                    (control as TextBox).Text = tbnum;
+                                    break;
+                                }
+                            }
+                        }
+                        judge = 1;
+                    }
+                }
+                if (judge == 0)
+                {
+                    MessageBox.Show("未找到目标车站！");
                 }
             }
         }
@@ -367,11 +420,11 @@ namespace Monkeys_Timetable
 
         private void 查询列车停站信息ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (cbTrain.SelectedItem == null)
+            if (cbTrain.SelectedItem == null && cbTrain.Text == "")
             {
                 MessageBox.Show("请先选择列车！");
             }
-            else
+            else if (cbTrain.SelectedItem != null)
             {
                 for (int i = 0; i < dm.TrainList.Count; i++)
                 {
@@ -392,7 +445,57 @@ namespace Monkeys_Timetable
                     }
                 }
             }
-            //之后添加控件选择列车 改成表格 加上时间 显示时关闭密度表
+            else
+            {
+                int judge = 0;
+                for (int i = 0; i < dm.TrainList.Count; i++)
+                {
+                    string strsta = "";
+                    string arrivetime = "";
+                    string depturetime = "";
+                    string title = "车站名" + "\t" + "到达时刻" + "\t" + "出发时刻" + "\n";
+                    if (dm.TrainList[i].trainNo == cbTrain.Text)
+                    {
+                        for (int j = 0; j < dm.TrainList[i].staList.Count; j++)
+                        {
+                            arrivetime = dm.TrainList[i].staTimeDic[dm.TrainList[i].staList[j]][0];
+                            depturetime = dm.TrainList[i].staTimeDic[dm.TrainList[i].staList[j]][1];
+                            strsta = strsta + dm.TrainList[i].staList[j] + "\t" + arrivetime + "\t" + depturetime + "\n";
+                        }
+                        MessageBox.Show(title + strsta);
+                        judge = 1;
+                        break;
+                    }
+                }
+                if (judge == 0)
+                {
+                    MessageBox.Show("未找到目标列车！");
+                }
+            }
+        }
+
+        private void 查询车站服务列车ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (cbStation.SelectedItem == null)
+            {
+                MessageBox.Show("请先选择车站！");
+            }
+            else
+            {
+                for(int i = 0; i < dm.stationStringList.Count; i++)
+                {
+                    string trainnum = "";
+                    string arrivetime = "";
+                    string depturetime = "";
+                    string title = "列车车次" + "\t" + "到达时刻" + "\t" + "出发时刻" + "\n";
+                    //MessageBox.Show(dm.stationStringList[i]);
+                    if (dm.stationStringList[i] == cbStation.SelectedItem.ToString())
+                    {
+
+                    }
+                    
+                }
+            }
         }
     }
     

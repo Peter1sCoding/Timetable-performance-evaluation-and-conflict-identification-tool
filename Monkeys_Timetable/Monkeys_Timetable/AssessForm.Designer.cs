@@ -98,6 +98,7 @@
             this.查询车站服务列车ToolStripMenuItem.Name = "查询车站服务列车ToolStripMenuItem";
             this.查询车站服务列车ToolStripMenuItem.Size = new System.Drawing.Size(143, 24);
             this.查询车站服务列车ToolStripMenuItem.Text = "查询车站服务列车";
+            this.查询车站服务列车ToolStripMenuItem.Click += new System.EventHandler(this.查询车站服务列车ToolStripMenuItem_Click);
             // 
             // AssessForm
             // 
