@@ -484,7 +484,7 @@ namespace Monkeys_Timetable
             traintime.Columns.Add("到达时刻");
             traintime.Columns.Add("出发时刻");
 
-            if (cbStation.SelectedItem == null)
+            if (cbStation.SelectedItem == null && cbStation.Text == "")
             {
                 MessageBox.Show("请先选择车站！");
             }
