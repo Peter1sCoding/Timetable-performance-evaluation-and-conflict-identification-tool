@@ -476,27 +476,87 @@ namespace Monkeys_Timetable
 
         private void 查询车站服务列车ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            DataGridView statrain = new DataGridView();
+            statrain.Size = new Size(450, 560);
+            statrain.Location = new Point(175, 30);
+            DataTable traintime = new DataTable();
+            traintime.Columns.Add("列车车次");
+            traintime.Columns.Add("到达时刻");
+            traintime.Columns.Add("出发时刻");
+
             if (cbStation.SelectedItem == null)
             {
                 MessageBox.Show("请先选择车站！");
             }
-            else
+            else if (cbStation.SelectedItem != null)
             {
-                for(int i = 0; i < dm.stationStringList.Count; i++)
+                for (int i = 0; i < dm.stationStringList.Count; i++)
                 {
-                    string trainnum = "";
-                    string arrivetime = "";
-                    string depturetime = "";
-                    string title = "列车车次" + "\t" + "到达时刻" + "\t" + "出发时刻" + "\n";
-                    //MessageBox.Show(dm.stationStringList[i]);
                     if (dm.stationStringList[i] == cbStation.SelectedItem.ToString())
                     {
-
+                        for (int j = 0; j < dm.TrainList.Count; j++)
+                        {
+                            for (int k = 0; k < dm.TrainList[j].staList.Count; k++)
+                            {
+                                if (dm.TrainList[j].staList[k] == cbStation.SelectedItem.ToString())
+                                {
+                                    string trainnum = dm.TrainList[j].trainNo;
+                                    string arrivetime = dm.TrainList[j].staTimeDic[dm.TrainList[j].staList[k]][0];
+                                    string depturetime = dm.TrainList[j].staTimeDic[dm.TrainList[j].staList[k]][1];
+                                    if (ass.GetMinute(depturetime) - ass.GetMinute(arrivetime) != 0)
+                                    {
+                                        traintime.Rows.Add(trainnum, arrivetime, depturetime);
+                                    }
+                                }
+                            }
+                        }
+                        break;
                     }
-                    
+                }
+                this.splitContainer1.Panel2.Controls.Add(statrain);
+                statrain.DataSource = traintime;
+            }
+            else
+            {
+                int judge = 0;
+                for (int i = 0; i < dm.stationStringList.Count; i++)
+                {
+                    if (dm.stationStringList[i] == cbStation.Text)
+                    {
+                        for (int j = 0; j < dm.TrainList.Count; j++)
+                        {
+                            for (int k = 0; k < dm.TrainList[j].staList.Count; k++)
+                            {
+                                if (dm.TrainList[j].staList[k] == cbStation.SelectedItem.ToString())
+                                {
+                                    string trainnum = dm.TrainList[j].trainNo;
+                                    string arrivetime = dm.TrainList[j].staTimeDic[dm.TrainList[j].staList[k]][0];
+                                    string depturetime = dm.TrainList[j].staTimeDic[dm.TrainList[j].staList[k]][1];
+                                    if (ass.GetMinute(depturetime) - ass.GetMinute(arrivetime) != 0)
+                                    {
+                                        traintime.Rows.Add(trainnum, arrivetime, depturetime);
+                                    }
+                                }
+                            }
+                        }
+                        judge = 1;
+                        break;
+                    }
+                }
+                if (judge == 0)
+                {
+                    MessageBox.Show("未找到目标车站！");
+                }
+                else if (judge == 1)
+                {
+                    this.splitContainer1.Panel2.Controls.Add(statrain);
+                    statrain.DataSource = traintime;
                 }
             }
+
+
+
+
         }
     }
-    
 }
