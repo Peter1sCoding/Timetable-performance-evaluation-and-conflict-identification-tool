@@ -477,8 +477,8 @@ namespace Monkeys_Timetable
         private void 查询车站服务列车ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DataGridView statrain = new DataGridView();
-            statrain.Size = new Size(450, 560);
-            statrain.Location = new Point(175, 30);
+            statrain.Size = new Size(360, 560);
+            statrain.Location = new Point(200, 30);
             DataTable traintime = new DataTable();
             traintime.Columns.Add("列车车次");
             traintime.Columns.Add("到达时刻");
@@ -553,9 +553,6 @@ namespace Monkeys_Timetable
                     statrain.DataSource = traintime;
                 }
             }
-
-
-
 
         }
     }
