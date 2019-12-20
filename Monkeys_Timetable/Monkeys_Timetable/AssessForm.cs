@@ -351,11 +351,8 @@ namespace Monkeys_Timetable
                         g.DrawString(d_down.ToString(), font3, brush2, new PointF(400 + barLength2+5, 25 * i + 75+5));
                         #endregion
                     }
-
                     i++;
                 }
-
-
             }
             finally
             {
@@ -370,20 +367,26 @@ namespace Monkeys_Timetable
 
         private void 查询列车停站信息ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-           for(int i = 0; i < dm.TrainList.Count; i++)
-           {
-                string strsta = "";
-                
-                if (dm.TrainList[i].trainNo == cbTrain.SelectedItem.ToString())
+            if (cbTrain.SelectedItem == null)
+            {
+                MessageBox.Show("请先选择列车！");
+            }
+            else
+            {
+                for (int i = 0; i < dm.TrainList.Count; i++)
                 {
-                    for (int j = 0; j < dm.TrainList[i].staList.Count; j++)
+                    string strsta = "";
+                    if (dm.TrainList[i].trainNo == cbTrain.SelectedItem.ToString())
                     {
-                        strsta = strsta + "\n" + dm.TrainList[i].staList[j];
+                        for (int j = 0; j < dm.TrainList[i].staList.Count; j++)
+                        {
+                            strsta = strsta + "\n" + dm.TrainList[i].staList[j];
+                        }
+                        MessageBox.Show(strsta);
+                        break;
                     }
-                    MessageBox.Show(strsta);
-                    break;
                 }
-           }
+            }
             //之后添加控件选择列车 改成表格 加上时间 显示时关闭密度表
         }
     }
