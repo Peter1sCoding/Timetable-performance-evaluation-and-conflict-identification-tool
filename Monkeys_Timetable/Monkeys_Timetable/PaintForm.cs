@@ -253,7 +253,7 @@ namespace Monkeys_Timetable
 
         private void 运行图标记冲突ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Graphics gs = this.pictureBox2.CreateGraphics();
+            Graphics gs = Graphics.FromImage(bmp);
             if (checkBox1.Checked)
             {
                 pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
@@ -262,6 +262,7 @@ namespace Monkeys_Timetable
             {
                 pt.ConflictDrawDown(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
             }
+            this.pictureBox2.BackgroundImage = bmp;
         }
 
         private void 计算ToolStripMenuItem1_Click(object sender, EventArgs e)
