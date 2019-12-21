@@ -31,9 +31,9 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.绘制区间列车密度图ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.查询列车停站信息ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.查询车站服务列车ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.查询车站服务列车ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -51,7 +51,6 @@
             this.查询车站服务列车ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(6, 2, 0, 2);
             this.menuStrip1.Size = new System.Drawing.Size(1047, 28);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
@@ -69,6 +68,13 @@
             this.查询列车停站信息ToolStripMenuItem.Size = new System.Drawing.Size(143, 24);
             this.查询列车停站信息ToolStripMenuItem.Text = "查询列车停站信息";
             this.查询列车停站信息ToolStripMenuItem.Click += new System.EventHandler(this.查询列车停站信息ToolStripMenuItem_Click);
+            // 
+            // 查询车站服务列车ToolStripMenuItem
+            // 
+            this.查询车站服务列车ToolStripMenuItem.Name = "查询车站服务列车ToolStripMenuItem";
+            this.查询车站服务列车ToolStripMenuItem.Size = new System.Drawing.Size(143, 24);
+            this.查询车站服务列车ToolStripMenuItem.Text = "查询车站服务列车";
+            this.查询车站服务列车ToolStripMenuItem.Click += new System.EventHandler(this.查询车站服务列车ToolStripMenuItem_Click);
             // 
             // splitContainer1
             // 
@@ -89,16 +95,13 @@
             this.splitContainer2.Location = new System.Drawing.Point(0, 0);
             this.splitContainer2.Name = "splitContainer2";
             this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer2.Panel1
+            // 
+            this.splitContainer2.Panel1.BackColor = System.Drawing.SystemColors.Control;
             this.splitContainer2.Size = new System.Drawing.Size(384, 592);
             this.splitContainer2.SplitterDistance = 235;
             this.splitContainer2.TabIndex = 0;
-            // 
-            // 查询车站服务列车ToolStripMenuItem
-            // 
-            this.查询车站服务列车ToolStripMenuItem.Name = "查询车站服务列车ToolStripMenuItem";
-            this.查询车站服务列车ToolStripMenuItem.Size = new System.Drawing.Size(143, 24);
-            this.查询车站服务列车ToolStripMenuItem.Text = "查询车站服务列车";
-            this.查询车站服务列车ToolStripMenuItem.Click += new System.EventHandler(this.查询车站服务列车ToolStripMenuItem_Click);
             // 
             // AssessForm
             // 

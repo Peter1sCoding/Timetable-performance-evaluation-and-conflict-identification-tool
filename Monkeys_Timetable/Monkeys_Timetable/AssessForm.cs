@@ -346,75 +346,87 @@ namespace Monkeys_Timetable
             }
         }
 
+        int clear = 0;
         public void drawDensity()
         {
             Graphics g = splitContainer1.Panel2.CreateGraphics();
-            try
+            if (clear == 1)
             {
-                // title
-                Font font = new Font("Arial", 10, FontStyle.Regular);
-                Font font1 = new Font("宋体", 14, FontStyle.Bold);
-                SolidBrush brush = new SolidBrush(Color.Blue);
-               
-                g.DrawString("区间列车密度统计", font1, brush, new PointF(320, 30));
-                // Up Down
-                Font font2 = new Font("宋体", 10, FontStyle.Bold);
-                SolidBrush brush2 = new SolidBrush(Color.Black);
-                g.DrawString("上行", font2, brush2, new PointF(350, 55));
-                g.DrawString("下行", font2, brush2, new PointF(420, 55));
-                // 画个水平线找位置 圈出区域为绘图的地方
-                g.DrawLine(new Pen(brush2), new Point(0, 70), new Point(750, 70));
-                g.DrawLine(new Pen(brush2), new Point(0, 620), new Point(750, 620));
-                g.DrawLine(new Pen(brush2), new Point(400, 70), new Point(400, 620));
-                g.DrawLine(new Pen(brush2), new Point(120, 70), new Point(120, 620));// 最长的bar
-                g.DrawLine(new Pen(brush2), new Point(400 + 280, 70), new Point(400 + 280, 620));// 最长的bar
-
-                float aa =(float)0;//绘图的比例系数 
-                if(maxDensity!=0)
-                    aa = 280 / maxDensity;
-                Font font3 = new Font("宋体", 10);
-                int i = 0;
-                foreach (List<string> sec in TrainDensity.Keys)
+                g.Clear(Color.FromArgb(240,240,240));
+                clear = 0;
+            }
+            else if (clear == 0)
+            {
+                try
                 {
-                    List<int> den = TrainDensity[sec];
-                    int d_up = den[0];
-                    int d_down = den[1];
+                    // title
+                    Font font = new Font("Arial", 10, FontStyle.Regular);
+                    Font font1 = new Font("宋体", 14, FontStyle.Bold);
+                    SolidBrush brush = new SolidBrush(Color.Blue);
 
-                    if (sec[0] == "上海" && sec[1] == "上海虹桥")
+                    g.DrawString("区间列车密度统计", font1, brush, new PointF(320, 30));
+                    // Up Down
+                    Font font2 = new Font("宋体", 10, FontStyle.Bold);
+                    SolidBrush brush2 = new SolidBrush(Color.Black);
+                    g.DrawString("上行", font2, brush2, new PointF(350, 55));
+                    g.DrawString("下行", font2, brush2, new PointF(420, 55));
+                    // 画个水平线找位置 圈出区域为绘图的地方
+                    g.DrawLine(new Pen(brush2), new Point(0, 70), new Point(750, 70));
+                    g.DrawLine(new Pen(brush2), new Point(0, 620), new Point(750, 620));
+                    g.DrawLine(new Pen(brush2), new Point(400, 70), new Point(400, 620));
+                    g.DrawLine(new Pen(brush2), new Point(120, 70), new Point(120, 620));// 最长的bar
+                    g.DrawLine(new Pen(brush2), new Point(400 + 280, 70), new Point(400 + 280, 620));// 最长的bar
+
+                    float aa = (float)0;//绘图的比例系数 
+                    if (maxDensity != 0)
+                        aa = 280 / maxDensity;
+                    Font font3 = new Font("宋体", 10);
+                    int i = 0;
+                    foreach (List<string> sec in TrainDensity.Keys)
                     {
-                        continue;
+                        List<int> den = TrainDensity[sec];
+                        int d_up = den[0];
+                        int d_down = den[1];
+
+                        if (sec[0] == "上海" && sec[1] == "上海虹桥")
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            g.DrawString(sec[0].ToString() + "-" + sec[1].ToString(), font3, brush2, new PointF(0, 75 + 25 * i + 5));
+
+                            #region 上行 橘色
+                            float barLength1 = Convert.ToSingle(d_up * aa);// 每个bar的长度等于对应区间密度d * aa
+                            SolidBrush brush3 = new SolidBrush(Color.Orange);
+
+                            g.FillRectangle(brush3, 400 - barLength1 - 5, 75 + 25 * i, barLength1, 20);
+                            g.DrawString(d_up.ToString(), font3, brush2, new PointF(400 - barLength1 - 30, 75 + 25 * i + 5));
+                            #endregion
+
+                            #region 下行 浅绿色
+                            float barLength2 = Convert.ToSingle(d_down * aa);
+                            SolidBrush brush4 = new SolidBrush(Color.LightGreen);
+
+                            g.FillRectangle(brush4, 400 + 5, 25 * i + 75, barLength2, 20);
+                            g.DrawString(d_down.ToString(), font3, brush2, new PointF(400 + barLength2 + 5, 25 * i + 75 + 5));
+                            #endregion
+                        }
+                        i++;
                     }
-                    else
-                    {
-                        g.DrawString(sec[0].ToString() + "-" + sec[1].ToString(), font3, brush2, new PointF(0, 75 + 25 * i + 5));
-
-                        #region 上行 橘色
-                        float barLength1 = Convert.ToSingle(d_up * aa);// 每个bar的长度等于对应区间密度d * aa
-                        SolidBrush brush3 = new SolidBrush(Color.Orange);
-
-                        g.FillRectangle(brush3, 400 - barLength1-5, 75 + 25 * i, barLength1, 20);
-                        g.DrawString(d_up.ToString(), font3, brush2, new PointF(400 - barLength1 - 30, 75 + 25 * i + 5));
-                        #endregion
-
-                        #region 下行 浅绿色
-                        float barLength2 = Convert.ToSingle(d_down * aa);
-                        SolidBrush brush4 = new SolidBrush(Color.LightGreen);
-
-                        g.FillRectangle(brush4, 400+5, 25 * i + 75, barLength2, 20);
-                        g.DrawString(d_down.ToString(), font3, brush2, new PointF(400 + barLength2+5, 25 * i + 75+5));
-                        #endregion
-                    }
-                    i++;
                 }
+                finally
+                {
+                    g.Dispose();
+                }
+                clear = 1;
             }
-            finally
-            {
-                g.Dispose();
-            }
+           
         }
 
         private void 绘制区间列车密度图ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            this.splitContainer1.Panel2.Controls.Clear();
             drawDensity();
         }
 
@@ -476,8 +488,12 @@ namespace Monkeys_Timetable
 
         private void 查询车站服务列车ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            this.splitContainer1.Panel2.Controls.Clear();
+            clear = 1;
+            drawDensity();
+            
             DataGridView statrain = new DataGridView();
-            statrain.Size = new Size(360, 560);
+            statrain.Size = new Size(360, 550);
             statrain.Location = new Point(200, 30);
             DataTable traintime = new DataTable();
             traintime.Columns.Add("列车车次");
