@@ -34,6 +34,7 @@
             this.查询车站服务列车ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.查询站间服务列车ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -48,7 +49,8 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.绘制区间列车密度图ToolStripMenuItem,
             this.查询列车停站信息ToolStripMenuItem,
-            this.查询车站服务列车ToolStripMenuItem});
+            this.查询车站服务列车ToolStripMenuItem,
+            this.查询站间服务列车ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1047, 28);
@@ -103,6 +105,13 @@
             this.splitContainer2.SplitterDistance = 235;
             this.splitContainer2.TabIndex = 0;
             // 
+            // 查询站间服务列车ToolStripMenuItem
+            // 
+            this.查询站间服务列车ToolStripMenuItem.Name = "查询站间服务列车ToolStripMenuItem";
+            this.查询站间服务列车ToolStripMenuItem.Size = new System.Drawing.Size(143, 24);
+            this.查询站间服务列车ToolStripMenuItem.Text = "查询站间服务列车";
+            this.查询站间服务列车ToolStripMenuItem.Click += new System.EventHandler(this.查询站间服务列车ToolStripMenuItem_Click);
+            // 
             // AssessForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -133,5 +142,6 @@
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.ToolStripMenuItem 查询列车停站信息ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 查询车站服务列车ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 查询站间服务列车ToolStripMenuItem;
     }
 }

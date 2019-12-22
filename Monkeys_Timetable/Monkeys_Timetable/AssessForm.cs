@@ -569,7 +569,145 @@ namespace Monkeys_Timetable
                     statrain.DataSource = traintime;
                 }
             }
-
         }
+
+        #region 查询站间服务列车全局变量
+        Label Strat;
+        ComboBox Stratsta;
+        Label Final;
+        ComboBox Finalsta;
+        Button inquire;
+        DataGridView servetrain;
+        int serveclear = 0;
+        #endregion
+
+        private void 查询站间服务列车ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.splitContainer1.Panel2.Controls.Clear();
+            clear = 1;
+            drawDensity();
+
+            Strat = new Label();
+            Strat.Name = "Strat";
+            Strat.Text = "选择出发站";
+            Strat.Font = new Font("宋体", 10, FontStyle.Bold);
+            Strat.Size = new Size(100, 30);
+            Strat.Location = new Point(180, 30);
+            this.splitContainer1.Panel2.Controls.Add(Strat);
+
+            Stratsta = new ComboBox();
+            Stratsta.Name = "Stratsta";
+            foreach (string str1 in dm.stationStringList)
+            {
+                string strr1 = str1;
+                Stratsta.Items.Add(strr1);
+            }
+            Stratsta.Size = new Size(100, 30);
+            Stratsta.Location = new Point(180, 60);
+            splitContainer1.Panel2.Controls.Add(Stratsta);
+
+            Final = new Label();
+            Final.Name = "Final";
+            Final.Text = "选择目的站";
+            Final.Font = new Font("宋体", 10, FontStyle.Bold);
+            Final.Size = new Size(100, 30);
+            Final.Location = new Point(320, 30);
+            this.splitContainer1.Panel2.Controls.Add(Final);
+
+            Finalsta = new ComboBox();
+            Finalsta.Name = "Finalsta";
+            foreach (string str2 in dm.stationStringList)
+            {
+                string strr2 = str2;
+                Finalsta.Items.Add(strr2);
+            }
+            Finalsta.Size = new Size(100, 30);
+            Finalsta.Location = new Point(320, 60);
+            splitContainer1.Panel2.Controls.Add(Finalsta);
+
+            inquire = new Button();
+            inquire.Name = "inquire";
+            inquire.Text = "查询服务列车";
+            inquire.Font = new Font("宋体", 10, FontStyle.Bold);
+            inquire.Size = new Size(150, 40);
+            inquire.Location = new Point(460, 40);
+            splitContainer1.Panel2.Controls.Add(inquire);
+            inquire.Click += inquire_Click;
+        }
+
+        private void inquire_Click(object sender, EventArgs e)
+        {
+            if (serveclear == 1)
+            {
+                this.splitContainer1.Panel2.Controls.Remove(servetrain);
+            }
+            if (Stratsta.SelectedItem == null)
+            {
+                MessageBox.Show("请选择出发车站！");
+            }
+            else if (Finalsta.SelectedItem == null)
+            {
+                MessageBox.Show("请选择到达车站！");
+            }
+            else if(Stratsta.SelectedItem == Finalsta.SelectedItem)
+            {
+                MessageBox.Show("请选择不同的车站！");
+            }
+            else
+            {
+                servetrain = new DataGridView();
+                servetrain.Size = new Size(545, 480);
+                servetrain.Location = new Point(110, 100);
+                this.splitContainer1.Panel2.Controls.Add(servetrain);
+                DataTable ODtime = new DataTable();
+                ODtime.Columns.Add("列车车次");
+                ODtime.Columns.Add("出发车站");
+                ODtime.Columns.Add("出发时刻");
+                ODtime.Columns.Add("到达车站");
+                ODtime.Columns.Add("到达时刻");
+                int count = 0;
+
+                for(int i = 0; i < dm.TrainList.Count; i++)
+                {
+                    for (int j = 0; j < dm.TrainList[i].staList.Count; j++)
+                    {
+                        if (dm.TrainList[i].staList[j] == Stratsta.SelectedItem.ToString())
+                        {
+                            string arrivetime1 = dm.TrainList[i].staTimeDic[dm.TrainList[i].staList[j]][0];
+                            string depturetime1 = dm.TrainList[i].staTimeDic[dm.TrainList[i].staList[j]][1];
+                            if (ass.GetMinute(depturetime1) - ass.GetMinute(arrivetime1) > 0)
+                            {
+                                for(int k = 0; k < dm.TrainList[i].staList.Count; k++)
+                                {
+                                    if (dm.TrainList[i].staList[k] == Finalsta.SelectedItem.ToString())
+                                    {
+                                        string arrivetime2 = dm.TrainList[i].staTimeDic[dm.TrainList[i].staList[k]][0];
+                                        string depturetime2 = dm.TrainList[i].staTimeDic[dm.TrainList[i].staList[k]][1];
+                                        if(ass.GetMinute(depturetime2) - ass.GetMinute(arrivetime2) != 0 && ass.GetMinute(arrivetime2) - ass.GetMinute(depturetime1) > 0)
+                                        {
+                                            string trainnum = dm.TrainList[i].trainNo;
+                                            ODtime.Rows.Add(trainnum, dm.TrainList[i].staList[j], depturetime1, dm.TrainList[i].staList[k], arrivetime2);
+                                            count++;
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                if(count != 0)
+                {
+                    servetrain.DataSource = ODtime;
+                    serveclear = 1;
+                }
+                else
+                {
+                    this.splitContainer1.Panel2.Controls.Remove(servetrain);
+                    MessageBox.Show("没有站间服务列车");
+                }
+            }
+        }
+
     }
 }
