@@ -371,11 +371,12 @@ namespace Monkeys_Timetable
                     g.DrawString("上行", font2, brush2, new PointF(350, 55));
                     g.DrawString("下行", font2, brush2, new PointF(420, 55));
                     // 画个水平线找位置 圈出区域为绘图的地方
-                    g.DrawLine(new Pen(brush2), new Point(0, 70), new Point(750, 70));
-                    g.DrawLine(new Pen(brush2), new Point(0, 620), new Point(750, 620));
+                    g.DrawLine(new Pen(brush2), new Point(120, 70), new Point(680, 70));
+                    //g.DrawLine(new Pen(brush2), new Point(0, 70), new Point(750, 70));
+                    //g.DrawLine(new Pen(brush2), new Point(0, 620), new Point(750, 620));
                     g.DrawLine(new Pen(brush2), new Point(400, 70), new Point(400, 620));
-                    g.DrawLine(new Pen(brush2), new Point(120, 70), new Point(120, 620));// 最长的bar
-                    g.DrawLine(new Pen(brush2), new Point(400 + 280, 70), new Point(400 + 280, 620));// 最长的bar
+                    //g.DrawLine(new Pen(brush2), new Point(120, 70), new Point(120, 620));// 最长的bar
+                    //g.DrawLine(new Pen(brush2), new Point(400 + 280, 70), new Point(400 + 280, 620));// 最长的bar
 
                     float aa = (float)0;//绘图的比例系数 
                     if (maxDensity != 0)
