@@ -11,7 +11,7 @@ using System.Drawing.Drawing2D;
 
 namespace Monkeys_Timetable
 {
-    class PaintTool//封装绘制运行图所需的方法
+    public class PaintTool//封装绘制运行图所需的方法
     {
         Font font=new Font("宋体",8f);
         Brush brush=new SolidBrush(Color.Green);
@@ -20,6 +20,7 @@ namespace Monkeys_Timetable
         List<float> TimeX = new List<float>();
         List<float> staY = new List<float>();
         DataTable ct = new DataTable();
+
         public void TimetableFrame(double WinWidth, double WinHeight, double TotalMile, List<double> StationMile, Graphics gs,List<string> StationName)
         {
             SF.Alignment = StringAlignment.Far;
@@ -116,6 +117,10 @@ namespace Monkeys_Timetable
                         p2.X = TimeX[i2];
                         p1.Y = staY[index1];
                         p2.Y = staY[index2];
+                        List<PointF> pointList = new List<PointF>();
+                        pointList.Add(p1);
+                        pointList.Add(p2);
+                        train.trainPointDic.Add(StaionList[i], pointList);
                         gs.DrawLine(pp, p1, p2);
                     }
                 }
@@ -177,6 +182,73 @@ namespace Monkeys_Timetable
                     }
                 }                
             }
+        }
+        
+        public static int PointInLine(PointF curPoint, PointF LineStart, PointF LineEnd, double DiffPermitted)
+        {
+            if (DiffPermitted < 0)
+                DiffPermitted = 0 - DiffPermitted;
+
+            //首先判断垂直或近似垂直的情况
+            if (Math.Abs(curPoint.X - LineStart.X) <= DiffPermitted && Math.Abs(curPoint.X - LineEnd.X) <= DiffPermitted)
+            {
+                if (curPoint.Y <= LineStart.Y && curPoint.Y >= LineEnd.Y || curPoint.Y >= LineStart.Y && curPoint.Y <= LineEnd.Y)
+                    return 0;
+                else if (curPoint.Y > LineStart.Y && LineStart.Y > LineEnd.Y || curPoint.Y < LineStart.Y && LineStart.Y < LineEnd.Y)
+                    return 1;
+                else
+                    return 2;
+            }
+            //再判断水平或近似水平的情况
+            else if (Math.Abs(curPoint.Y - LineStart.Y) <= DiffPermitted && Math.Abs(curPoint.Y - LineEnd.Y) <= DiffPermitted)
+            {
+                if (curPoint.X <= LineStart.X && curPoint.X >= LineEnd.X || curPoint.X >= LineStart.X && curPoint.X <= LineEnd.X)
+                    return 0;
+                else if (curPoint.X > LineStart.X && LineStart.X > LineEnd.X || curPoint.X < LineStart.X && LineStart.X < LineEnd.X)
+                    return 1;
+                else
+                    return 2;
+            }
+            else
+            {
+                //通过三角形面积公式计算第三点距给定线的距离
+                double a = GetDistance(curPoint, LineStart);
+                double b = GetDistance(curPoint, LineEnd);
+                double c = GetDistance(LineStart, LineEnd);
+
+                //if (Math.Abs(a + b - c) < DiffPermitted)
+                //    return 0;
+
+                double p = (a + b + c) / 2;
+
+                double s = Math.Sqrt(p * (p - a) * (p - b) * (p - c));
+
+                double h = 2 * s / c;
+
+                //如果在指定范围内，则继续判断垂直交点是否在给定两点之间
+                //主要方法是判断三个点组成的三角形中，线起点和终点所在的顶角是否为钝角(即cos值是否为负，实际不用再计算其具体角度是多少)，
+                //根据余弦定理，实际只须判断三条边中a^2+b^2-c^2是否大于0即可。
+                //如果其中之一为钝角，则不在两线间，而是向该点方向延伸，否则在两点间
+                if (h < DiffPermitted)
+                {
+                    //先判断线起点所在角度是否为钝角
+                    if (a * a + c * c - b * b < 0)
+                        return 1;
+                    else if (b * b + c * c - a * a < 0)
+                        return 2;
+                    else
+                        return 0;
+                }
+            }
+
+            return -1;
+        }
+        public static double GetDistance(PointF p1, PointF p2)
+        {
+            float x = p1.X - p2.X;
+            float y = p1.Y - p2.Y;
+
+            return Math.Sqrt(x * x + y * y);
         }
 
     }

@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Drawing;
 
 namespace Monkeys_Timetable
 {
-    class Train //存入各列车的到发时刻及停站信息
+    public class Train //存入各列车的到发时刻及停站信息
     {
         private string x_trainNo; //车次信息
 
@@ -133,6 +134,7 @@ namespace Monkeys_Timetable
                 x_Dir = value;
             }
         }
-    
+        public Dictionary<string, List<PointF>> trainPointDic = new Dictionary<string, List<PointF>>();
+
     }
 }

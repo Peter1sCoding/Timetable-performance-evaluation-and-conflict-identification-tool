@@ -20,13 +20,14 @@ namespace Monkeys_Timetable
         DataManager dm;
         Conflict_Identification ci;
         DataTable dt;
-        PaintTool pt = new PaintTool();
+        PaintTool pt = new PaintTool();        
         DataTable ConflictTable;
         Bitmap bmp = new Bitmap(TD_Width, TD_Height);
 
         public PaintForm()
-        {
+        {      
             pictureBox2 = new PictureBox();
+
             InitializeComponent();
             this.Size = new Size(TD_Width, TD_Height);
             dm = new DataManager();
@@ -297,5 +298,55 @@ namespace Monkeys_Timetable
             checkBox2.Checked = true;
             checkBox1.Checked = true;
         }
+        private void TimetableViewCtrl_MouseMove(object sender, MouseEventArgs e)
+        {
+            float precision = 5f;
+
+            Train selTrainNow = null;
+            DateTime selTime = DateTime.MinValue;
+
+            int n = -1;
+            foreach (Train train in dm.TrainList)
+            {
+                for(int i = 0;i < train.trainPointDic.Count - 1; i++)
+                {
+                    n = PaintTool.PointInLine(e.Location, train.trainPointDic[train.staList[i]][1], train.trainPointDic[train.staList[i + 1]][0], precision);
+                    if (n == 0)
+                    {
+                        ShowTrainInfoTooltip(train, e.Location);
+                        break;
+                    }
+                }
+                if (n == 0)
+                    break;
+            }           
+            Refresh();
+        }
+        private void ShowTrainInfoTooltip(Train train, Point location)
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add("车站");
+            dt.Columns.Add("到达时刻");
+            dt.Columns.Add("出发时刻");
+           
+            dataGridView1.Text = train.trainNo;
+
+            for (int i = 0; i < train.staList.Count; i++)
+            {
+                dt.Rows.Add(train.staList[i], train.staTimeDic[train.staList[i]][0], train.staTimeDic[train.staList[i]][1]);
+            }
+
+            //下面计算能将信息全部显示出来的位置，默认情况下，给定坐标为左上角坐标
+            //如果右侧显示不下而左侧可以，则在鼠标左侧显示
+            if (ClientSize.Width - location.X < dataGridView1.Width && location.X >= dataGridView1.Width)
+                location.X -= dataGridView1.Width;
+
+            if (ClientSize.Height - location.Y < dataGridView1.Height && location.Y >= dataGridView1.Height)
+                location.Y -= dataGridView1.Height;
+
+            dataGridView1.Visible = true;
+            dataGridView1.Location = location;
+        }
+
     }
 }
