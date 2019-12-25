@@ -17,9 +17,21 @@ namespace Monkeys_Timetable
         Brush brush=new SolidBrush(Color.Green);
         StringFormat SF = new StringFormat();
         StringFormat SF1 = new StringFormat();
+
+        
+
         List<float> TimeX = new List<float>();
         List<float> staY = new List<float>();
         DataTable ct = new DataTable();
+
+        public struct Border
+        {
+            public double up;
+            public double down;
+        }
+        Border border1 = new Border();
+        List<Border> border2 = new List<Border>();
+         
 
         public void TimetableFrame(double WinWidth, double WinHeight, double TotalMile, List<double> StationMile, Graphics gs,List<string> StationName)
         {
@@ -260,5 +272,6 @@ namespace Monkeys_Timetable
             return Math.Sqrt(x * x + y * y);
         }
 
+        
     }
 }
