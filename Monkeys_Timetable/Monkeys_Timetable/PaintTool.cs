@@ -17,9 +17,24 @@ namespace Monkeys_Timetable
         Brush brush=new SolidBrush(Color.Green);
         StringFormat SF = new StringFormat();
         StringFormat SF1 = new StringFormat();
+
+        List<string> Str = new List<string>();
+        List<double> Mile = new List<double>();
+        Dictionary<int, List<string>> str1 = new Dictionary<int, List<string>>();
+        Dictionary<int, List<double>> Mile1 = new Dictionary<int, List<double>>();
+
         List<float> TimeX = new List<float>();
         List<float> staY = new List<float>();
         DataTable ct = new DataTable();
+
+        public struct Border
+        {
+            public double up;
+            public double down;
+        }
+        Border border1 = new Border();
+        List<Border> border2 = new List<Border>();
+         
 
         public void TimetableFrame(double WinWidth, double WinHeight, double TotalMile, List<double> StationMile, Graphics gs,List<string> StationName)
         {
@@ -169,15 +184,13 @@ namespace Monkeys_Timetable
                 {
                     if(conflict.FrontTrain == tra)
                     {
-                        if((conflict.ConflictType == "到到")||(conflict.ConflictType == "到通")|| (conflict.ConflictType == "通到")|| (conflict.ConflictType == "通通"))
-                        {
-                            int i1 = tra.MinuteDic[conflict.ConflictSta][0];
-                            PointF p = new PointF();
-                            int index = StationList.IndexOf(conflict.ConflictSta);
-                            p.X = TimeX[i1];
-                            p.Y = staY[index];
-                            conflict.ConflictLocation = p;
-                        }                      
+                        int i1 = tra.MinuteDic[conflict.ConflictSta][0];
+                        PointF p = new PointF();
+                        int index = StationList.IndexOf(conflict.ConflictSta);
+                        p.X = TimeX[i1];
+                        p.Y = staY[index];
+                        conflict.ConflictLocation = p;
+                                             
                     }
                 }
             }
@@ -192,9 +205,16 @@ namespace Monkeys_Timetable
                 if (TrainDic[No].Dir == "up")
                 {
                     int cPoint = 0;
-                    if ((ct.Rows[i]["冲突类型"].ToString() == "到发") || (ct.Rows[i]["冲突类型"].ToString() == "到到") || (ct.Rows[i]["冲突类型"].ToString() == "到通") || (ct.Rows[i]["冲突类型"].ToString() == "通通"))
+                    if ((ct.Rows[i]["冲突类型"].ToString() == "通到") || (ct.Rows[i]["冲突类型"].ToString() == "到到") || (ct.Rows[i]["冲突类型"].ToString() == "到通") || (ct.Rows[i]["冲突类型"].ToString() == "通通"))
                     {
                         cPoint = TrainDic[ct.Rows[i]["前车"].ToString()].MinuteDic[ct.Rows[i]["车站"].ToString()][0];
+                        p1.X = TimeX[cPoint];
+                        p1.Y = staY[StaionList.IndexOf(ct.Rows[i]["车站"].ToString())];
+                        gs.DrawEllipse(pp, p1.X, p1.Y, 5, 5);
+                    }
+                    if ((ct.Rows[i]["冲突类型"].ToString() == "发通") || (ct.Rows[i]["冲突类型"].ToString() == "通发") || (ct.Rows[i]["冲突类型"].ToString() == "发发"))
+                    {
+                        cPoint = TrainDic[ct.Rows[i]["前车"].ToString()].MinuteDic[ct.Rows[i]["车站"].ToString()][1];
                         p1.X = TimeX[cPoint];
                         p1.Y = staY[StaionList.IndexOf(ct.Rows[i]["车站"].ToString())];
                         gs.DrawEllipse(pp, p1.X, p1.Y, 5, 5);
@@ -215,6 +235,13 @@ namespace Monkeys_Timetable
                     if ((ct.Rows[i]["冲突类型"].ToString() == "到发") || (ct.Rows[i]["冲突类型"].ToString() == "到到") || (ct.Rows[i]["冲突类型"].ToString() == "到通") || (ct.Rows[i]["冲突类型"].ToString() == "通通"))
                     {
                         cPoint = TrainDic[ct.Rows[i]["前车"].ToString()].MinuteDic[ct.Rows[i]["车站"].ToString()][0];
+                        p1.X = TimeX[cPoint];
+                        p1.Y = staY[StaionList.IndexOf(ct.Rows[i]["车站"].ToString())];
+                        gs.DrawEllipse(pp, p1.X, p1.Y, 5, 5);
+                    }
+                    if ((ct.Rows[i]["冲突类型"].ToString() == "发通") || (ct.Rows[i]["冲突类型"].ToString() == "通发") || (ct.Rows[i]["冲突类型"].ToString() == "发发"))
+                    {
+                        cPoint = TrainDic[ct.Rows[i]["前车"].ToString()].MinuteDic[ct.Rows[i]["车站"].ToString()][1];
                         p1.X = TimeX[cPoint];
                         p1.Y = staY[StaionList.IndexOf(ct.Rows[i]["车站"].ToString())];
                         gs.DrawEllipse(pp, p1.X, p1.Y, 5, 5);
@@ -291,6 +318,54 @@ namespace Monkeys_Timetable
 
             return Math.Sqrt(x * x + y * y);
         }
+
+        public void Branch(List<string> StationStr, List<double> StationMile, double Width, double Height)
+        {
+            float divi = 5;
+            int a = StationStr.Count;
+            List<int> ind1 = new List<int>();
+            int k = 0;
+            for (int i = 0; i < a; i++)
+            {
+                if (StationMile[i] == 0)
+                {
+                    k++;
+                }
+                ind1.Add(k);
+            }
+            for (int j = 1; j < k; j++)
+            {
+                for (int t = 0; t < a; t++)
+                {
+                    if (ind1[t] == j)
+                    {
+                        Str.Add(StationStr[t]);
+                        Mile.Add(StationMile[t]);
+                    }
+                }
+                str1.Add(k, Str);
+                Mile1.Add(k, Mile);
+            }//将主线与支线分开
+            double all = 0;
+            for (int l = 1; l <= k; l++)
+            {
+                all = all + Mile1[l].Max();
+            }
+            List<double> h = new List<double>();
+            for (int hh = 0; hh < k; hh++)
+            {
+                h.Add(Width * Mile1[hh + 1].Max() / all);
+            }
+            for (int e = 0; e < k - 1; e++)
+            {
+                border1.up = 0;
+                border1.down = h[e];
+                border2.Add(border1);
+                border1.up = border1.down;
+                border1.down = border1.down + h[e + 1];
+            }//把picturebox分为k份，分别绘画支线
+
+        }//关于支线实现
 
     }
 }
