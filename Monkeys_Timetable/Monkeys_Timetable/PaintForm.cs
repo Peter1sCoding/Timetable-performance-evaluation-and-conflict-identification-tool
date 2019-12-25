@@ -37,7 +37,7 @@ namespace Monkeys_Timetable
             dm.DivideUpDown();
             dm.AddTra2sta();
             dm.GetStop();
-            
+   
         }
 
         private void PaintForm_Load(object sender, EventArgs e)
@@ -186,6 +186,7 @@ namespace Monkeys_Timetable
             {
                 pt.TimetableFrame(this.pictureBox2.Width, this.pictureBox2.Height, total, staMile, gs, dm.stationStringList);
             }
+            pt.GetTrainPoint(dm.TrainList, dm.stationStringList);
             this.pictureBox2.BackgroundImage = bmp;
         }
         //public void Draw()
@@ -302,48 +303,69 @@ namespace Monkeys_Timetable
         {
             float precision = 5f;
 
-            Train selTrainNow = null;
-            DateTime selTime = DateTime.MinValue;
-
             int n = -1;
-            foreach (Train train in dm.TrainList)
+            if (checkBox1.Checked)
             {
-                for(int i = 0;i < train.trainPointDic.Count - 1; i++)
+                foreach (Train train in dm.upTrainList)
                 {
-                    n = PaintTool.PointInLine(e.Location, train.trainPointDic[train.staList[i]][1], train.trainPointDic[train.staList[i + 1]][0], precision);
-                    if (n == 0)
+                    for (int i = 0; i < train.trainPointDic.Count - 1; i++)
                     {
-                        ShowTrainInfoTooltip(train, e.Location);
-                        break;
+                        n = PaintTool.PointInLine(e.Location, train.trainPointDic[train.staList[i]][1], train.trainPointDic[train.staList[i + 1]][0], precision);
+                        if (n == 0)
+                        {
+                            ShowTrainInfoTooltip(train, e.Location);
+                            break;
+                        }
                     }
+                    if (n == 0)
+                        break;
                 }
-                if (n == 0)
-                    break;
-            }           
-            Refresh();
+                Refresh();
+            }
+            if (checkBox2.Checked)
+            {
+                foreach (Train train in dm.downTrainList)
+                {
+                    for (int i = 0; i < train.trainPointDic.Count - 1; i++)
+                    {
+                        n = PaintTool.PointInLine(e.Location, train.trainPointDic[train.staList[i]][1], train.trainPointDic[train.staList[i + 1]][0], precision);
+                        if (n == 0)
+                        {
+                            ShowTrainInfoTooltip(train, e.Location);
+                            break;
+                        }
+                    }
+                    if (n == 0)
+                        break;
+                }
+                Refresh();
+            }
         }
         private void ShowTrainInfoTooltip(Train train, Point location)
         {
             DataTable dt = new DataTable();
+            dt.TableName = train.trainNo;
+            dt.Columns.Add(train.trainNo);
             dt.Columns.Add("车站");
             dt.Columns.Add("到达时刻");
             dt.Columns.Add("出发时刻");
            
-            dataGridView1.Text = train.trainNo;
 
             for (int i = 0; i < train.staList.Count; i++)
             {
-                dt.Rows.Add(train.staList[i], train.staTimeDic[train.staList[i]][0], train.staTimeDic[train.staList[i]][1]);
+                dt.Rows.Add("",train.staList[i], train.staTimeDic[train.staList[i]][0], train.staTimeDic[train.staList[i]][1]);
             }
 
-            //下面计算能将信息全部显示出来的位置，默认情况下，给定坐标为左上角坐标
-            //如果右侧显示不下而左侧可以，则在鼠标左侧显示
+
             if (ClientSize.Width - location.X < dataGridView1.Width && location.X >= dataGridView1.Width)
                 location.X -= dataGridView1.Width;
 
-            if (ClientSize.Height - location.Y < dataGridView1.Height && location.Y >= dataGridView1.Height)
+           if (ClientSize.Height - location.Y < dataGridView1.Height && location.Y >= dataGridView1.Height)
                 location.Y -= dataGridView1.Height;
 
+
+            dataGridView1.DataSource = dt;
+            dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.Visible = true;
             dataGridView1.Location = location;
         }

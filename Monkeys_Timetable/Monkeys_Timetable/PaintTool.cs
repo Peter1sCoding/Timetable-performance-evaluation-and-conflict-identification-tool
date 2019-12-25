@@ -116,11 +116,7 @@ namespace Monkeys_Timetable
                         p1.X = TimeX[i1];
                         p2.X = TimeX[i2];
                         p1.Y = staY[index1];
-                        p2.Y = staY[index2];
-                        List<PointF> pointList = new List<PointF>();
-                        pointList.Add(p1);
-                        pointList.Add(p2);
-                        train.trainPointDic.Add(StaionList[i], pointList);
+                        p2.Y = staY[index2];                       
                         gs.DrawLine(pp, p1, p2);
                     }
                 }
@@ -136,12 +132,35 @@ namespace Monkeys_Timetable
                         p1.Y = staY[index1];
                         p2.Y = staY[index1];
                         gs.DrawLine(pp, p1, p2);
-                    }
-                    
+                    }                   
                 }
             }
         }//运行线铺画方法
-
+        public void GetTrainPoint(List<Train> TrainList,List<string> StationList)//存入各列车点位坐标
+        {
+            foreach(Train train in TrainList)
+            {
+                for(int i = 0; i < train.staList.Count; i++)
+                {
+                    PointF p1 = new PointF();
+                    PointF p2 = new PointF();
+                    int index1 = StationList.IndexOf(train.staList[i]);
+                    int i1 = train.MinuteDic[train.staList[i]][0];
+                    int i2 = train.MinuteDic[train.staList[i]][1];
+                    p1.X = TimeX[i1];
+                    p2.X = TimeX[i2];
+                    p1.Y = staY[index1];
+                    p2.Y = staY[index1];
+                    List<PointF> pointList = new List<PointF>();
+                    pointList.Add(p1);
+                    pointList.Add(p2);
+                    if (!train.trainPointDic.ContainsKey(train.staList[i]))
+                    {
+                        train.trainPointDic.Add(train.staList[i], pointList);
+                    }
+                }
+            }
+        }
         public void ConflictDrawUp(Graphics gs,DataTable ct,Dictionary<string,Train> TrainDic, List<string> StaionList)
         {
             Pen pp = new Pen(Color.Blue, 2);
@@ -162,7 +181,6 @@ namespace Monkeys_Timetable
                 }                
             }              
         }
-
         public void ConflictDrawDown(Graphics gs, DataTable ct, Dictionary<string, Train> TrainDic, List<string> StaionList)
         {
             Pen pp = new Pen(Color.Blue, 2);
@@ -182,15 +200,14 @@ namespace Monkeys_Timetable
                     }
                 }                
             }
-        }
-        
-        public static int PointInLine(PointF curPoint, PointF LineStart, PointF LineEnd, double DiffPermitted)
+        }       
+        public static int PointInLine(PointF curPoint, PointF LineStart, PointF LineEnd, double Difference)
         {
-            if (DiffPermitted < 0)
-                DiffPermitted = 0 - DiffPermitted;
+            if (Difference < 0)
+                Difference = 0 - Difference;
 
-            //首先判断垂直或近似垂直的情况
-            if (Math.Abs(curPoint.X - LineStart.X) <= DiffPermitted && Math.Abs(curPoint.X - LineEnd.X) <= DiffPermitted)
+            //首先判断垂直情况
+            if (Math.Abs(curPoint.X - LineStart.X) <= Difference && Math.Abs(curPoint.X - LineEnd.X) <= Difference)
             {
                 if (curPoint.Y <= LineStart.Y && curPoint.Y >= LineEnd.Y || curPoint.Y >= LineStart.Y && curPoint.Y <= LineEnd.Y)
                     return 0;
@@ -200,7 +217,7 @@ namespace Monkeys_Timetable
                     return 2;
             }
             //再判断水平或近似水平的情况
-            else if (Math.Abs(curPoint.Y - LineStart.Y) <= DiffPermitted && Math.Abs(curPoint.Y - LineEnd.Y) <= DiffPermitted)
+            else if (Math.Abs(curPoint.Y - LineStart.Y) <= Difference && Math.Abs(curPoint.Y - LineEnd.Y) <= Difference)
             {
                 if (curPoint.X <= LineStart.X && curPoint.X >= LineEnd.X || curPoint.X >= LineStart.X && curPoint.X <= LineEnd.X)
                     return 0;
@@ -216,20 +233,13 @@ namespace Monkeys_Timetable
                 double b = GetDistance(curPoint, LineEnd);
                 double c = GetDistance(LineStart, LineEnd);
 
-                //if (Math.Abs(a + b - c) < DiffPermitted)
-                //    return 0;
-
                 double p = (a + b + c) / 2;
 
                 double s = Math.Sqrt(p * (p - a) * (p - b) * (p - c));
 
                 double h = 2 * s / c;
 
-                //如果在指定范围内，则继续判断垂直交点是否在给定两点之间
-                //主要方法是判断三个点组成的三角形中，线起点和终点所在的顶角是否为钝角(即cos值是否为负，实际不用再计算其具体角度是多少)，
-                //根据余弦定理，实际只须判断三条边中a^2+b^2-c^2是否大于0即可。
-                //如果其中之一为钝角，则不在两线间，而是向该点方向延伸，否则在两点间
-                if (h < DiffPermitted)
+                if (h < Difference)
                 {
                     //先判断线起点所在角度是否为钝角
                     if (a * a + c * c - b * b < 0)
@@ -240,7 +250,6 @@ namespace Monkeys_Timetable
                         return 0;
                 }
             }
-
             return -1;
         }
         public static double GetDistance(PointF p1, PointF p2)
