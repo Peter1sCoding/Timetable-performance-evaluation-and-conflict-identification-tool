@@ -184,7 +184,7 @@ namespace Monkeys_Timetable
         }
         public void ConflictDrawUp(Graphics gs,DataTable ct,Dictionary<string,Train> TrainDic, List<string> StaionList)
         {
-            Pen pp = new Pen(Color.Blue, 2);
+            Pen pp = new Pen(Color.Green, 2);
             PointF p1 = new PointF();
             for(int i = 0; i < ct.Rows.Count; i++)
             {
@@ -204,7 +204,7 @@ namespace Monkeys_Timetable
         }
         public void ConflictDrawDown(Graphics gs, DataTable ct, Dictionary<string, Train> TrainDic, List<string> StaionList)
         {
-            Pen pp = new Pen(Color.Blue, 2);
+            Pen pp = new Pen(Color.Green, 2);
             PointF p1 = new PointF();
             for (int i = 0; i < ct.Rows.Count; i++)
             {

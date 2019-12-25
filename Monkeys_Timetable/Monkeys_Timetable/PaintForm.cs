@@ -309,7 +309,6 @@ namespace Monkeys_Timetable
         private void TimetableViewCtrl_MouseMove(object sender, MouseEventArgs e)
         {
             float precision = 5f;
-
             int n = -1;
             int c = -1;
             if (checkBox1.Checked)
@@ -318,18 +317,33 @@ namespace Monkeys_Timetable
                 {
                     Graphics gs;
                     gs = Graphics.FromImage(bmp);
-                    for (int i = 0; i < ci.ConflictList.Count; i++)
+                    if (upConflictClicked)
                     {
-                        c = PaintTool.PointInCircle(e.Location, ci.ConflictList[i].ConflictLocation, 2f);
-                        if(c == 0)
+                        for (int i = 0; i < ci.ConflictList.Count; i++)
                         {
-                            ShowInfoTooltip(ci.ConflictList[i], e.Location);
-                            Pen SelectedPen = new Pen(Color.Green, 2);
-                            gs.DrawEllipse(SelectedPen, ci.ConflictList[i].ConflictLocation.X, ci.ConflictList[i].ConflictLocation.Y, 5, 5);
+                            c = PaintTool.PointInCircle(e.Location, ci.ConflictList[i].ConflictLocation, 5f);
+                            if (c == 0)
+                            {
+                                this.pictureBox2.Refresh();
+                                DrawPicture();
+                                if (upConflictClicked)
+                                {
+                                    pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
+                                }
+                                if (downConflictClicked)
+                                {
+                                    pt.ConflictDrawDown(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
+                                }
+                                ShowInfoTooltip(ci.ConflictList[i], e.Location);
+                                Pen SelectedPen = new Pen(Color.Blue, 2);
+                                gs.DrawEllipse(SelectedPen, ci.ConflictList[i].ConflictLocation.X, ci.ConflictList[i].ConflictLocation.Y, 5, 5);
+                                break;
+                            }
                         }
-                    }
+                    }                   
                     if (c != 0)
                     {
+                        dataGridView2.Visible = false;
                         for (int i = 0; i < train.trainPointDic.Count - 1; i++)
                         {
                             n = PaintTool.PointInLine(e.Location, train.trainPointDic[train.staList[i]][1], train.trainPointDic[train.staList[i + 1]][0], precision);
@@ -368,18 +382,33 @@ namespace Monkeys_Timetable
                 {
                     Graphics gs;
                     gs = Graphics.FromImage(bmp);
-                    for (int i = 0; i < ci.ConflictList.Count; i++)
+                    if (downConflictClicked)
                     {
-                        c = PaintTool.PointInCircle(e.Location, ci.ConflictList[i].ConflictLocation, 10f);
-                        if (c == 0)
+                        for (int i = 0; i < ci.ConflictList.Count; i++)
                         {
-                            ShowInfoTooltip(ci.ConflictList[i], e.Location);
-                            Pen SelectedPen = new Pen(Color.Green, 2);
-                            gs.DrawEllipse(SelectedPen, ci.ConflictList[i].ConflictLocation.X, ci.ConflictList[i].ConflictLocation.Y, 5, 5);
+                            c = PaintTool.PointInCircle(e.Location, ci.ConflictList[i].ConflictLocation, 5f);
+                            if (c == 0)
+                            {
+                                this.pictureBox2.Refresh();
+                                DrawPicture();
+                                if (upConflictClicked)
+                                {
+                                    pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
+                                }
+                                if (downConflictClicked)
+                                {
+                                    pt.ConflictDrawDown(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
+                                }
+                                ShowInfoTooltip(ci.ConflictList[i], e.Location);
+                                Pen SelectedPen = new Pen(Color.Blue, 2);
+                                gs.DrawEllipse(SelectedPen, ci.ConflictList[i].ConflictLocation.X, ci.ConflictList[i].ConflictLocation.Y, 5, 5);
+                                break;
+                            }
                         }
-                    }
+                    }                   
                     if (c != 0)
                     {
+                        dataGridView2.Visible = false;
                         for (int i = 0; i < train.trainPointDic.Count - 1; i++)
                         {
                             n = PaintTool.PointInLine(e.Location, train.trainPointDic[train.staList[i]][1], train.trainPointDic[train.staList[i + 1]][0], precision);
@@ -451,16 +480,10 @@ namespace Monkeys_Timetable
             dt.Columns.Add("后车");
             dt.Columns.Add("车站");
             dt.Rows.Add(con.ConflictType, con.FrontTrain.trainNo, con.LatterTrain.trainNo, con.ConflictSta);
-            if (ClientSize.Width - location.X < dataGridView1.Width && location.X >= dataGridView1.Width)
-                location.X -= dataGridView1.Width;
 
-            if (ClientSize.Height - location.Y < dataGridView1.Height && location.Y >= dataGridView1.Height)
-                location.Y -= dataGridView1.Height;
-
-            dataGridView1.DataSource = dt;
-            dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridView1.Visible = true;
-            dataGridView1.Location = location;
+            dataGridView2.DataSource = dt;
+            dataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView2.Visible = true;
         }
     }
 }
