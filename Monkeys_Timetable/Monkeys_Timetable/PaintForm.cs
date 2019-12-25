@@ -313,7 +313,16 @@ namespace Monkeys_Timetable
                         n = PaintTool.PointInLine(e.Location, train.trainPointDic[train.staList[i]][1], train.trainPointDic[train.staList[i + 1]][0], precision);
                         if (n == 0)
                         {
+                            this.pictureBox2.Refresh();
+                            DrawPicture();
                             ShowTrainInfoTooltip(train, e.Location);
+                            Pen SelectedPen = new Pen(Color.Blue, 2);
+                            Graphics gs;
+                            gs = Graphics.FromImage(bmp);
+                            for (int j = 0; j < train.staList.Count - 1; j++)
+                            {
+                                gs.DrawLine(SelectedPen, train.trainPointDic[train.staList[j]][1], train.trainPointDic[train.staList[j + 1]][0]);
+                            }
                             break;
                         }
                     }
@@ -331,7 +340,16 @@ namespace Monkeys_Timetable
                         n = PaintTool.PointInLine(e.Location, train.trainPointDic[train.staList[i]][1], train.trainPointDic[train.staList[i + 1]][0], precision);
                         if (n == 0)
                         {
+                            this.pictureBox2.Refresh();
+                            DrawPicture();
                             ShowTrainInfoTooltip(train, e.Location);
+                            Pen SelectedPen = new Pen(Color.Blue, 2);
+                            Graphics gs;
+                            gs = Graphics.FromImage(bmp);
+                            for(int j = 0; j < train.staList.Count - 1; j++)
+                            {
+                                gs.DrawLine(SelectedPen, train.trainPointDic[train.staList[j]][1], train.trainPointDic[train.staList[j + 1]][0]);
+                            }
                             break;
                         }
                     }
