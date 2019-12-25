@@ -330,7 +330,7 @@ namespace Monkeys_Timetable
                             {
                                 pt.ConflictDrawDown(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
                             }
-                            ShowTrainInfoTooltip(train, e.Location);
+                            ShowInfoTooltip(train, e.Location);
                             Pen SelectedPen = new Pen(Color.Blue, 2);
                             for (int j = 0; j < train.staList.Count - 1; j++)
                             {
@@ -355,7 +355,7 @@ namespace Monkeys_Timetable
                         {
                             this.pictureBox2.Refresh();
                             DrawPicture();
-                            ShowTrainInfoTooltip(train, e.Location);
+                            ShowInfoTooltip(train, e.Location);
                             Pen SelectedPen = new Pen(Color.Blue, 2);
                             Graphics gs;
                             gs = Graphics.FromImage(bmp);
@@ -372,7 +372,7 @@ namespace Monkeys_Timetable
                 Refresh();
             }
         }
-        private void ShowTrainInfoTooltip(Train train, Point location)
+        private void ShowInfoTooltip(Train train, Point location)
         {
             DataTable dt = new DataTable();
             dt.TableName = train.trainNo;
