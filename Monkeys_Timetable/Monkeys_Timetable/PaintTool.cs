@@ -18,7 +18,10 @@ namespace Monkeys_Timetable
         StringFormat SF = new StringFormat();
         StringFormat SF1 = new StringFormat();
 
-        
+        List<string> Str = new List<string>();
+        List<double> Mile = new List<double>();
+        Dictionary<int, List<string>> str1 = new Dictionary<int, List<string>>();
+        Dictionary<int, List<double>> Mile1 = new Dictionary<int, List<double>>();
 
         List<float> TimeX = new List<float>();
         List<float> staY = new List<float>();
@@ -316,6 +319,53 @@ namespace Monkeys_Timetable
             return Math.Sqrt(x * x + y * y);
         }
 
-        
+        public void Branch(List<string> StationStr, List<double> StationMile, double Width, double Height)
+        {
+            float divi = 5;
+            int a = StationStr.Count;
+            List<int> ind1 = new List<int>();
+            int k = 0;
+            for (int i = 0; i < a; i++)
+            {
+                if (StationMile[i] == 0)
+                {
+                    k++;
+                }
+                ind1.Add(k);
+            }
+            for (int j = 1; j < k; j++)
+            {
+                for (int t = 0; t < a; t++)
+                {
+                    if (ind1[t] == j)
+                    {
+                        Str.Add(StationStr[t]);
+                        Mile.Add(StationMile[t]);
+                    }
+                }
+                str1.Add(k, Str);
+                Mile1.Add(k, Mile);
+            }//将主线与支线分开
+            double all = 0;
+            for (int l = 1; l <= k; l++)
+            {
+                all = all + Mile1[l].Max();
+            }
+            List<double> h = new List<double>();
+            for (int hh = 0; hh < k; hh++)
+            {
+                h.Add(Width * Mile1[hh + 1].Max() / all);
+            }
+            for (int e = 0; e < k - 1; e++)
+            {
+                border1.up = 0;
+                border1.down = h[e];
+                border2.Add(border1);
+                border1.up = border1.down;
+                border1.down = border1.down + h[e + 1];
+            }//把picturebox分为k份，分别绘画支线
+
+        }//关于支线实现
+
     }
 }
