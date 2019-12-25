@@ -312,6 +312,14 @@ namespace Monkeys_Timetable
             {
                 foreach (Train train in dm.upTrainList)
                 {
+                    for(int i = 0; i < ci.ConflictList.Count; i++)
+                    {
+                        int c = PaintTool.PointInCircle(e.Location, ci.ConflictList[i].ConflictLocation, precision);
+                        if(n == 0)
+                        {
+
+                        }
+                    }
                     for (int i = 0; i < train.trainPointDic.Count - 1; i++)
                     {
                         n = PaintTool.PointInLine(e.Location, train.trainPointDic[train.staList[i]][1], train.trainPointDic[train.staList[i + 1]][0], precision);

@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace Monkeys_Timetable
 {
-    class Conflict
+    public class Conflict
     {
         private PointF x_ConflictLocation;
         public PointF ConflictLocation

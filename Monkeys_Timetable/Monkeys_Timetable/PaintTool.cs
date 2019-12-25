@@ -161,6 +161,27 @@ namespace Monkeys_Timetable
                 }
             }
         }
+        public void GetConflictPoint(List<Conflict> ConflictList,List<Train> TrainList, List<string> StationList)
+        {
+            foreach(Conflict conflict in ConflictList)
+            {
+                foreach(Train tra in TrainList)
+                {
+                    if(conflict.FrontTrain == tra)
+                    {
+                        if((conflict.ConflictType == "到到")||(conflict.ConflictType == "到通")|| (conflict.ConflictType == "通到")|| (conflict.ConflictType == "通通"))
+                        {
+                            int i1 = tra.MinuteDic[conflict.ConflictSta][0];
+                            PointF p = new PointF();
+                            int index = StationList.IndexOf(conflict.ConflictSta);
+                            p.X = TimeX[i1];
+                            p.Y = staY[index];
+                            conflict.ConflictLocation = p;
+                        }                      
+                    }
+                }
+            }
+        }
         public void ConflictDrawUp(Graphics gs,DataTable ct,Dictionary<string,Train> TrainDic, List<string> StaionList)
         {
             Pen pp = new Pen(Color.Blue, 2);
@@ -250,6 +271,17 @@ namespace Monkeys_Timetable
                         return 0;
                 }
             }
+            return -1;
+        }
+        public static int PointInCircle(PointF curPoint, PointF CirclePoint, double Difference)
+        {
+            if (Difference < 0)
+                Difference = 0 - Difference;
+            double h = GetDistance(curPoint, CirclePoint);
+            if (h < Difference)
+            {
+                return 0;
+            }                          
             return -1;
         }
         public static double GetDistance(PointF p1, PointF p2)

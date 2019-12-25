@@ -36,8 +36,8 @@ namespace Monkeys_Timetable
         public void Conflict_Judge()
         {
             ConflictTrains = new List<string>();
-            
-            
+            ConflictList = new List<Conflict>();
+
             for (int i = 0; i < stationList.Count; i++)
             {
                 #region 判断上行到达冲突
