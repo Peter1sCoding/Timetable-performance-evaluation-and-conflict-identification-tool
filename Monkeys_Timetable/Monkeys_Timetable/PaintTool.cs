@@ -185,15 +185,13 @@ namespace Monkeys_Timetable
                 {
                     if(conflict.FrontTrain == tra)
                     {
-                        if((conflict.ConflictType == "到到")||(conflict.ConflictType == "到通")|| (conflict.ConflictType == "通到")|| (conflict.ConflictType == "通通"))
-                        {
-                            int i1 = tra.MinuteDic[conflict.ConflictSta][0];
-                            PointF p = new PointF();
-                            int index = StationList.IndexOf(conflict.ConflictSta);
-                            p.X = TimeX[i1];
-                            p.Y = staY[index];
-                            conflict.ConflictLocation = p;
-                        }                      
+                        int i1 = tra.MinuteDic[conflict.ConflictSta][0];
+                        PointF p = new PointF();
+                        int index = StationList.IndexOf(conflict.ConflictSta);
+                        p.X = TimeX[i1];
+                        p.Y = staY[index];
+                        conflict.ConflictLocation = p;
+                                             
                     }
                 }
             }

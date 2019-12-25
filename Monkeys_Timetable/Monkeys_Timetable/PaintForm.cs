@@ -44,7 +44,8 @@ namespace Monkeys_Timetable
 
             ci = new Conflict_Identification(dm.stationList, dm.HeadwayDic, dm.TrainDic);
             ci.Conflict_Judge();
-   
+            dt = ci.ToDataTable();
+
         }
 
         private void PaintForm_Load(object sender, EventArgs e)
@@ -137,7 +138,6 @@ namespace Monkeys_Timetable
         private void 冲突检测数据ToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
-            dt = ci.ToDataTable();
             ConflictForm cf = new ConflictForm(dt);
             cf.Show();
         }
