@@ -214,6 +214,13 @@ namespace Monkeys_Timetable
                         p1.Y = staY[StaionList.IndexOf(ct.Rows[i]["车站"].ToString())];
                         gs.DrawEllipse(pp, p1.X, p1.Y, 5, 5);
                     }
+                    if ((ct.Rows[i]["冲突类型"].ToString() == "发通") || (ct.Rows[i]["冲突类型"].ToString() == "通发") || (ct.Rows[i]["冲突类型"].ToString() == "发发"))
+                    {
+                        cPoint = TrainDic[ct.Rows[i]["前车"].ToString()].MinuteDic[ct.Rows[i]["车站"].ToString()][1];
+                        p1.X = TimeX[cPoint];
+                        p1.Y = staY[StaionList.IndexOf(ct.Rows[i]["车站"].ToString())];
+                        gs.DrawEllipse(pp, p1.X, p1.Y, 5, 5);
+                    }
                 }                
             }              
         }
@@ -230,6 +237,13 @@ namespace Monkeys_Timetable
                     if ((ct.Rows[i]["冲突类型"].ToString() == "到发") || (ct.Rows[i]["冲突类型"].ToString() == "到到") || (ct.Rows[i]["冲突类型"].ToString() == "到通") || (ct.Rows[i]["冲突类型"].ToString() == "通通"))
                     {
                         cPoint = TrainDic[ct.Rows[i]["前车"].ToString()].MinuteDic[ct.Rows[i]["车站"].ToString()][0];
+                        p1.X = TimeX[cPoint];
+                        p1.Y = staY[StaionList.IndexOf(ct.Rows[i]["车站"].ToString())];
+                        gs.DrawEllipse(pp, p1.X, p1.Y, 5, 5);
+                    }
+                    if ((ct.Rows[i]["冲突类型"].ToString() == "发通") || (ct.Rows[i]["冲突类型"].ToString() == "通发") || (ct.Rows[i]["冲突类型"].ToString() == "发发"))
+                    {
+                        cPoint = TrainDic[ct.Rows[i]["前车"].ToString()].MinuteDic[ct.Rows[i]["车站"].ToString()][1];
                         p1.X = TimeX[cPoint];
                         p1.Y = staY[StaionList.IndexOf(ct.Rows[i]["车站"].ToString())];
                         gs.DrawEllipse(pp, p1.X, p1.Y, 5, 5);
