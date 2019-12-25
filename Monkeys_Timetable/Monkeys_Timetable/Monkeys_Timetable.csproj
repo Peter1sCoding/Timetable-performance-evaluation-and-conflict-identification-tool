@@ -60,6 +60,7 @@
     <Compile Include="Conflicts.cs" />
     <Compile Include="Conflict_Identification.cs" />
     <Compile Include="DataManager.cs" />
+    <Compile Include="DrawStation.cs" />
     <Compile Include="LinePlan.cs">
       <SubType>Form</SubType>
     </Compile>
