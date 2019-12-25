@@ -25,6 +25,8 @@ namespace Monkeys_Timetable
         Bitmap bmp = new Bitmap(TD_Width, TD_Height);
         public bool upConflictClicked = false;
         public bool downConflictClicked = false;
+        
+        
 
         public PaintForm()
         {      
@@ -154,7 +156,13 @@ namespace Monkeys_Timetable
             {
                 staMile.Add(dm.stationList[i].totalMile);
             }
-            pt.TimetableFrame(this.pictureBox2.Width, this.pictureBox2.Height, total, staMile, gs, dm.stationStringList);
+            pt.Branch(dm.staDrawStr, dm.staDrawMile, this.pictureBox2.Width, this.pictureBox2.Height);
+            int k = pt.border2.Count;
+            for (int i = 0; i < k; k++)
+            {
+                pt.TimetableFrame(this.pictureBox2.Width, pt.border2[i].up,pt.border2[i].down, total, staMile, gs, dm.stationStringList);
+            }
+
             this.pictureBox2.BackgroundImage = bmp;
         }
         public void DrawPicture()

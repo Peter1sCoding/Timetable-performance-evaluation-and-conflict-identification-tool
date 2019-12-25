@@ -33,11 +33,12 @@ namespace Monkeys_Timetable
             public double down;
         }
         Border border1 = new Border();
-        List<Border> border2 = new List<Border>();
+        public List<Border> border2 = new List<Border>();
          
 
-        public void TimetableFrame(double WinWidth, double WinHeight, double TotalMile, List<double> StationMile, Graphics gs,List<string> StationName)
+        public void TimetableFrame(double WinWidth, double WinUp,double WinDown, double TotalMile, List<double> StationMile, Graphics gs,List<string> StationName)
         {
+            double WinHeight = WinDown - WinUp;
             SF.Alignment = StringAlignment.Far;
             SF1.Alignment = StringAlignment.Center;
             float Left = 55;//运行图左边留白
@@ -54,10 +55,10 @@ namespace Monkeys_Timetable
             double Width = WinWidth - (Left + Right);
             double Height = WinHeight - (Up + Down);
             p1.X = Left;
-            p1.Y = Up;
+            p1.Y = (float)(Up+WinUp);
             p2.X = Left;
             int a = StationMile.Count;
-            p2.Y = (float)(Up + Height * StationMile[a - 1] / TotalMile);
+            p2.Y = (float)(WinUp + Up + Height * StationMile[a - 1] / TotalMile);
             double add1 = Width / (24 * 60);
             float add = (float)add1;
             float xx = 0;
@@ -105,8 +106,8 @@ namespace Monkeys_Timetable
             int n = StationMile.Count();
             for (int k = 0; k < n; k++)
             {
-                p1.Y = (float)(Up + Height * StationMile[k] / TotalMile);
-                p2.Y = (float)(Up + Height * StationMile[k] / TotalMile);
+                p1.Y = (float)(WinUp + Up + Height * StationMile[k] / TotalMile);
+                p2.Y = (float)(WinUp + Up + Height * StationMile[k] / TotalMile);
                 gs.DrawLine(pp1, p1, p2);
                 gs.DrawString(StationName[k], font, brush, p1.X-5, p1.Y-5,SF);//在这插入车站标签语句
                 staY.Add(p1.Y);
@@ -356,7 +357,7 @@ namespace Monkeys_Timetable
             List<double> h = new List<double>();
             for (int hh = 0; hh < k; hh++)
             {
-                h.Add(Width * Mile1[hh + 1].Max() / all);
+                h.Add(Height * Mile1[hh + 1].Max() / all);
             }
             for (int e = 0; e < k - 1; e++)
             {
