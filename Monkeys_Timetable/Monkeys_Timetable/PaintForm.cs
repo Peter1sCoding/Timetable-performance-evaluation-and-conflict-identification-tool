@@ -324,6 +324,7 @@ namespace Monkeys_Timetable
                             c = PaintTool.PointInCircle(e.Location, ci.ConflictList[i].ConflictLocation, 5f);
                             if (c == 0)
                             {
+                                dataGridView1.Visible = false;
                                 this.pictureBox2.Refresh();
                                 DrawPicture();
                                 if (upConflictClicked)
@@ -389,6 +390,7 @@ namespace Monkeys_Timetable
                             c = PaintTool.PointInCircle(e.Location, ci.ConflictList[i].ConflictLocation, 5f);
                             if (c == 0)
                             {
+                                dataGridView1.Visible = false;
                                 this.pictureBox2.Refresh();
                                 DrawPicture();
                                 if (upConflictClicked)
