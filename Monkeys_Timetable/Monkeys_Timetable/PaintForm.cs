@@ -25,6 +25,8 @@ namespace Monkeys_Timetable
         Bitmap bmp = new Bitmap(TD_Width, TD_Height);
         public bool upConflictClicked = false;
         public bool downConflictClicked = false;
+        
+        
 
         public PaintForm()
         {      
@@ -147,48 +149,79 @@ namespace Monkeys_Timetable
             checkBox1.Checked = false;
             checkBox2.Checked = false;
             pictureBox2.BackgroundImage = null;
-            int ix = dm.stationList.Count;
-            double total = dm.stationList[ix - 1].totalMile;
+            int ix = dm.stationDrawList.Count;
             List<double> staMile = new List<double>();
             for (int i = 0; i < ix; i++)
             {
-                staMile.Add(dm.stationList[i].totalMile);
+                staMile.Add(dm.stationDrawList[i].totalMile);
             }
-            pt.TimetableFrame(this.pictureBox2.Width, this.pictureBox2.Height, total, staMile, gs, dm.stationStringList);
+            pt.Branch(dm.stationDrawStringList, staMile, this.pictureBox2.Width, this.pictureBox2.Height);
+            int k = pt.border2.Count;
+            for (int i = 0; i < k; k++)
+            {
+                int ii = i + 1;
+                double total1 = pt.Mile1[ii].Last();
+                pt.TimetableFrame(this.pictureBox2.Width, pt.border2[i].up,pt.border2[i].down, total1,staMile, gs, dm.stationStringList,ii);
+            }
+
             this.pictureBox2.BackgroundImage = bmp;
         }
         public void DrawPicture()
         {
             Graphics gs;
             gs = Graphics.FromImage(bmp);
-            int ix = dm.stationList.Count;
-            double total = dm.stationList[ix - 1].totalMile;
+            int ix = dm.stationDrawList.Count();
             List<double> staMile = new List<double>();
             for (int i = 0; i < ix; i++)
             {
-                staMile.Add(dm.stationList[i].totalMile);
+                staMile.Add(dm.stationDrawList[i].totalMile);
             }
+            pt.Branch(dm.stationDrawStringList, staMile, this.pictureBox2.Width, this.pictureBox2.Height);
+            int k = pt.border2.Count;
             pictureBox2.BackgroundImage = null;
             gs.Clear(this.pictureBox2.BackColor);
             if (checkBox1.Checked == true && checkBox2.Checked == true)
             {
-                pt.TimetableFrame(this.pictureBox2.Width, this.pictureBox2.Height, total, staMile, gs, dm.stationStringList);
-                pt.TrainLine(gs, dm.upTrainList, dm.stationStringList);
-                pt.TrainLine(gs, dm.downTrainList, dm.stationStringList);
+                for (int i = 0; i < k; k++)
+                {
+                    int ii = i + 1;
+                    double total1 = pt.Mile1[ii].Last();
+                    pt.TimetableFrame(this.pictureBox2.Width, pt.border2[i].up, pt.border2[i].down, total1, staMile, gs, dm.stationStringList, ii);
+                    pt.TrainLine(gs, dm.upTrainList, pt.str1[ii],ii);
+                    pt.TrainLine(gs, dm.downTrainList, pt.str1[ii],ii);
+                }
+                
             }
             else if (checkBox1.Checked == true && checkBox2.Checked == false)
             {
-                pt.TimetableFrame(this.pictureBox2.Width, this.pictureBox2.Height, total, staMile, gs, dm.stationStringList);
-                pt.TrainLine(gs, dm.upTrainList, dm.stationStringList);
+                for (int i = 0; i < k; k++)
+                {
+                    int ii = i + 1;
+                    double total1 = pt.Mile1[ii].Last();
+                    pt.TimetableFrame(this.pictureBox2.Width, pt.border2[i].up, pt.border2[i].down, total1, staMile, gs, dm.stationStringList, ii);
+                    pt.TrainLine(gs, dm.upTrainList, pt.str1[ii], ii);
+                }
+                
             }
             else if (checkBox1.Checked == false && checkBox2.Checked == true)
             {
-                pt.TimetableFrame(this.pictureBox2.Width, this.pictureBox2.Height, total, staMile, gs, dm.stationStringList);
-                pt.TrainLine(gs, dm.downTrainList, dm.stationStringList);
+                for (int i = 0; i < k; k++)
+                {
+                    int ii = i + 1;
+                    double total1 = pt.Mile1[ii].Last();
+                    pt.TimetableFrame(this.pictureBox2.Width, pt.border2[i].up, pt.border2[i].down, total1, staMile, gs, dm.stationStringList, ii);
+                    pt.TrainLine(gs, dm.downTrainList, pt.str1[ii], ii);
+                }
+                
             }
             else
             {
-                pt.TimetableFrame(this.pictureBox2.Width, this.pictureBox2.Height, total, staMile, gs, dm.stationStringList);
+                for (int i = 0; i < k; k++)
+                {
+                    int ii = i + 1;
+                    double total1 = pt.Mile1[ii].Last();
+                    pt.TimetableFrame(this.pictureBox2.Width, pt.border2[i].up, pt.border2[i].down, total1, staMile, gs, dm.stationStringList, ii);
+                }
             }
             pt.GetTrainPoint(dm.TrainList, dm.stationStringList);
             pt.GetConflictPoint(ci.ConflictList,dm.TrainList, dm.stationStringList);
@@ -486,6 +519,19 @@ namespace Monkeys_Timetable
             dataGridView2.DataSource = dt;
             dataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView2.Visible = true;
+        }
+
+        private void 读取车站画图信息ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Multiselect = true;
+            dialog.Title = "请选择文件夹";
+            dialog.Filter = "所有文件(*.*)|*.*";
+            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                staFileName = dialog.FileName;
+            }
+            dm.ReadDrawStation(staFileName);
         }
     }
 }

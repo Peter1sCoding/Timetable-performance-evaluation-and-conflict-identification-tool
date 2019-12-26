@@ -106,6 +106,34 @@ namespace Monkeys_Timetable
                 x_stationStringList = value;
             }
         }
+        /// <summary>
+        /// /////////////////
+        /// </summary>
+        private List<DrawStation> x_stationDrawList;//车站列表
+        public List<DrawStation> stationDrawList
+        {
+            get
+            {
+                return x_stationDrawList;
+            }
+            set
+            {
+                x_stationDrawList = value;
+            }
+        }
+
+        private List<String> x_stationDrawStringList;//车站列表
+        public List<String> stationDrawStringList
+        {
+            get
+            {
+                return x_stationDrawStringList;
+            }
+            set
+            {
+                x_stationDrawStringList = value;
+            }
+        }
 
         private Dictionary<string, Dictionary<string,int>> x_HeadwayDic; //通过"站名+上下行+间隔类型"索引间隔时间标准
         public Dictionary<string, Dictionary<string, int>> HeadwayDic
@@ -253,6 +281,27 @@ namespace Monkeys_Timetable
                 sta.totalMile = int.Parse(strr[2]);
                 stationList.Add(sta);
                 stationStringList.Add(sta.stationName);
+                str = sr.ReadLine();
+            }
+            sr.Close();
+        }
+
+        public void ReadDrawStation(string Filename)
+        {
+            StreamReader sr = new StreamReader(Filename, Encoding.UTF8);
+            string str = sr.ReadLine();
+            stationDrawList = new List<DrawStation>();
+            stationDrawStringList = new List<String>();
+            while (str != null)
+            {
+                DrawStation sta = new DrawStation();
+                str = str.Replace("\r", string.Empty).Replace("\"", string.Empty).Replace("\t", string.Empty).Replace("'", string.Empty).Replace("\\", string.Empty).Replace("\0", string.Empty).Replace("?", string.Empty).Replace("*", string.Empty);
+                String[] strr = str.Split(',');
+                sta.stationNo = strr[0];
+                sta.stationName = strr[1];
+                sta.totalMile = int.Parse(strr[2]);
+                stationDrawList.Add(sta);
+                stationDrawStringList.Add(sta.stationName);
                 str = sr.ReadLine();
             }
             sr.Close();
