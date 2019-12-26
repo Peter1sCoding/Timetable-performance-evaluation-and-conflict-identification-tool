@@ -157,11 +157,11 @@ namespace Monkeys_Timetable
             }
             pt.Branch(dm.stationDrawStringList, staMile, this.pictureBox2.Width, this.pictureBox2.Height);
             int k = pt.border2.Count;
-            for (int i = 0; i < k; k++)
+            for (int i = 0; i < k; i++)
             {
                 int ii = i + 1;
                 double total1 = pt.Mile1[ii].Last();
-                pt.TimetableFrame(this.pictureBox2.Width, pt.border2[i].up,pt.border2[i].down, total1,staMile, gs, dm.stationStringList,ii);
+                pt.TimetableFrame(this.pictureBox2.Width, pt.border2[i].up,pt.border2[i].down, total1,pt.Mile1[ii], gs, dm.stationStringList,ii);
             }
 
             this.pictureBox2.BackgroundImage = bmp;
@@ -183,11 +183,11 @@ namespace Monkeys_Timetable
             gs.Clear(this.pictureBox2.BackColor);
             if (checkBox1.Checked == true && checkBox2.Checked == true)
             {
-                for (int i = 0; i < k; k++)
+                for (int i = 0; i < k; i++)
                 {
                     int ii = i + 1;
                     double total1 = pt.Mile1[ii].Last();
-                    pt.TimetableFrame(this.pictureBox2.Width, pt.border2[i].up, pt.border2[i].down, total1, staMile, gs, dm.stationStringList, ii);
+                    pt.TimetableFrame(this.pictureBox2.Width, pt.border2[i].up, pt.border2[i].down, total1, pt.Mile1[ii], gs, dm.stationStringList, ii);
                     pt.TrainLine(gs, dm.upTrainList, pt.str1[ii],ii);
                     pt.TrainLine(gs, dm.downTrainList, pt.str1[ii],ii);
                 }
@@ -195,33 +195,31 @@ namespace Monkeys_Timetable
             }
             else if (checkBox1.Checked == true && checkBox2.Checked == false)
             {
-                for (int i = 0; i < k; k++)
+                for (int i = 0; i < k; i++)
                 {
                     int ii = i + 1;
                     double total1 = pt.Mile1[ii].Last();
-                    pt.TimetableFrame(this.pictureBox2.Width, pt.border2[i].up, pt.border2[i].down, total1, staMile, gs, dm.stationStringList, ii);
-                    pt.TrainLine(gs, dm.upTrainList, pt.str1[ii], ii);
+                    pt.TimetableFrame(this.pictureBox2.Width, pt.border2[i].up, pt.border2[i].down, total1, pt.Mile1[ii], gs, dm.stationStringList, ii);
                 }
                 
             }
             else if (checkBox1.Checked == false && checkBox2.Checked == true)
             {
-                for (int i = 0; i < k; k++)
+                for (int i = 0; i < k; i++)
                 {
                     int ii = i + 1;
                     double total1 = pt.Mile1[ii].Last();
-                    pt.TimetableFrame(this.pictureBox2.Width, pt.border2[i].up, pt.border2[i].down, total1, staMile, gs, dm.stationStringList, ii);
-                    pt.TrainLine(gs, dm.downTrainList, pt.str1[ii], ii);
+                    pt.TimetableFrame(this.pictureBox2.Width, pt.border2[i].up, pt.border2[i].down, total1, pt.Mile1[ii], gs, dm.stationStringList, ii);
                 }
                 
             }
             else
             {
-                for (int i = 0; i < k; k++)
+                for (int i = 0; i < k; i++)
                 {
                     int ii = i + 1;
                     double total1 = pt.Mile1[ii].Last();
-                    pt.TimetableFrame(this.pictureBox2.Width, pt.border2[i].up, pt.border2[i].down, total1, staMile, gs, dm.stationStringList, ii);
+                    pt.TimetableFrame(this.pictureBox2.Width, pt.border2[i].up, pt.border2[i].down, total1, pt.Mile1[ii], gs, dm.stationStringList, ii);
                 }
             }
             for (int i = 0; i < k; k++)
@@ -303,7 +301,7 @@ namespace Monkeys_Timetable
             if (checkBox1.Checked)
             {
                 int k = pt.border2.Count;
-                for (int i = 0; i < k; k++)
+                for (int i = 0; i < k; i++)
                 {
                     int ii = i + 1;
                     double total1 = pt.Mile1[ii].Last();
@@ -314,7 +312,7 @@ namespace Monkeys_Timetable
             else if (checkBox2.Checked)
             {
                 int k = pt.border2.Count;
-                for (int i = 0; i < k; k++)
+                for (int i = 0; i < k; i++)
                 {
                     int ii = i + 1;
                     double total1 = pt.Mile1[ii].Last();
@@ -381,7 +379,7 @@ namespace Monkeys_Timetable
                                 if (upConflictClicked)
                                 {
                                     int k = pt.border2.Count;
-                                    for (int i1 = 0; i1 < k; k++)
+                                    for (int i1 = 0; i1 < k; i1++)
                                     {
                                         int ii = i1 + 1;
                                         double total1 = pt.Mile1[ii].Last();
@@ -391,7 +389,7 @@ namespace Monkeys_Timetable
                                 if (downConflictClicked)
                                 {
                                     int k = pt.border2.Count;
-                                    for (int i1 = 0; i1 < k; k++)
+                                    for (int i1 = 0; i1 < k; i1++)
                                     {
                                         int ii = i1 + 1;
                                         double total1 = pt.Mile1[ii].Last();
@@ -418,7 +416,7 @@ namespace Monkeys_Timetable
                                 if (upConflictClicked)
                                 {
                                     int k = pt.border2.Count;
-                                    for (int i1 = 0; i1 < k; k++)
+                                    for (int i1 = 0; i1 < k; i1++)
                                     {
                                         int ii = i1 + 1;
                                         double total1 = pt.Mile1[ii].Last();
@@ -428,7 +426,7 @@ namespace Monkeys_Timetable
                                 if (downConflictClicked)
                                 {
                                     int k = pt.border2.Count;
-                                    for (int i1 = 0; i1 < k; k++)
+                                    for (int i1 = 0; i1 < k; i1++)
                                     {
                                         int ii = i1 + 1;
                                         double total1 = pt.Mile1[ii].Last();
@@ -471,7 +469,7 @@ namespace Monkeys_Timetable
                                 if (upConflictClicked)
                                 {
                                     int k = pt.border2.Count;
-                                    for (int i1 = 0; i1 < k; k++)
+                                    for (int i1 = 0; i1 < k; i1++)
                                     {
                                         int ii = i1 + 1;
                                         double total1 = pt.Mile1[ii].Last();
@@ -481,7 +479,7 @@ namespace Monkeys_Timetable
                                 if (downConflictClicked)
                                 {
                                     int k = pt.border2.Count;
-                                    for (int i1 = 0; i1 < k; k++)
+                                    for (int i1 = 0; i1 < k; i1++)
                                     {
                                         int ii = i1 + 1;
                                         double total1 = pt.Mile1[ii].Last();
@@ -508,7 +506,7 @@ namespace Monkeys_Timetable
                                 if (upConflictClicked)
                                 {
                                     int k = pt.border2.Count;
-                                    for (int i1 = 0; i1 < k; k++)
+                                    for (int i1 = 0; i1 < k; i1++)
                                     {
                                         int ii = i1 + 1;
                                         double total1 = pt.Mile1[ii].Last();
@@ -518,7 +516,7 @@ namespace Monkeys_Timetable
                                 if (downConflictClicked)
                                 {
                                     int k = pt.border2.Count;
-                                    for (int i1 = 0; i1 < k; k++)
+                                    for (int i1 = 0; i1 < k; i1++)
                                     {
                                         int ii = i1 + 1;
                                         double total1 = pt.Mile1[ii].Last();

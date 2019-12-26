@@ -71,7 +71,10 @@ namespace Monkeys_Timetable
                     if (j % 60 == 0)
                     {
                         gs.DrawLine(pp2, p1, p2);
-                        TimeX.Add(p1.X);
+                        if (indd == 1)
+                        {
+                            TimeX.Add(p1.X);
+                        }
                         p1.X = (float)(p1.X + add);
                         p2.X = (float)(p2.X + add);
                         gs.DrawString(Convert.ToString(Hour),font,brush,p2.X,p2.Y+5,SF1);//在这添加插入时间语句
@@ -80,14 +83,20 @@ namespace Monkeys_Timetable
                     else if (j % 60 != 0 && j % 30 == 0)
                     {
                         gs.DrawLine(pp3, p1, p2);
-                        TimeX.Add(p1.X);
+                        if (indd == 1)
+                        {
+                            TimeX.Add(p1.X);
+                        }
                         p1.X = (float)(p1.X + add);
                         p2.X = (float)(p2.X + add);
                     }
                     else
                     {
                         gs.DrawLine(pp1, p1, p2);
-                        TimeX.Add(p1.X);
+                        if (indd == 1)
+                        {
+                            TimeX.Add(p1.X);
+                        }
                         p1.X = (float)(p1.X + add);
                         p2.X = (float)(p2.X + add);
                     }
@@ -114,6 +123,7 @@ namespace Monkeys_Timetable
                 staY.Add(p1.Y);
             }
             staY2.Add(indd, staY);
+            staY = new List<float>();
         }//运行图框架图
         public void TrainLine(Graphics gs,List<Train> TrainList,List<string> StaionList,int k)
         {
@@ -324,7 +334,7 @@ namespace Monkeys_Timetable
 
         public void Branch(List<string> StationStr, List<double> StationMile, double Width, double Height)
         {
-            float divi = 5;
+            //float divi = 5;
             int a = StationStr.Count;
             List<int> ind1 = new List<int>();
             int k = 0;
@@ -348,6 +358,8 @@ namespace Monkeys_Timetable
                 }
                 str1.Add(j, Str);
                 Mile1.Add(j, Mile);
+                Str = new List<string>();
+                Mile = new List<double>();
             }//将主线与支线分开
             double all = 0;
             for (int l = 1; l <= k; l++)
@@ -359,15 +371,15 @@ namespace Monkeys_Timetable
             {
                 h.Add(Height * Mile1[hh + 1].Max() / all);
             }
-            for (int e = 0; e < k - 1; e++)
+            border1.up = 0;
+            border1.down = h[0];
+            for (int e = 1; e < k; e++)
             {
-                border1.up = 0;
-                border1.down = h[e];
                 border2.Add(border1);
                 border1.up = border1.down;
-                border1.down = border1.down + h[e + 1];
+                border1.down = border1.down + h[e];
             }//把picturebox分为k份，分别绘画支线
-
+            border2.Add(border1);
         }//关于支线实现
 
     }
