@@ -171,5 +171,10 @@ namespace Monkeys_Timetable
         {
 
         }
+
+        private void LinePlan_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -132,7 +132,7 @@ namespace Monkeys_Timetable
         }//运行图框架图
         public void TrainLine(Graphics gs,List<Train> TrainList,List<string> StaionList,int k)
         {
-            Pen pp = new Pen(Color.Red, (float)1.5);
+            Pen pp = new Pen(Color.Red, (float)1.2);
             PointF p1 = new PointF();
             PointF p2 = new PointF();
             foreach (Train train in TrainList)

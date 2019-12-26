@@ -599,13 +599,7 @@ namespace Monkeys_Timetable
                 staFileName = dialog.FileName;
             }
             dm.ReadDrawStation(staFileName);
-            //int ix = dm.stationDrawList.Count;
-            //List<double> staMile = new List<double>();
-            //for (int i = 0; i < ix; i++)
-            //{
-            //    staMile.Add(dm.stationDrawList[i].totalMile);
-            //}
-            //pt.Branch(dm.stationDrawStringList, staMile, this.pictureBox2.Width, this.pictureBox2.Height);
+            
         }
     }
 }
