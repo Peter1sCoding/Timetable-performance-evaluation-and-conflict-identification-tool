@@ -14,52 +14,58 @@ namespace Monkeys_Timetable
     public partial class LoginForm : Form
     {
         Button login;
-        TextBox ID;
-        TextBox password;
-        Label IDLabel;
-        Label pasLabel;
         //string file;
+
         public LoginForm()
         {
             InitializeComponent();
 
-            this.Size = new Size(1300, 700);
+
+            Rectangle rect = System.Windows.Forms.SystemInformation.VirtualScreen;
+            //Rectangle rect = SystemInformation.WorkingArea;
+            this.Height = rect.Height;
+            this.Width = rect.Width;
             this.Text = "高速铁路运行图冲突检测与评估系统 V1.0";
 
             login = new Button();
             login.Size = new Size(70, 35);
             login.Text = "确认";
-            login.Location = new Point(680, 600);
+            login.Font= new Font("楷体", 18, FontStyle.Bold);
+            login.Location = new Point(615, 600);
+            login.Location = new Point(this.Width / 2, this.Height*4/ 5);
 
-            ID = new TextBox();
-            ID.Size = new Size(160, 60);
-            ID.Location = new Point(640, 530);
+            label1.ForeColor = Color.White;
+            label1.BackColor = Color.Transparent;
+            label1.Font = new Font("楷体",18,FontStyle.Bold);
+            label1.Location = new Point(480,520);
+            label1.Location = new Point(this.Width* 7/16, this.Height *5/ 7);
 
-            password = new TextBox();
-            password.Size = new Size(160, 60);
-            password.Location = new Point(640, 560);
+            label2.ForeColor = Color.White;
+            label2.BackColor = Color.Transparent;
+            label2.Location = new Point(500,550);
+            label2.Font = new Font("楷体", 18, FontStyle.Bold);
+            label2.Location = new Point(this.Width * 7/16, this.Height * 6 / 8);
 
-            IDLabel = new Label();
-            IDLabel.Size = new Size(80, 40);
-            IDLabel.Location = new Point(560, 535);
-            IDLabel.Text = "用户名:";
 
-            pasLabel = new Label();
-            pasLabel.Size = new Size(80, 40);
-            pasLabel.Location = new Point(560, 565);
-            pasLabel.Text = "密码:";
+            label3.Text = "高速铁路运行图冲突检测与评估系统";
+            label3.ForeColor = Color.White;
+            label3.BackColor = Color.Transparent;
+            label3.Font = new Font("华文行楷",60, FontStyle.Bold);
+            label3.Location = new Point(this.Width/11,this.Height/9);
+
+            textBox1.Location= new Point(label1.Location.X+90, label1.Location.Y + 5);
+            textBox1.Size = new Size(160, 60);
+
+            textBox2.Location = new Point(label2.Location.X+90, label2.Location.Y+5);
+            textBox2.Size = new Size(160, 60);
 
             this.Controls.Add(login);
-            this.Controls.Add(ID);
-            this.Controls.Add(pasLabel);
-            this.Controls.Add(IDLabel);
-            this.Controls.Add(password);
 
             login.Click += login_Click;
         }
         public void login_Click(object sender,EventArgs e)
         {
-            if ((ID.Text == "Admin") && (password.Text == "123456"))
+            if ((textBox1.Text == "Admin") && (textBox2.Text == "123456"))
             {
                 PaintForm pf = new PaintForm();
                 pf.Show();
@@ -73,6 +79,11 @@ namespace Monkeys_Timetable
         private void LoginForm_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+    
         }
     }
 }
