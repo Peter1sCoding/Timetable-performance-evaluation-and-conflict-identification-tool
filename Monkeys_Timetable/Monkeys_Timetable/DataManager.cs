@@ -159,10 +159,10 @@ namespace Monkeys_Timetable
                 Train tra = new Train();
                 str = str.Replace("\r", string.Empty).Replace("\"", string.Empty).Replace("\t", string.Empty).Replace("'", string.Empty).Replace("\\", string.Empty).Replace("\0", string.Empty).Replace("?", string.Empty).Replace("*", string.Empty);
                 String[] strr = str.Split(',');
-                tra.trainNo = strr[0];
+                tra.TrainNo = strr[0];
                 tra.speed = "350";
                 string staname = strr[2];
-                string LastNumber = tra.trainNo.Substring(tra.trainNo.Length - 1, 1);
+                string LastNumber = tra.TrainNo.Substring(tra.TrainNo.Length - 1, 1);
                 if (( LastNumber == "0")||(LastNumber == "2") || (LastNumber == "4") || (LastNumber == "6") || (LastNumber == "8"))
                 {
                     tra.Dir = "up";
@@ -172,7 +172,7 @@ namespace Monkeys_Timetable
                     tra.Dir = "down";
                 }
 
-                if (!TrainDic.ContainsKey(tra.trainNo))
+                if (!TrainDic.ContainsKey(tra.TrainNo))
                 {
                     tra.staTimeDic = new Dictionary<string, List<string>>();
                     if (!tra.staTimeDic.ContainsKey(staname))
@@ -183,17 +183,17 @@ namespace Monkeys_Timetable
                         timelist.Add(strr[5]);
                         tra.staTimeDic.Add(staname, timelist);
                     }                  
-                    TrainDic.Add(tra.trainNo, tra);
+                    TrainDic.Add(tra.TrainNo, tra);
                 }
                 else
                 {
-                    if (!TrainDic[tra.trainNo].staTimeDic.ContainsKey(staname))
+                    if (!TrainDic[tra.TrainNo].staTimeDic.ContainsKey(staname))
                     {
                         List<string> timelist = new List<string>();
                         timelist.Add(strr[3]);
                         timelist.Add(strr[4]);
                         timelist.Add(strr[5]);
-                        TrainDic[tra.trainNo].staTimeDic.Add(staname, timelist);
+                        TrainDic[tra.TrainNo].staTimeDic.Add(staname, timelist);
                     }
                 }
                 str = sr.ReadLine();
@@ -215,20 +215,23 @@ namespace Monkeys_Timetable
             }
             ToMinute(TrainList);
         }
+        /// <summary>
+        /// 根据车次尾号将列车存入上行或下行列车字典
+        /// </summary>
         public void DivideUpDown()
         {
             UpTrainDic = new Dictionary<string, Train>();
             DownTrainDic = new Dictionary<string, Train>();
             for (int i = 0; i < TrainList.Count; i++)
             {
-                string LastNumber = TrainList[i].trainNo.Substring(TrainList[i].trainNo.Length - 1, 1);
+                string LastNumber = TrainList[i].TrainNo.Substring(TrainList[i].TrainNo.Length - 1, 1);
                 if (( LastNumber == "0")||(LastNumber == "2") || (LastNumber == "4") || (LastNumber == "6") || (LastNumber == "8"))
                 {
-                    UpTrainDic.Add(TrainList[i].trainNo, TrainList[i]);
+                    UpTrainDic.Add(TrainList[i].TrainNo, TrainList[i]);
                 }
                 else if ((LastNumber == "1") || (LastNumber == "3") || (LastNumber == "5") || (LastNumber == "7") || (LastNumber == "9"))
                 {
-                    DownTrainDic.Add(TrainList[i].trainNo, TrainList[i]);
+                    DownTrainDic.Add(TrainList[i].TrainNo, TrainList[i]);
                 }
             }
 
@@ -330,7 +333,7 @@ namespace Monkeys_Timetable
             sw.Write("\r\n");
             for (int i = 0; i < trainList.Count(); i++)
             {               
-                sw.Write(trainList[i].trainNo + ",");
+                sw.Write(trainList[i].TrainNo + ",");
                 int begin = stationStringList.IndexOf(trainList[i].staList[0]);
                 int end = stationStringList.IndexOf(trainList[i].staList[trainList[i].staList.Count() - 1]);
                 string front = "";

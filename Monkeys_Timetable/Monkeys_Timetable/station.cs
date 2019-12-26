@@ -7,7 +7,10 @@ namespace Monkeys_Timetable
 {
     class Station
     {
-        private string x_stationNo;//车站序号
+        private string x_stationNo;
+        /// <summary>
+        ///车站序号
+        /// </summary>
         public string stationNo
         {
             get
@@ -20,7 +23,10 @@ namespace Monkeys_Timetable
             }
         }
 
-        private string x_stationName;//车站名称
+        private string x_stationName;
+        /// <summary>
+        ///车站名称
+        /// </summary>
         public string stationName
         {
             get
@@ -33,7 +39,10 @@ namespace Monkeys_Timetable
             }
         }
 
-        private int x_totalMile; //车站累计里程
+        private int x_totalMile;
+        /// <summary>
+        ///车站累计里程
+        /// </summary>
         public int totalMile
         {
             get
@@ -46,6 +55,9 @@ namespace Monkeys_Timetable
             }
         }
         private List<Train> x_upStaTraArrList;
+        /// <summary>
+        /// 车站上行到达列车列表
+        /// </summary>
         public List<Train> upStaTraArrList
         {
             get
@@ -58,6 +70,9 @@ namespace Monkeys_Timetable
             }
         }
         private List<Train> x_upStaTraDepList;
+        /// <summary>
+        /// 车站上行出发列车列表
+        /// </summary>
         public List<Train> upStaTraDepList
         {
             get
@@ -70,6 +85,9 @@ namespace Monkeys_Timetable
             }
         }
         private List<Train> x_downStaTraArrList;
+        /// <summary>
+        /// 车站下行到达列车列表
+        /// </summary>
         public List<Train> downStaTraArrList
         {
             get
@@ -82,6 +100,9 @@ namespace Monkeys_Timetable
             }
         }
         private List<Train> x_downStaTraDepList;
+        /// <summary>
+        /// 车站下行出发列车列表
+        /// </summary>
         public List<Train> downStaTraDepList
         {
             get
@@ -93,7 +114,10 @@ namespace Monkeys_Timetable
                 x_downStaTraDepList = value;
             }
         }
-        private float x_x; //LinePlan中的坐标
+        private float x_x;
+        /// <summary>
+        ///LinePlan中的坐标
+        /// </summary>
         public float x
         {
             get

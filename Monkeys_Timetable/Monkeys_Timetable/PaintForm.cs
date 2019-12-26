@@ -38,6 +38,7 @@ namespace Monkeys_Timetable
             dm.ReadHeadway(Application.StartupPath + @"\\车站列车安全间隔.csv");
             dm.ReadStation(Application.StartupPath + @"\\沪宁车站信息.csv");
             dm.ReadTrain(Application.StartupPath + @"\\沪宁时刻图.csv");
+            dm.ReadDrawStation(Application.StartupPath + @"\\沪宁车站画图信息.csv");
             dm.DivideUpDown();
             dm.AddTra2sta();
             dm.GetStop();
@@ -546,8 +547,8 @@ namespace Monkeys_Timetable
             location.X += 15;
             location.Y += 15;
             DataTable dt = new DataTable();
-            dt.TableName = train.trainNo;
-            dt.Columns.Add(train.trainNo);
+            dt.TableName = train.TrainNo;
+            dt.Columns.Add(train.TrainNo);
             dt.Columns.Add("车站");
             dt.Columns.Add("到达时刻");
             dt.Columns.Add("出发时刻");
@@ -578,7 +579,7 @@ namespace Monkeys_Timetable
             dt.Columns.Add("前车");
             dt.Columns.Add("后车");
             dt.Columns.Add("车站");
-            dt.Rows.Add(con.ConflictType, con.FrontTrain.trainNo, con.LatterTrain.trainNo, con.ConflictSta);
+            dt.Rows.Add(con.ConflictType, con.FrontTrain.TrainNo, con.LatterTrain.TrainNo, con.ConflictSta);
 
             dataGridView2.DataSource = dt;
             dataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;

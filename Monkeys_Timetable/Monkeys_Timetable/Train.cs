@@ -6,13 +6,24 @@ using System.Drawing;
 
 namespace Monkeys_Timetable
 {
-    public class Train //存入各列车的到发时刻及停站信息
+    /// <summary>
+    ///存入各列车的到发时刻及停站信息
+    /// </summary>
+    public class Train 
     {
-        private string x_trainNo; //车次信息
-
-        public bool newbool = true; //判断是否初次生成trainDic
-
-        public string trainNo
+        /// <summary>
+        ///判断是否初次生成trainDic
+        /// </summary>
+        public bool newbool = true;
+        /// <summary>
+        /// 冲突所在bmp中点位
+        /// </summary>
+        ///         
+        private string x_trainNo;
+        /// <summary>
+        ///车次信息
+        /// </summary>
+        public string TrainNo
         {
             get
             {
@@ -23,8 +34,10 @@ namespace Monkeys_Timetable
                 x_trainNo = value;
             }
         }
-
-        private string x_OriSta; //始发站
+        /// <summary>
+        ///始发站
+        /// </summary>
+        private string x_OriSta; 
         public string OriSta
         {
             get
@@ -36,8 +49,10 @@ namespace Monkeys_Timetable
                 x_OriSta = value;
             }
         }
-
-        private string x_DesSta; //终到站
+        /// <summary>
+        ///终到站
+        /// </summary>
+        private string x_DesSta; 
         public string DesSta
         {
             get
@@ -49,7 +64,10 @@ namespace Monkeys_Timetable
                 x_DesSta = value;
             }
         }
-        private Dictionary<string, List<string>> x_staTimeDic; //存放列车在各站时刻信息
+        private Dictionary<string, List<string>> x_staTimeDic;
+        /// <summary>
+        ///存放列车在各站时刻信息
+        /// </summary>
         public Dictionary<string, List<string>> staTimeDic
         {
             get
@@ -62,7 +80,10 @@ namespace Monkeys_Timetable
             }
         }
 
-        private List<string> x_staList; //存放列车在各站时刻信息
+        private List<string> x_staList;
+        /// <summary>
+        ///存放列车在各站时刻信息
+        /// </summary>
         public List<string> staList
         {
             get
@@ -74,7 +95,10 @@ namespace Monkeys_Timetable
                 x_staList = value;
             }
         }
-        private Dictionary<string, List<int>> x_MinuteDic; //存放列车在各站时刻int信息
+        private Dictionary<string, List<int>> x_MinuteDic;
+        /// <summary>
+        ///存放列车在各站时刻int信息
+        /// </summary>
         public Dictionary<string, List<int>> MinuteDic
         {
             get
@@ -86,7 +110,10 @@ namespace Monkeys_Timetable
                 x_MinuteDic = value;
             }
         }
-        private Dictionary<string, bool> x_isStopDic; //存放列车是否停站信息，true为停，false为不停
+        private Dictionary<string, bool> x_isStopDic;
+        /// <summary>
+        ///存放列车是否停站信息，true为停，false为不停
+        /// </summary>
         public Dictionary<string, bool> isStopDic
         {
             get
@@ -98,7 +125,10 @@ namespace Monkeys_Timetable
                 x_isStopDic = value;
             }
         }
-        private string x_ConflictString; //终到站
+        private string x_ConflictString;
+        /// <summary>
+        ///冲突描述字符串
+        /// </summary>
         public string ConflictString
         {
             get
@@ -111,6 +141,9 @@ namespace Monkeys_Timetable
             }
         }
         private string x_speed;
+        /// <summary>
+        /// 列车速度
+        /// </summary>
         public string speed
         {
             get
@@ -123,6 +156,9 @@ namespace Monkeys_Timetable
             }
         }
         private string x_Dir;
+        /// <summary>
+        /// 列车运行方向
+        /// </summary>
         public string Dir
         {
             get
@@ -134,7 +170,24 @@ namespace Monkeys_Timetable
                 x_Dir = value;
             }
         }
-        public Dictionary<string, List<PointF>> trainPointDic = new Dictionary<string, List<PointF>>();
-
+        private Dictionary<string, List<PointF>> x_trainPointDic;
+        /// <summary>
+        /// 列车在bmp中点位信息
+        /// </summary>
+        public Dictionary<string, List<PointF>> trainPointDic
+        {
+            get
+            {
+                if(x_trainPointDic == null)
+                {
+                    x_trainPointDic = new Dictionary<string, List<PointF>>();
+                }
+                return x_trainPointDic;
+            }
+            set
+            {
+                x_trainPointDic = value;
+            }
+        }
     }
 }

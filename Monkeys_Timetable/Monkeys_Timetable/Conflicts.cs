@@ -12,6 +12,9 @@ namespace Monkeys_Timetable
     public class Conflict
     {
         private PointF x_ConflictLocation;
+        /// <summary>
+        /// 冲突所在bmp中点位
+        /// </summary>
         public PointF ConflictLocation
         {
             get
@@ -24,8 +27,10 @@ namespace Monkeys_Timetable
             }
         }
 
-        private Train m_FrontTrain;//冲突中的前车
-
+        private Train m_FrontTrain;
+        /// <summary>
+        /// 冲突中的前车
+        /// </summary>
         public Train FrontTrain
         {
             get
@@ -37,7 +42,10 @@ namespace Monkeys_Timetable
                 m_FrontTrain = value;
             }
         }
-        private Train m_LatterTrain;//冲突中的后车
+        private Train m_LatterTrain;
+        /// <summary>
+        /// 冲突中的后车
+        /// </summary>
         public Train LatterTrain
         {
             get
@@ -49,7 +57,10 @@ namespace Monkeys_Timetable
                 m_LatterTrain = value;
             }
         }
-        private String m_ConflictType;//冲突类型
+        private String m_ConflictType;
+        /// <summary>
+        /// 冲突类型
+        /// </summary>
         public String ConflictType
         {
             get
@@ -61,7 +72,10 @@ namespace Monkeys_Timetable
                 m_ConflictType = value;
             }
         }
-        private String m_ConflictSta; //车站到发间隔冲突所在车站
+        private String m_ConflictSta; 
+        /// <summary>
+        /// 车站到发间隔冲突所在车站
+        /// </summary>
         public String ConflictSta
         {
             get
