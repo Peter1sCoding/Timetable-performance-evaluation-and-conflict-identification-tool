@@ -601,5 +601,10 @@ namespace Monkeys_Timetable
             dm.ReadDrawStation(staFileName);
             
         }
+
+        private void 框架图ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

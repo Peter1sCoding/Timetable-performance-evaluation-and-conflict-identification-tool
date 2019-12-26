@@ -33,6 +33,7 @@
             this.读取时刻表信息ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.读取车站信息ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.读取列车间隔信息ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.读取车站画图信息ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.绘制ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.绘制运行图ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.绘制运行图上行ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -51,7 +52,13 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.读取车站画图信息ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.导出ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.导出运行图ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.导出开行方案ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.框架图ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.上行运行图ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.下行运行图ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.上下行运行图ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -66,7 +73,8 @@
             this.绘制ToolStripMenuItem,
             this.检测ToolStripMenuItem,
             this.计算ToolStripMenuItem1,
-            this.开行方案ToolStripMenuItem});
+            this.开行方案ToolStripMenuItem,
+            this.导出ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 1, 0, 1);
@@ -107,6 +115,13 @@
             this.读取列车间隔信息ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.读取列车间隔信息ToolStripMenuItem.Text = "读取列车间隔信息";
             this.读取列车间隔信息ToolStripMenuItem.Click += new System.EventHandler(this.读取列车间隔信息ToolStripMenuItem_Click);
+            // 
+            // 读取车站画图信息ToolStripMenuItem
+            // 
+            this.读取车站画图信息ToolStripMenuItem.Name = "读取车站画图信息ToolStripMenuItem";
+            this.读取车站画图信息ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.读取车站画图信息ToolStripMenuItem.Text = "读取车站画图信息";
+            this.读取车站画图信息ToolStripMenuItem.Click += new System.EventHandler(this.读取车站画图信息ToolStripMenuItem_Click);
             // 
             // 绘制ToolStripMenuItem
             // 
@@ -232,7 +247,7 @@
             // pictureBox2
             // 
             this.pictureBox2.Location = new System.Drawing.Point(0, 23);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(1333, 1059);
             this.pictureBox2.TabIndex = 8;
@@ -243,7 +258,7 @@
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(251, 92);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 29;
             this.dataGridView1.Size = new System.Drawing.Size(343, 298);
@@ -254,19 +269,63 @@
             // 
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView2.Location = new System.Drawing.Point(0, 23);
-            this.dataGridView2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridView2.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowTemplate.Height = 29;
             this.dataGridView2.Size = new System.Drawing.Size(351, 71);
             this.dataGridView2.TabIndex = 10;
             this.dataGridView2.Visible = false;
             // 
-            // 读取车站画图信息ToolStripMenuItem
+            // 导出ToolStripMenuItem
             // 
-            this.读取车站画图信息ToolStripMenuItem.Name = "读取车站画图信息ToolStripMenuItem";
-            this.读取车站画图信息ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
-            this.读取车站画图信息ToolStripMenuItem.Text = "读取车站画图信息";
-            this.读取车站画图信息ToolStripMenuItem.Click += new System.EventHandler(this.读取车站画图信息ToolStripMenuItem_Click);
+            this.导出ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.导出运行图ToolStripMenuItem,
+            this.导出开行方案ToolStripMenuItem});
+            this.导出ToolStripMenuItem.Name = "导出ToolStripMenuItem";
+            this.导出ToolStripMenuItem.Size = new System.Drawing.Size(44, 22);
+            this.导出ToolStripMenuItem.Text = "导出";
+            // 
+            // 导出运行图ToolStripMenuItem
+            // 
+            this.导出运行图ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.框架图ToolStripMenuItem,
+            this.上行运行图ToolStripMenuItem,
+            this.下行运行图ToolStripMenuItem,
+            this.上下行运行图ToolStripMenuItem});
+            this.导出运行图ToolStripMenuItem.Name = "导出运行图ToolStripMenuItem";
+            this.导出运行图ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.导出运行图ToolStripMenuItem.Text = "导出运行图";
+            // 
+            // 导出开行方案ToolStripMenuItem
+            // 
+            this.导出开行方案ToolStripMenuItem.Name = "导出开行方案ToolStripMenuItem";
+            this.导出开行方案ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.导出开行方案ToolStripMenuItem.Text = "导出开行方案";
+            // 
+            // 框架图ToolStripMenuItem
+            // 
+            this.框架图ToolStripMenuItem.Name = "框架图ToolStripMenuItem";
+            this.框架图ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.框架图ToolStripMenuItem.Text = "运行图底图";
+            this.框架图ToolStripMenuItem.Click += new System.EventHandler(this.框架图ToolStripMenuItem_Click);
+            // 
+            // 上行运行图ToolStripMenuItem
+            // 
+            this.上行运行图ToolStripMenuItem.Name = "上行运行图ToolStripMenuItem";
+            this.上行运行图ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.上行运行图ToolStripMenuItem.Text = "上行运行图";
+            // 
+            // 下行运行图ToolStripMenuItem
+            // 
+            this.下行运行图ToolStripMenuItem.Name = "下行运行图ToolStripMenuItem";
+            this.下行运行图ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.下行运行图ToolStripMenuItem.Text = "下行运行图";
+            // 
+            // 上下行运行图ToolStripMenuItem
+            // 
+            this.上下行运行图ToolStripMenuItem.Name = "上下行运行图ToolStripMenuItem";
+            this.上下行运行图ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.上下行运行图ToolStripMenuItem.Text = "上下行运行图";
             // 
             // PaintForm
             // 
@@ -282,7 +341,7 @@
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "PaintForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "运行图显示及检测分析工具V1.0";
@@ -324,5 +383,12 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.ToolStripMenuItem 读取车站画图信息ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 导出ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 导出运行图ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 框架图ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 导出开行方案ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 上行运行图ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 下行运行图ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 上下行运行图ToolStripMenuItem;
     }
 }
