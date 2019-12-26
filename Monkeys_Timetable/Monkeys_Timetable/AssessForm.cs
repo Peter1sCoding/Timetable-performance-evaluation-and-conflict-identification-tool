@@ -78,7 +78,7 @@ namespace Monkeys_Timetable
             //cbTrain.Items.AddRange(new object[] { 1, 2, 3 });
             foreach (Train tra in dm.TrainList)
             {
-                string trainName = tra.trainNo;
+                string trainName = tra.TrainNo;
                 cbTrain.Items.Add(trainName);
             }
             cbTrain.Size = new Size(100, 30);
@@ -138,7 +138,7 @@ namespace Monkeys_Timetable
                 strtrain = cbTrain.SelectedItem.ToString();
                 for (int i = 0; i < dm.TrainList.Count-1; i++)
                 {
-                    if(strtrain == dm.TrainList[i].trainNo)
+                    if(strtrain == dm.TrainList[i].TrainNo)
                     {
                         tbTravalSpeed.Text = ass.GetTravelSpeed(dm)[i].ToString()+"km/h";
                         tbTechicalSpeed.Text = ass.GetTechnicalSpeed(dm)[i].ToString()+"km/h";
@@ -153,7 +153,7 @@ namespace Monkeys_Timetable
                 strtrain = cbTrain.Text;
                 for (int i = 0; i < dm.TrainList.Count - 1; i++)
                 {
-                    if (strtrain == dm.TrainList[i].trainNo)
+                    if (strtrain == dm.TrainList[i].TrainNo)
                     {
                         tbTravalSpeed.Text = ass.GetTravelSpeed(dm)[i].ToString() + "km/h";
                         tbTechicalSpeed.Text = ass.GetTechnicalSpeed(dm)[i].ToString() + "km/h";
@@ -445,7 +445,7 @@ namespace Monkeys_Timetable
                     string arrivetime = "";
                     string depturetime = "";
                     string title = "车站名" + "\t" + "到达时刻" + "\t" + "出发时刻" + "\n";
-                    if (dm.TrainList[i].trainNo == cbTrain.SelectedItem.ToString())
+                    if (dm.TrainList[i].TrainNo == cbTrain.SelectedItem.ToString())
                     {
                         for (int j = 0; j < dm.TrainList[i].staList.Count; j++)
                         {
@@ -467,7 +467,7 @@ namespace Monkeys_Timetable
                     string arrivetime = "";
                     string depturetime = "";
                     string title = "车站名" + "\t" + "到达时刻" + "\t" + "出发时刻" + "\n";
-                    if (dm.TrainList[i].trainNo == cbTrain.Text)
+                    if (dm.TrainList[i].TrainNo == cbTrain.Text)
                     {
                         for (int j = 0; j < dm.TrainList[i].staList.Count; j++)
                         {
@@ -517,7 +517,7 @@ namespace Monkeys_Timetable
                             {
                                 if (dm.TrainList[j].staList[k] == cbStation.SelectedItem.ToString())
                                 {
-                                    string trainnum = dm.TrainList[j].trainNo;
+                                    string trainnum = dm.TrainList[j].TrainNo;
                                     string arrivetime = dm.TrainList[j].staTimeDic[dm.TrainList[j].staList[k]][0];
                                     string depturetime = dm.TrainList[j].staTimeDic[dm.TrainList[j].staList[k]][1];
                                     if (ass.GetMinute(depturetime) - ass.GetMinute(arrivetime) != 0)
@@ -555,7 +555,7 @@ namespace Monkeys_Timetable
                             {
                                 if (dm.TrainList[j].staList[k] == cbStation.SelectedItem.ToString())
                                 {
-                                    string trainnum = dm.TrainList[j].trainNo;
+                                    string trainnum = dm.TrainList[j].TrainNo;
                                     string arrivetime = dm.TrainList[j].staTimeDic[dm.TrainList[j].staList[k]][0];
                                     string depturetime = dm.TrainList[j].staTimeDic[dm.TrainList[j].staList[k]][1];
                                     if (ass.GetMinute(depturetime) - ass.GetMinute(arrivetime) != 0)
@@ -699,7 +699,7 @@ namespace Monkeys_Timetable
                                         string depturetime2 = dm.TrainList[i].staTimeDic[dm.TrainList[i].staList[k]][1];
                                         if(ass.GetMinute(depturetime2) - ass.GetMinute(arrivetime2) != 0 && ass.GetMinute(arrivetime2) - ass.GetMinute(depturetime1) > 0)
                                         {
-                                            string trainnum = dm.TrainList[i].trainNo;
+                                            string trainnum = dm.TrainList[i].TrainNo;
                                             ODtime.Rows.Add(trainnum, dm.TrainList[i].staList[j], depturetime1, dm.TrainList[i].staList[k], arrivetime2);
                                             count++;
                                             break;
