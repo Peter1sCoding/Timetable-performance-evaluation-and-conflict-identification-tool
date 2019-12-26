@@ -215,6 +215,9 @@ namespace Monkeys_Timetable
             }
             ToMinute(TrainList);
         }
+        /// <summary>
+        /// 根据车次尾号将列车存入上行或下行列车字典
+        /// </summary>
         public void DivideUpDown()
         {
             UpTrainDic = new Dictionary<string, Train>();
