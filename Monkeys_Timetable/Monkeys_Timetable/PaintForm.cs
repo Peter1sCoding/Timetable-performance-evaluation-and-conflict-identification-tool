@@ -25,6 +25,8 @@ namespace Monkeys_Timetable
         Bitmap bmp = new Bitmap(TD_Width, TD_Height);
         public bool upConflictClicked = false;
         public bool downConflictClicked = false;
+        
+        
 
         public PaintForm()
         {      
@@ -36,13 +38,15 @@ namespace Monkeys_Timetable
             dm.ReadHeadway(Application.StartupPath + @"\\车站列车安全间隔.csv");
             dm.ReadStation(Application.StartupPath + @"\\沪宁车站信息.csv");
             dm.ReadTrain(Application.StartupPath + @"\\沪宁时刻图.csv");
+            dm.ReadDrawStation(Application.StartupPath + @"\\沪宁车站画图信息.csv");
             dm.DivideUpDown();
             dm.AddTra2sta();
             dm.GetStop();
 
             ci = new Conflict_Identification(dm.stationList, dm.HeadwayDic, dm.TrainDic);
             ci.Conflict_Judge();
-   
+            dt = ci.ToDataTable();
+
         }
 
         private void PaintForm_Load(object sender, EventArgs e)
@@ -135,7 +139,6 @@ namespace Monkeys_Timetable
         private void 冲突检测数据ToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
-            dt = ci.ToDataTable();
             ConflictForm cf = new ConflictForm(dt);
             cf.Show();
         }
@@ -147,51 +150,86 @@ namespace Monkeys_Timetable
             checkBox1.Checked = false;
             checkBox2.Checked = false;
             pictureBox2.BackgroundImage = null;
-            int ix = dm.stationList.Count;
-            double total = dm.stationList[ix - 1].totalMile;
+            int ix = dm.stationDrawList.Count;
             List<double> staMile = new List<double>();
             for (int i = 0; i < ix; i++)
             {
-                staMile.Add(dm.stationList[i].totalMile);
+                staMile.Add(dm.stationDrawList[i].totalMile);
             }
-            pt.TimetableFrame(this.pictureBox2.Width, this.pictureBox2.Height, total, staMile, gs, dm.stationStringList);
+            pt.Branch(dm.stationDrawStringList, staMile, this.pictureBox2.Width, this.pictureBox2.Height);
+            int k = pt.border2.Count;
+            for (int i = 0; i < k; i++)
+            {
+                int ii = i + 1;
+                double total1 = pt.Mile1[ii].Last();
+                pt.TimetableFrame(this.pictureBox2.Width, pt.border2[i].up,pt.border2[i].down, total1,pt.Mile1[ii], gs, pt.str1[ii],ii);
+            }
+
             this.pictureBox2.BackgroundImage = bmp;
         }
+        
         public void DrawPicture()
         {
             Graphics gs;
             gs = Graphics.FromImage(bmp);
-            int ix = dm.stationList.Count;
-            double total = dm.stationList[ix - 1].totalMile;
+            int ix = dm.stationDrawList.Count();
             List<double> staMile = new List<double>();
             for (int i = 0; i < ix; i++)
             {
-                staMile.Add(dm.stationList[i].totalMile);
+                staMile.Add(dm.stationDrawList[i].totalMile);
             }
+            pt.Branch(dm.stationDrawStringList, staMile, this.pictureBox2.Width, this.pictureBox2.Height);
+            int k = pt.border2.Count;
             pictureBox2.BackgroundImage = null;
             gs.Clear(this.pictureBox2.BackColor);
             if (checkBox1.Checked == true && checkBox2.Checked == true)
             {
-                pt.TimetableFrame(this.pictureBox2.Width, this.pictureBox2.Height, total, staMile, gs, dm.stationStringList);
-                pt.TrainLine(gs, dm.upTrainList, dm.stationStringList);
-                pt.TrainLine(gs, dm.downTrainList, dm.stationStringList);
+                for (int i = 0; i < k; i++)
+                {
+                    int ii = i + 1;
+                    double total1 = pt.Mile1[ii].Last();
+                    pt.TimetableFrame(this.pictureBox2.Width, pt.border2[i].up,pt.border2[i].down, total1,pt.Mile1[ii], gs, pt.str1[ii],ii);
+                    pt.TrainLine(gs, dm.upTrainList, pt.str1[ii],ii);
+                    pt.TrainLine(gs, dm.downTrainList, pt.str1[ii],ii);
+                }
+                
             }
             else if (checkBox1.Checked == true && checkBox2.Checked == false)
             {
-                pt.TimetableFrame(this.pictureBox2.Width, this.pictureBox2.Height, total, staMile, gs, dm.stationStringList);
-                pt.TrainLine(gs, dm.upTrainList, dm.stationStringList);
+                for (int i = 0; i < k; i++)
+                {
+                    int ii = i + 1;
+                    double total1 = pt.Mile1[ii].Last();
+                    pt.TimetableFrame(this.pictureBox2.Width, pt.border2[i].up,pt.border2[i].down, total1,pt.Mile1[ii], gs, pt.str1[ii],ii);
+                }
+                
             }
             else if (checkBox1.Checked == false && checkBox2.Checked == true)
             {
-                pt.TimetableFrame(this.pictureBox2.Width, this.pictureBox2.Height, total, staMile, gs, dm.stationStringList);
-                pt.TrainLine(gs, dm.downTrainList, dm.stationStringList);
+                for (int i = 0; i < k; i++)
+                {
+                    int ii = i + 1;
+                    double total1 = pt.Mile1[ii].Last();
+                    pt.TimetableFrame(this.pictureBox2.Width, pt.border2[i].up,pt.border2[i].down, total1,pt.Mile1[ii], gs, pt.str1[ii],ii);
+                }
+                
             }
             else
             {
-                pt.TimetableFrame(this.pictureBox2.Width, this.pictureBox2.Height, total, staMile, gs, dm.stationStringList);
+                for (int i = 0; i < k; i++)
+                {
+                    int ii = i + 1;
+                    double total1 = pt.Mile1[ii].Last();
+                    pt.TimetableFrame(this.pictureBox2.Width, pt.border2[i].up,pt.border2[i].down, total1,pt.Mile1[ii], gs, pt.str1[ii],ii);
+                }
             }
-            pt.GetTrainPoint(dm.TrainList, dm.stationStringList);
-            pt.GetConflictPoint(ci.ConflictList,dm.TrainList, dm.stationStringList);
+            for (int i = 0; i < k; k++)
+            {
+                int ii = i + 1;
+                double total1 = pt.Mile1[ii].Last();
+                pt.GetTrainPoint(dm.TrainList, dm.stationStringList, ii);
+                pt.GetConflictPoint(ci.ConflictList, dm.TrainList, dm.stationStringList, ii);
+            }
             this.pictureBox2.BackgroundImage = bmp;
         }
         //public void Draw()
@@ -263,12 +301,24 @@ namespace Monkeys_Timetable
             Graphics gs = Graphics.FromImage(bmp);
             if (checkBox1.Checked)
             {
-                pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
+                int k = pt.border2.Count;
+                for (int i = 0; i < k; i++)
+                {
+                    int ii = i + 1;
+                    double total1 = pt.Mile1[ii].Last();
+                    pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList,ii);
+                }
                 upConflictClicked = true;
             }
             else if (checkBox2.Checked)
             {
-                pt.ConflictDrawDown(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
+                int k = pt.border2.Count;
+                for (int i = 0; i < k; i++)
+                {
+                    int ii = i + 1;
+                    double total1 = pt.Mile1[ii].Last();
+                    pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList, ii);
+                }
                 downConflictClicked = true;
             }
             this.pictureBox2.BackgroundImage = bmp;
@@ -324,15 +374,28 @@ namespace Monkeys_Timetable
                             c = PaintTool.PointInCircle(e.Location, ci.ConflictList[i].ConflictLocation, 5f);
                             if (c == 0)
                             {
+                                dataGridView1.Visible = false;
                                 this.pictureBox2.Refresh();
                                 DrawPicture();
                                 if (upConflictClicked)
                                 {
-                                    pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
+                                    int k = pt.border2.Count;
+                                    for (int i1 = 0; i1 < k; i1++)
+                                    {
+                                        int ii = i1 + 1;
+                                        double total1 = pt.Mile1[ii].Last();
+                                        pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList, ii);
+                                    }
                                 }
                                 if (downConflictClicked)
                                 {
-                                    pt.ConflictDrawDown(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
+                                    int k = pt.border2.Count;
+                                    for (int i1 = 0; i1 < k; i1++)
+                                    {
+                                        int ii = i1 + 1;
+                                        double total1 = pt.Mile1[ii].Last();
+                                        pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList, ii);
+                                    }
                                 }
                                 ShowInfoTooltip(ci.ConflictList[i], e.Location);
                                 Pen SelectedPen = new Pen(Color.Blue, 2);
@@ -353,11 +416,23 @@ namespace Monkeys_Timetable
                                 DrawPicture();
                                 if (upConflictClicked)
                                 {
-                                    pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
+                                    int k = pt.border2.Count;
+                                    for (int i1 = 0; i1 < k; i1++)
+                                    {
+                                        int ii = i1 + 1;
+                                        double total1 = pt.Mile1[ii].Last();
+                                        pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList, ii);
+                                    }
                                 }
                                 if (downConflictClicked)
                                 {
-                                    pt.ConflictDrawDown(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
+                                    int k = pt.border2.Count;
+                                    for (int i1 = 0; i1 < k; i1++)
+                                    {
+                                        int ii = i1 + 1;
+                                        double total1 = pt.Mile1[ii].Last();
+                                        pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList, ii);
+                                    }
                                 }
                                 ShowInfoTooltip(train, e.Location);
                                 Pen SelectedPen = new Pen(Color.Blue, 2);
@@ -389,15 +464,28 @@ namespace Monkeys_Timetable
                             c = PaintTool.PointInCircle(e.Location, ci.ConflictList[i].ConflictLocation, 5f);
                             if (c == 0)
                             {
+                                dataGridView1.Visible = false;
                                 this.pictureBox2.Refresh();
                                 DrawPicture();
                                 if (upConflictClicked)
                                 {
-                                    pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
+                                    int k = pt.border2.Count;
+                                    for (int i1 = 0; i1 < k; i1++)
+                                    {
+                                        int ii = i1 + 1;
+                                        double total1 = pt.Mile1[ii].Last();
+                                        pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList, ii);
+                                    }
                                 }
                                 if (downConflictClicked)
                                 {
-                                    pt.ConflictDrawDown(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
+                                    int k = pt.border2.Count;
+                                    for (int i1 = 0; i1 < k; i1++)
+                                    {
+                                        int ii = i1 + 1;
+                                        double total1 = pt.Mile1[ii].Last();
+                                        pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList, ii);
+                                    }
                                 }
                                 ShowInfoTooltip(ci.ConflictList[i], e.Location);
                                 Pen SelectedPen = new Pen(Color.Blue, 2);
@@ -418,11 +506,23 @@ namespace Monkeys_Timetable
                                 DrawPicture();
                                 if (upConflictClicked)
                                 {
-                                    pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
+                                    int k = pt.border2.Count;
+                                    for (int i1 = 0; i1 < k; i1++)
+                                    {
+                                        int ii = i1 + 1;
+                                        double total1 = pt.Mile1[ii].Last();
+                                        pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList, ii);
+                                    }
                                 }
                                 if (downConflictClicked)
                                 {
-                                    pt.ConflictDrawDown(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
+                                    int k = pt.border2.Count;
+                                    for (int i1 = 0; i1 < k; i1++)
+                                    {
+                                        int ii = i1 + 1;
+                                        double total1 = pt.Mile1[ii].Last();
+                                        pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList, ii);
+                                    }
                                 }
                                 ShowInfoTooltip(train, e.Location);
                                 Pen SelectedPen = new Pen(Color.Blue, 2);
@@ -447,8 +547,8 @@ namespace Monkeys_Timetable
             location.X += 15;
             location.Y += 15;
             DataTable dt = new DataTable();
-            dt.TableName = train.trainNo;
-            dt.Columns.Add(train.trainNo);
+            dt.TableName = train.TrainNo;
+            dt.Columns.Add(train.TrainNo);
             dt.Columns.Add("车站");
             dt.Columns.Add("到达时刻");
             dt.Columns.Add("出发时刻");
@@ -479,11 +579,24 @@ namespace Monkeys_Timetable
             dt.Columns.Add("前车");
             dt.Columns.Add("后车");
             dt.Columns.Add("车站");
-            dt.Rows.Add(con.ConflictType, con.FrontTrain.trainNo, con.LatterTrain.trainNo, con.ConflictSta);
+            dt.Rows.Add(con.ConflictType, con.FrontTrain.TrainNo, con.LatterTrain.TrainNo, con.ConflictSta);
 
             dataGridView2.DataSource = dt;
             dataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView2.Visible = true;
+        }
+
+        private void 读取车站画图信息ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Multiselect = true;
+            dialog.Title = "请选择文件夹";
+            dialog.Filter = "所有文件(*.*)|*.*";
+            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                staFileName = dialog.FileName;
+            }
+            dm.ReadDrawStation(staFileName);
         }
     }
 }

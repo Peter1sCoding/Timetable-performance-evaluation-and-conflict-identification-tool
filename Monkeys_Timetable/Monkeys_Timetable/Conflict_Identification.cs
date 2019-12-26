@@ -9,12 +9,12 @@ namespace Monkeys_Timetable
 
     class Conflict_Identification //封装判断各类间隔时间的方法
     {
-        public List<Station> stationList;
-        public Dictionary<string, Dictionary<string, int>> HeadwayDic;
-        public Dictionary<string, Train> TrainDic;
-        public List<Conflict> ConflictList;
+        public List<Station> stationList; //车站列表
+        public Dictionary<string, Dictionary<string, int>> HeadwayDic;//列车安全间隔字典
+        public Dictionary<string, Train> TrainDic;//列车字典
+        public List<Conflict> ConflictList;//冲突字典
 
-        private List<String> x_ConflictTrains;
+        private List<String> x_ConflictTrains;//冲突列车列表
         public List<String> ConflictTrains
         {
             get
@@ -27,13 +27,13 @@ namespace Monkeys_Timetable
             }
         }
 
-        public Conflict_Identification (List<Station> stationList, Dictionary<string, Dictionary<string, int>> HeadwayDic,Dictionary<string,Train> TrainDic)
+        public Conflict_Identification (List<Station> stationList, Dictionary<string, Dictionary<string, int>> HeadwayDic,Dictionary<string,Train> TrainDic)//构造函数，将传入数据转为类中定义数据
         {
             this.stationList = stationList;
             this.HeadwayDic = HeadwayDic;
             this.TrainDic = TrainDic;
         }
-        public void Conflict_Judge()
+        public void Conflict_Judge()//判断车站安全间隔冲突的方法
         {
             ConflictTrains = new List<string>();
             ConflictList = new List<Conflict>();
@@ -55,7 +55,7 @@ namespace Monkeys_Timetable
                                 c.FrontTrain = stationList[i].upStaTraArrList[j];
                                 c.LatterTrain = stationList[i].upStaTraArrList[j + 1];
                                 ConflictList.Add(c);
-                                ConflictTrains.Add(stationList[i].stationName + "," + stationList[i].upStaTraArrList[j].trainNo + "," + stationList[i].upStaTraArrList[j + 1].trainNo + ",到到");                               
+                                ConflictTrains.Add(stationList[i].stationName + "," + stationList[i].upStaTraArrList[j].TrainNo + "," + stationList[i].upStaTraArrList[j + 1].TrainNo + ",到到");                               
                             }
                         }
 
@@ -69,7 +69,7 @@ namespace Monkeys_Timetable
                                 c.FrontTrain = stationList[i].upStaTraArrList[j];
                                 c.LatterTrain = stationList[i].upStaTraArrList[j + 1];
                                 ConflictList.Add(c);
-                                ConflictTrains.Add(stationList[i].stationName + "," + stationList[i].upStaTraArrList[j].trainNo + "," + stationList[i].upStaTraArrList[j + 1].trainNo + ",到通");
+                                ConflictTrains.Add(stationList[i].stationName + "," + stationList[i].upStaTraArrList[j].TrainNo + "," + stationList[i].upStaTraArrList[j + 1].TrainNo + ",到通");
                             }
                         }
 
@@ -83,7 +83,7 @@ namespace Monkeys_Timetable
                                 c.FrontTrain = stationList[i].upStaTraArrList[j];
                                 c.LatterTrain = stationList[i].upStaTraArrList[j + 1];
                                 ConflictList.Add(c);
-                                ConflictTrains.Add(stationList[i].stationName + "," + stationList[i].upStaTraArrList[j].trainNo + "," + stationList[i].upStaTraArrList[j + 1].trainNo + ",通到");
+                                ConflictTrains.Add(stationList[i].stationName + "," + stationList[i].upStaTraArrList[j].TrainNo + "," + stationList[i].upStaTraArrList[j + 1].TrainNo + ",通到");
                             }
                         }
 
@@ -97,7 +97,7 @@ namespace Monkeys_Timetable
                                 c.FrontTrain = stationList[i].upStaTraArrList[j];
                                 c.LatterTrain = stationList[i].upStaTraArrList[j + 1];
                                 ConflictList.Add(c);
-                                ConflictTrains.Add(stationList[i].stationName + "," + stationList[i].upStaTraArrList[j].trainNo + "," + stationList[i].upStaTraArrList[j + 1].trainNo + ",通通");
+                                ConflictTrains.Add(stationList[i].stationName + "," + stationList[i].upStaTraArrList[j].TrainNo + "," + stationList[i].upStaTraArrList[j + 1].TrainNo + ",通通");
                             }
                         }
                     }                   
@@ -118,7 +118,7 @@ namespace Monkeys_Timetable
                                 c.FrontTrain = stationList[i].upStaTraDepList[j];
                                 c.LatterTrain = stationList[i].upStaTraDepList[j + 1];
                                 ConflictList.Add(c);
-                                ConflictTrains.Add(stationList[i].stationName + "," + stationList[i].upStaTraDepList[j].trainNo + "," + stationList[i].upStaTraDepList[j + 1].trainNo + ",发发");
+                                ConflictTrains.Add(stationList[i].stationName + "," + stationList[i].upStaTraDepList[j].TrainNo + "," + stationList[i].upStaTraDepList[j + 1].TrainNo + ",发发");
                             }
                         }
 
@@ -132,7 +132,7 @@ namespace Monkeys_Timetable
                                 c.FrontTrain = stationList[i].upStaTraDepList[j];
                                 c.LatterTrain = stationList[i].upStaTraDepList[j + 1];
                                 ConflictList.Add(c);
-                                ConflictTrains.Add(stationList[i].stationName + "," + stationList[i].upStaTraDepList[j].trainNo + "," + stationList[i].upStaTraDepList[j + 1].trainNo + ",发通");
+                                ConflictTrains.Add(stationList[i].stationName + "," + stationList[i].upStaTraDepList[j].TrainNo + "," + stationList[i].upStaTraDepList[j + 1].TrainNo + ",发通");
                             }
                         }
 
@@ -146,7 +146,7 @@ namespace Monkeys_Timetable
                                 c.FrontTrain = stationList[i].upStaTraDepList[j];
                                 c.LatterTrain = stationList[i].upStaTraDepList[j + 1];
                                 ConflictList.Add(c);
-                                ConflictTrains.Add(stationList[i].stationName + "," + stationList[i].upStaTraDepList[j].trainNo + "," + stationList[i].upStaTraDepList[j + 1].trainNo + ",通发");
+                                ConflictTrains.Add(stationList[i].stationName + "," + stationList[i].upStaTraDepList[j].TrainNo + "," + stationList[i].upStaTraDepList[j + 1].TrainNo + ",通发");
                             }
                         }
                     }                                    
@@ -167,7 +167,7 @@ namespace Monkeys_Timetable
                                 c.FrontTrain = stationList[i].downStaTraArrList[j];
                                 c.LatterTrain = stationList[i].downStaTraArrList[j + 1];
                                 ConflictList.Add(c);
-                                ConflictTrains.Add(stationList[i].stationName + "," + stationList[i].downStaTraArrList[j].trainNo + "," + stationList[i].downStaTraArrList[j + 1].trainNo + ",到到");
+                                ConflictTrains.Add(stationList[i].stationName + "," + stationList[i].downStaTraArrList[j].TrainNo + "," + stationList[i].downStaTraArrList[j + 1].TrainNo + ",到到");
                             }
                         }
 
@@ -181,7 +181,7 @@ namespace Monkeys_Timetable
                                 c.FrontTrain = stationList[i].downStaTraArrList[j];
                                 c.LatterTrain = stationList[i].downStaTraArrList[j + 1];
                                 ConflictList.Add(c);
-                                ConflictTrains.Add(stationList[i].stationName + "," + stationList[i].downStaTraArrList[j].trainNo + "," + stationList[i].downStaTraArrList[j + 1].trainNo + ",到通");
+                                ConflictTrains.Add(stationList[i].stationName + "," + stationList[i].downStaTraArrList[j].TrainNo + "," + stationList[i].downStaTraArrList[j + 1].TrainNo + ",到通");
                             }
                         }
 
@@ -195,7 +195,7 @@ namespace Monkeys_Timetable
                                 c.FrontTrain = stationList[i].downStaTraArrList[j];
                                 c.LatterTrain = stationList[i].downStaTraArrList[j + 1];
                                 ConflictList.Add(c);
-                                ConflictTrains.Add(stationList[i].stationName + "," + stationList[i].downStaTraArrList[j].trainNo + "," + stationList[i].downStaTraArrList[j + 1].trainNo + ",通到");
+                                ConflictTrains.Add(stationList[i].stationName + "," + stationList[i].downStaTraArrList[j].TrainNo + "," + stationList[i].downStaTraArrList[j + 1].TrainNo + ",通到");
                             }
                         }
 
@@ -209,7 +209,7 @@ namespace Monkeys_Timetable
                                 c.FrontTrain = stationList[i].downStaTraArrList[j];
                                 c.LatterTrain = stationList[i].downStaTraArrList[j + 1];
                                 ConflictList.Add(c);
-                                ConflictTrains.Add(stationList[i].stationName + "," + stationList[i].downStaTraArrList[j].trainNo + "," + stationList[i].downStaTraArrList[j + 1].trainNo + ",通通");
+                                ConflictTrains.Add(stationList[i].stationName + "," + stationList[i].downStaTraArrList[j].TrainNo + "," + stationList[i].downStaTraArrList[j + 1].TrainNo + ",通通");
                             }
                         }
                     }                   
@@ -230,7 +230,7 @@ namespace Monkeys_Timetable
                                 c.FrontTrain = stationList[i].downStaTraDepList[j];
                                 c.LatterTrain = stationList[i].downStaTraDepList[j + 1];
                                 ConflictList.Add(c);
-                                ConflictTrains.Add(stationList[i].stationName + "," + stationList[i].downStaTraDepList[j].trainNo + "," + stationList[i].downStaTraDepList[j + 1].trainNo + ",发发");
+                                ConflictTrains.Add(stationList[i].stationName + "," + stationList[i].downStaTraDepList[j].TrainNo + "," + stationList[i].downStaTraDepList[j + 1].TrainNo + ",发发");
                             }
                         }
                         if ((stationList[i].downStaTraDepList[j].isStopDic[stationList[i].stationName] == true) && (stationList[i].downStaTraDepList[j + 1].isStopDic[stationList[i].stationName] == false))
@@ -243,7 +243,7 @@ namespace Monkeys_Timetable
                                 c.FrontTrain = stationList[i].downStaTraDepList[j];
                                 c.LatterTrain = stationList[i].downStaTraDepList[j + 1];
                                 ConflictList.Add(c);
-                                ConflictTrains.Add(stationList[i].stationName + "," + stationList[i].downStaTraDepList[j].trainNo + "," + stationList[i].downStaTraDepList[j + 1].trainNo + ",发通");                              
+                                ConflictTrains.Add(stationList[i].stationName + "," + stationList[i].downStaTraDepList[j].TrainNo + "," + stationList[i].downStaTraDepList[j + 1].TrainNo + ",发通");                              
                             }
                         }
                         if ((stationList[i].downStaTraDepList[j].isStopDic[stationList[i].stationName] == false) && (stationList[i].downStaTraDepList[j + 1].isStopDic[stationList[i].stationName] == true))
@@ -256,7 +256,7 @@ namespace Monkeys_Timetable
                                 c.FrontTrain = stationList[i].downStaTraDepList[j];
                                 c.LatterTrain = stationList[i].downStaTraDepList[j + 1];
                                 ConflictList.Add(c);
-                                ConflictTrains.Add(stationList[i].stationName + "," + stationList[i].downStaTraDepList[j].trainNo + "," + stationList[i].downStaTraDepList[j + 1].trainNo + ",通发");
+                                ConflictTrains.Add(stationList[i].stationName + "," + stationList[i].downStaTraDepList[j].TrainNo + "," + stationList[i].downStaTraDepList[j + 1].TrainNo + ",通发");
                             }
                         }
                     }                    
@@ -264,7 +264,7 @@ namespace Monkeys_Timetable
                 #endregion
             }
         }
-        public DataTable ToDataTable()
+        public DataTable ToDataTable()//将生成的字符串格式列车冲突信息转为DataTable
         {
             DataTable dt = new DataTable();
             dt.Columns.Add("序号");
@@ -280,8 +280,7 @@ namespace Monkeys_Timetable
                 string[] str = ConflictTrains[i].Split(',');
                 dt.Rows.Add(i + 1, str[0], str[1], TrainDic[str[1]].staTimeDic[str[0]][0] + "," + TrainDic[str[1]].staTimeDic[str[0]][1], str[2], TrainDic[str[2]].staTimeDic[str[0]][0] + "," + TrainDic[str[2]].staTimeDic[str[0]][1], str[3]);
             }
-            return dt;
-       
+            return dt;      
         }
     }
 }

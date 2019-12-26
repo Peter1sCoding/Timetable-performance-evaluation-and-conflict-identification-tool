@@ -9,25 +9,34 @@ using System.Windows.Forms;
 
 namespace Monkeys_Timetable
 {
-    public partial class LinePlan : Form//显示开行方案
+    /// <summary>
+    /// 显示开行方案
+    /// </summary>
+    public partial class LinePlan : Form
     {
-        
-
+        /// <summary>
+        /// DataManager对象，用以读取与生成开行方案相关的数据
+        /// </summary>
         DataManager dm;
-        //Bitmap bmp;
+        /// <summary>
+        /// 存入上行开行方案的DataTable
+        /// </summary>
         DataTable UpPlanTable;
+        /// <summary>
+        /// 存入下行开行方案的DataTable
+        /// </summary>
         DataTable DownPlanTable;
-        //Graphics g;
-        Brush b;
-        Font font;
-        Pen p;
+        /// <summary>
+        /// 存入上行开行方案的字典，key为车站名，int中0为不停站，1为停站
+        /// </summary>
         Dictionary<string, int> UpPlanDic;
+        /// <summary>
+        /// 存入下行开行方案的字典，key为车站名，int中0为不停站，1为停站
+        /// </summary>
         Dictionary<string, int> DownPlanDic;
-
         public LinePlan()
         {
             InitializeComponent();
-
             dm = new DataManager();
             dm.ReadHeadway(Application.StartupPath + @"\\车站列车安全间隔.csv");
             dm.ReadStation(Application.StartupPath + @"\\沪宁车站信息.csv");
@@ -35,22 +44,18 @@ namespace Monkeys_Timetable
             dm.DivideUpDown();
             dm.AddTra2sta();
             dm.GetStop();
-
-            b = new SolidBrush(Color.Black);
-            font = new Font("黑体", 10);
-            p = new Pen(Color.Black, 1);
-
-            //DrawStation();
             GetPlanTable();
             ToDataGridView();
         }
+        /// <summary>
+        /// 生成列车开行方案，并存入开行方案字典和DataTable
+        /// </summary>
         public void GetPlanTable()
         {
             UpPlanTable = new DataTable();
             UpPlanDic = new Dictionary<string, int>();
             DownPlanTable = new DataTable();
             DownPlanDic = new Dictionary<string, int>();
-
             for(int i = 0; i < dm.upTrainList.Count; i++)
             {
                 string StaConList = "";
@@ -98,15 +103,9 @@ namespace Monkeys_Timetable
                 }
             }
         }
-        public void GetStaX()
-        {
-            float total = dm.stationList[dm.stationList.Count - 1].totalMile;
-
-            for(int i = 0; i < dm.stationList.Count; i++)
-            {
-                dm.stationList[i].x = 1000 * (dm.stationList[i].totalMile / total);
-            }
-        }
+        /// <summary>
+        /// 将开行方案DataTable以DataGridView形式显示于窗体中
+        /// </summary>
         public void ToDataGridView()
         {
             DataTable dt = new DataTable();
@@ -137,8 +136,6 @@ namespace Monkeys_Timetable
             }
             dataGridView1.DataSource = dt;
             Console.WriteLine(total);
-
-
             DataTable dt1 = new DataTable();
             dt1.Columns.Add("开行数量");
             for (int i = 0; i < dm.stationStringList.Count; i++)
@@ -164,29 +161,7 @@ namespace Monkeys_Timetable
                 dt1.Rows.Add(dr);
             }
             dataGridView2.DataSource = dt1;
-        }
-        /*public void DrawStation()
-        {
-            GetPlanTable();
-            bmp = new Bitmap(1000, UpPlanTable.Rows.Count * 15 + 600);
-            g = Graphics.FromImage(bmp);
-           
-            GetStaX();
-            foreach(Station sta in dm.stationList)
-            {
-                if ((int.Parse(sta.stationNo) % 2) == 0)
-                {
-                    g.DrawString(sta.stationName, font, b, sta.x, 100);
-                }
-                else
-                {
-                    g.DrawString(sta.stationName, font, b, sta.x, 150);
-                }
-            }
-            this.pictureBox1.BackgroundImage = bmp;
-        }
-        */
-
+        }      
         private void pictureBox1_Click(object sender, EventArgs e)
         {
 
