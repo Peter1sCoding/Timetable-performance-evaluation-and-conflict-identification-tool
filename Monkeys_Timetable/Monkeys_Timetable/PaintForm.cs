@@ -201,6 +201,7 @@ namespace Monkeys_Timetable
                     int ii = i + 1;
                     double total1 = pt.Mile1[ii].Last();
                     pt.TimetableFrame(this.pictureBox2.Width, pt.border2[i].up,pt.border2[i].down, total1,pt.Mile1[ii], gs, pt.str1[ii],ii);
+                    pt.TrainLine(gs, dm.upTrainList, pt.str1[ii], ii);
                 }
                 
             }
@@ -211,6 +212,7 @@ namespace Monkeys_Timetable
                     int ii = i + 1;
                     double total1 = pt.Mile1[ii].Last();
                     pt.TimetableFrame(this.pictureBox2.Width, pt.border2[i].up,pt.border2[i].down, total1,pt.Mile1[ii], gs, pt.str1[ii],ii);
+                    pt.TrainLine(gs, dm.downTrainList, pt.str1[ii], ii);
                 }
                 
             }
@@ -223,12 +225,12 @@ namespace Monkeys_Timetable
                     pt.TimetableFrame(this.pictureBox2.Width, pt.border2[i].up,pt.border2[i].down, total1,pt.Mile1[ii], gs, pt.str1[ii],ii);
                 }
             }
-            for (int i = 0; i < k; k++)
+            for (int i = 0; i < k; i++)
             {
                 int ii = i + 1;
                 double total1 = pt.Mile1[ii].Last();
-                pt.GetTrainPoint(dm.TrainList, dm.stationStringList, ii);
-                pt.GetConflictPoint(ci.ConflictList, dm.TrainList, dm.stationStringList, ii);
+                pt.GetTrainPoint(dm.TrainList, pt.str1[ii], ii);
+                pt.GetConflictPoint(ci.ConflictList, dm.TrainList, pt.str1[ii], ii);
             }
             this.pictureBox2.BackgroundImage = bmp;
         }
@@ -597,6 +599,13 @@ namespace Monkeys_Timetable
                 staFileName = dialog.FileName;
             }
             dm.ReadDrawStation(staFileName);
+            //int ix = dm.stationDrawList.Count;
+            //List<double> staMile = new List<double>();
+            //for (int i = 0; i < ix; i++)
+            //{
+            //    staMile.Add(dm.stationDrawList[i].totalMile);
+            //}
+            //pt.Branch(dm.stationDrawStringList, staMile, this.pictureBox2.Width, this.pictureBox2.Height);
         }
     }
 }

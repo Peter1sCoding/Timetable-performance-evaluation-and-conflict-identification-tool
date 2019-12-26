@@ -122,7 +122,12 @@ namespace Monkeys_Timetable
                 gs.DrawString(StationName[k], font, brush, p1.X-5, p1.Y-5,SF);//在这插入车站标签语句
                 staY.Add(p1.Y);
             }
-            staY2.Add(indd, staY);
+            List<float> ff=new List<float>();
+            if (!staY2.TryGetValue(indd,out ff))
+            {
+                staY2.Add(indd, staY);
+            }
+            
             staY = new List<float>();
         }//运行图框架图
         public void TrainLine(Graphics gs,List<Train> TrainList,List<string> StaionList,int k)
@@ -170,22 +175,26 @@ namespace Monkeys_Timetable
             {
                 for(int i = 0; i < train.staList.Count; i++)
                 {
-                    PointF p1 = new PointF();
-                    PointF p2 = new PointF();
-                    int index1 = StationList.IndexOf(train.staList[i]);
-                    int i1 = train.MinuteDic[train.staList[i]][0];
-                    int i2 = train.MinuteDic[train.staList[i]][1];
-                    p1.X = TimeX[i1];
-                    p2.X = TimeX[i2];
-                    p1.Y = staY2[k][index1];
-                    p2.Y = staY2[k][index1];
-                    List<PointF> pointList = new List<PointF>();
-                    pointList.Add(p1);
-                    pointList.Add(p2);
-                    if (!train.trainPointDic.ContainsKey(train.staList[i]))
+                    if (StationList.IndexOf(train.staList[i]) != -1)
                     {
-                        train.trainPointDic.Add(train.staList[i], pointList);
+                        PointF p1 = new PointF();
+                        PointF p2 = new PointF();
+                        int index1 = StationList.IndexOf(train.staList[i]);
+                        int i1 = train.MinuteDic[train.staList[i]][0];
+                        int i2 = train.MinuteDic[train.staList[i]][1];
+                        p1.X = TimeX[i1];
+                        p2.X = TimeX[i2];
+                        p1.Y = staY2[k][index1];
+                        p2.Y = staY2[k][index1];
+                        List<PointF> pointList = new List<PointF>();
+                        pointList.Add(p1);
+                        pointList.Add(p2);
+                        if (!train.trainPointDic.ContainsKey(train.staList[i]))
+                        {
+                            train.trainPointDic.Add(train.staList[i], pointList);
+                        }
                     }
+                        
                 }
             }
         }
@@ -197,13 +206,16 @@ namespace Monkeys_Timetable
                 {
                     if(conflict.FrontTrain == tra)
                     {
-                        int i1 = tra.MinuteDic[conflict.ConflictSta][0];
-                        PointF p = new PointF();
-                        int index = StationList.IndexOf(conflict.ConflictSta);
-                        p.X = TimeX[i1];
-                        p.Y = staY2[k][index];
-                        conflict.ConflictLocation = p;
-                                             
+                        if (StationList.IndexOf(conflict.ConflictSta) != -1)
+                        {
+                            int i1 = tra.MinuteDic[conflict.ConflictSta][0];
+                            PointF p = new PointF();
+                            int index = StationList.IndexOf(conflict.ConflictSta);
+                            p.X = TimeX[i1];
+                            p.Y = staY2[k][index];
+                            conflict.ConflictLocation = p;
+                        }
+                     
                     }
                 }
             }
@@ -335,6 +347,9 @@ namespace Monkeys_Timetable
         public void Branch(List<string> StationStr, List<double> StationMile, double Width, double Height)
         {
             //float divi = 5;
+            str1 = new Dictionary<int, List<string>>();
+            Mile1 = new Dictionary<int, List<double>>();
+            border2 = new List<Border>();
             int a = StationStr.Count;
             List<int> ind1 = new List<int>();
             int k = 0;
