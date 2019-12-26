@@ -223,8 +223,8 @@ namespace Monkeys_Timetable
                     pt.TimetableFrame(this.pictureBox2.Width, pt.border2[i].up, pt.border2[i].down, total1, staMile, gs, dm.stationStringList, ii);
                 }
             }
-            pt.GetTrainPoint(dm.TrainList, dm.stationStringList);
-            pt.GetConflictPoint(ci.ConflictList,dm.TrainList, dm.stationStringList);
+            //pt.GetTrainPoint(dm.TrainList, dm.stationStringList);
+            //pt.GetConflictPoint(ci.ConflictList,dm.TrainList, dm.stationStringList);
             this.pictureBox2.BackgroundImage = bmp;
         }
         //public void Draw()
@@ -296,12 +296,12 @@ namespace Monkeys_Timetable
             Graphics gs = Graphics.FromImage(bmp);
             if (checkBox1.Checked)
             {
-                pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
+                //pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
                 upConflictClicked = true;
             }
             else if (checkBox2.Checked)
             {
-                pt.ConflictDrawDown(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
+               // pt.ConflictDrawDown(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
                 downConflictClicked = true;
             }
             this.pictureBox2.BackgroundImage = bmp;
@@ -362,11 +362,11 @@ namespace Monkeys_Timetable
                                 DrawPicture();
                                 if (upConflictClicked)
                                 {
-                                    pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
+                                    //pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
                                 }
                                 if (downConflictClicked)
                                 {
-                                    pt.ConflictDrawDown(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
+                                   //pt.ConflictDrawDown(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
                                 }
                                 ShowInfoTooltip(ci.ConflictList[i], e.Location);
                                 Pen SelectedPen = new Pen(Color.Blue, 2);
@@ -387,11 +387,11 @@ namespace Monkeys_Timetable
                                 DrawPicture();
                                 if (upConflictClicked)
                                 {
-                                    pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
+                                    //pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
                                 }
                                 if (downConflictClicked)
                                 {
-                                    pt.ConflictDrawDown(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
+                                    //pt.ConflictDrawDown(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
                                 }
                                 ShowInfoTooltip(train, e.Location);
                                 Pen SelectedPen = new Pen(Color.Blue, 2);
@@ -428,11 +428,11 @@ namespace Monkeys_Timetable
                                 DrawPicture();
                                 if (upConflictClicked)
                                 {
-                                    pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
+                                    //pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
                                 }
                                 if (downConflictClicked)
                                 {
-                                    pt.ConflictDrawDown(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
+                                    //pt.ConflictDrawDown(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
                                 }
                                 ShowInfoTooltip(ci.ConflictList[i], e.Location);
                                 Pen SelectedPen = new Pen(Color.Blue, 2);
@@ -453,11 +453,11 @@ namespace Monkeys_Timetable
                                 DrawPicture();
                                 if (upConflictClicked)
                                 {
-                                    pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
+                                    //pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
                                 }
                                 if (downConflictClicked)
                                 {
-                                    pt.ConflictDrawDown(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
+                                    //pt.ConflictDrawDown(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
                                 }
                                 ShowInfoTooltip(train, e.Location);
                                 Pen SelectedPen = new Pen(Color.Blue, 2);
