@@ -162,7 +162,7 @@ namespace Monkeys_Timetable
             {
                 int ii = i + 1;
                 double total1 = pt.Mile1[ii].Last();
-                pt.TimetableFrame(this.pictureBox2.Width, pt.border2[i].up,pt.border2[i].down, total1,pt.Mile1[ii], gs, dm.stationStringList,ii);
+                pt.TimetableFrame(this.pictureBox2.Width, pt.border2[i].up,pt.border2[i].down, total1,pt.Mile1[ii], gs, pt.str1[ii],ii);
             }
 
             this.pictureBox2.BackgroundImage = bmp;
@@ -188,7 +188,7 @@ namespace Monkeys_Timetable
                 {
                     int ii = i + 1;
                     double total1 = pt.Mile1[ii].Last();
-                    pt.TimetableFrame(this.pictureBox2.Width, pt.border2[i].up, pt.border2[i].down, total1, pt.Mile1[ii], gs, dm.stationStringList, ii);
+                    pt.TimetableFrame(this.pictureBox2.Width, pt.border2[i].up,pt.border2[i].down, total1,pt.Mile1[ii], gs, pt.str1[ii],ii);
                     pt.TrainLine(gs, dm.upTrainList, pt.str1[ii],ii);
                     pt.TrainLine(gs, dm.downTrainList, pt.str1[ii],ii);
                 }
@@ -200,7 +200,7 @@ namespace Monkeys_Timetable
                 {
                     int ii = i + 1;
                     double total1 = pt.Mile1[ii].Last();
-                    pt.TimetableFrame(this.pictureBox2.Width, pt.border2[i].up, pt.border2[i].down, total1, pt.Mile1[ii], gs, dm.stationStringList, ii);
+                    pt.TimetableFrame(this.pictureBox2.Width, pt.border2[i].up,pt.border2[i].down, total1,pt.Mile1[ii], gs, pt.str1[ii],ii);
                 }
                 
             }
@@ -210,7 +210,7 @@ namespace Monkeys_Timetable
                 {
                     int ii = i + 1;
                     double total1 = pt.Mile1[ii].Last();
-                    pt.TimetableFrame(this.pictureBox2.Width, pt.border2[i].up, pt.border2[i].down, total1, pt.Mile1[ii], gs, dm.stationStringList, ii);
+                    pt.TimetableFrame(this.pictureBox2.Width, pt.border2[i].up,pt.border2[i].down, total1,pt.Mile1[ii], gs, pt.str1[ii],ii);
                 }
                 
             }
@@ -220,7 +220,7 @@ namespace Monkeys_Timetable
                 {
                     int ii = i + 1;
                     double total1 = pt.Mile1[ii].Last();
-                    pt.TimetableFrame(this.pictureBox2.Width, pt.border2[i].up, pt.border2[i].down, total1, pt.Mile1[ii], gs, dm.stationStringList, ii);
+                    pt.TimetableFrame(this.pictureBox2.Width, pt.border2[i].up,pt.border2[i].down, total1,pt.Mile1[ii], gs, pt.str1[ii],ii);
                 }
             }
             for (int i = 0; i < k; k++)
