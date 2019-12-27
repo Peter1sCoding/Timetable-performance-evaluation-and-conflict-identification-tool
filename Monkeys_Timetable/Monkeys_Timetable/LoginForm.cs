@@ -6,6 +6,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
+using System.Data.OleDb;
 
 namespace Monkeys_Timetable
 {
@@ -31,7 +33,6 @@ namespace Monkeys_Timetable
             login.Size = new Size(70, 35);
             login.Text = "确认";
             login.Font= new Font("楷体", 18, FontStyle.Bold);
-            login.Location = new Point(615, 600);
             login.Location = new Point(this.Width / 2, this.Height*4/ 5);
 
             label1.ForeColor = Color.White;
@@ -59,24 +60,53 @@ namespace Monkeys_Timetable
             textBox2.Location = new Point(label2.Location.X+90, label2.Location.Y+5);
             textBox2.Size = new Size(160, 60);
 
+            button1.Size = new Size(70, 35);
+            button1.Font = new Font("楷体", 18, FontStyle.Bold);
+            button1.Location = new Point(this.Width*3/7, this.Height * 4 / 5);
+
+            button2.Size = new Size(70, 35);
+            button2.Text = "取消";
+            button2.Font = new Font("楷体", 18, FontStyle.Bold);
+            button2.Location = new Point(this.Width *7/13, this.Height * 4 / 5);
+
             this.Controls.Add(login);
 
             login.Click += login_Click;
         }
         public void login_Click(object sender,EventArgs e)
         {
-            if ((textBox1.Text == "Admin") && (textBox2.Text == "123456"))
+            string Accessfilename = @"\\注册用户表.mdb";
+            string Constr = "Provider=Microsoft.ace.OLEDB.12.0;Data Source=" + Application.StartupPath + Accessfilename;
+            OleDbConnection con = new OleDbConnection(Constr);
+            con.Open();
+            string selectsql1 = "Select * from UsersDat where Users='" + textBox1.Text.ToString() + "'" ;
+            string selectsql2 = "Select * from PasswordDat where password='" + textBox2.Text.ToString() + "'";
+            OleDbCommand odc1 = new OleDbCommand(selectsql1,con);
+            OleDbCommand odc2 = new OleDbCommand(selectsql2, con);
+            OleDbDataReader odr1;
+            OleDbDataReader odr2;
+            odr1 = odc1.ExecuteReader();
+            odr2 = odc2.ExecuteReader();
+            if (odr1.Read()&&odr2.Read())
             {
-                PaintForm pf = new PaintForm();
-                pf.Show();
+                PaintForm paintForm = new PaintForm();
+                this.Hide();
+                paintForm.Show();
             }
+            else
+            {
+                MessageBox.Show("用户名或密码错误！");
+                return;
+            }
+            con.Close();
+
             if (textBox1.Text.Trim()=="")
             {
-                MessageBox.Show("用户名不能为空");
+                MessageBox.Show("用户名不能为空！");
             }
-            else if(textBox2.Text.Trim()=="")
+            if(textBox2.Text.Trim()=="")
             {
-                MessageBox.Show("密码错误！");
+                MessageBox.Show("密码不能为空！");
             }
         }
 
@@ -88,6 +118,17 @@ namespace Monkeys_Timetable
         private void label1_Click(object sender, EventArgs e)
         {
     
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            RegisterForm registerForm = new RegisterForm();
+            registerForm.Show();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
