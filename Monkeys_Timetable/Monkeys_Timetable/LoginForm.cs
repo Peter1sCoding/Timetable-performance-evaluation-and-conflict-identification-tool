@@ -70,7 +70,11 @@ namespace Monkeys_Timetable
                 PaintForm pf = new PaintForm();
                 pf.Show();
             }
-            else
+            if (textBox1.Text.Trim()=="")
+            {
+                MessageBox.Show("用户名不能为空");
+            }
+            else if(textBox2.Text.Trim()=="")
             {
                 MessageBox.Show("密码错误！");
             }
