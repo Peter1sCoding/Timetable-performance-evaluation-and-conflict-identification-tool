@@ -221,7 +221,7 @@ namespace Monkeys_Timetable
                 }
             }
         }
-        public void ConflictDrawUp(Graphics gs,DataTable ct,Dictionary<string,Train> TrainDic, List<string> StaionList,int k)
+        public void ConflictDrawUp(Graphics gs,DataTable ct,Dictionary<string,Train> TrainDic, List<string> StaionList)
         {
             Pen pp = new Pen(Color.Green, 2);
             PointF p1 = new PointF();
@@ -235,15 +235,27 @@ namespace Monkeys_Timetable
                     {
                         cPoint = TrainDic[ct.Rows[i]["前车"].ToString()].MinuteDic[ct.Rows[i]["车站"].ToString()][0];
                         p1.X = TimeX[cPoint];
-                        p1.Y = staY2[k][StaionList.IndexOf(ct.Rows[i]["车站"].ToString())];
-                        gs.DrawEllipse(pp, p1.X, p1.Y, 5, 5);
+                        for(int j = 1; j < str1.Count + 1; j++)
+                        {
+                            if (str1[j].Contains(ct.Rows[i]["车站"].ToString()))
+                            {
+                                p1.Y = staY2[j][str1[j].IndexOf(ct.Rows[i]["车站"].ToString())];
+                                gs.DrawEllipse(pp, p1.X, p1.Y, 5, 5);
+                            }
+                        }                        
                     }
                     if ((ct.Rows[i]["冲突类型"].ToString() == "发通") || (ct.Rows[i]["冲突类型"].ToString() == "通发") || (ct.Rows[i]["冲突类型"].ToString() == "发发"))
                     {
                         cPoint = TrainDic[ct.Rows[i]["前车"].ToString()].MinuteDic[ct.Rows[i]["车站"].ToString()][1];
                         p1.X = TimeX[cPoint];
-                        p1.Y = staY2[k][StaionList.IndexOf(ct.Rows[i]["车站"].ToString())];
-                        gs.DrawEllipse(pp, p1.X, p1.Y, 5, 5);
+                        for (int j = 1; j < str1.Count + 1; j++)
+                        {
+                            if (str1[j].Contains(ct.Rows[i]["车站"].ToString()))
+                            {
+                                p1.Y = staY2[j][str1[j].IndexOf(ct.Rows[i]["车站"].ToString())];
+                                gs.DrawEllipse(pp, p1.X, p1.Y, 5, 5);
+                            }
+                        }
                     }
                 }                
             }              
@@ -258,19 +270,31 @@ namespace Monkeys_Timetable
                 if(TrainDic[No].Dir == "down")
                 {
                     int cPoint = 0;
-                    if ((ct.Rows[i]["冲突类型"].ToString() == "到发") || (ct.Rows[i]["冲突类型"].ToString() == "到到") || (ct.Rows[i]["冲突类型"].ToString() == "到通") || (ct.Rows[i]["冲突类型"].ToString() == "通通"))
+                    if ((ct.Rows[i]["冲突类型"].ToString() == "通到") || (ct.Rows[i]["冲突类型"].ToString() == "到到") || (ct.Rows[i]["冲突类型"].ToString() == "到通") || (ct.Rows[i]["冲突类型"].ToString() == "通通"))
                     {
                         cPoint = TrainDic[ct.Rows[i]["前车"].ToString()].MinuteDic[ct.Rows[i]["车站"].ToString()][0];
                         p1.X = TimeX[cPoint];
-                        p1.Y = staY2[k][StaionList.IndexOf(ct.Rows[i]["车站"].ToString())];
-                        gs.DrawEllipse(pp, p1.X, p1.Y, 5, 5);
+                        for (int j = 1; j < str1.Count + 1; j++)
+                        {
+                            if (str1[j].Contains(ct.Rows[i]["车站"].ToString()))
+                            {
+                                p1.Y = staY2[j][StaionList.IndexOf(ct.Rows[i]["车站"].ToString())];
+                                gs.DrawEllipse(pp, p1.X, p1.Y, 5, 5);
+                            }
+                        }
                     }
                     if ((ct.Rows[i]["冲突类型"].ToString() == "发通") || (ct.Rows[i]["冲突类型"].ToString() == "通发") || (ct.Rows[i]["冲突类型"].ToString() == "发发"))
                     {
                         cPoint = TrainDic[ct.Rows[i]["前车"].ToString()].MinuteDic[ct.Rows[i]["车站"].ToString()][1];
                         p1.X = TimeX[cPoint];
-                        p1.Y = staY2[k][StaionList.IndexOf(ct.Rows[i]["车站"].ToString())];
-                        gs.DrawEllipse(pp, p1.X, p1.Y, 5, 5);
+                        for (int j = 1; j < str1.Count + 1; j++)
+                        {
+                            if (str1[j].Contains(ct.Rows[i]["车站"].ToString()))
+                            {
+                                p1.Y = staY2[j][StaionList.IndexOf(ct.Rows[i]["车站"].ToString())];
+                                gs.DrawEllipse(pp, p1.X, p1.Y, 5, 5);
+                            }
+                        }
                     }
                 }                
             }

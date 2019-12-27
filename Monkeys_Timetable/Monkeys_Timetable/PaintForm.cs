@@ -228,8 +228,8 @@ namespace Monkeys_Timetable
             for (int i = 0; i < k; i++)
             {
                 pt.GetTrainPoint(dm.TrainList, pt.str1[i + 1], i);
-                pt.GetConflictPoint(ci.ConflictList, dm.TrainList, pt.str1[i + 1], i);
-            }
+                pt.GetConflictPoint(ci.ConflictList, dm.TrainList, pt.str1[i + 1],i);
+            }            
             this.pictureBox2.BackgroundImage = bmp;
         }
         //public void Draw()
@@ -306,7 +306,7 @@ namespace Monkeys_Timetable
                 {
                     int ii = i + 1;
                     double total1 = pt.Mile1[ii].Last();
-                    pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList,ii);
+                    pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
                 }
                 upConflictClicked = true;
             }
@@ -317,7 +317,7 @@ namespace Monkeys_Timetable
                 {
                     int ii = i + 1;
                     double total1 = pt.Mile1[ii].Last();
-                    pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList, ii);
+                    pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
                 }
                 downConflictClicked = true;
             }
@@ -384,7 +384,7 @@ namespace Monkeys_Timetable
                                     {
                                         int ii = i1 + 1;
                                         double total1 = pt.Mile1[ii].Last();
-                                        pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList, ii);
+                                        pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
                                     }
                                 }
                                 if (downConflictClicked)
@@ -394,7 +394,7 @@ namespace Monkeys_Timetable
                                     {
                                         int ii = i1 + 1;
                                         double total1 = pt.Mile1[ii].Last();
-                                        pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList, ii);
+                                        pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
                                     }
                                 }
                                 ShowInfoTooltip(ci.ConflictList[i], e.Location);
@@ -440,7 +440,7 @@ namespace Monkeys_Timetable
                                     {
                                         int ii = i1 + 1;
                                         double total1 = pt.Mile1[ii].Last();
-                                        pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList, ii);
+                                        pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
                                     }
                                 }
                                 if (downConflictClicked)
@@ -450,7 +450,7 @@ namespace Monkeys_Timetable
                                     {
                                         int ii = i1 + 1;
                                         double total1 = pt.Mile1[ii].Last();
-                                        pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList, ii);
+                                        pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
                                     }
                                 }
                                 ShowInfoTooltip(train, e.Location);
@@ -504,7 +504,7 @@ namespace Monkeys_Timetable
                                     {
                                         int ii = i1 + 1;
                                         double total1 = pt.Mile1[ii].Last();
-                                        pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList, ii);
+                                        pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
                                     }
                                 }
                                 if (downConflictClicked)
@@ -514,7 +514,7 @@ namespace Monkeys_Timetable
                                     {
                                         int ii = i1 + 1;
                                         double total1 = pt.Mile1[ii].Last();
-                                        pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList, ii);
+                                        pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
                                     }
                                 }
                                 ShowInfoTooltip(ci.ConflictList[i], e.Location);
@@ -560,7 +560,7 @@ namespace Monkeys_Timetable
                                     {
                                         int ii = i1 + 1;
                                         double total1 = pt.Mile1[ii].Last();
-                                        pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList, ii);
+                                        pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
                                     }
                                 }
                                 if (downConflictClicked)
@@ -570,7 +570,7 @@ namespace Monkeys_Timetable
                                     {
                                         int ii = i1 + 1;
                                         double total1 = pt.Mile1[ii].Last();
-                                        pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList, ii);
+                                        pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
                                     }
                                 }
                                 ShowInfoTooltip(train, e.Location);
