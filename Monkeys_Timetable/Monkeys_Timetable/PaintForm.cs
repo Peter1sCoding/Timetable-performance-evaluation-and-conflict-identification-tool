@@ -399,7 +399,7 @@ namespace Monkeys_Timetable
                                 }
                                 ShowInfoTooltip(ci.ConflictList[i], e.Location);
                                 Pen SelectedPen = new Pen(Color.Blue, 2);
-                                gs.DrawEllipse(SelectedPen, ci.ConflictList[i].ConflictLocation.X, ci.ConflictList[i].ConflictLocation.Y, 5, 5);
+                                gs.DrawEllipse(SelectedPen, ci.ConflictList[i].ConflictLocation.X-2, ci.ConflictList[i].ConflictLocation.Y-2, 5, 5);
                                 break;
                             }
                         }
@@ -519,7 +519,7 @@ namespace Monkeys_Timetable
                                 }
                                 ShowInfoTooltip(ci.ConflictList[i], e.Location);
                                 Pen SelectedPen = new Pen(Color.Blue, 2);
-                                gs.DrawEllipse(SelectedPen, ci.ConflictList[i].ConflictLocation.X, ci.ConflictList[i].ConflictLocation.Y, 5, 5);
+                                gs.DrawEllipse(SelectedPen, ci.ConflictList[i].ConflictLocation.X-2, ci.ConflictList[i].ConflictLocation.Y-2, 5, 5);
                                 break;
                             }
                         }

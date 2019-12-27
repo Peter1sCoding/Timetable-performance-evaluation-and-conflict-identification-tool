@@ -223,7 +223,7 @@ namespace Monkeys_Timetable
         }
         public void ConflictDrawUp(Graphics gs,DataTable ct,Dictionary<string,Train> TrainDic, List<string> StaionList)
         {
-            Pen pp = new Pen(Color.Green, 2);
+            Pen pp = new Pen(Color.Black, 2);
             PointF p1 = new PointF();
             for(int i = 0; i < ct.Rows.Count; i++)
             {
@@ -240,7 +240,7 @@ namespace Monkeys_Timetable
                             if (str1[j].Contains(ct.Rows[i]["车站"].ToString()))
                             {
                                 p1.Y = staY2[j][str1[j].IndexOf(ct.Rows[i]["车站"].ToString())];
-                                gs.DrawEllipse(pp, p1.X, p1.Y, 5, 5);
+                                gs.DrawEllipse(pp, p1.X-2, p1.Y-2, 5, 5);
                             }
                         }                        
                     }
@@ -253,7 +253,7 @@ namespace Monkeys_Timetable
                             if (str1[j].Contains(ct.Rows[i]["车站"].ToString()))
                             {
                                 p1.Y = staY2[j][str1[j].IndexOf(ct.Rows[i]["车站"].ToString())];
-                                gs.DrawEllipse(pp, p1.X, p1.Y, 5, 5);
+                                gs.DrawEllipse(pp, p1.X-2, p1.Y-2, 5, 5);
                             }
                         }
                     }
@@ -262,7 +262,7 @@ namespace Monkeys_Timetable
         }
         public void ConflictDrawDown(Graphics gs, DataTable ct, Dictionary<string, Train> TrainDic, List<string> StaionList,int k)
         {
-            Pen pp = new Pen(Color.Green, 2);
+            Pen pp = new Pen(Color.Black, 2);
             PointF p1 = new PointF();
             for (int i = 0; i < ct.Rows.Count; i++)
             {
@@ -279,7 +279,7 @@ namespace Monkeys_Timetable
                             if (str1[j].Contains(ct.Rows[i]["车站"].ToString()))
                             {
                                 p1.Y = staY2[j][StaionList.IndexOf(ct.Rows[i]["车站"].ToString())];
-                                gs.DrawEllipse(pp, p1.X, p1.Y, 5, 5);
+                                gs.DrawEllipse(pp, p1.X-2, p1.Y-2, 5, 5);
                             }
                         }
                     }
@@ -292,7 +292,7 @@ namespace Monkeys_Timetable
                             if (str1[j].Contains(ct.Rows[i]["车站"].ToString()))
                             {
                                 p1.Y = staY2[j][StaionList.IndexOf(ct.Rows[i]["车站"].ToString())];
-                                gs.DrawEllipse(pp, p1.X, p1.Y, 5, 5);
+                                gs.DrawEllipse(pp, p1.X-2, p1.Y-2, 5, 5);
                             }
                         }
                     }
