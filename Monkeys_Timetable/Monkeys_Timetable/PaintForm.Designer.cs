@@ -46,19 +46,20 @@
             this.开行方案ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.显示开行方案数据ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.开行方案图ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.导出ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.导出运行图ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.框架图ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.上行运行图ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.下行运行图ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.上下行运行图ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.导出开行方案ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.计算ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.导出ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.导出运行图ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.导出开行方案ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.框架图ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.上行运行图ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.下行运行图ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.上下行运行图ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -216,6 +217,57 @@
             this.开行方案图ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.开行方案图ToolStripMenuItem.Text = "开行方案图";
             // 
+            // 导出ToolStripMenuItem
+            // 
+            this.导出ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.导出运行图ToolStripMenuItem,
+            this.导出开行方案ToolStripMenuItem});
+            this.导出ToolStripMenuItem.Name = "导出ToolStripMenuItem";
+            this.导出ToolStripMenuItem.Size = new System.Drawing.Size(44, 22);
+            this.导出ToolStripMenuItem.Text = "导出";
+            // 
+            // 导出运行图ToolStripMenuItem
+            // 
+            this.导出运行图ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.框架图ToolStripMenuItem,
+            this.上行运行图ToolStripMenuItem,
+            this.下行运行图ToolStripMenuItem,
+            this.上下行运行图ToolStripMenuItem});
+            this.导出运行图ToolStripMenuItem.Name = "导出运行图ToolStripMenuItem";
+            this.导出运行图ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.导出运行图ToolStripMenuItem.Text = "导出运行图";
+            // 
+            // 框架图ToolStripMenuItem
+            // 
+            this.框架图ToolStripMenuItem.Name = "框架图ToolStripMenuItem";
+            this.框架图ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.框架图ToolStripMenuItem.Text = "运行图底图";
+            this.框架图ToolStripMenuItem.Click += new System.EventHandler(this.框架图ToolStripMenuItem_Click);
+            // 
+            // 上行运行图ToolStripMenuItem
+            // 
+            this.上行运行图ToolStripMenuItem.Name = "上行运行图ToolStripMenuItem";
+            this.上行运行图ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.上行运行图ToolStripMenuItem.Text = "上行运行图";
+            // 
+            // 下行运行图ToolStripMenuItem
+            // 
+            this.下行运行图ToolStripMenuItem.Name = "下行运行图ToolStripMenuItem";
+            this.下行运行图ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.下行运行图ToolStripMenuItem.Text = "下行运行图";
+            // 
+            // 上下行运行图ToolStripMenuItem
+            // 
+            this.上下行运行图ToolStripMenuItem.Name = "上下行运行图ToolStripMenuItem";
+            this.上下行运行图ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.上下行运行图ToolStripMenuItem.Text = "上下行运行图";
+            // 
+            // 导出开行方案ToolStripMenuItem
+            // 
+            this.导出开行方案ToolStripMenuItem.Name = "导出开行方案ToolStripMenuItem";
+            this.导出开行方案ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.导出开行方案ToolStripMenuItem.Text = "导出开行方案";
+            // 
             // 计算ToolStripMenuItem
             // 
             this.计算ToolStripMenuItem.Name = "计算ToolStripMenuItem";
@@ -276,56 +328,16 @@
             this.dataGridView2.TabIndex = 10;
             this.dataGridView2.Visible = false;
             // 
-            // 导出ToolStripMenuItem
+            // checkBox3
             // 
-            this.导出ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.导出运行图ToolStripMenuItem,
-            this.导出开行方案ToolStripMenuItem});
-            this.导出ToolStripMenuItem.Name = "导出ToolStripMenuItem";
-            this.导出ToolStripMenuItem.Size = new System.Drawing.Size(44, 22);
-            this.导出ToolStripMenuItem.Text = "导出";
-            // 
-            // 导出运行图ToolStripMenuItem
-            // 
-            this.导出运行图ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.框架图ToolStripMenuItem,
-            this.上行运行图ToolStripMenuItem,
-            this.下行运行图ToolStripMenuItem,
-            this.上下行运行图ToolStripMenuItem});
-            this.导出运行图ToolStripMenuItem.Name = "导出运行图ToolStripMenuItem";
-            this.导出运行图ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.导出运行图ToolStripMenuItem.Text = "导出运行图";
-            // 
-            // 导出开行方案ToolStripMenuItem
-            // 
-            this.导出开行方案ToolStripMenuItem.Name = "导出开行方案ToolStripMenuItem";
-            this.导出开行方案ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.导出开行方案ToolStripMenuItem.Text = "导出开行方案";
-            // 
-            // 框架图ToolStripMenuItem
-            // 
-            this.框架图ToolStripMenuItem.Name = "框架图ToolStripMenuItem";
-            this.框架图ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.框架图ToolStripMenuItem.Text = "运行图底图";
-            this.框架图ToolStripMenuItem.Click += new System.EventHandler(this.框架图ToolStripMenuItem_Click);
-            // 
-            // 上行运行图ToolStripMenuItem
-            // 
-            this.上行运行图ToolStripMenuItem.Name = "上行运行图ToolStripMenuItem";
-            this.上行运行图ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.上行运行图ToolStripMenuItem.Text = "上行运行图";
-            // 
-            // 下行运行图ToolStripMenuItem
-            // 
-            this.下行运行图ToolStripMenuItem.Name = "下行运行图ToolStripMenuItem";
-            this.下行运行图ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.下行运行图ToolStripMenuItem.Text = "下行运行图";
-            // 
-            // 上下行运行图ToolStripMenuItem
-            // 
-            this.上下行运行图ToolStripMenuItem.Name = "上下行运行图ToolStripMenuItem";
-            this.上下行运行图ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.上下行运行图ToolStripMenuItem.Text = "上下行运行图";
+            this.checkBox3.AutoSize = true;
+            this.checkBox3.Location = new System.Drawing.Point(1231, 4);
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.Size = new System.Drawing.Size(96, 16);
+            this.checkBox3.TabIndex = 11;
+            this.checkBox3.Text = "显示详细信息";
+            this.checkBox3.UseVisualStyleBackColor = true;
+            this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
             // 
             // PaintForm
             // 
@@ -334,6 +346,7 @@
             this.AutoScroll = true;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(913, 529);
+            this.Controls.Add(this.checkBox3);
             this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.pictureBox2);
@@ -390,5 +403,6 @@
         private System.Windows.Forms.ToolStripMenuItem 上行运行图ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 下行运行图ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 上下行运行图ToolStripMenuItem;
+        private System.Windows.Forms.CheckBox checkBox3;
     }
 }

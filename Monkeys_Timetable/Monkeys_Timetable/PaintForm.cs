@@ -629,7 +629,10 @@ namespace Monkeys_Timetable
 
             dataGridView1.DataSource = dt;
             dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridView1.Visible = true;
+            if (checkBox3.Checked)
+            {
+                dataGridView1.Visible = true;
+            }
             dataGridView1.Location = location;
         }
         private void ShowInfoTooltip(Conflict con, Point location)
@@ -643,7 +646,11 @@ namespace Monkeys_Timetable
 
             dataGridView2.DataSource = dt;
             dataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridView2.Visible = true;
+            if (checkBox3.Checked)
+            {
+                dataGridView2.Visible = true;
+            }
+                
         }
 
         private void 读取车站画图信息ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -663,6 +670,12 @@ namespace Monkeys_Timetable
         private void 框架图ToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void checkBox3_CheckedChanged(object sender, EventArgs e)
+        {
+            dataGridView2.Visible = false;
+            dataGridView1.Visible = false;
         }
     }
 }
