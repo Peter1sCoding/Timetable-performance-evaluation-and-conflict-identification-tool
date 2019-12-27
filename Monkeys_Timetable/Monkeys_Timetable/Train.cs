@@ -170,23 +170,23 @@ namespace Monkeys_Timetable
                 x_Dir = value;
             }
         }
-        private Dictionary<string, List<PointF>> x_trainPointDic;
+        private List<Dictionary<string, List<PointF>>> x_TrainPointList;
         /// <summary>
         /// 列车在bmp中点位信息
         /// </summary>
-        public Dictionary<string, List<PointF>> trainPointDic
+        public List<Dictionary<string, List<PointF>>> TrainPointList
         {
             get
             {
-                if(x_trainPointDic == null)
+                if(x_TrainPointList == null)
                 {
-                    x_trainPointDic = new Dictionary<string, List<PointF>>();
+                    x_TrainPointList = new List<Dictionary<string, List<PointF>>>();
                 }
-                return x_trainPointDic;
+                return x_TrainPointList;
             }
             set
             {
-                x_trainPointDic = value;
+                x_TrainPointList = value;
             }
         }
     }

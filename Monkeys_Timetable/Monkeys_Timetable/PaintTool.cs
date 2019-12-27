@@ -173,7 +173,9 @@ namespace Monkeys_Timetable
         {
             foreach(Train train in TrainList)
             {
-                for(int i = 0; i < train.staList.Count; i++)
+                Dictionary<string, List<PointF>> PointDic = new Dictionary<string, List<PointF>>();
+                train.TrainPointList.Add(PointDic);
+                for (int i = 0; i < train.staList.Count; i++)
                 {
                     if (StationList.IndexOf(train.staList[i]) != -1)
                     {
@@ -184,17 +186,16 @@ namespace Monkeys_Timetable
                         int i2 = train.MinuteDic[train.staList[i]][1];
                         p1.X = TimeX[i1];
                         p2.X = TimeX[i2];
-                        p1.Y = staY2[k][index1];
-                        p2.Y = staY2[k][index1];
+                        p1.Y = staY2[k + 1][index1];
+                        p2.Y = staY2[k + 1][index1];
                         List<PointF> pointList = new List<PointF>();
                         pointList.Add(p1);
                         pointList.Add(p2);
-                        if (!train.trainPointDic.ContainsKey(train.staList[i]))
+                        if (!train.TrainPointList[k].ContainsKey(train.staList[i]))
                         {
-                            train.trainPointDic.Add(train.staList[i], pointList);
+                            train.TrainPointList[k].Add(train.staList[i], pointList);
                         }
-                    }
-                        
+                    }                        
                 }
             }
         }
@@ -212,7 +213,7 @@ namespace Monkeys_Timetable
                             PointF p = new PointF();
                             int index = StationList.IndexOf(conflict.ConflictSta);
                             p.X = TimeX[i1];
-                            p.Y = staY2[k][index];
+                            p.Y = staY2[k + 1][index];
                             conflict.ConflictLocation = p;
                         }
                      

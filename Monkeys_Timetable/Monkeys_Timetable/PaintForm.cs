@@ -25,6 +25,7 @@ namespace Monkeys_Timetable
         Bitmap bmp = new Bitmap(TD_Width, TD_Height);
         public bool upConflictClicked = false;
         public bool downConflictClicked = false;
+
         
         
 
@@ -211,10 +212,9 @@ namespace Monkeys_Timetable
                 {
                     int ii = i + 1;
                     double total1 = pt.Mile1[ii].Last();
-                    pt.TimetableFrame(this.pictureBox2.Width, pt.border2[i].up,pt.border2[i].down, total1,pt.Mile1[ii], gs, pt.str1[ii],ii);
+                    pt.TimetableFrame(this.pictureBox2.Width, pt.border2[i].up, pt.border2[i].down, total1, pt.Mile1[ii], gs, pt.str1[ii], ii);
                     pt.TrainLine(gs, dm.downTrainList, pt.str1[ii], ii);
-                }
-                
+                }          
             }
             else
             {
@@ -227,10 +227,8 @@ namespace Monkeys_Timetable
             }
             for (int i = 0; i < k; i++)
             {
-                int ii = i + 1;
-                double total1 = pt.Mile1[ii].Last();
-                pt.GetTrainPoint(dm.TrainList, pt.str1[ii], ii);
-                pt.GetConflictPoint(ci.ConflictList, dm.TrainList, pt.str1[ii], ii);
+                pt.GetTrainPoint(dm.TrainList, pt.str1[i + 1], i);
+                pt.GetConflictPoint(ci.ConflictList, dm.TrainList, pt.str1[i + 1], i);
             }
             this.pictureBox2.BackgroundImage = bmp;
         }
@@ -405,13 +403,32 @@ namespace Monkeys_Timetable
                                 break;
                             }
                         }
-                    }                   
+                    }
                     if (c != 0)
                     {
                         dataGridView2.Visible = false;
-                        for (int i = 0; i < train.trainPointDic.Count - 1; i++)
+
+
+                        for (int i = 0; i < train.TrainPointList.Count; i++)
                         {
-                            n = PaintTool.PointInLine(e.Location, train.trainPointDic[train.staList[i]][1], train.trainPointDic[train.staList[i + 1]][0], precision);
+                            for (int s = 0; s < pt.str1.Count; s++)
+                            {
+                                for(int m = 0; m < train.staList.Count - 1; m++)
+                                {
+                                    if ((train.TrainPointList[s].ContainsKey(train.staList[m])) && (train.TrainPointList[s].ContainsKey(train.staList[m + 1])))
+                                    {
+                                        n = PaintTool.PointInLine(e.Location, train.TrainPointList[s][train.staList[m]][1], train.TrainPointList[s][train.staList[m + 1]][0], precision);
+                                        if (n == 0)
+                                        {
+                                            break;
+                                        }
+                                    }
+                                }                                                   
+                                if (n == 0)
+                                {
+                                    break;
+                                }
+                            }
                             if (n == 0)
                             {
                                 this.pictureBox2.Refresh();
@@ -438,14 +455,25 @@ namespace Monkeys_Timetable
                                 }
                                 ShowInfoTooltip(train, e.Location);
                                 Pen SelectedPen = new Pen(Color.Blue, 2);
-                                for (int j = 0; j < train.staList.Count - 1; j++)
+                                for (int j = 1; j < pt.str1.Count + 1; j++)
                                 {
-                                    gs.DrawLine(SelectedPen, train.trainPointDic[train.staList[j]][1], train.trainPointDic[train.staList[j + 1]][0]);
+                                    for (int p = 0; p < pt.str1[j].Count - 1; p++)
+                                    {
+                                        if (train.TrainPointList[j - 1].Count <= 1)
+                                        {
+                                            break;
+                                        }
+                                        if((train.staList.Contains(pt.str1[j][p]))&& (train.staList.Contains(pt.str1[j][p + 1])))
+                                        {
+                                            gs.DrawLine(SelectedPen, train.TrainPointList[j - 1][pt.str1[j][p]][0], train.TrainPointList[j - 1][pt.str1[j][p + 1]][1]);                                         
+                                        }                       
+                                    }
                                 }
                                 break;
                             }
                         }
-                    }                    
+
+                    }
                     if ((c == 0) || (n == 0))
                     {
                         break;
@@ -459,7 +487,7 @@ namespace Monkeys_Timetable
                 {
                     Graphics gs;
                     gs = Graphics.FromImage(bmp);
-                    if (downConflictClicked)
+                    if (upConflictClicked)
                     {
                         for (int i = 0; i < ci.ConflictList.Count; i++)
                         {
@@ -495,13 +523,32 @@ namespace Monkeys_Timetable
                                 break;
                             }
                         }
-                    }                   
+                    }
                     if (c != 0)
                     {
                         dataGridView2.Visible = false;
-                        for (int i = 0; i < train.trainPointDic.Count - 1; i++)
+
+
+                        for (int i = 0; i < train.TrainPointList.Count - 1; i++)
                         {
-                            n = PaintTool.PointInLine(e.Location, train.trainPointDic[train.staList[i]][1], train.trainPointDic[train.staList[i + 1]][0], precision);
+                            for (int s = 0; s < pt.str1.Count; s++)
+                            {
+                                for (int m = 0; m < train.staList.Count - 1; m++)
+                                {
+                                    if ((train.TrainPointList[s].ContainsKey(train.staList[m])) && (train.TrainPointList[s].ContainsKey(train.staList[m + 1])))
+                                    {
+                                        n = PaintTool.PointInLine(e.Location, train.TrainPointList[s][train.staList[m]][1], train.TrainPointList[s][train.staList[m + 1]][0], precision);
+                                        if (n == 0)
+                                        {
+                                            break;
+                                        }
+                                    }
+                                }
+                                if (n == 0)
+                                {
+                                    break;
+                                }
+                            }
                             if (n == 0)
                             {
                                 this.pictureBox2.Refresh();
@@ -528,13 +575,24 @@ namespace Monkeys_Timetable
                                 }
                                 ShowInfoTooltip(train, e.Location);
                                 Pen SelectedPen = new Pen(Color.Blue, 2);
-                                for (int j = 0; j < train.staList.Count - 1; j++)
+                                for (int j = 1; j < pt.str1.Count + 1; j++)
                                 {
-                                    gs.DrawLine(SelectedPen, train.trainPointDic[train.staList[j]][1], train.trainPointDic[train.staList[j + 1]][0]);
+                                    for (int p = 0; p < pt.str1[j].Count - 1; p++)
+                                    {
+                                        if (train.TrainPointList[j - 1].Count <= 0)
+                                        {
+                                            break;
+                                        }
+                                        if (train.staList.Contains(pt.str1[j][p]) && train.staList.Contains(pt.str1[j][p + 1]))
+                                        {
+                                            gs.DrawLine(SelectedPen, train.TrainPointList[j - 1][pt.str1[j][p]][1], train.TrainPointList[j - 1][pt.str1[j][p + 1]][0]);
+                                        }
+                                    }
                                 }
                                 break;
                             }
                         }
+
                     }
                     if ((c == 0) || (n == 0))
                     {
