@@ -26,6 +26,9 @@ namespace Monkeys_Timetable
         List<float> TimeX = new List<float>();
         List<float> staY = new List<float>();
         Dictionary<int, List<float>> staY2 = new Dictionary<int, List<float>>();
+        /// <summary>
+        /// 存放冲突信息的DataTable
+        /// </summary>
         DataTable ct = new DataTable();
 
         public struct Border
@@ -199,6 +202,9 @@ namespace Monkeys_Timetable
                 }
             }
         }
+        /// <summary>
+        /// 获取各冲突点在bmp的坐标
+        /// </summary>
         public void GetConflictPoint(List<Conflict> ConflictList,List<Train> TrainList)
         {
             foreach(Conflict conflict in ConflictList)
@@ -241,6 +247,9 @@ namespace Monkeys_Timetable
                 }
             }
         }
+        /// <summary>
+        /// 在bmp中绘制上行列车间的冲突点
+        /// </summary>
         public void ConflictDrawUp(Graphics gs,DataTable ct,Dictionary<string,Train> TrainDic, List<string> StaionList)
         {
             Pen pp = new Pen(Color.Black, 2);
@@ -280,6 +289,9 @@ namespace Monkeys_Timetable
                 }                
             }              
         }
+        /// <summary>
+        /// 在bmp中绘制下行列车间的冲突点
+        /// </summary>
         public void ConflictDrawDown(Graphics gs, DataTable ct, Dictionary<string, Train> TrainDic, List<string> StaionList)
         {
             Pen pp = new Pen(Color.Black, 2);
@@ -318,7 +330,10 @@ namespace Monkeys_Timetable
                     }
                 }
             }
-        }       
+        }
+        /// <summary>
+		/// 以一定误差判断点是否在由另外两点构成的直线上
+		/// </summary>
         public static int PointInLine(PointF curPoint, PointF LineStart, PointF LineEnd, double Difference)
         {
             if (Difference < 0)
@@ -370,6 +385,9 @@ namespace Monkeys_Timetable
             }
             return -1;
         }
+        /// <summary>
+		/// 以一定误差判断点是否在另一个点的附近
+		/// </summary>
         public static int PointInCircle(PointF curPoint, PointF CirclePoint, double Difference)
         {
             if (Difference < 0)
@@ -381,6 +399,9 @@ namespace Monkeys_Timetable
             }                          
             return -1;
         }
+        /// <summary>
+		/// 获取两点间距离
+		/// </summary>
         public static double GetDistance(PointF p1, PointF p2)
         {
             float x = p1.X - p2.X;
@@ -388,7 +409,6 @@ namespace Monkeys_Timetable
 
             return Math.Sqrt(x * x + y * y);
         }
-
         public void Branch(List<string> StationStr, List<double> StationMile, double Width, double Height)
         {
             //float divi = 5;
