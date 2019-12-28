@@ -576,6 +576,14 @@ namespace Monkeys_Timetable
                                         {
                                             gs.DrawLine(SelectedPen, train.TrainPointList[j - 1][pt.str1[j][p]][1], train.TrainPointList[j - 1][pt.str1[j][p + 1]][0]);
                                         }
+                                        
+                                    }
+                                    for (int p = 1; p < pt.str1[j].Count - 1; p++)
+                                    {
+                                        if (train.TrainPointList[j - 1].Count <= 1)
+                                        {
+                                            break;
+                                        }
                                         if (train.staList.Contains(pt.str1[j][p]))
                                         {
                                             gs.DrawLine(SelectedPen, train.TrainPointList[j - 1][pt.str1[j][p]][1], train.TrainPointList[j - 1][pt.str1[j][p]][0]);
