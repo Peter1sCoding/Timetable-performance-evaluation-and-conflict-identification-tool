@@ -16,6 +16,7 @@ namespace Monkeys_Timetable
         public int REID=1;
         public DateTime registertime1;
         public DateTime registertime2;
+        public int SURE = 0;
         public RegisterForm()
         {
             InitializeComponent();
@@ -54,6 +55,14 @@ namespace Monkeys_Timetable
             {
                 MessageBox.Show("密码不能为空！");
             }
+            if(System.Text.RegularExpressions.Regex.IsMatch(textBox2.Text, "[A-Z]")&&(System.Text.RegularExpressions.Regex.IsMatch(textBox2.Text, "[0-9]")) && (System.Text.RegularExpressions.Regex.IsMatch(textBox2.Text, "[a-z]")))
+            {
+                SURE = 1;
+            }
+            else
+            {
+                MessageBox.Show("密码必须包含大小写字母和数字！");
+            }
             if(textBox3.Text.Trim()=="")
             {
                 MessageBox.Show("确认密码不能为空！");
@@ -66,20 +75,29 @@ namespace Monkeys_Timetable
             string Constr = "Provider=Microsoft.ace.OLEDB.12.0;Data Source=" + Application.StartupPath + Accessfilename;
             OleDbConnection con = new OleDbConnection(Constr);
             con.Open();
-            if((textBox1.Text!="")&&(textBox2.Text!="")&&(textBox3.Text!="")&&(textBox2.Text==textBox3.Text))
+            if((textBox1.Text!="")&&(textBox2.Text!="")&&(textBox3.Text!="")&&(textBox2.Text==textBox3.Text)&&(SURE==1))
             {
-               
-                registertime1 = DateTime.Now;
-                registertime2 = DateTime.Now;
-                string insertsql1 = "insert into UsersDat([Users],[Registertime])values('" + textBox1.Text + "','" +registertime1+ "')";
-                string insertsql2 = "insert into PasswordDat([Password],[Addtime])values('" + textBox2.Text + "','" + registertime2 + "')";
-                OleDbCommand odc1 = new OleDbCommand(insertsql1, con);
-                OleDbCommand odc2 = new OleDbCommand(insertsql2, con);
-                odc1.ExecuteNonQuery();
-                odc2.ExecuteNonQuery();
-                MessageBox.Show("注册成功，请前往登录界面登录！");
-                this.Close();
-
+                string selectsql1 = "Select * from UsersDat where Users='" + textBox1.Text.ToString() + "'";
+                OleDbCommand odc3 = new OleDbCommand(selectsql1, con);
+                OleDbDataReader odr3;
+                odr3 = odc3.ExecuteReader();
+                if (odr3.Read())
+                {
+                    MessageBox.Show("该用户名已被注册！");
+                }
+                else
+                {
+                    registertime1 = DateTime.Now;
+                    registertime2 = DateTime.Now;
+                    string insertsql1 = "insert into UsersDat([Users],[Registertime])values('" + textBox1.Text + "','" + registertime1 + "')";
+                    string insertsql2 = "insert into PasswordDat([Password],[Addtime])values('" + textBox2.Text + "','" + registertime2 + "')";
+                    OleDbCommand odc1 = new OleDbCommand(insertsql1, con);
+                    OleDbCommand odc2 = new OleDbCommand(insertsql2, con);
+                    odc1.ExecuteNonQuery();
+                    odc2.ExecuteNonQuery();
+                    MessageBox.Show("注册成功，请前往登录界面登录！");
+                    this.Close();
+                }                   
             }
             con.Close();
 
