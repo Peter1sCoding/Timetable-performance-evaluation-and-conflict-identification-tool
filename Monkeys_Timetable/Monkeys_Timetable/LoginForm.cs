@@ -16,6 +16,8 @@ namespace Monkeys_Timetable
     public partial class LoginForm : Form
     {
         Button login;
+        static int login_Width =1300;
+        static int login_Height = 750;
         //string file;
 
         public LoginForm()
@@ -23,9 +25,7 @@ namespace Monkeys_Timetable
             InitializeComponent();
 
 
-            Rectangle rect = System.Windows.Forms.SystemInformation.VirtualScreen;
-            this.Height = rect.Height;
-            this.Width = rect.Width;
+            this.Size = new Size(login_Width, login_Height);
             this.Text = "高速铁路运行图冲突检测与评估系统 V1.0";
 
             login = new Button();
@@ -34,13 +34,13 @@ namespace Monkeys_Timetable
             login.Font= new Font("楷体", 18, FontStyle.Bold);
             login.Location = new Point(this.Width / 2, this.Height*4/ 5);
 
-            label1.ForeColor = Color.White;
+            label1.ForeColor = Color.Black;
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("楷体",18,FontStyle.Bold);
             label1.Location = new Point(480,520);
             label1.Location = new Point(this.Width* 7/16, this.Height *5/ 7);
 
-            label2.ForeColor = Color.White;
+            label2.ForeColor = Color.Black;
             label2.BackColor = Color.Transparent;
             label2.Location = new Point(500,550);
             label2.Font = new Font("楷体", 18, FontStyle.Bold);
@@ -61,12 +61,12 @@ namespace Monkeys_Timetable
 
             button1.Size = new Size(70, 35);
             button1.Font = new Font("楷体", 18, FontStyle.Bold);
-            button1.Location = new Point(this.Width*3/7, this.Height * 4 / 5);
+            button1.Location = new Point(this.Width*3/7, this.Height * 8/9);
 
             button2.Size = new Size(70, 35);
             button2.Text = "取消";
             button2.Font = new Font("楷体", 18, FontStyle.Bold);
-            button2.Location = new Point(this.Width *7/13, this.Height * 4 / 5);
+            button2.Location = new Point(this.Width *6/13, this.Height * 4 / 5);
 
             this.Controls.Add(login);
 
