@@ -131,5 +131,10 @@
     <None Include="沪宁车站画图信息.csv" />
     <None Include="车站列车安全间隔.csv" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="注册用户表.mdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
