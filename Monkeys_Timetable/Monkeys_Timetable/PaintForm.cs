@@ -33,7 +33,8 @@ namespace Monkeys_Timetable
         public PaintForm()
         {      
             pictureBox2 = new PictureBox();
-
+            pictureBox2.Width = TD_Width;
+            pictureBox2.Height = TD_Height;
             InitializeComponent();
             this.Size = new Size(TD_Width, TD_Height);
             dm = new DataManager();
