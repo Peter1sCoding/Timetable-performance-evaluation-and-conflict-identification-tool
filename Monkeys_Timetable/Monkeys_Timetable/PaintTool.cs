@@ -199,7 +199,7 @@ namespace Monkeys_Timetable
                 }
             }
         }
-        public void GetConflictPoint(List<Conflict> ConflictList,List<Train> TrainList, List<string> StationList,int k)
+        public void GetConflictPoint(List<Conflict> ConflictList,List<Train> TrainList)
         {
             foreach(Conflict conflict in ConflictList)
             {
@@ -207,16 +207,36 @@ namespace Monkeys_Timetable
                 {
                     if(conflict.FrontTrain == tra)
                     {
-                        if (StationList.IndexOf(conflict.ConflictSta) != -1)
+                        if((conflict.ConflictType=="到通")|| (conflict.ConflictType == "通到") || (conflict.ConflictType == "到到") || (conflict.ConflictType == "通通"))
                         {
                             int i1 = tra.MinuteDic[conflict.ConflictSta][0];
                             PointF p = new PointF();
-                            int index = StationList.IndexOf(conflict.ConflictSta);
-                            p.X = TimeX[i1];
-                            p.Y = staY2[k + 1][index];
-                            conflict.ConflictLocation = p;
+                            p.X = TimeX[i1];                             
+                            for (int i = 0; i < str1.Count; i++)
+                            {
+                                if (str1[i + 1].Contains(conflict.ConflictSta))
+                                {
+                                    int index = str1[i + 1].IndexOf(conflict.ConflictSta);
+                                    p.Y = staY2[i + 1][index];
+                                    conflict.ConflictLocation = p;
+                                }
+                            }
                         }
-                     
+                        else
+                        {
+                            int i1 = tra.MinuteDic[conflict.ConflictSta][1];
+                            PointF p = new PointF();
+                            p.X = TimeX[i1];
+                            for (int i = 0; i < str1.Count; i++)
+                            {
+                                if (str1[i + 1].Contains(conflict.ConflictSta))
+                                {
+                                    int index = str1[i + 1].IndexOf(conflict.ConflictSta);
+                                    p.Y = staY2[i + 1][index];
+                                    conflict.ConflictLocation = p;
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -260,14 +280,14 @@ namespace Monkeys_Timetable
                 }                
             }              
         }
-        public void ConflictDrawDown(Graphics gs, DataTable ct, Dictionary<string, Train> TrainDic, List<string> StaionList,int k)
+        public void ConflictDrawDown(Graphics gs, DataTable ct, Dictionary<string, Train> TrainDic, List<string> StaionList)
         {
             Pen pp = new Pen(Color.Black, 2);
             PointF p1 = new PointF();
             for (int i = 0; i < ct.Rows.Count; i++)
             {
                 string No = ct.Rows[i]["前车"].ToString();
-                if(TrainDic[No].Dir == "down")
+                if (TrainDic[No].Dir == "down")
                 {
                     int cPoint = 0;
                     if ((ct.Rows[i]["冲突类型"].ToString() == "通到") || (ct.Rows[i]["冲突类型"].ToString() == "到到") || (ct.Rows[i]["冲突类型"].ToString() == "到通") || (ct.Rows[i]["冲突类型"].ToString() == "通通"))
@@ -278,8 +298,8 @@ namespace Monkeys_Timetable
                         {
                             if (str1[j].Contains(ct.Rows[i]["车站"].ToString()))
                             {
-                                p1.Y = staY2[j][StaionList.IndexOf(ct.Rows[i]["车站"].ToString())];
-                                gs.DrawEllipse(pp, p1.X-2, p1.Y-2, 5, 5);
+                                p1.Y = staY2[j][str1[j].IndexOf(ct.Rows[i]["车站"].ToString())];
+                                gs.DrawEllipse(pp, p1.X - 2, p1.Y - 2, 5, 5);
                             }
                         }
                     }
@@ -291,12 +311,12 @@ namespace Monkeys_Timetable
                         {
                             if (str1[j].Contains(ct.Rows[i]["车站"].ToString()))
                             {
-                                p1.Y = staY2[j][StaionList.IndexOf(ct.Rows[i]["车站"].ToString())];
-                                gs.DrawEllipse(pp, p1.X-2, p1.Y-2, 5, 5);
+                                p1.Y = staY2[j][str1[j].IndexOf(ct.Rows[i]["车站"].ToString())];
+                                gs.DrawEllipse(pp, p1.X - 2, p1.Y - 2, 5, 5);
                             }
                         }
                     }
-                }                
+                }
             }
         }       
         public static int PointInLine(PointF curPoint, PointF LineStart, PointF LineEnd, double Difference)

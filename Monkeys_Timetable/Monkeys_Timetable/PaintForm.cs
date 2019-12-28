@@ -228,8 +228,8 @@ namespace Monkeys_Timetable
             for (int i = 0; i < k; i++)
             {
                 pt.GetTrainPoint(dm.TrainList, pt.str1[i + 1], i);
-                pt.GetConflictPoint(ci.ConflictList, dm.TrainList, pt.str1[i + 1],i);
-            }            
+            }
+            pt.GetConflictPoint(ci.ConflictList, dm.TrainList);
             this.pictureBox2.BackgroundImage = bmp;
         }
         //public void Draw()
@@ -301,6 +301,7 @@ namespace Monkeys_Timetable
             Graphics gs = Graphics.FromImage(bmp);
             if (checkBox1.Checked)
             {
+                Refresh();
                 int k = pt.border2.Count;
                 for (int i = 0; i < k; i++)
                 {
@@ -312,12 +313,13 @@ namespace Monkeys_Timetable
             }
             else if (checkBox2.Checked)
             {
+                Refresh();
                 int k = pt.border2.Count;
                 for (int i = 0; i < k; i++)
                 {
                     int ii = i + 1;
                     double total1 = pt.Mile1[ii].Last();
-                    pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
+                    pt.ConflictDrawDown(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
                 }
                 downConflictClicked = true;
             }
@@ -371,14 +373,14 @@ namespace Monkeys_Timetable
                     {
                         for (int i = 0; i < ci.ConflictList.Count; i++)
                         {
-                            c = PaintTool.PointInCircle(e.Location, ci.ConflictList[i].ConflictLocation, 5f);
-                            if (c == 0)
+                            if(ci.ConflictList[i].FrontTrain.Dir == "up")
                             {
-                                dataGridView1.Visible = false;
-                                this.pictureBox2.Refresh();
-                                DrawPicture();
-                                if (upConflictClicked)
+                                c = PaintTool.PointInCircle(e.Location, ci.ConflictList[i].ConflictLocation, 5f);
+                                if (c == 0)
                                 {
+                                    dataGridView1.Visible = false;
+                                    this.pictureBox2.Refresh();
+                                    DrawPicture();
                                     int k = pt.border2.Count;
                                     for (int i1 = 0; i1 < k; i1++)
                                     {
@@ -386,29 +388,17 @@ namespace Monkeys_Timetable
                                         double total1 = pt.Mile1[ii].Last();
                                         pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
                                     }
+                                    ShowInfoTooltip(ci.ConflictList[i]);
+                                    Pen SelectedPen = new Pen(Color.Blue, 2);
+                                    gs.DrawEllipse(SelectedPen, ci.ConflictList[i].ConflictLocation.X - 2, ci.ConflictList[i].ConflictLocation.Y - 2, 5, 5);
+                                    break;
                                 }
-                                if (downConflictClicked)
-                                {
-                                    int k = pt.border2.Count;
-                                    for (int i1 = 0; i1 < k; i1++)
-                                    {
-                                        int ii = i1 + 1;
-                                        double total1 = pt.Mile1[ii].Last();
-                                        pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
-                                    }
-                                }
-                                ShowInfoTooltip(ci.ConflictList[i], e.Location);
-                                Pen SelectedPen = new Pen(Color.Blue, 2);
-                                gs.DrawEllipse(SelectedPen, ci.ConflictList[i].ConflictLocation.X-2, ci.ConflictList[i].ConflictLocation.Y-2, 5, 5);
-                                break;
-                            }
+                            }                            
                         }
                     }
                     if (c != 0)
                     {
                         dataGridView2.Visible = false;
-
-
                         for (int i = 0; i < train.TrainPointList.Count; i++)
                         {
                             for (int s = 0; s < pt.str1.Count; s++)
@@ -450,7 +440,7 @@ namespace Monkeys_Timetable
                                     {
                                         int ii = i1 + 1;
                                         double total1 = pt.Mile1[ii].Last();
-                                        pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
+                                        pt.ConflictDrawDown(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
                                     }
                                 }
                                 ShowInfoTooltip(train, e.Location);
@@ -472,7 +462,6 @@ namespace Monkeys_Timetable
                                 break;
                             }
                         }
-
                     }
                     if ((c == 0) || (n == 0))
                     {
@@ -487,48 +476,36 @@ namespace Monkeys_Timetable
                 {
                     Graphics gs;
                     gs = Graphics.FromImage(bmp);
-                    if (upConflictClicked)
+                    if (downConflictClicked)
                     {
                         for (int i = 0; i < ci.ConflictList.Count; i++)
                         {
-                            c = PaintTool.PointInCircle(e.Location, ci.ConflictList[i].ConflictLocation, 5f);
-                            if (c == 0)
+                            if (ci.ConflictList[i].FrontTrain.Dir == "down")
                             {
-                                dataGridView1.Visible = false;
-                                this.pictureBox2.Refresh();
-                                DrawPicture();
-                                if (upConflictClicked)
+                                c = PaintTool.PointInCircle(e.Location, ci.ConflictList[i].ConflictLocation, 5f);
+                                if (c == 0)
                                 {
+                                    dataGridView1.Visible = false;
+                                    this.pictureBox2.Refresh();
+                                    DrawPicture();
                                     int k = pt.border2.Count;
                                     for (int i1 = 0; i1 < k; i1++)
                                     {
                                         int ii = i1 + 1;
                                         double total1 = pt.Mile1[ii].Last();
-                                        pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
+                                        pt.ConflictDrawDown(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
                                     }
+                                    ShowInfoTooltip(ci.ConflictList[i]);
+                                    Pen SelectedPen = new Pen(Color.Blue, 2);
+                                    gs.DrawEllipse(SelectedPen, ci.ConflictList[i].ConflictLocation.X - 2, ci.ConflictList[i].ConflictLocation.Y - 2, 5, 5);
+                                    break;
                                 }
-                                if (downConflictClicked)
-                                {
-                                    int k = pt.border2.Count;
-                                    for (int i1 = 0; i1 < k; i1++)
-                                    {
-                                        int ii = i1 + 1;
-                                        double total1 = pt.Mile1[ii].Last();
-                                        pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
-                                    }
-                                }
-                                ShowInfoTooltip(ci.ConflictList[i], e.Location);
-                                Pen SelectedPen = new Pen(Color.Blue, 2);
-                                gs.DrawEllipse(SelectedPen, ci.ConflictList[i].ConflictLocation.X-2, ci.ConflictList[i].ConflictLocation.Y-2, 5, 5);
-                                break;
-                            }
+                            }                           
                         }
                     }
                     if (c != 0)
                     {
                         dataGridView2.Visible = false;
-
-
                         for (int i = 0; i < train.TrainPointList.Count - 1; i++)
                         {
                             for (int s = 0; s < pt.str1.Count; s++)
@@ -570,7 +547,7 @@ namespace Monkeys_Timetable
                                     {
                                         int ii = i1 + 1;
                                         double total1 = pt.Mile1[ii].Last();
-                                        pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
+                                        pt.ConflictDrawDown(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
                                     }
                                 }
                                 ShowInfoTooltip(train, e.Location);
@@ -635,7 +612,7 @@ namespace Monkeys_Timetable
             }
             dataGridView1.Location = location;
         }
-        private void ShowInfoTooltip(Conflict con, Point location)
+        private void ShowInfoTooltip(Conflict con)
         {
             DataTable dt = new DataTable();
             dt.Columns.Add("冲突类型");
@@ -649,8 +626,7 @@ namespace Monkeys_Timetable
             if (checkBox3.Checked)
             {
                 dataGridView2.Visible = true;
-            }
-                
+            }                
         }
 
         private void 读取车站画图信息ToolStripMenuItem_Click(object sender, EventArgs e)
