@@ -7,9 +7,15 @@ using System.Data;
 
 namespace Monkeys_Timetable
 {
-    class DataManager  //读入到发时刻及车站等数据的类，封装读取列车、车站等方法
+    /// <summary>
+    /// 读入到发时刻及车站等数据的类，封装读取列车、车站等方法
+    /// </summary>
+    class DataManager
     {
-        private List<Train> x_TrainList; //列车列表
+        private List<Train> x_TrainList;
+        /// <summary>
+        /// 所有列车列表
+        /// </summary>
         public List<Train> TrainList
         {
             get
@@ -21,7 +27,11 @@ namespace Monkeys_Timetable
                 x_TrainList = value;
             }
         }
-        private List<Train> x_upTrainList; //列车列表
+        
+        private List<Train> x_upTrainList;
+        /// <summary>
+        /// 上行列车列表
+        /// </summary>
         public List<Train> upTrainList
         {
             get
@@ -33,7 +43,11 @@ namespace Monkeys_Timetable
                 x_upTrainList = value;
             }
         }
-        private List<Train> x_downTrainList; //列车列表
+
+        private List<Train> x_downTrainList;
+        /// <summary>
+        /// 下行列车列表
+        /// </summary>
         public List<Train> downTrainList
         {
             get
@@ -45,8 +59,11 @@ namespace Monkeys_Timetable
                 x_downTrainList = value;
             }
         }
-        private Dictionary<string, Train> m_TrainDic; //列车字典
-        //列车字典
+       
+        private Dictionary<string, Train> m_TrainDic;
+        /// <summary>
+        /// 所有列车字典
+        /// </summary>
         public Dictionary<string, Train> TrainDic
         {
             get
@@ -57,8 +74,11 @@ namespace Monkeys_Timetable
             }
             set { m_TrainDic = value; }
         }
-        private Dictionary<string, Train> m_UpTrainDic; //上行列车字典
-        //列车字典
+        
+        private Dictionary<string, Train> m_UpTrainDic;
+        /// <summary>
+        /// 上行列车字典
+        /// </summary>
         public Dictionary<string, Train> UpTrainDic
         {
             get
@@ -69,8 +89,12 @@ namespace Monkeys_Timetable
             }
             set { m_UpTrainDic = value; }
         }
-        private Dictionary<string, Train> m_DownTrainDic; //列车字典
-        //列车字典
+
+       
+        private Dictionary<string, Train> m_DownTrainDic;
+        /// <summary>
+        /// 下行列车字典
+        /// </summary>
         public Dictionary<string, Train> DownTrainDic
         {
             get
@@ -81,7 +105,11 @@ namespace Monkeys_Timetable
             }
             set { m_DownTrainDic = value; }
         }
-        private List<Station> x_stationList;//车站列表
+
+        private List<Station> x_stationList;
+        /// <summary>
+        /// 车站列表
+        /// </summary>
         public List<Station> stationList
         {
             get
@@ -94,7 +122,10 @@ namespace Monkeys_Timetable
             }
         }
 
-        private List<String> x_stationStringList;//车站列表
+        private List<String> x_stationStringList;
+        /// <summary>
+        /// 车站列表
+        /// </summary>
         public List<String> stationStringList
         {
             get
@@ -106,11 +137,9 @@ namespace Monkeys_Timetable
                 x_stationStringList = value;
             }
         }
-        /// <summary>
-        /// /////////////////
-        /// </summary>
-        private List<DrawStation> x_stationDrawList;//车站列表
-        public List<DrawStation> stationDrawList
+       
+        private List<DrawStation> x_stationDrawList;
+        public List<DrawStation> stationDrawList//车站列表
         {
             get
             {
@@ -122,8 +151,8 @@ namespace Monkeys_Timetable
             }
         }
 
-        private List<String> x_stationDrawStringList;//车站列表
-        public List<String> stationDrawStringList
+        private List<String> x_stationDrawStringList;
+        public List<String> stationDrawStringList//车站列表
         {
             get
             {
@@ -135,7 +164,10 @@ namespace Monkeys_Timetable
             }
         }
 
-        private Dictionary<string, Dictionary<string,int>> x_HeadwayDic; //通过"站名+上下行+间隔类型"索引间隔时间标准
+        private Dictionary<string, Dictionary<string,int>> x_HeadwayDic;
+        /// <summary>
+        /// 通过"站名+上下行+间隔类型"索引间隔时间标准
+        /// </summary>
         public Dictionary<string, Dictionary<string, int>> HeadwayDic
         {
             get
@@ -148,6 +180,9 @@ namespace Monkeys_Timetable
             }
         }
 
+        /// <summary>
+        /// 读取列车文件并根据尾号判断上下行
+        /// </summary>
         public void ReadTrain(string Filename)
         {
             TrainDic.Clear();
@@ -215,6 +250,7 @@ namespace Monkeys_Timetable
             }
             ToMinute(TrainList);
         }
+
         /// <summary>
         /// 根据车次尾号将列车存入上行或下行列车字典
         /// </summary>
@@ -268,6 +304,9 @@ namespace Monkeys_Timetable
             ToMinute(downTrainList);
         }
 
+        /// <summary>
+        /// 读取文件将车站存入车站信息列表和车站名列表
+        /// </summary>
         public void ReadStation(string Filename)
         {
             StreamReader sr = new StreamReader(Filename, Encoding.UTF8);
@@ -309,6 +348,10 @@ namespace Monkeys_Timetable
             }
             sr.Close();
         }
+
+        /// <summary>
+        /// 输出之前读取的信息为时刻表，包含车次、出发、到达车站以及列车停站信息
+        /// </summary>
         public void OutPutTimetable(List<Train> trainList,List<string> stationlist)
         {
             FileStream fs = new FileStream(Environment.CurrentDirectory + @"\\运行图输出.csv", System.IO.FileMode.Open, System.IO.FileAccess.Write);
@@ -357,8 +400,12 @@ namespace Monkeys_Timetable
             }
             sw.Close();
             fs.Close();
-        }        
-        public void ReadHeadway(string FileName)//读取车站列车安全间隔
+        }
+
+        /// <summary>
+        /// 读取车站列车安全间隔
+        /// </summary>
+        public void ReadHeadway(string FileName)
         {
             HeadwayDic = new Dictionary<string, Dictionary<string,int>>();
             StreamReader sr = new StreamReader(FileName, Encoding.Default);
@@ -481,12 +528,18 @@ namespace Monkeys_Timetable
             sr.Close();
         }
 
+        /// <summary>
+        /// 组成key的方法，包含strr[]和上下行、速度
+        /// </summary>
         public string ConcatenateAllString(string a1,string a2,string a3)
         {
             string s = a1 + a2 + a3;
             return s;
         }
 
+        /// <summary>
+        /// 将车站到发时间转成分钟存入minutelist
+        /// </summary>
         public void ToMinute(List<Train> trainList)
         {
             foreach (Train train in TrainList)
@@ -513,6 +566,9 @@ namespace Monkeys_Timetable
             }
         }
 
+        /// <summary>
+        /// 将上下行的停站存入isStopDic字典里
+        /// </summary>
         public void GetStop()
         {
             for(int i = 0; i < upTrainList.Count; i++)
@@ -548,6 +604,9 @@ namespace Monkeys_Timetable
             }
         }
 
+        /// <summary>
+        /// 把车和车站关联，生成车站的列车列表
+        /// </summary>
         public void AddTra2sta()
         {
             for(int i = 0; i < stationList.Count; i++)

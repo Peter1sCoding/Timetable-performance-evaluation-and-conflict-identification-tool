@@ -7,14 +7,32 @@ using System.Data;
 namespace Monkeys_Timetable
 {
 
-    class Conflict_Identification //封装判断各类间隔时间的方法
+    /// <summary>
+    /// 封装判断各类间隔时间的方法
+    /// </summary>
+    class Conflict_Identification
     {
-        public List<Station> stationList; //车站列表
-        public Dictionary<string, Dictionary<string, int>> HeadwayDic;//列车安全间隔字典
-        public Dictionary<string, Train> TrainDic;//列车字典
-        public List<Conflict> ConflictList;//冲突字典
+        /// <summary>
+        ///车站列表
+        /// </summary>
+        public List<Station> stationList;
+        /// <summary>
+        /// 列车安全间隔字典
+        /// </summary>
+        public Dictionary<string, Dictionary<string, int>> HeadwayDic;
+        /// <summary>
+        /// 列车字典
+        /// </summary>
+        public Dictionary<string, Train> TrainDic;
+        /// <summary>
+        /// 冲突字典
+        /// </summary>
+        public List<Conflict> ConflictList;
 
-        private List<String> x_ConflictTrains;//冲突列车列表
+        private List<String> x_ConflictTrains;
+        /// <summary>
+        /// 冲突列车列表
+        /// </summary>
         public List<String> ConflictTrains
         {
             get
@@ -27,13 +45,20 @@ namespace Monkeys_Timetable
             }
         }
 
+        /// <summary>
+        /// 构造函数
+        /// </summary>
         public Conflict_Identification (List<Station> stationList, Dictionary<string, Dictionary<string, int>> HeadwayDic,Dictionary<string,Train> TrainDic)//构造函数，将传入数据转为类中定义数据
         {
             this.stationList = stationList;
             this.HeadwayDic = HeadwayDic;
             this.TrainDic = TrainDic;
         }
-        public void Conflict_Judge()//判断车站安全间隔冲突的方法
+
+        /// <summary>
+        ///判断车站安全间隔冲突的方法
+        /// </summary>
+        public void Conflict_Judge()
         {
             ConflictTrains = new List<string>();
             ConflictList = new List<Conflict>();
@@ -264,7 +289,11 @@ namespace Monkeys_Timetable
                 #endregion
             }
         }
-        public DataTable ToDataTable()//将生成的字符串格式列车冲突信息转为DataTable
+
+        /// <summary>
+        ///将生成的字符串格式列车冲突信息转为DataTable
+        /// </summary>
+        public DataTable ToDataTable()
         {
             DataTable dt = new DataTable();
             dt.Columns.Add("序号");
