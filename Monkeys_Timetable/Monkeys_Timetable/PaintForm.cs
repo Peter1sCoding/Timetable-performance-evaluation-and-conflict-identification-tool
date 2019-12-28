@@ -16,8 +16,8 @@ namespace Monkeys_Timetable
         string traFileName;
         string staFileName;
         string headFileName;
-        static int TD_Width = 2400;//运行图总宽度
-        static int TD_Height = 1800;//运行图总高度
+        static int TD_Width = 3000;//运行图总宽度
+        static int TD_Height = 2000;//运行图总高度
         DataManager dm;
         Conflict_Identification ci;
         DataTable dt;
@@ -33,8 +33,8 @@ namespace Monkeys_Timetable
         public PaintForm()
         {      
             pictureBox2 = new PictureBox();
-            pictureBox2.Width = TD_Width;
-            pictureBox2.Height = TD_Height;
+            pictureBox2.Size = new Size(TD_Width, TD_Height);
+
             InitializeComponent();
             this.Size = new Size(TD_Width, TD_Height);
             dm = new DataManager();
@@ -147,6 +147,7 @@ namespace Monkeys_Timetable
         }
         public void DrawFrame()
         {
+            pictureBox2.Size = new Size(TD_Width, TD_Height);
             Graphics gs;
             gs = Graphics.FromImage(bmp);
             gs.Clear(this.pictureBox2.BackColor);
@@ -159,13 +160,13 @@ namespace Monkeys_Timetable
             {
                 staMile.Add(dm.stationDrawList[i].totalMile);
             }
-            pt.Branch(dm.stationDrawStringList, staMile, this.pictureBox2.Width, this.pictureBox2.Height);
+            pt.Branch(dm.stationDrawStringList, staMile, this.bmp.Width, this.bmp.Height);
             int k = pt.border2.Count;
             for (int i = 0; i < k; i++)
             {
                 int ii = i + 1;
                 double total1 = pt.Mile1[ii].Last();
-                pt.TimetableFrame(this.pictureBox2.Width, pt.border2[i].up,pt.border2[i].down, total1,pt.Mile1[ii], gs, pt.str1[ii],ii);
+                pt.TimetableFrame(this.bmp.Width, pt.border2[i].up,pt.border2[i].down, total1,pt.Mile1[ii], gs, pt.str1[ii],ii);
             }
 
             this.pictureBox2.BackgroundImage = bmp;
@@ -173,6 +174,7 @@ namespace Monkeys_Timetable
         
         public void DrawPicture()
         {
+            pictureBox2.Size = new Size(TD_Width, TD_Height);
             Graphics gs;
             gs = Graphics.FromImage(bmp);
             int ix = dm.stationDrawList.Count();
@@ -181,7 +183,7 @@ namespace Monkeys_Timetable
             {
                 staMile.Add(dm.stationDrawList[i].totalMile);
             }
-            pt.Branch(dm.stationDrawStringList, staMile, this.pictureBox2.Width, this.pictureBox2.Height);
+            pt.Branch(dm.stationDrawStringList, staMile, this.bmp.Width, this.bmp.Height);
             int k = pt.border2.Count;
             pictureBox2.BackgroundImage = null;
             gs.Clear(this.pictureBox2.BackColor);
@@ -191,7 +193,7 @@ namespace Monkeys_Timetable
                 {
                     int ii = i + 1;
                     double total1 = pt.Mile1[ii].Last();
-                    pt.TimetableFrame(this.pictureBox2.Width, pt.border2[i].up,pt.border2[i].down, total1,pt.Mile1[ii], gs, pt.str1[ii],ii);
+                    pt.TimetableFrame(this.bmp.Width, pt.border2[i].up,pt.border2[i].down, total1,pt.Mile1[ii], gs, pt.str1[ii],ii);
                     pt.TrainLine(gs, dm.upTrainList, pt.str1[ii],ii);
                     pt.TrainLine(gs, dm.downTrainList, pt.str1[ii],ii);
                 }
@@ -203,7 +205,7 @@ namespace Monkeys_Timetable
                 {
                     int ii = i + 1;
                     double total1 = pt.Mile1[ii].Last();
-                    pt.TimetableFrame(this.pictureBox2.Width, pt.border2[i].up,pt.border2[i].down, total1,pt.Mile1[ii], gs, pt.str1[ii],ii);
+                    pt.TimetableFrame(this.bmp.Width, pt.border2[i].up,pt.border2[i].down, total1,pt.Mile1[ii], gs, pt.str1[ii],ii);
                     pt.TrainLine(gs, dm.upTrainList, pt.str1[ii], ii);
                 }
                 
@@ -214,7 +216,7 @@ namespace Monkeys_Timetable
                 {
                     int ii = i + 1;
                     double total1 = pt.Mile1[ii].Last();
-                    pt.TimetableFrame(this.pictureBox2.Width, pt.border2[i].up, pt.border2[i].down, total1, pt.Mile1[ii], gs, pt.str1[ii], ii);
+                    pt.TimetableFrame(this.bmp.Width, pt.border2[i].up, pt.border2[i].down, total1, pt.Mile1[ii], gs, pt.str1[ii], ii);
                     pt.TrainLine(gs, dm.downTrainList, pt.str1[ii], ii);
                 }          
             }
@@ -224,7 +226,7 @@ namespace Monkeys_Timetable
                 {
                     int ii = i + 1;
                     double total1 = pt.Mile1[ii].Last();
-                    pt.TimetableFrame(this.pictureBox2.Width, pt.border2[i].up,pt.border2[i].down, total1,pt.Mile1[ii], gs, pt.str1[ii],ii);
+                    pt.TimetableFrame(this.bmp.Width, pt.border2[i].up,pt.border2[i].down, total1,pt.Mile1[ii], gs, pt.str1[ii],ii);
                 }
             }
             for (int i = 0; i < k; i++)
@@ -236,6 +238,7 @@ namespace Monkeys_Timetable
         }
         //public void Draw()
         //{
+        //    pictureBox2.Size = new Size(TD_Width, TD_Height);
         //    Graphics gs;
         //    gs = Graphics.FromImage(bmp);
         //    int ix = dm.stationList.Count;
@@ -300,6 +303,7 @@ namespace Monkeys_Timetable
 
         private void 运行图标记冲突ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            pictureBox2.Size = new Size(TD_Width, TD_Height);
             Graphics gs = Graphics.FromImage(bmp);
             if (checkBox1.Checked)
             {
@@ -362,6 +366,7 @@ namespace Monkeys_Timetable
         }
         private void TimetableViewCtrl_MouseMove(object sender, MouseEventArgs e)
         {
+            pictureBox2.Size = new Size(TD_Width, TD_Height);
             float precision = 5f;
             int n = -1;
             int c = -1;
