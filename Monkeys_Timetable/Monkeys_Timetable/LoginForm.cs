@@ -24,7 +24,6 @@ namespace Monkeys_Timetable
 
 
             Rectangle rect = System.Windows.Forms.SystemInformation.VirtualScreen;
-            //Rectangle rect = SystemInformation.WorkingArea;
             this.Height = rect.Height;
             this.Width = rect.Width;
             this.Text = "高速铁路运行图冲突检测与评估系统 V1.0";

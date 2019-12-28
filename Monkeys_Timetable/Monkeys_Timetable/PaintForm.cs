@@ -64,7 +64,7 @@ namespace Monkeys_Timetable
         {
             
         }
-
+       
         private void 读取车站信息ToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();

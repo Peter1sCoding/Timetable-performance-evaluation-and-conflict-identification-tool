@@ -34,6 +34,7 @@ namespace Monkeys_Timetable
         /// 存入下行开行方案的字典，key为车站名，int中0为不停站，1为停站
         /// </summary>
         Dictionary<string, int> DownPlanDic;
+
         public LinePlan()
         {
             InitializeComponent();
