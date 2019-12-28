@@ -11,8 +11,11 @@ namespace Monkeys_Timetable
 {
     public partial class ConflictForm : Form
     {
-        
-        public ConflictForm(DataTable dt)//以DataGridView格式显示各冲突的相关信息
+        /// <summary>
+        /// 以DataGridView格式显示各冲突的相关信息
+        /// </summary>
+        /// <param name="dt"></param>
+        public ConflictForm(DataTable dt)
         {
             InitializeComponent();
             this.dataGridView1.DataSource = dt;
