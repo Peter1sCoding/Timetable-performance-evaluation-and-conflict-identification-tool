@@ -78,8 +78,8 @@
             this.导出ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(6, 1, 0, 1);
-            this.menuStrip1.Size = new System.Drawing.Size(2000, 29);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 1, 0, 1);
+            this.menuStrip1.Size = new System.Drawing.Size(2400, 24);
             this.menuStrip1.TabIndex = 6;
             this.menuStrip1.Text = "menuStrip1";
             this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
@@ -92,35 +92,35 @@
             this.读取列车间隔信息ToolStripMenuItem,
             this.读取车站画图信息ToolStripMenuItem});
             this.读取文件ToolStripMenuItem.Name = "读取文件ToolStripMenuItem";
-            this.读取文件ToolStripMenuItem.Size = new System.Drawing.Size(90, 27);
+            this.读取文件ToolStripMenuItem.Size = new System.Drawing.Size(68, 22);
             this.读取文件ToolStripMenuItem.Text = "读取文件";
             this.读取文件ToolStripMenuItem.Click += new System.EventHandler(this.读取文件ToolStripMenuItem_Click);
             // 
             // 读取时刻表信息ToolStripMenuItem
             // 
             this.读取时刻表信息ToolStripMenuItem.Name = "读取时刻表信息ToolStripMenuItem";
-            this.读取时刻表信息ToolStripMenuItem.Size = new System.Drawing.Size(226, 28);
+            this.读取时刻表信息ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.读取时刻表信息ToolStripMenuItem.Text = "读取时刻表信息";
             this.读取时刻表信息ToolStripMenuItem.Click += new System.EventHandler(this.读取时刻表信息ToolStripMenuItem_Click);
             // 
             // 读取车站信息ToolStripMenuItem1
             // 
             this.读取车站信息ToolStripMenuItem1.Name = "读取车站信息ToolStripMenuItem1";
-            this.读取车站信息ToolStripMenuItem1.Size = new System.Drawing.Size(226, 28);
+            this.读取车站信息ToolStripMenuItem1.Size = new System.Drawing.Size(172, 22);
             this.读取车站信息ToolStripMenuItem1.Text = "读取车站信息";
             this.读取车站信息ToolStripMenuItem1.Click += new System.EventHandler(this.读取车站信息ToolStripMenuItem1_Click);
             // 
             // 读取列车间隔信息ToolStripMenuItem
             // 
             this.读取列车间隔信息ToolStripMenuItem.Name = "读取列车间隔信息ToolStripMenuItem";
-            this.读取列车间隔信息ToolStripMenuItem.Size = new System.Drawing.Size(226, 28);
+            this.读取列车间隔信息ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.读取列车间隔信息ToolStripMenuItem.Text = "读取列车间隔信息";
             this.读取列车间隔信息ToolStripMenuItem.Click += new System.EventHandler(this.读取列车间隔信息ToolStripMenuItem_Click);
             // 
             // 读取车站画图信息ToolStripMenuItem
             // 
             this.读取车站画图信息ToolStripMenuItem.Name = "读取车站画图信息ToolStripMenuItem";
-            this.读取车站画图信息ToolStripMenuItem.Size = new System.Drawing.Size(226, 28);
+            this.读取车站画图信息ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.读取车站画图信息ToolStripMenuItem.Text = "读取车站画图信息";
             this.读取车站画图信息ToolStripMenuItem.Click += new System.EventHandler(this.读取车站画图信息ToolStripMenuItem_Click);
             // 
@@ -132,35 +132,35 @@
             this.绘制运行图下行ToolStripMenuItem,
             this.绘制运行图上下行ToolStripMenuItem});
             this.绘制ToolStripMenuItem.Name = "绘制ToolStripMenuItem";
-            this.绘制ToolStripMenuItem.Size = new System.Drawing.Size(56, 27);
+            this.绘制ToolStripMenuItem.Size = new System.Drawing.Size(44, 22);
             this.绘制ToolStripMenuItem.Text = "绘制";
             this.绘制ToolStripMenuItem.Click += new System.EventHandler(this.绘制ToolStripMenuItem_Click);
             // 
             // 绘制运行图ToolStripMenuItem
             // 
             this.绘制运行图ToolStripMenuItem.Name = "绘制运行图ToolStripMenuItem";
-            this.绘制运行图ToolStripMenuItem.Size = new System.Drawing.Size(260, 28);
+            this.绘制运行图ToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.绘制运行图ToolStripMenuItem.Text = "绘制运行图底图";
             this.绘制运行图ToolStripMenuItem.Click += new System.EventHandler(this.绘制运行图ToolStripMenuItem_Click_1);
             // 
             // 绘制运行图上行ToolStripMenuItem
             // 
             this.绘制运行图上行ToolStripMenuItem.Name = "绘制运行图上行ToolStripMenuItem";
-            this.绘制运行图上行ToolStripMenuItem.Size = new System.Drawing.Size(260, 28);
+            this.绘制运行图上行ToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.绘制运行图上行ToolStripMenuItem.Text = "绘制运行图（上行）";
             this.绘制运行图上行ToolStripMenuItem.Click += new System.EventHandler(this.绘制运行图上行ToolStripMenuItem_Click);
             // 
             // 绘制运行图下行ToolStripMenuItem
             // 
             this.绘制运行图下行ToolStripMenuItem.Name = "绘制运行图下行ToolStripMenuItem";
-            this.绘制运行图下行ToolStripMenuItem.Size = new System.Drawing.Size(260, 28);
+            this.绘制运行图下行ToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.绘制运行图下行ToolStripMenuItem.Text = "绘制运行图（下行）";
             this.绘制运行图下行ToolStripMenuItem.Click += new System.EventHandler(this.绘制运行图下行ToolStripMenuItem_Click);
             // 
             // 绘制运行图上下行ToolStripMenuItem
             // 
             this.绘制运行图上下行ToolStripMenuItem.Name = "绘制运行图上下行ToolStripMenuItem";
-            this.绘制运行图上下行ToolStripMenuItem.Size = new System.Drawing.Size(260, 28);
+            this.绘制运行图上下行ToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.绘制运行图上下行ToolStripMenuItem.Text = "绘制运行图（上下行）";
             this.绘制运行图上下行ToolStripMenuItem.Click += new System.EventHandler(this.绘制运行图上下行ToolStripMenuItem_Click);
             // 
@@ -170,28 +170,28 @@
             this.显示冲突列车数据ToolStripMenuItem,
             this.运行图标记冲突ToolStripMenuItem});
             this.检测ToolStripMenuItem.Name = "检测ToolStripMenuItem";
-            this.检测ToolStripMenuItem.Size = new System.Drawing.Size(56, 27);
+            this.检测ToolStripMenuItem.Size = new System.Drawing.Size(44, 22);
             this.检测ToolStripMenuItem.Text = "检测";
             this.检测ToolStripMenuItem.Click += new System.EventHandler(this.检测ToolStripMenuItem_Click);
             // 
             // 显示冲突列车数据ToolStripMenuItem
             // 
             this.显示冲突列车数据ToolStripMenuItem.Name = "显示冲突列车数据ToolStripMenuItem";
-            this.显示冲突列车数据ToolStripMenuItem.Size = new System.Drawing.Size(226, 28);
+            this.显示冲突列车数据ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.显示冲突列车数据ToolStripMenuItem.Text = "显示冲突列车数据";
             this.显示冲突列车数据ToolStripMenuItem.Click += new System.EventHandler(this.显示冲突列车数据ToolStripMenuItem_Click);
             // 
             // 运行图标记冲突ToolStripMenuItem
             // 
             this.运行图标记冲突ToolStripMenuItem.Name = "运行图标记冲突ToolStripMenuItem";
-            this.运行图标记冲突ToolStripMenuItem.Size = new System.Drawing.Size(226, 28);
+            this.运行图标记冲突ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.运行图标记冲突ToolStripMenuItem.Text = "运行图标记冲突";
             this.运行图标记冲突ToolStripMenuItem.Click += new System.EventHandler(this.运行图标记冲突ToolStripMenuItem_Click);
             // 
             // 计算ToolStripMenuItem1
             // 
             this.计算ToolStripMenuItem1.Name = "计算ToolStripMenuItem1";
-            this.计算ToolStripMenuItem1.Size = new System.Drawing.Size(56, 27);
+            this.计算ToolStripMenuItem1.Size = new System.Drawing.Size(44, 22);
             this.计算ToolStripMenuItem1.Text = "计算";
             this.计算ToolStripMenuItem1.Click += new System.EventHandler(this.计算ToolStripMenuItem1_Click);
             // 
@@ -201,20 +201,20 @@
             this.显示开行方案数据ToolStripMenuItem,
             this.开行方案图ToolStripMenuItem});
             this.开行方案ToolStripMenuItem.Name = "开行方案ToolStripMenuItem";
-            this.开行方案ToolStripMenuItem.Size = new System.Drawing.Size(90, 27);
+            this.开行方案ToolStripMenuItem.Size = new System.Drawing.Size(68, 22);
             this.开行方案ToolStripMenuItem.Text = "开行方案";
             // 
             // 显示开行方案数据ToolStripMenuItem
             // 
             this.显示开行方案数据ToolStripMenuItem.Name = "显示开行方案数据ToolStripMenuItem";
-            this.显示开行方案数据ToolStripMenuItem.Size = new System.Drawing.Size(192, 28);
+            this.显示开行方案数据ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.显示开行方案数据ToolStripMenuItem.Text = "开行方案数据";
             this.显示开行方案数据ToolStripMenuItem.Click += new System.EventHandler(this.显示开行方案数据ToolStripMenuItem_Click);
             // 
             // 开行方案图ToolStripMenuItem
             // 
             this.开行方案图ToolStripMenuItem.Name = "开行方案图ToolStripMenuItem";
-            this.开行方案图ToolStripMenuItem.Size = new System.Drawing.Size(192, 28);
+            this.开行方案图ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.开行方案图ToolStripMenuItem.Text = "开行方案图";
             // 
             // 导出ToolStripMenuItem
@@ -223,7 +223,7 @@
             this.导出运行图ToolStripMenuItem,
             this.导出开行方案ToolStripMenuItem});
             this.导出ToolStripMenuItem.Name = "导出ToolStripMenuItem";
-            this.导出ToolStripMenuItem.Size = new System.Drawing.Size(56, 27);
+            this.导出ToolStripMenuItem.Size = new System.Drawing.Size(44, 22);
             this.导出ToolStripMenuItem.Text = "导出";
             // 
             // 导出运行图ToolStripMenuItem
@@ -234,38 +234,41 @@
             this.下行运行图ToolStripMenuItem,
             this.上下行运行图ToolStripMenuItem});
             this.导出运行图ToolStripMenuItem.Name = "导出运行图ToolStripMenuItem";
-            this.导出运行图ToolStripMenuItem.Size = new System.Drawing.Size(192, 28);
+            this.导出运行图ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.导出运行图ToolStripMenuItem.Text = "导出运行图";
             // 
             // 框架图ToolStripMenuItem
             // 
             this.框架图ToolStripMenuItem.Name = "框架图ToolStripMenuItem";
-            this.框架图ToolStripMenuItem.Size = new System.Drawing.Size(192, 28);
+            this.框架图ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.框架图ToolStripMenuItem.Text = "运行图底图";
             this.框架图ToolStripMenuItem.Click += new System.EventHandler(this.框架图ToolStripMenuItem_Click);
             // 
             // 上行运行图ToolStripMenuItem
             // 
             this.上行运行图ToolStripMenuItem.Name = "上行运行图ToolStripMenuItem";
-            this.上行运行图ToolStripMenuItem.Size = new System.Drawing.Size(192, 28);
+            this.上行运行图ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.上行运行图ToolStripMenuItem.Text = "上行运行图";
+            this.上行运行图ToolStripMenuItem.Click += new System.EventHandler(this.上行运行图ToolStripMenuItem_Click);
             // 
             // 下行运行图ToolStripMenuItem
             // 
             this.下行运行图ToolStripMenuItem.Name = "下行运行图ToolStripMenuItem";
-            this.下行运行图ToolStripMenuItem.Size = new System.Drawing.Size(192, 28);
+            this.下行运行图ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.下行运行图ToolStripMenuItem.Text = "下行运行图";
+            this.下行运行图ToolStripMenuItem.Click += new System.EventHandler(this.下行运行图ToolStripMenuItem_Click);
             // 
             // 上下行运行图ToolStripMenuItem
             // 
             this.上下行运行图ToolStripMenuItem.Name = "上下行运行图ToolStripMenuItem";
-            this.上下行运行图ToolStripMenuItem.Size = new System.Drawing.Size(192, 28);
+            this.上下行运行图ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.上下行运行图ToolStripMenuItem.Text = "上下行运行图";
+            this.上下行运行图ToolStripMenuItem.Click += new System.EventHandler(this.上下行运行图ToolStripMenuItem_Click);
             // 
             // 导出开行方案ToolStripMenuItem
             // 
             this.导出开行方案ToolStripMenuItem.Name = "导出开行方案ToolStripMenuItem";
-            this.导出开行方案ToolStripMenuItem.Size = new System.Drawing.Size(192, 28);
+            this.导出开行方案ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.导出开行方案ToolStripMenuItem.Text = "导出开行方案";
             // 
             // 计算ToolStripMenuItem
@@ -276,10 +279,10 @@
             // 
             // checkBox1
             // 
-            this.checkBox1.Location = new System.Drawing.Point(1365, 6);
-            this.checkBox1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.checkBox1.Location = new System.Drawing.Point(910, 4);
+            this.checkBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(72, 23);
+            this.checkBox1.Size = new System.Drawing.Size(48, 16);
             this.checkBox1.TabIndex = 0;
             this.checkBox1.Text = "上行";
             this.checkBox1.UseVisualStyleBackColor = true;
@@ -287,10 +290,10 @@
             // 
             // checkBox2
             // 
-            this.checkBox2.Location = new System.Drawing.Point(1446, 6);
-            this.checkBox2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.checkBox2.Location = new System.Drawing.Point(964, 4);
+            this.checkBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(72, 23);
+            this.checkBox2.Size = new System.Drawing.Size(48, 16);
             this.checkBox2.TabIndex = 0;
             this.checkBox2.Text = "下行";
             this.checkBox2.UseVisualStyleBackColor = true;
@@ -298,9 +301,11 @@
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Location = new System.Drawing.Point(0, 33);
+            this.pictureBox2.BackColor = System.Drawing.Color.White;
+            this.pictureBox2.Location = new System.Drawing.Point(0, 23);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(2000, 1500);
+            this.pictureBox2.Size = new System.Drawing.Size(2400, 1800);
             this.pictureBox2.TabIndex = 8;
             this.pictureBox2.TabStop = false;
             this.pictureBox2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.TimetableViewCtrl_MouseMove);
@@ -308,30 +313,31 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(376, 130);
+            this.dataGridView1.Location = new System.Drawing.Point(251, 92);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 29;
-            this.dataGridView1.Size = new System.Drawing.Size(514, 422);
+            this.dataGridView1.Size = new System.Drawing.Size(343, 298);
             this.dataGridView1.TabIndex = 9;
             this.dataGridView1.Visible = false;
             // 
             // dataGridView2
             // 
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(0, 33);
+            this.dataGridView2.Location = new System.Drawing.Point(0, 23);
+            this.dataGridView2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowTemplate.Height = 29;
-            this.dataGridView2.Size = new System.Drawing.Size(526, 101);
+            this.dataGridView2.Size = new System.Drawing.Size(351, 71);
             this.dataGridView2.TabIndex = 10;
             this.dataGridView2.Visible = false;
             // 
             // checkBox3
             // 
             this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(1846, 6);
-            this.checkBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.checkBox3.Location = new System.Drawing.Point(1231, 4);
             this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(132, 21);
+            this.checkBox3.Size = new System.Drawing.Size(96, 16);
             this.checkBox3.TabIndex = 11;
             this.checkBox3.Text = "显示详细信息";
             this.checkBox3.UseVisualStyleBackColor = true;
@@ -339,11 +345,11 @@
             // 
             // PaintForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 17F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1394, 773);
+            this.ClientSize = new System.Drawing.Size(930, 546);
             this.Controls.Add(this.checkBox3);
             this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.dataGridView1);
@@ -352,6 +358,7 @@
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "PaintForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "运行图显示及检测分析工具V1.0";

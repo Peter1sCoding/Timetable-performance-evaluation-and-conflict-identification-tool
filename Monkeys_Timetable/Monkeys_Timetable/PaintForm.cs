@@ -16,7 +16,7 @@ namespace Monkeys_Timetable
         string traFileName;
         string staFileName;
         string headFileName;
-        static int TD_Width = 4800;//运行图总宽度
+        static int TD_Width = 2400;//运行图总宽度
         static int TD_Height = 1800;//运行图总高度
         DataManager dm;
         Conflict_Identification ci;
@@ -458,10 +458,17 @@ namespace Monkeys_Timetable
                                         {
                                             gs.DrawLine(SelectedPen, train.TrainPointList[j - 1][pt.str1[j][p]][0], train.TrainPointList[j - 1][pt.str1[j][p + 1]][1]);                                         
                                         }
-                                        //if (train.staList.Contains(pt.str1[j][p]))
-                                        //{
-                                        //    gs.DrawLine(SelectedPen, train.TrainPointList[j - 1][pt.str1[j][p]][1], train.TrainPointList[j - 1][pt.str1[j][p]][0]);
-                                        //}
+                                    }
+                                    for (int p = 1; p < pt.str1[j].Count - 1; p++)
+                                    {
+                                        if (train.TrainPointList[j - 1].Count <= 1)
+                                        {
+                                            break;
+                                        }
+                                        if (train.staList.Contains(pt.str1[j][p]))
+                                        {
+                                            gs.DrawLine(SelectedPen, train.TrainPointList[j - 1][pt.str1[j][p]][1], train.TrainPointList[j - 1][pt.str1[j][p]][0]);
+                                        }
                                     }
                                 }
                                 break;
@@ -569,10 +576,10 @@ namespace Monkeys_Timetable
                                         {
                                             gs.DrawLine(SelectedPen, train.TrainPointList[j - 1][pt.str1[j][p]][1], train.TrainPointList[j - 1][pt.str1[j][p + 1]][0]);
                                         }
-                                        //if (train.staList.Contains(pt.str1[j][p]))
-                                        //{
-                                        //    gs.DrawLine(SelectedPen, train.TrainPointList[j - 1][pt.str1[j][p]][1], train.TrainPointList[j - 1][pt.str1[j][p]][0]);
-                                        //}
+                                        if (train.staList.Contains(pt.str1[j][p]))
+                                        {
+                                            gs.DrawLine(SelectedPen, train.TrainPointList[j - 1][pt.str1[j][p]][1], train.TrainPointList[j - 1][pt.str1[j][p]][0]);
+                                        }
                                     }
                                 }
                                 break;
@@ -654,6 +661,51 @@ namespace Monkeys_Timetable
 
         private void 框架图ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Title = "保存图片";
+            dialog.Filter = @"jpeg|*.jpg|bmp|*.bmp|png|*.png";
+            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                string Name = dialog.FileName.ToString();
+                if (Name != "" && Name != null)
+                {
+                    string filename = Name.Substring(Name.LastIndexOf(".") + 1).ToString();
+                    System.Drawing.Imaging.ImageFormat imgformat = null;
+
+
+                    if (filename != "")
+                    {
+                        switch (filename)
+                        {
+                            case "jpg":
+                                imgformat = System.Drawing.Imaging.ImageFormat.Jpeg;
+                                break;
+                            case "bmp":
+                                imgformat = System.Drawing.Imaging.ImageFormat.Bmp;
+                                break;
+                            case "png":
+                                imgformat = System.Drawing.Imaging.ImageFormat.Png;
+                                break;
+                            default:
+                                imgformat = System.Drawing.Imaging.ImageFormat.Png;
+                                break;
+                        }
+                        try
+                        {
+                            checkBox1.Checked = false;
+                            checkBox2.Checked = false;
+                            DrawPicture();
+                            Bitmap bit = new Bitmap(pictureBox2.BackgroundImage);
+                            MessageBox.Show(Name);
+                            pictureBox2.BackgroundImage.Save(Name, imgformat);
+                        }
+                        catch
+                        {
+                        }
+                    }
+                }
+            }
+
 
         }
 
@@ -661,6 +713,158 @@ namespace Monkeys_Timetable
         {
             dataGridView2.Visible = false;
             dataGridView1.Visible = false;
+            DrawPicture();
+
+        }
+
+        private void 上行运行图ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Title = "保存图片";
+            dialog.Filter = @"jpeg|*.jpg|bmp|*.bmp|png|*.png";
+            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                string Name = dialog.FileName.ToString();
+                if (Name != "" && Name != null)
+                {
+                    string filename = Name.Substring(Name.LastIndexOf(".") + 1).ToString();
+                    System.Drawing.Imaging.ImageFormat imgformat = null;
+
+
+                    if (filename != "")
+                    {
+                        switch (filename)
+                        {
+                            case "jpg":
+                                imgformat = System.Drawing.Imaging.ImageFormat.Jpeg;
+                                break;
+                            case "bmp":
+                                imgformat = System.Drawing.Imaging.ImageFormat.Bmp;
+                                break;
+                            case "png":
+                                imgformat = System.Drawing.Imaging.ImageFormat.Png;
+                                break;
+                            default:
+                                imgformat = System.Drawing.Imaging.ImageFormat.Png;
+                                break;
+                        }
+                        try
+                        {
+                            checkBox1.Checked = true;
+                            checkBox2.Checked = false;
+                            DrawPicture();
+                            Bitmap bit = new Bitmap(pictureBox2.BackgroundImage);
+                            MessageBox.Show(Name);
+                            pictureBox2.BackgroundImage.Save(Name, imgformat);
+                        }
+                        catch
+                        {
+                        }
+                    }
+                }
+            }
+
+
+        }
+
+        private void 下行运行图ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Title = "保存图片";
+            dialog.Filter = @"jpeg|*.jpg|bmp|*.bmp|png|*.png";
+            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                string Name = dialog.FileName.ToString();
+                if (Name != "" && Name != null)
+                {
+                    string filename = Name.Substring(Name.LastIndexOf(".") + 1).ToString();
+                    System.Drawing.Imaging.ImageFormat imgformat = null;
+
+
+                    if (filename != "")
+                    {
+                        switch (filename)
+                        {
+                            case "jpg":
+                                imgformat = System.Drawing.Imaging.ImageFormat.Jpeg;
+                                break;
+                            case "bmp":
+                                imgformat = System.Drawing.Imaging.ImageFormat.Bmp;
+                                break;
+                            case "png":
+                                imgformat = System.Drawing.Imaging.ImageFormat.Png;
+                                break;
+                            default:
+                                imgformat = System.Drawing.Imaging.ImageFormat.Png;
+                                break;
+                        }
+                        try
+                        {
+                            checkBox1.Checked = false;
+                            checkBox2.Checked = true;
+                            DrawPicture();
+                            Bitmap bit = new Bitmap(pictureBox2.BackgroundImage);
+                            MessageBox.Show(Name);
+                            pictureBox2.BackgroundImage.Save(Name, imgformat);
+                        }
+                        catch
+                        {
+                        }
+                    }
+                }
+            }
+
+
+        }
+
+        private void 上下行运行图ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Title = "保存图片";
+            dialog.Filter = @"jpeg|*.jpg|bmp|*.bmp|png|*.png";
+            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                string Name = dialog.FileName.ToString();
+                if (Name != "" && Name != null)
+                {
+                    string filename = Name.Substring(Name.LastIndexOf(".") + 1).ToString();
+                    System.Drawing.Imaging.ImageFormat imgformat = null;
+
+
+                    if (filename != "")
+                    {
+                        switch (filename)
+                        {
+                            case "jpg":
+                                imgformat = System.Drawing.Imaging.ImageFormat.Jpeg;
+                                break;
+                            case "bmp":
+                                imgformat = System.Drawing.Imaging.ImageFormat.Bmp;
+                                break;
+                            case "png":
+                                imgformat = System.Drawing.Imaging.ImageFormat.Png;
+                                break;
+                            default:
+                                imgformat = System.Drawing.Imaging.ImageFormat.Png;
+                                break;
+                        }
+                        try
+                        {
+                            checkBox1.Checked = true;
+                            checkBox2.Checked = true;
+                            DrawPicture();
+                            Bitmap bit = new Bitmap(pictureBox2.BackgroundImage);
+                            MessageBox.Show(Name);
+                            pictureBox2.BackgroundImage.Save(Name, imgformat);
+                        }
+                        catch
+                        {
+                        }
+                    }
+                }
+            }
+
+
         }
     }
 }

@@ -158,7 +158,7 @@ namespace Monkeys_Timetable
                 }
                 for (int i = 1; i < a - 1; i++)
                 {
-                    if (StaionList.IndexOf(train.staList[i]) != -1)
+                    if (StaionList.IndexOf(train.staList[i]) != -1 && train.staList[i] != StaionList[0] && train.staList[i] != StaionList[StaionList.Count - 1]) 
                     {
                         int index1 = StaionList.IndexOf(train.staList[i]);
                         int i1 = train.MinuteDic[train.staList[i]][0];
