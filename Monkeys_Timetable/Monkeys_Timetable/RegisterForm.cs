@@ -13,10 +13,19 @@ namespace Monkeys_Timetable
 {
     public partial class RegisterForm : Form
     {
-        public int REID=1;
+        /// <summary>
+        /// 注册用户名的时间
+        /// </summary>
         public DateTime registertime1;
+        /// <summary>
+        /// 注册密码的时间
+        /// </summary>
         public DateTime registertime2;
+        /// <summary>
+        /// 密码强度设置的判断标准
+        /// </summary>
         public int SURE = 0;
+
         public RegisterForm()
         {
             InitializeComponent();
