@@ -641,7 +641,7 @@ namespace Monkeys_Timetable
                 dataGridView1.Visible = true;
             }
             dataGridView1.Location = location;
-        }
+        }//显示列车详细信息
         private void ShowInfoTooltip(Conflict con,Point location)
         {
             location.X += 15;
@@ -663,7 +663,7 @@ namespace Monkeys_Timetable
                 dataGridView2.Visible = true;
                 dataGridView2.Location = location;
             }
-        }
+        }//显示冲突详细信息
         private void 读取车站画图信息ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
@@ -895,5 +895,47 @@ namespace Monkeys_Timetable
         {
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //    if(TD_Width < 6000 && TD_Height < 4000)
+            //    {
+            //        TD_Width += 30;
+            //        TD_Height += 20;
+            //    }
+            //    bmp = new Bitmap(TD_Width, TD_Height);
+            //    pt.TimeX = new List<float>();
+            //    pt.staY2 = new Dictionary<int, List<float>>();
+            //    for(int ind = 0; ind <dm.upTrainList.Count ; ind++)
+            //    {
+            //        dm.upTrainList[1].TrainPointList = new List<Dictionary<string, List<PointF>>>();
+            //    }
+            //    for (int ind = 0; ind < dm.downTrainList.Count; ind++)
+            //    {
+            //        dm.downTrainList[1].TrainPointList = new List<Dictionary<string, List<PointF>>>();
+            //    }
+            //    DrawPicture();
+        }//放大
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //    if (TD_Width > 900 && TD_Height > 600)
+            //    {
+            //        TD_Width -= 30;
+            //        TD_Height -= 20;
+            //    }
+            //    bmp = new Bitmap(TD_Width, TD_Height);
+            //    pt.TimeX = new List<float>();
+            //    pt.staY2 = new Dictionary<int, List<float>>();
+            //    for (int ind = 0; ind < dm.upTrainList.Count; ind++)
+            //    {
+            //        dm.upTrainList[ind].TrainPointList = new List<Dictionary<string, List<PointF>>>();
+            //    }
+            //    for (int ind = 0; ind < dm.downTrainList.Count; ind++)
+            //    {
+            //        dm.downTrainList[ind].TrainPointList = new List<Dictionary<string, List<PointF>>>();
+            //    }
+            //    DrawPicture();
+        }//缩小
     }
 }

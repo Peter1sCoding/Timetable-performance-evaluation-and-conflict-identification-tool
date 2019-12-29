@@ -23,9 +23,9 @@ namespace Monkeys_Timetable
         public Dictionary<int, List<string>> str1 = new Dictionary<int, List<string>>();
         public Dictionary<int, List<double>> Mile1 = new Dictionary<int, List<double>>();
 
-        List<float> TimeX = new List<float>();
+        public List<float> TimeX = new List<float>();
         List<float> staY = new List<float>();
-        Dictionary<int, List<float>> staY2 = new Dictionary<int, List<float>>();
+        public Dictionary<int, List<float>> staY2 = new Dictionary<int, List<float>>();
         /// <summary>
         /// 存放冲突信息的DataTable
         /// </summary>
