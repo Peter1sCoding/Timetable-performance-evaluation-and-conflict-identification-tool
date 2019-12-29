@@ -339,8 +339,7 @@ namespace Monkeys_Timetable
         }
 
         private void PaintForm_Scroll(object sender, ScrollEventArgs e)
-        { 
-
+        {         
         }
 
         private void 绘制运行图上行ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -395,7 +394,7 @@ namespace Monkeys_Timetable
                                         double total1 = pt.Mile1[ii].Last();
                                         pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
                                     }
-                                    ShowInfoTooltip(ci.ConflictList[i]);
+                                    ShowInfoTooltip(ci.ConflictList[i], e.Location);
                                     Pen SelectedPen = new Pen(Color.Blue, 2);
                                     gs.DrawEllipse(SelectedPen, ci.ConflictList[i].ConflictLocation.X - 2, ci.ConflictList[i].ConflictLocation.Y - 2, 5, 5);
                                     break;
@@ -513,7 +512,7 @@ namespace Monkeys_Timetable
                                         double total1 = pt.Mile1[ii].Last();
                                         pt.ConflictDrawDown(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
                                     }
-                                    ShowInfoTooltip(ci.ConflictList[i]);
+                                    ShowInfoTooltip(ci.ConflictList[i],e.Location);
                                     Pen SelectedPen = new Pen(Color.Blue, 2);
                                     gs.DrawEllipse(SelectedPen, ci.ConflictList[i].ConflictLocation.X - 2, ci.ConflictList[i].ConflictLocation.Y - 2, 5, 5);
                                     break;
@@ -627,13 +626,14 @@ namespace Monkeys_Timetable
             }
 
 
-            if (ClientSize.Width - location.X < dataGridView1.Width && location.X >= dataGridView1.Width)
-                location.X -= dataGridView1.Width;
+            //if (ClientSize.Width - location.X < dataGridView1.Width && location.X >= dataGridView1.Width)
+            //location.X = dataGridView1.Width - location.X;
 
-           if (ClientSize.Height - location.Y < dataGridView1.Height && location.Y >= dataGridView1.Height)
-                location.Y -= dataGridView1.Height;
+            //if (ClientSize.Height - location.Y < dataGridView1.Height && location.Y >= dataGridView1.Height)
+            //location.Y = dataGridView1.Height - location.Y;
 
-
+            location.X += this.AutoScrollPosition.X;
+            location.Y += this.AutoScrollPosition.Y;
             dataGridView1.DataSource = dt;
             dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             if (checkBox3.Checked)
@@ -642,8 +642,10 @@ namespace Monkeys_Timetable
             }
             dataGridView1.Location = location;
         }
-        private void ShowInfoTooltip(Conflict con)
+        private void ShowInfoTooltip(Conflict con,Point location)
         {
+            location.X += 15;
+            location.Y += 15;
             DataTable dt = new DataTable();
             dt.Columns.Add("冲突类型");
             dt.Columns.Add("前车");
@@ -651,14 +653,17 @@ namespace Monkeys_Timetable
             dt.Columns.Add("车站");
             dt.Rows.Add(con.ConflictType, con.FrontTrain.TrainNo, con.LatterTrain.TrainNo, con.ConflictSta);
 
+            location.X += this.AutoScrollPosition.X;
+            location.Y += this.AutoScrollPosition.Y;
             dataGridView2.DataSource = dt;
             dataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+
             if (checkBox3.Checked)
             {
                 dataGridView2.Visible = true;
-            }                
+                dataGridView2.Location = location;
+            }
         }
-
         private void 读取车站画图信息ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
@@ -878,6 +883,16 @@ namespace Monkeys_Timetable
                 }
             }
 
+
+        }
+
+        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
 
         }
     }
