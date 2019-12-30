@@ -173,84 +173,50 @@ namespace Monkeys_Timetable
         public Dictionary<List<string>, List<int>> GetTrainDensity(DataManager dmm)//列车密度表_返回形式(<站名，站名> -> <上行列车数，下行列车数>)
         {
             DataManager dm = dmm;
+            PaintTool pt = new PaintTool();
             Dictionary<List<string>, List<int>> TrainDensity = new Dictionary<List<string>, List<int>>();
-            List<string> StationName = dm.stationStringList;
-            for (int i = 0; i < StationName.Count - 1; i++)
+            
+            for(int jjj = 1;jjj < pt.str1.Count+1;jjj++)
             {
-                List<string> Section = new List<string>();
-                Section.Add(StationName[i]);
-                Section.Add(StationName[i + 1]);
-                List<int> Density = new List<int>();
-                int DensityUp = 0;
-                int DensityDown = 0;
-                foreach (Train aTrain in dm.UpTrainDic.Values)
+                List<string> StationName = pt.str1[jjj];
+                for (int i = 0; i < StationName.Count - 1; i++)
                 {
-                    for (int j = 0; j < aTrain.staList.Count - 1; j++)
+                    List<string> Section = new List<string>();
+                    Section.Add(StationName[i]);
+                    Section.Add(StationName[i + 1]);
+                    List<int> Density = new List<int>();
+                    int DensityUp = 0;
+                    int DensityDown = 0;
+                    foreach (Train aTrain in dm.UpTrainDic.Values)
                     {
-                        if (StationName[i] == "上海虹桥" && StationName[i + 1] == "安亭北")
-                            continue;
-                        if (StationName[i+1] == aTrain.staList[j] && StationName[i] == aTrain.staList[j + 1])
+                        for (int j = 0; j < aTrain.staList.Count - 1; j++)
                         {
-                            DensityUp++;
+                            if (StationName[i + 1] == aTrain.staList[j] && StationName[i] == aTrain.staList[j + 1])
+                            {
+                                DensityUp++;
+                            }
                         }
                     }
-                }
-                Density.Add(DensityUp);
-                AllDensity.Add(DensityUp);
+                    Density.Add(DensityUp);
+                    AllDensity.Add(DensityUp);
 
-                foreach (Train aTrain in dm.DownTrainDic.Values)
-                {
-                    for (int j = 0; j < aTrain.staList.Count - 1; j++)
+                    foreach (Train aTrain in dm.DownTrainDic.Values)
                     {
-                        if (StationName[i] == "安亭北" && StationName[i + 1] == "上海虹桥")
-                            continue;
-                        if (StationName[i] == aTrain.staList[j] && StationName[i+1] == aTrain.staList[j + 1])
+                        for (int j = 0; j < aTrain.staList.Count - 1; j++)
                         {
-                            DensityDown++;
+
+                            if (StationName[i] == aTrain.staList[j] && StationName[i + 1] == aTrain.staList[j + 1])
+                            {
+                                DensityDown++;
+                            }
                         }
                     }
-                }
-                Density.Add(DensityDown);
-                AllDensity.Add(DensityDown);
-                TrainDensity.Add(Section, Density);
-            }
-
-            #region 安亭北-上海虹桥
-            List<string> Section2 = new List<string>();
-            Section2.Add("安亭北");
-            Section2.Add("上海虹桥");
-            List<int> Density2 = new List<int>();
-            int ForkDensityUp = 0;
-            foreach (Train aTrain in dm.UpTrainDic.Values)
-            {
-                for (int j = 0; j < aTrain.staList.Count - 1; j++)
-                {
-                    if (aTrain.staList[j] == "上海虹桥" && aTrain.staList[j + 1] == "安亭北")
-                    {
-                        ForkDensityUp++;
-                    }
+                    Density.Add(DensityDown);
+                    AllDensity.Add(DensityDown);
+                    TrainDensity.Add(Section, Density);
                 }
             }
-            Density2.Add(ForkDensityUp);
-            AllDensity.Add(ForkDensityUp);
-           
-            int ForkDensityDown = 0;
-            foreach (Train aTrain in dm.DownTrainDic.Values)
-            {
-                for (int j = 0; j < aTrain.staList.Count - 1; j++)
-                {
-                    if (aTrain.staList[j] == "安亭北" && aTrain.staList[j + 1] == "上海虹桥")
-                    {
-                        ForkDensityDown++;
-                    }
-                }
-            }
-            Density2.Add(ForkDensityDown);
-            AllDensity.Add(ForkDensityDown);
-            #endregion
-
-            TrainDensity.Add(Section2,Density2);
-
+            
             return TrainDensity;
         }
         

@@ -34,6 +34,7 @@ namespace Monkeys_Timetable
             dm.ReadHeadway(Application.StartupPath + @"\\车站列车安全间隔.csv");
             dm.ReadStation(Application.StartupPath + @"\\沪宁车站信息.csv");
             dm.ReadTrain(Application.StartupPath + @"\\沪宁时刻图.csv");
+            dm.ReadDrawStation(Application.StartupPath + "\\沪宁车站画图信息.csv");
             dm.DivideUpDown();
             dm.AddTra2sta();
             dm.GetStop();
