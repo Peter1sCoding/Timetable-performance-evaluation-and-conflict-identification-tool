@@ -173,7 +173,10 @@ namespace Monkeys_Timetable
                 }
             }
         }//运行线铺画方法
-        public void GetTrainPoint(List<Train> TrainList,List<string> StationList,int k)//存入各列车点位坐标
+         /// <summary>
+         ///存入各列车点位坐标
+         /// </summary>
+        public void GetTrainPoint(List<Train> TrainList,List<string> StationList,int k)
         {
             foreach(Train train in TrainList)
             {
