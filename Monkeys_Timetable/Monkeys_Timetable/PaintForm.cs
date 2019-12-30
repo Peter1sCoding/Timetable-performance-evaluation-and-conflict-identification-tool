@@ -908,7 +908,7 @@ namespace Monkeys_Timetable
             pt.staY2 = new Dictionary<int, List<float>>();
             for (int ind = 0; ind < dm.upTrainList.Count; ind++)
             {
-                dm.upTrainList[1].TrainPointList = new List<Dictionary<string, List<PointF>>>();
+                dm.upTrainList[ind].TrainPointList = new List<Dictionary<string, List<PointF>>>();
             }
             for (int ind = 0; ind < dm.downTrainList.Count; ind++)
             {
