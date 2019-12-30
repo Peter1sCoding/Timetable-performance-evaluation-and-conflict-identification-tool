@@ -734,5 +734,10 @@ namespace Monkeys_Timetable
             }
         }
 
+        private void 运行图综合指标ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.splitContainer1.Panel2.Controls.Clear();
+            clear = 0;
+        }
     }
 }
