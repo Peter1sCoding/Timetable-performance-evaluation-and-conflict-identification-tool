@@ -269,11 +269,27 @@ namespace Monkeys_Timetable
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             DrawPicture();
+            if(upConflictClicked == true)
+            {
+                upConflictClicked = false;
+            }
+            if (upConflictClicked == false)
+            {
+                upConflictClicked = true;
+            }
         }//上行运行图的绘制
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
             DrawPicture();
+            if (downConflictClicked == true)
+            {
+                downConflictClicked = false;
+            }
+            if (downConflictClicked == false)
+            {
+                downConflictClicked = true;
+            }
         }//下行运行图的绘制
 
         private void 开行方案数据ToolStripMenuItem_Click(object sender, EventArgs e)
