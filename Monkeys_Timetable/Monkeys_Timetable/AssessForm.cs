@@ -738,6 +738,22 @@ namespace Monkeys_Timetable
         {
             this.splitContainer1.Panel2.Controls.Clear();
             clear = 0;
+
+            DataGridView UpDownIndex = new DataGridView();
+            UpDownIndex.Size = new Size(445, 400);
+            UpDownIndex.Location = new Point(180, 120);
+            this.splitContainer1.Panel2.Controls.Add(UpDownIndex);
+            DataTable Information = new DataTable();
+            Information.Columns.Add(" ");
+            Information.Columns.Add("上行");
+            Information.Columns.Add("下行");
+            Information.Columns.Add("上下行综合");
+
+            Information.Rows.Add("平均旅行速度", ass.UpDownTravelSpeed(dm)[0], ass.UpDownTravelSpeed(dm)[1], ass.UpDownTravelSpeed(dm)[2]);
+            Information.Rows.Add("平均技术速度", ass.UpDownTechnicalSpeed(dm)[0], ass.UpDownTechnicalSpeed(dm)[1], ass.UpDownTechnicalSpeed(dm)[2]);
+            Information.Rows.Add("平均速度系数", ass.UpDownSpeedIndex(dm)[0], ass.UpDownSpeedIndex(dm)[1], ass.UpDownSpeedIndex(dm)[2]);
+
+            UpDownIndex.DataSource = Information;
         }
     }
 }

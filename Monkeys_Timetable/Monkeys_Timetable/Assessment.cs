@@ -25,6 +25,55 @@ namespace Monkeys_Timetable
             return aMinute;
         }
 
+        public List<double> UpDownTravelSpeed(DataManager dmm)//上下行车的旅行速度，总旅行速度
+        {
+            DataManager dm = dmm;
+            List<double> UpDownTravelSpeed = new List<double>();
+            double UpSumMile = 0, UpSumTravelTime = 0, DownSumMile = 0, DownSumTravelTime = 0, SumMile = 0, SumTravelTime = 0;
+            foreach (Train aTrain in dm.upTrainList)
+            {
+                List<string> staDicValue1 = new List<string>();
+                staDicValue1 = aTrain.staTimeDic[aTrain.staList[0]];//始发站的信息列表
+                double aTime1 = GetMinute(staDicValue1[1]);//始发站的出发时间
+                List<string> staDicValue2 = new List<string>();
+                staDicValue2 = aTrain.staTimeDic[aTrain.staList[aTrain.staList.Count - 1]];//终到站的信息列表
+                double aMile = Convert.ToDouble(staDicValue2[2]);
+                double aTime2 = GetMinute(staDicValue2[0]);//终到站的到达时间
+                double aTime = aTime2 - aTime1;
+                UpSumMile = UpSumMile + aMile;
+                UpSumTravelTime = UpSumTravelTime + aTime;
+            }
+            SumMile = SumMile + UpSumMile;
+            SumTravelTime = SumTravelTime + UpSumTravelTime;
+            double UpTravelSpeed = 60 * UpSumMile / UpSumTravelTime;
+            UpTravelSpeed = Math.Round(UpTravelSpeed, 2);
+            UpDownTravelSpeed.Add(UpTravelSpeed);
+
+            foreach (Train aTrain in dm.downTrainList)
+            {
+                List<string> staDicValue1 = new List<string>();
+                staDicValue1 = aTrain.staTimeDic[aTrain.staList[0]];//始发站的信息列表
+                double aTime1 = GetMinute(staDicValue1[1]);//始发站的出发时间
+                List<string> staDicValue2 = new List<string>();
+                staDicValue2 = aTrain.staTimeDic[aTrain.staList[aTrain.staList.Count - 1]];//终到站的信息列表
+                double aMile = Convert.ToDouble(staDicValue2[2]);
+                double aTime2 = GetMinute(staDicValue2[0]);//终到站的到达时间
+                double aTime = aTime2 - aTime1;
+                DownSumMile = DownSumMile + aMile;
+                DownSumTravelTime = DownSumTravelTime + aTime;
+            }
+            SumMile = SumMile + DownSumMile;
+            SumTravelTime = SumTravelTime + DownSumTravelTime;
+            double DownTravelSpeed = 60 * DownSumMile / DownSumTravelTime;
+            DownTravelSpeed = Math.Round(DownTravelSpeed, 2);
+            UpDownTravelSpeed.Add(DownTravelSpeed);
+            double SumTravelSpeed= 60 * SumMile / SumTravelTime;
+            SumTravelSpeed = Math.Round(SumTravelSpeed, 2);
+            UpDownTravelSpeed.Add(SumTravelSpeed);
+
+            return UpDownTravelSpeed;
+        }
+
         public List<double> GetTravelSpeed(DataManager dmm)//所有车的旅行速度
         {
             DataManager dm = dmm;
@@ -44,6 +93,69 @@ namespace Monkeys_Timetable
                 TravelSpeed.Add(aSpeed);
             }
             return TravelSpeed;
+        }
+
+        public List<double> UpDownTechnicalSpeed(DataManager dmm)//上下行车的技术速度，总技术速度
+        {
+            DataManager dm = dmm;
+            List<double> UpDownTechnicalSpeed = new List<double>();
+            double UpSumMile = 0, UpSumTechnicalTime = 0, DownSumMile = 0, DownSumTechnicalTime = 0, SumMile = 0, SumTechnicalTime = 0;
+            foreach (Train aTrain in dm.upTrainList)
+            {
+                int stationNum = aTrain.staList.Count - 1;
+                double aTime = 0;
+                for (int i = 0; i < stationNum; i++)
+                {
+                    List<string> staDicValue1 = new List<string>();
+                    staDicValue1 = aTrain.staTimeDic[aTrain.staList[i]];//出发站的信息列表
+                    double aTime1 = GetMinute(staDicValue1[1]);//出发站的出发时间
+                    List<string> staDicValue2 = new List<string>();
+                    staDicValue2 = aTrain.staTimeDic[aTrain.staList[i + 1]];//到达站的信息列表
+                    double aTime2 = GetMinute(staDicValue2[0]);//到达站的到达时间
+                    aTime = aTime + aTime2 - aTime1;
+                }
+                List<string> staDicValue3 = new List<string>();
+                staDicValue3 = aTrain.staTimeDic[aTrain.staList[aTrain.staList.Count - 1]];//终到站的信息列表
+                double aMile = Convert.ToDouble(staDicValue3[2]);//终到站的累计里程
+                UpSumMile = UpSumMile + aMile;
+                UpSumTechnicalTime = UpSumTechnicalTime + aTime;
+            }
+            SumMile = SumMile + UpSumMile;
+            SumTechnicalTime = SumTechnicalTime + UpSumTechnicalTime;
+            double UpTechnicalSpeed = 60 * UpSumMile / UpSumTechnicalTime;
+            UpTechnicalSpeed = Math.Round(UpTechnicalSpeed, 2);
+            UpDownTechnicalSpeed.Add(UpTechnicalSpeed);
+
+            foreach (Train aTrain in dm.downTrainList)
+            {
+                int stationNum = aTrain.staList.Count - 1;
+                double aTime = 0;
+                for (int i = 0; i < stationNum; i++)
+                {
+                    List<string> staDicValue1 = new List<string>();
+                    staDicValue1 = aTrain.staTimeDic[aTrain.staList[i]];//出发站的信息列表
+                    double aTime1 = GetMinute(staDicValue1[1]);//出发站的出发时间
+                    List<string> staDicValue2 = new List<string>();
+                    staDicValue2 = aTrain.staTimeDic[aTrain.staList[i + 1]];//到达站的信息列表
+                    double aTime2 = GetMinute(staDicValue2[0]);//到达站的到达时间
+                    aTime = aTime + aTime2 - aTime1;
+                }
+                List<string> staDicValue3 = new List<string>();
+                staDicValue3 = aTrain.staTimeDic[aTrain.staList[aTrain.staList.Count - 1]];//终到站的信息列表
+                double aMile = Convert.ToDouble(staDicValue3[2]);//终到站的累计里程
+                DownSumMile = DownSumMile + aMile;
+                DownSumTechnicalTime = DownSumTechnicalTime + aTime;
+            }
+            SumMile = SumMile + DownSumMile;
+            SumTechnicalTime = SumTechnicalTime + DownSumTechnicalTime;
+            double DownTechnicalSpeed = 60 * DownSumMile / DownSumTechnicalTime;
+            DownTechnicalSpeed = Math.Round(DownTechnicalSpeed, 2);
+            UpDownTechnicalSpeed.Add(DownTechnicalSpeed);
+            double SumTechnicalSpeed = 60 * SumMile / SumTechnicalTime;
+            SumTechnicalSpeed = Math.Round(SumTechnicalSpeed, 2);
+            UpDownTechnicalSpeed.Add(SumTechnicalSpeed);
+
+            return UpDownTechnicalSpeed;
         }
 
         public List<double> GetTechnicalSpeed(DataManager dmm)//所有车的技术速度
@@ -87,6 +199,21 @@ namespace Monkeys_Timetable
                 SpeedIndex.Add(aSpeedIndex);
             }
             return SpeedIndex;
+        }
+
+        public List<double> UpDownSpeedIndex(DataManager dmm)//上下行车的速度系数，总速度系数
+        {
+            DataManager dm = dmm;
+            List<double> UpDownSpeedIndex = new List<double>();
+            List<double> Speed1 = UpDownTravelSpeed(dm);
+            List<double> Speed2 = UpDownTechnicalSpeed(dm);
+            for (int i = 0; i < Speed1.Count; i++)
+            {
+                double aSpeedIndex = Speed1[i] / Speed2[i];
+                aSpeedIndex = Math.Round(aSpeedIndex, 2);
+                UpDownSpeedIndex.Add(aSpeedIndex);
+            }
+            return UpDownSpeedIndex;
         }
 
         public int GetHour(string aTime)//获得出发或者到达时刻是在哪一个小时里
@@ -182,7 +309,7 @@ namespace Monkeys_Timetable
             {
                 staMile.Add(dm.stationDrawList[i].totalMile);
             }
-            pt.Branch(dm.stationDrawStringList,staMile, pf.bmp.Width, pf.bmp.Height);
+            pt.Branch(dm.stationDrawStringList, staMile, pf.bmp.Width, pf.bmp.Height);
 
             Dictionary<List<string>, List<int>> TrainDensity = new Dictionary<List<string>, List<int>>();
             
