@@ -48,9 +48,19 @@ namespace Monkeys_Timetable
             splitContainer2.SplitterWidth = 2;
             splitContainer1.IsSplitterFixed = true;
             splitContainer2.IsSplitterFixed = true;
+            StatisticalIndex();
             ShowPanel_1();
             ShowPanel_2();
             
+        }
+
+        # region StatisticalIndex全局变量
+
+        #endregion
+
+        public void StatisticalIndex()
+        {
+
         }
 
         #region Panel_1全局变量
@@ -72,7 +82,7 @@ namespace Monkeys_Timetable
             lbTrain.Text = "选择列车";
             lbTrain.Font = new Font("宋体", 10, FontStyle.Bold);
             lbTrain.Size = new Size(70, 30);
-            lbTrain.Location = new Point(90, 55);
+            lbTrain.Location = new Point(90, 95);
             //lbTrain.TextAlign = ContentAlignment.MiddleCenter;
             this.splitContainer2.Panel1.Controls.Add(lbTrain);
 
@@ -83,46 +93,46 @@ namespace Monkeys_Timetable
                 cbTrain.Items.Add(trainName);
             }
             cbTrain.Size = new Size(100, 30);
-            cbTrain.Location = new Point(165, 50);
+            cbTrain.Location = new Point(165, 90);
             splitContainer2.Panel1.Controls.Add(cbTrain);
 
             lbTravalSpeed.Text = "旅行速度";
             lbTravalSpeed.Size = new Size(80, 20);
-            lbTravalSpeed.Location = new Point(100, 100);
+            lbTravalSpeed.Location = new Point(100, 140);
             splitContainer2.Panel1.Controls.Add(lbTravalSpeed);
             tbTravalSpeed.Size = new Size(80, 50);
-            tbTravalSpeed.Location = new Point(100, 100 + 20);
+            tbTravalSpeed.Location = new Point(100, 160);
             splitContainer2.Panel1.Controls.Add(tbTravalSpeed);
 
             lbTechicalSpeed.Text = "技术速度";
             lbTechicalSpeed.Size = new Size(80, 20);
-            lbTechicalSpeed.Location = new Point(300, 100);
+            lbTechicalSpeed.Location = new Point(300, 140);
             splitContainer2.Panel1.Controls.Add(lbTechicalSpeed);
             tbTechicalSpeed.Size = new Size(80, 50);
-            tbTechicalSpeed.Location = new Point(300, 100 + 20);
+            tbTechicalSpeed.Location = new Point(300, 160);
             splitContainer2.Panel1.Controls.Add(tbTechicalSpeed);
 
             lbSpeedIndex.Text = "速度系数";
             lbSpeedIndex.Size = new Size(80, 20);
-            lbSpeedIndex.Location = new Point(100, 200);
+            lbSpeedIndex.Location = new Point(100, 225);
             splitContainer2.Panel1.Controls.Add(lbSpeedIndex);
             tbSpeedIndex.Size = new Size(80, 50);
-            tbSpeedIndex.Location = new Point(100, 200 + 20);
+            tbSpeedIndex.Location = new Point(100, 245);
             splitContainer2.Panel1.Controls.Add(tbSpeedIndex);
 
             lbTrainServe.Text = "列车服务频率";
             lbTrainServe.Size = new Size(80, 20);
-            lbTrainServe.Location = new Point(300, 200);
+            lbTrainServe.Location = new Point(300, 225);
             splitContainer2.Panel1.Controls.Add(lbTrainServe);
             tbTrainServe.Size = new Size(80, 50);
-            tbTrainServe.Location = new Point(300, 200 + 20);
+            tbTrainServe.Location = new Point(300, 245);
             splitContainer2.Panel1.Controls.Add(tbTrainServe);
 
             btRunTrain = new Button();
             btRunTrain.Text = "查询列车信息";
             btRunTrain.Font = new Font("宋体", 10, FontStyle.Bold);
             btRunTrain.Size = new Size(120, 30);
-            btRunTrain.Location = new Point(280, 40);
+            btRunTrain.Location = new Point(280, 80);
             this.splitContainer2.Panel1.Controls.Add(btRunTrain);
             btRunTrain.Click += BtRunTrain_Click;
         }

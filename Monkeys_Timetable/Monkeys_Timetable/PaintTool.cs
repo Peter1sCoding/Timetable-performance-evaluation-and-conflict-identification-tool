@@ -154,6 +154,7 @@ namespace Monkeys_Timetable
                         p1.Y = staY2[k][index1];
                         p2.Y = staY2[k][index2];                       
                         gs.DrawLine(pp, p1, p2);
+                        
                     }
                 }
                 for (int i = 1; i < a - 1; i++)
@@ -172,7 +173,10 @@ namespace Monkeys_Timetable
                 }
             }
         }//运行线铺画方法
-        public void GetTrainPoint(List<Train> TrainList,List<string> StationList,int k)//存入各列车点位坐标
+         /// <summary>
+         ///存入各列车点位坐标
+         /// </summary>
+        public void GetTrainPoint(List<Train> TrainList,List<string> StationList,int k)
         {
             foreach(Train train in TrainList)
             {
