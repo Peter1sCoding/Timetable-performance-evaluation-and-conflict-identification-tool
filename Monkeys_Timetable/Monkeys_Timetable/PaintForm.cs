@@ -26,12 +26,13 @@ namespace Monkeys_Timetable
         Bitmap bmp = new Bitmap(TD_Width, TD_Height);
         public bool upConflictClicked = false;
         public bool downConflictClicked = false;
+       
 
         
         
 
         public PaintForm()
-        {      
+        {    
             pictureBox2 = new PictureBox();
             pictureBox2.Size = new Size(TD_Width, TD_Height);
 
@@ -49,7 +50,6 @@ namespace Monkeys_Timetable
             ci = new Conflict_Identification(dm.stationList, dm.HeadwayDic, dm.TrainDic);
             ci.Conflict_Judge();
             dt = ci.ToDataTable();
-
         }
 
         private void PaintForm_Load(object sender, EventArgs e)
@@ -269,11 +269,27 @@ namespace Monkeys_Timetable
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             DrawPicture();
+            if(upConflictClicked == true)
+            {
+                upConflictClicked = false;
+            }
+            if (upConflictClicked == false)
+            {
+                upConflictClicked = true;
+            }
         }//上行运行图的绘制
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
             DrawPicture();
+            if (downConflictClicked == true)
+            {
+                downConflictClicked = false;
+            }
+            if (downConflictClicked == false)
+            {
+                downConflictClicked = true;
+            }
         }//下行运行图的绘制
 
         private void 开行方案数据ToolStripMenuItem_Click(object sender, EventArgs e)
