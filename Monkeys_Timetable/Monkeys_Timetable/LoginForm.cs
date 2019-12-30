@@ -89,8 +89,8 @@ namespace Monkeys_Timetable
             if (odr1.Read()&&odr2.Read())
             {
                 PaintForm paintForm = new PaintForm();
-                this.Hide();
                 paintForm.Show();
+                this.Dispose();
             }
             else
             {
