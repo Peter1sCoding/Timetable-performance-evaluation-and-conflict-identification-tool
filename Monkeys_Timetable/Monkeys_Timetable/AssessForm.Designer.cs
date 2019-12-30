@@ -32,9 +32,10 @@
             this.绘制区间列车密度图ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.查询列车停站信息ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.查询车站服务列车ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.查询站间服务列车ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.查询站间服务列车ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.运行图综合指标ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -50,7 +51,8 @@
             this.绘制区间列车密度图ToolStripMenuItem,
             this.查询列车停站信息ToolStripMenuItem,
             this.查询车站服务列车ToolStripMenuItem,
-            this.查询站间服务列车ToolStripMenuItem});
+            this.查询站间服务列车ToolStripMenuItem,
+            this.运行图综合指标ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1047, 28);
@@ -77,6 +79,13 @@
             this.查询车站服务列车ToolStripMenuItem.Size = new System.Drawing.Size(143, 24);
             this.查询车站服务列车ToolStripMenuItem.Text = "查询车站服务列车";
             this.查询车站服务列车ToolStripMenuItem.Click += new System.EventHandler(this.查询车站服务列车ToolStripMenuItem_Click);
+            // 
+            // 查询站间服务列车ToolStripMenuItem
+            // 
+            this.查询站间服务列车ToolStripMenuItem.Name = "查询站间服务列车ToolStripMenuItem";
+            this.查询站间服务列车ToolStripMenuItem.Size = new System.Drawing.Size(143, 24);
+            this.查询站间服务列车ToolStripMenuItem.Text = "查询站间服务列车";
+            this.查询站间服务列车ToolStripMenuItem.Click += new System.EventHandler(this.查询站间服务列车ToolStripMenuItem_Click);
             // 
             // splitContainer1
             // 
@@ -105,12 +114,12 @@
             this.splitContainer2.SplitterDistance = 235;
             this.splitContainer2.TabIndex = 0;
             // 
-            // 查询站间服务列车ToolStripMenuItem
+            // 运行图综合指标ToolStripMenuItem
             // 
-            this.查询站间服务列车ToolStripMenuItem.Name = "查询站间服务列车ToolStripMenuItem";
-            this.查询站间服务列车ToolStripMenuItem.Size = new System.Drawing.Size(143, 24);
-            this.查询站间服务列车ToolStripMenuItem.Text = "查询站间服务列车";
-            this.查询站间服务列车ToolStripMenuItem.Click += new System.EventHandler(this.查询站间服务列车ToolStripMenuItem_Click);
+            this.运行图综合指标ToolStripMenuItem.Name = "运行图综合指标ToolStripMenuItem";
+            this.运行图综合指标ToolStripMenuItem.Size = new System.Drawing.Size(128, 24);
+            this.运行图综合指标ToolStripMenuItem.Text = "运行图综合指标";
+            this.运行图综合指标ToolStripMenuItem.Click += new System.EventHandler(this.运行图综合指标ToolStripMenuItem_Click);
             // 
             // AssessForm
             // 
@@ -143,5 +152,6 @@
         private System.Windows.Forms.ToolStripMenuItem 查询列车停站信息ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 查询车站服务列车ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 查询站间服务列车ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 运行图综合指标ToolStripMenuItem;
     }
 }

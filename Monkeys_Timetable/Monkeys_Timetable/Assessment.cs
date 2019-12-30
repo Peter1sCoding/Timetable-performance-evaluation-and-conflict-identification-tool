@@ -169,6 +169,7 @@ namespace Monkeys_Timetable
             return ServiceFrequency;
         }
 
+
         public List<int> AllDensity = new List<int>();//读取所有密度值，用来在Assessform中判断可视化条形图大小
         public Dictionary<List<string>, List<int>> GetTrainDensity(DataManager dmm)//列车密度表_返回形式(<站名，站名> -> <上行列车数，下行列车数>)
         {
