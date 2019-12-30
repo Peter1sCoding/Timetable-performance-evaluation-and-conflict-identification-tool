@@ -23,7 +23,7 @@ namespace Monkeys_Timetable
         DataTable dt;
         PaintTool pt = new PaintTool();        
         DataTable ConflictTable;
-        Bitmap bmp = new Bitmap(TD_Width, TD_Height);
+        public Bitmap bmp = new Bitmap(TD_Width, TD_Height);
 
         static bool YesOrNo = false;
 

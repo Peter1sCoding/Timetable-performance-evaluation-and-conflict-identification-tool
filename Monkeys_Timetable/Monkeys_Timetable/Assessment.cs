@@ -174,6 +174,15 @@ namespace Monkeys_Timetable
         {
             DataManager dm = dmm;
             PaintTool pt = new PaintTool();
+            PaintForm pf = new PaintForm();
+            int ix = dm.stationDrawList.Count;
+            List<double> staMile = new List<double>();
+            for (int i = 0; i < ix; i++)
+            {
+                staMile.Add(dm.stationDrawList[i].totalMile);
+            }
+            pt.Branch(dm.stationDrawStringList,staMile, pf.bmp.Width, pf.bmp.Height);
+
             Dictionary<List<string>, List<int>> TrainDensity = new Dictionary<List<string>, List<int>>();
             
             for(int jjj = 1;jjj < pt.str1.Count+1;jjj++)
