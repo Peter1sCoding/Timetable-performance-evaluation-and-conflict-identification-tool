@@ -154,6 +154,7 @@ namespace Monkeys_Timetable
                         p1.Y = staY2[k][index1];
                         p2.Y = staY2[k][index2];                       
                         gs.DrawLine(pp, p1, p2);
+                        
                     }
                 }
                 for (int i = 1; i < a - 1; i++)

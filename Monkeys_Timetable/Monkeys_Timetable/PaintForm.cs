@@ -24,9 +24,8 @@ namespace Monkeys_Timetable
         PaintTool pt = new PaintTool();        
         DataTable ConflictTable;
         Bitmap bmp = new Bitmap(TD_Width, TD_Height);
-        public bool upConflictClicked = false;
-        public bool downConflictClicked = false;
-       
+
+        static bool YesOrNo = false;
 
         
         
@@ -269,11 +268,19 @@ namespace Monkeys_Timetable
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             DrawPicture();
+            if (YesOrNo)
+            {
+                ConflictShow();
+            }
         }//上行运行图的绘制
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
             DrawPicture();
+            if (YesOrNo)
+            {
+                ConflictShow();
+            }
         }//下行运行图的绘制
 
         private void 开行方案数据ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -303,6 +310,18 @@ namespace Monkeys_Timetable
 
         private void 运行图标记冲突ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (YesOrNo == false)
+            {
+                YesOrNo = true;
+            }
+            else
+            {
+                YesOrNo = false;
+            }
+            ConflictShow();     
+        }
+        public void ConflictShow()
+        {
             pictureBox2.Size = new Size(TD_Width, TD_Height);
             Graphics gs = Graphics.FromImage(bmp);
             if (checkBox1.Checked)
@@ -315,9 +334,9 @@ namespace Monkeys_Timetable
                     double total1 = pt.Mile1[ii].Last();
                     pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
                 }
-                upConflictClicked = true;
+
             }
-            else if (checkBox2.Checked)
+            if (checkBox2.Checked)
             {
                 Refresh();
                 int k = pt.border2.Count;
@@ -327,7 +346,7 @@ namespace Monkeys_Timetable
                     double total1 = pt.Mile1[ii].Last();
                     pt.ConflictDrawDown(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
                 }
-                downConflictClicked = true;
+
             }
             this.pictureBox2.BackgroundImage = bmp;
         }
@@ -375,7 +394,7 @@ namespace Monkeys_Timetable
                 {
                     Graphics gs;
                     gs = Graphics.FromImage(bmp);
-                    if (upConflictClicked)
+                    if (checkBox1.Checked)
                     {
                         for (int i = 0; i < ci.ConflictList.Count; i++)
                         {
@@ -429,7 +448,7 @@ namespace Monkeys_Timetable
                             {
                                 this.pictureBox2.Refresh();
                                 DrawPicture();
-                                if (upConflictClicked)
+                                if (checkBox1.Checked)
                                 {
                                     int k = pt.border2.Count;
                                     for (int i1 = 0; i1 < k; i1++)
@@ -439,7 +458,7 @@ namespace Monkeys_Timetable
                                         pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
                                     }
                                 }
-                                if (downConflictClicked)
+                                if (checkBox2.Checked)
                                 {
                                     int k = pt.border2.Count;
                                     for (int i1 = 0; i1 < k; i1++)
@@ -493,7 +512,7 @@ namespace Monkeys_Timetable
                 {
                     Graphics gs;
                     gs = Graphics.FromImage(bmp);
-                    if (downConflictClicked)
+                    if (checkBox2.Checked)
                     {
                         for (int i = 0; i < ci.ConflictList.Count; i++)
                         {
@@ -547,7 +566,7 @@ namespace Monkeys_Timetable
                             {
                                 this.pictureBox2.Refresh();
                                 DrawPicture();
-                                if (upConflictClicked)
+                                if (checkBox1.Checked)
                                 {
                                     int k = pt.border2.Count;
                                     for (int i1 = 0; i1 < k; i1++)
@@ -557,7 +576,7 @@ namespace Monkeys_Timetable
                                         pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
                                     }
                                 }
-                                if (downConflictClicked)
+                                if (checkBox2.Checked)
                                 {
                                     int k = pt.border2.Count;
                                     for (int i1 = 0; i1 < k; i1++)
