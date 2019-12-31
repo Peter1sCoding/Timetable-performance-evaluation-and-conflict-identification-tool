@@ -29,7 +29,7 @@ namespace Monkeys_Timetable
 
         }
         
-        public void ShowFirst()
+        public void ShowFirst()//读取dm信息以能够调用ass方法进行计算 在form中绘制Panel分区
         {
             dm.ReadHeadway(Application.StartupPath + @"\\车站列车安全间隔.csv");
             dm.ReadStation(Application.StartupPath + @"\\沪宁车站信息.csv");
@@ -48,19 +48,8 @@ namespace Monkeys_Timetable
             splitContainer2.SplitterWidth = 2;
             splitContainer1.IsSplitterFixed = true;
             splitContainer2.IsSplitterFixed = true;
-            StatisticalIndex();
             ShowPanel_1();
             ShowPanel_2();
-            
-        }
-
-        # region StatisticalIndex全局变量
-
-        #endregion
-
-        public void StatisticalIndex()
-        {
-
         }
 
         #region Panel_1全局变量

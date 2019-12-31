@@ -31,7 +31,7 @@ namespace Monkeys_Timetable
             List<string> UpDownTime = new List<string>();
             string UpEarlyTime = "", UpLateTime = "", DownEarlyTime = "", DownLateTime = "";
             double UpMinTime = 1440, UpMaxTime = 0, DownMinTime = 1440, DownMaxTime = 0;
-            foreach (Train aTrain in dm.upTrainList)
+            foreach (Train aTrain in dm.upTrainList)//上行列车的早晚时间
             {
                 List<string> staDicValue1 = new List<string>();
                 staDicValue1 = aTrain.staTimeDic[aTrain.staList[0]];//始发站的信息列表
@@ -39,12 +39,12 @@ namespace Monkeys_Timetable
                 List<string> staDicValue2 = new List<string>();
                 staDicValue2 = aTrain.staTimeDic[aTrain.staList[aTrain.staList.Count - 1]];//终到站的信息列表
                 double aTime2 = GetMinute(staDicValue2[0]);//终到站的到达时间
-                if (UpMinTime > aTime1)
+                if (UpMinTime > aTime1)//寻找上行最早出发时间
                 {
                     UpMinTime = aTime1;
                     UpEarlyTime = staDicValue1[1];
                 }
-                if (UpMaxTime < aTime2)
+                if (UpMaxTime < aTime2)//寻找上行最晚到达时间
                 {
                     UpMaxTime = aTime2;
                     UpLateTime = staDicValue2[0];
@@ -53,7 +53,7 @@ namespace Monkeys_Timetable
             UpDownTime.Add(UpEarlyTime);
             UpDownTime.Add(UpLateTime);
 
-            foreach (Train aTrain in dm.downTrainList)
+            foreach (Train aTrain in dm.downTrainList)//下行列车早晚时间
             {
                 List<string> staDicValue1 = new List<string>();
                 staDicValue1 = aTrain.staTimeDic[aTrain.staList[0]];//始发站的信息列表
@@ -61,12 +61,12 @@ namespace Monkeys_Timetable
                 List<string> staDicValue2 = new List<string>();
                 staDicValue2 = aTrain.staTimeDic[aTrain.staList[aTrain.staList.Count - 1]];//终到站的信息列表
                 double aTime2 = GetMinute(staDicValue2[0]);//终到站的到达时间
-                if (DownMinTime > aTime1)
+                if (DownMinTime > aTime1)//寻找下行最早出发时间
                 {
                     DownMinTime = aTime1;
                     DownEarlyTime = staDicValue1[1];
                 }
-                if (DownMaxTime < aTime2)
+                if (DownMaxTime < aTime2)//寻找下行最晚到达时间
                 {
                     DownMaxTime = aTime2;
                     DownLateTime = staDicValue2[0];
@@ -75,7 +75,7 @@ namespace Monkeys_Timetable
             UpDownTime.Add(DownEarlyTime);
             UpDownTime.Add(DownLateTime);
 
-            if (GetMinute(UpEarlyTime) > GetMinute(DownEarlyTime))
+            if (GetMinute(UpEarlyTime) > GetMinute(DownEarlyTime))//寻找全部最早出发时间
             {
                 UpDownTime.Add(DownEarlyTime);
             }
@@ -83,7 +83,7 @@ namespace Monkeys_Timetable
             {
                 UpDownTime.Add(UpEarlyTime);
             }
-            if (GetMinute(UpLateTime) > GetMinute(DownLateTime))
+            if (GetMinute(UpLateTime) > GetMinute(DownLateTime))//寻找全部最晚到达时间
             {
                 UpDownTime.Add(UpLateTime);
             }
@@ -100,7 +100,7 @@ namespace Monkeys_Timetable
             DataManager dm = dmm;
             List<double> UpDownTravelSpeed = new List<double>();
             double UpSumMile = 0, UpSumTravelTime = 0, DownSumMile = 0, DownSumTravelTime = 0, SumMile = 0, SumTravelTime = 0;
-            foreach (Train aTrain in dm.upTrainList)
+            foreach (Train aTrain in dm.upTrainList)//上行列车的旅行速度
             {
                 List<string> staDicValue1 = new List<string>();
                 staDicValue1 = aTrain.staTimeDic[aTrain.staList[0]];//始发站的信息列表
@@ -115,11 +115,11 @@ namespace Monkeys_Timetable
             }
             SumMile = SumMile + UpSumMile;
             SumTravelTime = SumTravelTime + UpSumTravelTime;
-            double UpTravelSpeed = 60 * UpSumMile / UpSumTravelTime;
+            double UpTravelSpeed = 60 * UpSumMile / UpSumTravelTime;//计算上行列车的旅行速度
             UpTravelSpeed = Math.Round(UpTravelSpeed, 2);
             UpDownTravelSpeed.Add(UpTravelSpeed);
 
-            foreach (Train aTrain in dm.downTrainList)
+            foreach (Train aTrain in dm.downTrainList)//下行列车的旅行速度
             {
                 List<string> staDicValue1 = new List<string>();
                 staDicValue1 = aTrain.staTimeDic[aTrain.staList[0]];//始发站的信息列表
@@ -134,17 +134,17 @@ namespace Monkeys_Timetable
             }
             SumMile = SumMile + DownSumMile;
             SumTravelTime = SumTravelTime + DownSumTravelTime;
-            double DownTravelSpeed = 60 * DownSumMile / DownSumTravelTime;
+            double DownTravelSpeed = 60 * DownSumMile / DownSumTravelTime;//计算下行列车的旅行速度
             DownTravelSpeed = Math.Round(DownTravelSpeed, 2);
             UpDownTravelSpeed.Add(DownTravelSpeed);
-            double SumTravelSpeed= 60 * SumMile / SumTravelTime;
+            double SumTravelSpeed= 60 * SumMile / SumTravelTime;//计算上下行所有列车的平均旅行速度
             SumTravelSpeed = Math.Round(SumTravelSpeed, 2);
             UpDownTravelSpeed.Add(SumTravelSpeed);
 
             return UpDownTravelSpeed;
         }
 
-        public List<double> GetTravelSpeed(DataManager dmm)//所有车的旅行速度
+        public List<double> GetTravelSpeed(DataManager dmm)//每一列车的旅行速度
         {
             DataManager dm = dmm;
             List<double> TravelSpeed = new List<double>();
@@ -170,7 +170,7 @@ namespace Monkeys_Timetable
             DataManager dm = dmm;
             List<double> UpDownTechnicalSpeed = new List<double>();
             double UpSumMile = 0, UpSumTechnicalTime = 0, DownSumMile = 0, DownSumTechnicalTime = 0, SumMile = 0, SumTechnicalTime = 0;
-            foreach (Train aTrain in dm.upTrainList)
+            foreach (Train aTrain in dm.upTrainList)//上行列车的技术速度
             {
                 int stationNum = aTrain.staList.Count - 1;
                 double aTime = 0;
@@ -192,11 +192,11 @@ namespace Monkeys_Timetable
             }
             SumMile = SumMile + UpSumMile;
             SumTechnicalTime = SumTechnicalTime + UpSumTechnicalTime;
-            double UpTechnicalSpeed = 60 * UpSumMile / UpSumTechnicalTime;
+            double UpTechnicalSpeed = 60 * UpSumMile / UpSumTechnicalTime;//计算上行列车的技术速度
             UpTechnicalSpeed = Math.Round(UpTechnicalSpeed, 2);
             UpDownTechnicalSpeed.Add(UpTechnicalSpeed);
 
-            foreach (Train aTrain in dm.downTrainList)
+            foreach (Train aTrain in dm.downTrainList)//下行列车的技术速度
             {
                 int stationNum = aTrain.staList.Count - 1;
                 double aTime = 0;
@@ -218,17 +218,17 @@ namespace Monkeys_Timetable
             }
             SumMile = SumMile + DownSumMile;
             SumTechnicalTime = SumTechnicalTime + DownSumTechnicalTime;
-            double DownTechnicalSpeed = 60 * DownSumMile / DownSumTechnicalTime;
+            double DownTechnicalSpeed = 60 * DownSumMile / DownSumTechnicalTime;//计算下行列车的技术速度
             DownTechnicalSpeed = Math.Round(DownTechnicalSpeed, 2);
             UpDownTechnicalSpeed.Add(DownTechnicalSpeed);
-            double SumTechnicalSpeed = 60 * SumMile / SumTechnicalTime;
+            double SumTechnicalSpeed = 60 * SumMile / SumTechnicalTime;//计算上下行所有列车的平均技术速度
             SumTechnicalSpeed = Math.Round(SumTechnicalSpeed, 2);
             UpDownTechnicalSpeed.Add(SumTechnicalSpeed);
 
             return UpDownTechnicalSpeed;
         }
 
-        public List<double> GetTechnicalSpeed(DataManager dmm)//所有车的技术速度
+        public List<double> GetTechnicalSpeed(DataManager dmm)//每一列车的技术速度
         {
             DataManager dm = dmm;
             List<double> TechnicalSpeed = new List<double>();
@@ -256,7 +256,7 @@ namespace Monkeys_Timetable
             return TechnicalSpeed;
         }
 
-        public List<double> GetSpeedIndex(DataManager dmm)//速度系数
+        public List<double> GetSpeedIndex(DataManager dmm)//每一列车的速度系数=旅行速度/技术速度
         {
             DataManager dm = dmm;
             List<double> SpeedIndex = new List<double>();
@@ -306,12 +306,14 @@ namespace Monkeys_Timetable
                 int[] aCount = new int[] { 0, 0, 0, 0, 0, 0 };
                 foreach (Train aTrain in dm.TrainList)
                 {
-                    if (!aTrain.staTimeDic.Keys.Contains(sta))
+                    if (!aTrain.staTimeDic.Keys.Contains(sta))//判断列车是否经过该车站
+                    {
                         continue;
-                    
+                    }
+                        
                     List<string> aList1 = aTrain.staTimeDic[sta];
-                    int aHour1 = GetHour(aList1[0]);
-                    int aHour2 = GetHour(aList1[1]);
+                    int aHour1 = GetHour(aList1[0]);//出发时间
+                    int aHour2 = GetHour(aList1[1]);//到达时间
                     for (int i = 0; i < 6; i++)
                     {
                          if (aHour1 == 0)//始发站
@@ -342,7 +344,7 @@ namespace Monkeys_Timetable
             return StationService;
         }
 
-        public List<int> GetServiceFrequency(DataManager dmm)//所有车的服务频率（停站次数及列车级别）级别还没有加
+        public List<int> GetServiceFrequency(DataManager dmm)//所有车的服务频率（即停站次数）
         {
             DataManager dm = dmm;
             List<int> ServiceFrequency = new List<int>();
@@ -356,7 +358,7 @@ namespace Monkeys_Timetable
                     staDicValue1 = aTrain.staTimeDic[aTrain.staList[i]];//车站的信息列表
                     double aTime1 = GetMinute(staDicValue1[0]);//列车在该站的到达时间
                     double aTime2 = GetMinute(staDicValue1[1]);//列车在该站的出发时间
-                    if (aTime2 - aTime1 != 0)
+                    if (aTime2 - aTime1 != 0)//判断列车是否通过车站，若不是则服务次数加1
                     {
                         aCount += 1;
                     }
@@ -370,6 +372,7 @@ namespace Monkeys_Timetable
         public List<int> AllDensity = new List<int>();//读取所有密度值，用来在Assessform中判断可视化条形图大小
         public Dictionary<List<string>, List<int>> GetTrainDensity(DataManager dmm)//列车密度表_返回形式(<站名，站名> -> <上行列车数，下行列车数>)
         {
+            //调用方法实现PaintTool中str1的读取 完成密度值的计算
             DataManager dm = dmm;
             PaintTool pt = new PaintTool();
             PaintForm pf = new PaintForm();
@@ -385,20 +388,20 @@ namespace Monkeys_Timetable
             
             for(int jjj = 1;jjj < pt.str1.Count+1;jjj++)
             {
-                List<string> StationName = pt.str1[jjj];
+                List<string> StationName = pt.str1[jjj];//读取各个线路的站名列表
                 for (int i = 0; i < StationName.Count - 1; i++)
                 {
-                    List<string> Section = new List<string>();
+                    List<string> Section = new List<string>();//读取区间名称
                     Section.Add(StationName[i]);
                     Section.Add(StationName[i + 1]);
                     List<int> Density = new List<int>();
                     int DensityUp = 0;
                     int DensityDown = 0;
-                    foreach (Train aTrain in dm.UpTrainDic.Values)
+                    foreach (Train aTrain in dm.UpTrainDic.Values)//上行列车
                     {
                         for (int j = 0; j < aTrain.staList.Count - 1; j++)
                         {
-                            if (StationName[i + 1] == aTrain.staList[j] && StationName[i] == aTrain.staList[j + 1])
+                            if (StationName[i + 1] == aTrain.staList[j] && StationName[i] == aTrain.staList[j + 1])//判断列车经过车站顺序符合则区间列车密度加1
                             {
                                 DensityUp++;
                             }
@@ -407,12 +410,12 @@ namespace Monkeys_Timetable
                     Density.Add(DensityUp);
                     AllDensity.Add(DensityUp);
 
-                    foreach (Train aTrain in dm.DownTrainDic.Values)
+                    foreach (Train aTrain in dm.DownTrainDic.Values)//下行列车
                     {
                         for (int j = 0; j < aTrain.staList.Count - 1; j++)
                         {
 
-                            if (StationName[i] == aTrain.staList[j] && StationName[i + 1] == aTrain.staList[j + 1])
+                            if (StationName[i] == aTrain.staList[j] && StationName[i + 1] == aTrain.staList[j + 1])//判断列车经过车站顺序符合则区间列车密度加1
                             {
                                 DensityDown++;
                             }
