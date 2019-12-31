@@ -740,8 +740,8 @@ namespace Monkeys_Timetable
             clear = 0;
 
             DataGridView UpDownIndex = new DataGridView();
-            UpDownIndex.Size = new Size(445, 400);
-            UpDownIndex.Location = new Point(180, 120);
+            UpDownIndex.Size = new Size(445, 320);
+            UpDownIndex.Location = new Point(180, 130);
             this.splitContainer1.Panel2.Controls.Add(UpDownIndex);
             DataTable Information = new DataTable();
             Information.Columns.Add(" ");
@@ -752,6 +752,8 @@ namespace Monkeys_Timetable
             Information.Rows.Add("平均旅行速度", ass.UpDownTravelSpeed(dm)[0], ass.UpDownTravelSpeed(dm)[1], ass.UpDownTravelSpeed(dm)[2]);
             Information.Rows.Add("平均技术速度", ass.UpDownTechnicalSpeed(dm)[0], ass.UpDownTechnicalSpeed(dm)[1], ass.UpDownTechnicalSpeed(dm)[2]);
             Information.Rows.Add("平均速度系数", ass.UpDownSpeedIndex(dm)[0], ass.UpDownSpeedIndex(dm)[1], ass.UpDownSpeedIndex(dm)[2]);
+            Information.Rows.Add("最早出发时间", ass.UpDownTime(dm)[0], ass.UpDownTime(dm)[2], ass.UpDownTime(dm)[4]);
+            Information.Rows.Add("最晚到达时间", ass.UpDownTime(dm)[1], ass.UpDownTime(dm)[3], ass.UpDownTime(dm)[5]);
 
             UpDownIndex.DataSource = Information;
         }

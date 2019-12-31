@@ -25,6 +25,76 @@ namespace Monkeys_Timetable
             return aMinute;
         }
 
+        public List<string> UpDownTime(DataManager dmm)//上下行车的早晚时间，总早晚时间
+        {
+            DataManager dm = dmm;
+            List<string> UpDownTime = new List<string>();
+            string UpEarlyTime = "", UpLateTime = "", DownEarlyTime = "", DownLateTime = "";
+            double UpMinTime = 1440, UpMaxTime = 0, DownMinTime = 1440, DownMaxTime = 0;
+            foreach (Train aTrain in dm.upTrainList)
+            {
+                List<string> staDicValue1 = new List<string>();
+                staDicValue1 = aTrain.staTimeDic[aTrain.staList[0]];//始发站的信息列表
+                double aTime1 = GetMinute(staDicValue1[1]);//始发站的出发时间
+                List<string> staDicValue2 = new List<string>();
+                staDicValue2 = aTrain.staTimeDic[aTrain.staList[aTrain.staList.Count - 1]];//终到站的信息列表
+                double aTime2 = GetMinute(staDicValue2[0]);//终到站的到达时间
+                if (UpMinTime > aTime1)
+                {
+                    UpMinTime = aTime1;
+                    UpEarlyTime = staDicValue1[1];
+                }
+                if (UpMaxTime < aTime2)
+                {
+                    UpMaxTime = aTime2;
+                    UpLateTime = staDicValue2[0];
+                }
+            }
+            UpDownTime.Add(UpEarlyTime);
+            UpDownTime.Add(UpLateTime);
+
+            foreach (Train aTrain in dm.downTrainList)
+            {
+                List<string> staDicValue1 = new List<string>();
+                staDicValue1 = aTrain.staTimeDic[aTrain.staList[0]];//始发站的信息列表
+                double aTime1 = GetMinute(staDicValue1[1]);//始发站的出发时间
+                List<string> staDicValue2 = new List<string>();
+                staDicValue2 = aTrain.staTimeDic[aTrain.staList[aTrain.staList.Count - 1]];//终到站的信息列表
+                double aTime2 = GetMinute(staDicValue2[0]);//终到站的到达时间
+                if (DownMinTime > aTime1)
+                {
+                    DownMinTime = aTime1;
+                    DownEarlyTime = staDicValue1[1];
+                }
+                if (DownMaxTime < aTime2)
+                {
+                    DownMaxTime = aTime2;
+                    DownLateTime = staDicValue2[0];
+                }
+            }
+            UpDownTime.Add(DownEarlyTime);
+            UpDownTime.Add(DownLateTime);
+
+            if (GetMinute(UpEarlyTime) > GetMinute(DownEarlyTime))
+            {
+                UpDownTime.Add(DownEarlyTime);
+            }
+            else
+            {
+                UpDownTime.Add(UpEarlyTime);
+            }
+            if (GetMinute(UpLateTime) > GetMinute(DownLateTime))
+            {
+                UpDownTime.Add(UpLateTime);
+            }
+            else
+            {
+                UpDownTime.Add(DownLateTime);
+            }
+
+            return UpDownTime;
+        }
+
         public List<double> UpDownTravelSpeed(DataManager dmm)//上下行车的旅行速度，总旅行速度
         {
             DataManager dm = dmm;
