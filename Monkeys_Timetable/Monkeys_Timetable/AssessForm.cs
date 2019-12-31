@@ -42,9 +42,9 @@ namespace Monkeys_Timetable
             this.Height = 700;
             this.Width = 1300;
             this.splitContainer1.Dock = DockStyle.Fill;
-            splitContainer1.SplitterDistance = 499;
+            splitContainer1.SplitterDistance = 499;//左宽500，右宽800
             splitContainer1.SplitterWidth = 2;
-            splitContainer2.SplitterDistance = 349;
+            splitContainer2.SplitterDistance = 349;//上宽350，下宽350
             splitContainer2.SplitterWidth = 2;
             splitContainer1.IsSplitterFixed = true;
             splitContainer2.IsSplitterFixed = true;
@@ -66,16 +66,14 @@ namespace Monkeys_Timetable
         Button btRunTrain;
         #endregion
 
-        public void ShowPanel_1()
+        public void ShowPanel_1()//左上Panel加入控件
         {
             lbTrain.Text = "选择列车";
             lbTrain.Font = new Font("宋体", 10, FontStyle.Bold);
             lbTrain.Size = new Size(70, 30);
             lbTrain.Location = new Point(90, 95);
-            //lbTrain.TextAlign = ContentAlignment.MiddleCenter;
             this.splitContainer2.Panel1.Controls.Add(lbTrain);
 
-            //cbTrain.Items.AddRange(new object[] { 1, 2, 3 });
             foreach (Train tra in dm.TrainList)
             {
                 string trainName = tra.TrainNo;
@@ -126,19 +124,19 @@ namespace Monkeys_Timetable
             btRunTrain.Click += BtRunTrain_Click;
         }
 
-        private void BtRunTrain_Click(object sender, EventArgs e)
+        private void BtRunTrain_Click(object sender, EventArgs e)//Click事件为在左上Panel的控件中显示列车信息
         {
             String strtrain;
-            if (cbTrain.SelectedItem == null && cbTrain.Text =="")
+            if (cbTrain.SelectedItem == null && cbTrain.Text =="")//判断是否有选择列车
             {
                 MessageBox.Show("请先选择列车！");
             }
-            else if (cbTrain.SelectedItem != null)
+            else if (cbTrain.SelectedItem != null)//ComboBox中有选择对象
             {
                 strtrain = cbTrain.SelectedItem.ToString();
                 for (int i = 0; i < dm.TrainList.Count-1; i++)
                 {
-                    if(strtrain == dm.TrainList[i].TrainNo)
+                    if(strtrain == dm.TrainList[i].TrainNo)//检索到对应的车次号
                     {
                         tbTravalSpeed.Text = ass.GetTravelSpeed(dm)[i].ToString()+"km/h";
                         tbTechicalSpeed.Text = ass.GetTechnicalSpeed(dm)[i].ToString()+"km/h";
@@ -147,13 +145,13 @@ namespace Monkeys_Timetable
                     }
                 }
             }
-            else
+            else//ComboBox中为使用者自行输入的车次号
             {
                 int judge = 0;
                 strtrain = cbTrain.Text;
                 for (int i = 0; i < dm.TrainList.Count - 1; i++)
                 {
-                    if (strtrain == dm.TrainList[i].TrainNo)
+                    if (strtrain == dm.TrainList[i].TrainNo)//检索到对应的车次号
                     {
                         tbTravalSpeed.Text = ass.GetTravelSpeed(dm)[i].ToString() + "km/h";
                         tbTechicalSpeed.Text = ass.GetTechnicalSpeed(dm)[i].ToString() + "km/h";
@@ -163,7 +161,7 @@ namespace Monkeys_Timetable
                         break;
                     }
                 }
-                if (judge == 0)
+                if (judge == 0)//未检索到对应的车次号
                 {
                     MessageBox.Show("未找到目标列车！");
                 }
@@ -188,7 +186,7 @@ namespace Monkeys_Timetable
         Button btRunStation;
         #endregion
 
-        public void ShowPanel_2()
+        public void ShowPanel_2()//左下Panel加入控件
         {
             lbStation = new Label();
             lbStation.Name = "lbStation";
@@ -198,11 +196,8 @@ namespace Monkeys_Timetable
             lbStation.Location = new Point(90, 35);
             this.splitContainer2.Panel2.Controls.Add(lbStation);
 
-
             cbStation = new ComboBox();
             cbStation.Name = "cbStation";
-            //cbStation.Items.AddRange(new object[] { 1, 2, 3 });
-            
             foreach(string strr in dm.stationStringList)
             {
                 string strr2 = strr;
@@ -288,15 +283,14 @@ namespace Monkeys_Timetable
             btRunStation.Click += BtRunStation_Click;
         }
 
-        private void BtRunStation_Click(object sender, EventArgs e)
+        private void BtRunStation_Click(object sender, EventArgs e)//Click事件为在左下Panel的控件中显示车站信息
         {
             string str;
-            //throw new NotImplementedException();
-            if (cbStation.SelectedItem == null && cbStation.Text=="")
+            if (cbStation.SelectedItem == null && cbStation.Text=="")//判断是否有选择车站
             {
                 MessageBox.Show("请先选择车站！");
             }
-            else if(cbStation.SelectedItem != null)
+            else if(cbStation.SelectedItem != null)//检索到对应的车站名
             {
                 str = cbStation.SelectedItem.ToString();
                 int[] tbnums = serviceCount[str];//选中车站的6个时间段的服务次数
@@ -305,7 +299,7 @@ namespace Monkeys_Timetable
                     string str1 = "tbTime" + i.ToString();
                     foreach (Control control in this.splitContainer2.Panel2.Controls)
                     {
-                        if (control is TextBox && control.Name == str1)
+                        if (control is TextBox && control.Name == str1)//判断是否是需要写入数据的TextBox控件
                         {
                             string tbnum = tbnums[i - 1].ToString();
                             (control as TextBox).Text = tbnum;
@@ -314,7 +308,7 @@ namespace Monkeys_Timetable
                     }
                 }
             }
-            else
+            else//ComboBox中为使用者自行输入的车站名
             {
                 int judge = 0;
                 str = cbStation.Text;
@@ -328,7 +322,7 @@ namespace Monkeys_Timetable
                             string str1 = "tbTime" + i.ToString();
                             foreach (Control control in this.splitContainer2.Panel2.Controls)
                             {
-                                if (control is TextBox && control.Name == str1)
+                                if (control is TextBox && control.Name == str1)//判断是否是需要写入数据的TextBox控件
                                 {
                                     string tbnum = tbnums[i - 1].ToString();
                                     (control as TextBox).Text = tbnum;
@@ -339,7 +333,7 @@ namespace Monkeys_Timetable
                         judge = 1;
                     }
                 }
-                if (judge == 0)
+                if (judge == 0)//未检索到对应的车站名
                 {
                     MessageBox.Show("未找到目标车站！");
                 }
@@ -347,14 +341,14 @@ namespace Monkeys_Timetable
         }
 
         int clear = 0;
-        public void drawDensity()
+        public void drawDensity()//绘制区间列车密度图
         {
-            if (clear == 1)
+            if (clear == 1)//判断右边Panel是否有控件存在，存在便清除
             {
                 this.splitContainer1.Panel2.Controls.Clear();
                 clear = 0;
             }
-            else if (clear == 0)
+            else if (clear == 0)//判断右边Panel是否有控件存在，无控件便绘制区间列车密度图
             {
                 this.splitContainer1.Panel2.Controls.Clear();
 
@@ -366,24 +360,22 @@ namespace Monkeys_Timetable
                 splitContainer1.Panel2.Controls.Add(pbdensity);
                 Graphics g = Graphics.FromImage(bm);
 
-                // title
+                //图表标题
                 Font font = new Font("Arial", 10, FontStyle.Regular);
                 Font font1 = new Font("宋体", 14, FontStyle.Bold);
                 SolidBrush brush = new SolidBrush(Color.Blue);
-
                 g.DrawString("区间列车密度统计", font1, brush, new PointF(320, 30));
+
                 // Up Down
                 Font font2 = new Font("宋体", 10, FontStyle.Bold);
                 SolidBrush brush2 = new SolidBrush(Color.Black);
                 g.DrawString("上行", font2, brush2, new PointF(350, 55));
                 g.DrawString("下行", font2, brush2, new PointF(420, 55));
-                // 画个水平线找位置 圈出区域为绘图的地方
-                g.DrawLine(new Pen(brush2), new Point(120, 70), new Point(680, 70));
-                //g.DrawLine(new Pen(brush2), new Point(0, 70), new Point(750, 70));
-                //g.DrawLine(new Pen(brush2), new Point(0, 620), new Point(750, 620));
-                g.DrawLine(new Pen(brush2), new Point(400, 70), new Point(400, 620));
-                //g.DrawLine(new Pen(brush2), new Point(120, 70), new Point(120, 620));// 最长的bar
-                //g.DrawLine(new Pen(brush2), new Point(400 + 280, 70), new Point(400 + 280, 620));// 最长的bar
+
+                //用线路表示绘图区域
+                g.DrawLine(new Pen(brush2), new Point(120, 70), new Point(680, 70));//横轴
+                g.DrawLine(new Pen(brush2), new Point(400, 70), new Point(400, 620));//纵轴
+
 
                 float aa = (float)0;//绘图的比例系数 
                 if (maxDensity != 0)
