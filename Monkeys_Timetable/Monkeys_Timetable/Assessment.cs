@@ -7,8 +7,10 @@ namespace Monkeys_Timetable
 {
     class Assessment//封装各类运行图指标计算方法
     {
-        
-        public double GetMinute(string aTime)//将时间字符串转化为分钟
+        /// <summary>
+        /// 将时间字符串转化为分钟
+        /// </summary>
+        public double GetMinute(string aTime)
         {
             double aMinute1, aMinute2, aMinute;
             if (aTime != "")
@@ -25,6 +27,9 @@ namespace Monkeys_Timetable
             return aMinute;
         }
 
+        /// <summary>
+        /// 计算上下行车的早晚时间，总早晚时间
+        /// </summary>
         public List<string> UpDownTime(DataManager dmm)//上下行车的早晚时间，总早晚时间
         {
             DataManager dm = dmm;
@@ -95,6 +100,9 @@ namespace Monkeys_Timetable
             return UpDownTime;
         }
 
+        /// <summary>
+        /// 计算上下行车的旅行速度，总旅行速度
+        /// </summary>
         public List<double> UpDownTravelSpeed(DataManager dmm)//上下行车的旅行速度，总旅行速度
         {
             DataManager dm = dmm;
@@ -144,6 +152,9 @@ namespace Monkeys_Timetable
             return UpDownTravelSpeed;
         }
 
+        /// <summary>
+        /// 计算每一列车的旅行速度
+        /// </summary>
         public List<double> GetTravelSpeed(DataManager dmm)//每一列车的旅行速度
         {
             DataManager dm = dmm;
@@ -165,6 +176,9 @@ namespace Monkeys_Timetable
             return TravelSpeed;
         }
 
+        /// <summary>
+        /// 计算上下行车的技术速度，总技术速度
+        /// </summary>
         public List<double> UpDownTechnicalSpeed(DataManager dmm)//上下行车的技术速度，总技术速度
         {
             DataManager dm = dmm;
@@ -228,6 +242,9 @@ namespace Monkeys_Timetable
             return UpDownTechnicalSpeed;
         }
 
+        /// <summary>
+        /// 计算每一列车的技术速度
+        /// </summary>
         public List<double> GetTechnicalSpeed(DataManager dmm)//每一列车的技术速度
         {
             DataManager dm = dmm;
@@ -256,6 +273,9 @@ namespace Monkeys_Timetable
             return TechnicalSpeed;
         }
 
+        /// <summary>
+        /// 计算每一列车的速度系数
+        /// </summary>
         public List<double> GetSpeedIndex(DataManager dmm)//每一列车的速度系数=旅行速度/技术速度
         {
             DataManager dm = dmm;
@@ -271,6 +291,9 @@ namespace Monkeys_Timetable
             return SpeedIndex;
         }
 
+        /// <summary>
+        /// 计算上下行车的速度系数，总速度系数
+        /// </summary>
         public List<double> UpDownSpeedIndex(DataManager dmm)//上下行车的速度系数，总速度系数
         {
             DataManager dm = dmm;
@@ -286,6 +309,9 @@ namespace Monkeys_Timetable
             return UpDownSpeedIndex;
         }
 
+        /// <summary>
+        /// 获得出发或者到达时刻是在哪一个小时里
+        /// </summary>
         public int GetHour(string aTime)//获得出发或者到达时刻是在哪一个小时里
         {
             int aHour = 0;
@@ -297,6 +323,9 @@ namespace Monkeys_Timetable
             return aHour;
         }
 
+        /// <summary>
+        /// 计算车站服务次数，即有多少趟列车在本站进行服务，并按3小时为间隔将6-24点划分为6个时间段
+        /// </summary>
         public Dictionary<string, int[]> GetStationServiceCount(DataManager dmm)//车站服务次数，即有多少趟列车在本站进行服务，并按3小时为间隔将6-24点划分为6个时间段
         {
             DataManager dm = dmm;
@@ -344,6 +373,9 @@ namespace Monkeys_Timetable
             return StationService;
         }
 
+        /// <summary>
+        /// 计算所有车的服务频率
+        /// </summary>
         public List<int> GetServiceFrequency(DataManager dmm)//所有车的服务频率（即停站次数）
         {
             DataManager dm = dmm;
@@ -368,8 +400,10 @@ namespace Monkeys_Timetable
             return ServiceFrequency;
         }
 
-
         public List<int> AllDensity = new List<int>();//读取所有密度值，用来在Assessform中判断可视化条形图大小
+         /// <summary>
+        /// 计算所有站的列车密度
+        /// </summary>
         public Dictionary<List<string>, List<int>> GetTrainDensity(DataManager dmm)//列车密度表_返回形式(<站名，站名> -> <上行列车数，下行列车数>)
         {
             //调用方法实现PaintTool中str1的读取 完成密度值的计算
@@ -426,7 +460,6 @@ namespace Monkeys_Timetable
                     TrainDensity.Add(Section, Density);
                 }
             }
-            
             return TrainDensity;
         }
         
