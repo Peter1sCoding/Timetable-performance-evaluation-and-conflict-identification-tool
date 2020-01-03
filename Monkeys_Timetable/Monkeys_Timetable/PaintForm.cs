@@ -411,7 +411,11 @@ namespace Monkeys_Timetable
                                     {
                                         int ii = i1 + 1;
                                         double total1 = pt.Mile1[ii].Last();
-                                        pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
+                                        if (YesOrNo)
+                                        {
+                                            pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
+                                        }
+                                        
                                     }
                                     ShowInfoTooltip(ci.ConflictList[i], e.Location);
                                     Pen SelectedPen = new Pen(Color.Blue, 2);
@@ -459,7 +463,11 @@ namespace Monkeys_Timetable
                                     {
                                         int ii = i1 + 1;
                                         double total1 = pt.Mile1[ii].Last();
-                                        pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
+                                        if (YesOrNo)
+                                        {
+                                            pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
+                                        }
+                                        
                                     }
                                 }
                                 if (checkBox2.Checked)
@@ -589,7 +597,11 @@ namespace Monkeys_Timetable
                                     {
                                         int ii = i1 + 1;
                                         double total1 = pt.Mile1[ii].Last();
-                                        pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
+                                        if (YesOrNo)
+                                        {
+                                            pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
+                                        }
+                                        
                                     }
                                 }
                                 if (checkBox2.Checked)
