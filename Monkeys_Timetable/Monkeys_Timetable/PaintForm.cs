@@ -415,7 +415,11 @@ namespace Monkeys_Timetable
                                     }
                                     ShowInfoTooltip(ci.ConflictList[i], e.Location);
                                     Pen SelectedPen = new Pen(Color.Blue, 2);
-                                    gs.DrawEllipse(SelectedPen, ci.ConflictList[i].ConflictLocation.X - 2, ci.ConflictList[i].ConflictLocation.Y - 2, 5, 5);
+                                    if(YesOrNo)
+                                    {
+                                        gs.DrawEllipse(SelectedPen, ci.ConflictList[i].ConflictLocation.X - 2, ci.ConflictList[i].ConflictLocation.Y - 2, 5, 5);
+                                    }
+                                    
                                     break;
                                 }
                             }                            
@@ -465,7 +469,11 @@ namespace Monkeys_Timetable
                                     {
                                         int ii = i1 + 1;
                                         double total1 = pt.Mile1[ii].Last();
-                                        pt.ConflictDrawDown(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
+                                        if (YesOrNo)
+                                        {
+                                            pt.ConflictDrawDown(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
+                                        }
+                                        
                                     }
                                 }
                                 ShowInfoTooltip(train, e.Location);
@@ -529,11 +537,19 @@ namespace Monkeys_Timetable
                                     {
                                         int ii = i1 + 1;
                                         double total1 = pt.Mile1[ii].Last();
-                                        pt.ConflictDrawDown(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
+                                        if (YesOrNo)
+                                        {
+                                            pt.ConflictDrawDown(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
+                                        }
                                     }
+                                        
                                     ShowInfoTooltip(ci.ConflictList[i],e.Location);
                                     Pen SelectedPen = new Pen(Color.Blue, 2);
-                                    gs.DrawEllipse(SelectedPen, ci.ConflictList[i].ConflictLocation.X - 2, ci.ConflictList[i].ConflictLocation.Y - 2, 5, 5);
+                                    if (YesOrNo)
+                                    {
+                                        gs.DrawEllipse(SelectedPen, ci.ConflictList[i].ConflictLocation.X - 2, ci.ConflictList[i].ConflictLocation.Y - 2, 5, 5);
+                                    }
+                                    
                                     break;
                                 }
                             }                           
@@ -583,7 +599,11 @@ namespace Monkeys_Timetable
                                     {
                                         int ii = i1 + 1;
                                         double total1 = pt.Mile1[ii].Last();
-                                        pt.ConflictDrawDown(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
+                                        if (YesOrNo)
+                                        {
+                                            pt.ConflictDrawDown(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
+                                        }
+                                        
                                     }
                                 }
                                 ShowInfoTooltip(train, e.Location);

@@ -374,7 +374,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(930, 546);
+            this.ClientSize = new System.Drawing.Size(947, 563);
             this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.checkBox3);
             this.Controls.Add(this.dataGridView1);
