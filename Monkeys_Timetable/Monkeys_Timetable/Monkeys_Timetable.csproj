@@ -31,6 +31,10 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>图标2.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup />
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -132,6 +136,7 @@
     <None Include="车站列车安全间隔.csv" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="图标2.ico" />
     <Content Include="注册用户表.mdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
