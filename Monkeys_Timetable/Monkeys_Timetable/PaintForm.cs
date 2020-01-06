@@ -102,8 +102,12 @@ namespace Monkeys_Timetable
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 staFileName = dialog.FileName;
+                dm.ReadStation(staFileName);
             }
-            dm.ReadStation(staFileName);
+            if(dialog.FileName == null)
+            {
+                MessageBox.Show("未找到相关文件");
+            }
         }
         /// <summary>
         ///读取时刻表信息
@@ -117,11 +121,15 @@ namespace Monkeys_Timetable
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 traFileName = dialog.FileName;
+                dm.ReadTrain(traFileName);
+                dm.DivideUpDown();
+                dm.AddTra2sta();
+                dm.GetStop();
             }
-            dm.ReadTrain(traFileName);
-            dm.DivideUpDown();
-            dm.AddTra2sta();
-            dm.GetStop();            
+            if (dialog.FileName == null)
+            {
+                MessageBox.Show("未找到相关文件");
+            }            
         }
         /// <summary>
         ///读取列车间隔信息
@@ -135,8 +143,12 @@ namespace Monkeys_Timetable
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 headFileName = dialog.FileName;
+                dm.ReadHeadway(headFileName);
             }
-            dm.ReadHeadway(headFileName);
+            if (dialog.FileName == null)
+            {
+                MessageBox.Show("未找到相关文件");
+            }
         }
         private void 图像ToolStripMenuItem_Click(object sender, EventArgs e)
         {
