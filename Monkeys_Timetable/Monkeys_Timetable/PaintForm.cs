@@ -12,29 +12,61 @@ namespace Monkeys_Timetable
 {
     public partial class PaintForm : Form //实现绘制运行图的界面
     {
-
+        /// <summary>
+        /// 时刻表文件名
+        /// </summary>
         string traFileName;
+        /// <summary>
+        /// 车站文件名
+        /// </summary>
         string staFileName;
+        /// <summary>
+        /// 安全间隔文件名
+        /// </summary>
         string headFileName;
-        static int TD_Width = 3000;//运行图总宽度
-        static int TD_Height = 2000;//运行图总高度
+        /// <summary>
+        ///运行图总宽度
+        /// </summary>
+        static int TD_Width = 3000;
+        /// <summary>
+        ///运行图总高度
+        /// </summary>
+        static int TD_Height = 2000;
+        /// <summary>
+        ///DataManager对象，用于读取文件
+        /// </summary>
         DataManager dm;
+        /// <summary>
+        ///Conflict_Identification对象，用于检测冲突
+        /// </summary>
         Conflict_Identification ci;
+        /// <summary>
+        ///存放冲突信息
+        /// </summary>
         DataTable dt;
-        PaintTool pt = new PaintTool();        
+        /// <summary>
+        ///PaintTool对象，用于绘图
+        /// </summary>
+        PaintTool pt = new PaintTool();
+        /// <summary>
+        ///存放冲突信息
+        /// </summary>
         DataTable ConflictTable;
+        /// <summary>
+        ///bmp，运行图绘制的底图
+        /// </summary>
         public Bitmap bmp = new Bitmap(TD_Width, TD_Height);
-
+        /// <summary>
+        ///判断是否绘制冲突点
+        /// </summary>
         static bool YesOrNo = false;
-
-        
-        
-
+        /// <summary>
+        ///构造方法，初始化各对象
+        /// </summary>
         public PaintForm()
         {    
             pictureBox2 = new PictureBox();
             pictureBox2.Size = new Size(TD_Width, TD_Height);
-
             InitializeComponent();
             this.Size = new Size(TD_Width, TD_Height);
             dm = new DataManager();
@@ -45,27 +77,22 @@ namespace Monkeys_Timetable
             dm.DivideUpDown();
             dm.AddTra2sta();
             dm.GetStop();
-
             ci = new Conflict_Identification(dm.stationList, dm.HeadwayDic, dm.TrainDic);
             ci.Conflict_Judge();
             ConflictTable = ci.ToDataTable();
         }
-
         private void PaintForm_Load(object sender, EventArgs e)
         {
-
         }
-
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-
         }
-
         private void 读取文件ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            
+        {          
         }
-       
+        /// <summary>
+        ///读取车站信息
+        /// </summary>
         private void 读取车站信息ToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
@@ -78,7 +105,9 @@ namespace Monkeys_Timetable
             }
             dm.ReadStation(staFileName);
         }
-
+        /// <summary>
+        ///读取时刻表信息
+        /// </summary>
         private void 读取时刻表信息ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
@@ -94,7 +123,9 @@ namespace Monkeys_Timetable
             dm.AddTra2sta();
             dm.GetStop();            
         }
-
+        /// <summary>
+        ///读取列车间隔信息
+        /// </summary>
         private void 读取列车间隔信息ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
@@ -109,41 +140,31 @@ namespace Monkeys_Timetable
         }
         private void 图像ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
         }
-
         private void 绘制运行图ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
         }
-
         private void 绘制ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
         }
-
         private void panel2_Paint(object sender, PaintEventArgs e)
         {
-
         }
-
         private void panel3_Paint(object sender, PaintEventArgs e)
         {
-
-        }
-
-        
-
+        }       
         private void 冲突检测ToolStripMenuItem_Click(object sender, EventArgs e)
         {
         }
 
         private void 冲突检测数据ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
             ConflictForm cf = new ConflictForm(dt);
             cf.Show();
         }
+        /// <summary>
+        ///绘制时刻与站名线底图
+        /// </summary>
         public void DrawFrame()
         {
             pictureBox2.Size = new Size(TD_Width, TD_Height);
@@ -170,7 +191,9 @@ namespace Monkeys_Timetable
 
             this.pictureBox2.BackgroundImage = bmp;
         }
-        
+        /// <summary>
+        ///绘制运行线与冲突
+        /// </summary>
         public void DrawPicture()
         {
             pictureBox2.Size = new Size(TD_Width, TD_Height);
@@ -195,8 +218,7 @@ namespace Monkeys_Timetable
                     pt.TimetableFrame(this.bmp.Width, pt.border2[i].up,pt.border2[i].down, total1,pt.Mile1[ii], gs, pt.str1[ii],ii);
                     pt.TrainLine(gs, dm.upTrainList, pt.str1[ii],ii);
                     pt.TrainLine(gs, dm.downTrainList, pt.str1[ii],ii);
-                }
-                
+                }                
             }
             else if (checkBox1.Checked == true && checkBox2.Checked == false)
             {
@@ -206,8 +228,7 @@ namespace Monkeys_Timetable
                     double total1 = pt.Mile1[ii].Last();
                     pt.TimetableFrame(this.bmp.Width, pt.border2[i].up,pt.border2[i].down, total1,pt.Mile1[ii], gs, pt.str1[ii],ii);
                     pt.TrainLine(gs, dm.upTrainList, pt.str1[ii], ii);
-                }
-                
+                }                
             }
             else if (checkBox1.Checked == false && checkBox2.Checked == true)
             {
@@ -235,36 +256,10 @@ namespace Monkeys_Timetable
             pt.GetConflictPoint(ci.ConflictList, dm.TrainList);
             this.pictureBox2.BackgroundImage = bmp;
         }
-        //public void Draw()
-        //{
-        //    pictureBox2.Size = new Size(TD_Width, TD_Height);
-        //    Graphics gs;
-        //    gs = Graphics.FromImage(bmp);
-        //    int ix = dm.stationList.Count;
-        //    double total = dm.stationList[ix - 1].totalMile;
-        //    List<double> staMile = new List<double>();
-        //    for (int i = 0; i < ix; i++)
-        //    {
-        //        staMile.Add(dm.stationList[i].totalMile);
-        //    }
-        //    pictureBox2.BackgroundImage = null;
-        //    if (checkBox2.Checked == true)
-        //    {
-        //        pt.TimetableFrame(this.pictureBox2.Width, this.pictureBox2.Height, total, staMile, gs, dm.stationStringList);
-        //        pt.TrainLine(gs, dm.downTrainList, dm.stationStringList);
-        //    }
-        //    else
-        //    {
-        //        gs.Clear(this.pictureBox2.BackColor);
-        //        pt.TimetableFrame(this.pictureBox2.Width, this.pictureBox2.Height, total, staMile, gs, dm.stationStringList);
-        //    }
-        //    this.pictureBox2.BackgroundImage = bmp;
-        //}
         private void 绘制运行图ToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             DrawFrame();
         }
-
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             DrawPicture();
@@ -282,32 +277,27 @@ namespace Monkeys_Timetable
                 ConflictShow();
             }
         }//下行运行图的绘制
-
         private void 开行方案数据ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LinePlan lp = new LinePlan();
             lp.Show();
         }
-
         private void 检测ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Conflict_Identification ci = new Conflict_Identification(dm.stationList,dm.HeadwayDic,dm.TrainDic);
             ci.Conflict_Judge();
             ConflictTable = ci.ToDataTable();
         }
-
         private void 显示冲突列车数据ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ConflictForm cf = new ConflictForm(ConflictTable);
             cf.Show();
         }
-
         private void 显示开行方案数据ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LinePlan lp = new LinePlan();
             lp.Show();
         }
-
         private void 运行图标记冲突ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (YesOrNo == false)
@@ -320,6 +310,9 @@ namespace Monkeys_Timetable
             }
             ConflictShow();     
         }
+        /// <summary>
+        ///绘制冲突点
+        /// </summary>
         public void ConflictShow()
         {
             pictureBox2.Size = new Size(TD_Width, TD_Height);
@@ -334,7 +327,6 @@ namespace Monkeys_Timetable
                     double total1 = pt.Mile1[ii].Last();
                     pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
                 }
-
             }
             if (checkBox2.Checked)
             {
@@ -346,35 +338,29 @@ namespace Monkeys_Timetable
                     double total1 = pt.Mile1[ii].Last();
                     pt.ConflictDrawDown(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
                 }
-
             }
             this.pictureBox2.BackgroundImage = bmp;
         }
-
         private void 计算ToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             AssessForm af = new AssessForm();
             af.Show();
         }
-
         private void PaintForm_Scroll(object sender, ScrollEventArgs e)
         {         
         }
-
         private void 绘制运行图上行ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             checkBox1.Checked = false;
             checkBox2.Checked = false;
             checkBox1.Checked = true;
         }
-
         private void 绘制运行图下行ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             checkBox2.Checked = false;
             checkBox1.Checked = false;
             checkBox2.Checked = true;
         }
-
         private void 绘制运行图上下行ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             checkBox2.Checked = false;
@@ -382,6 +368,9 @@ namespace Monkeys_Timetable
             checkBox2.Checked = true;
             checkBox1.Checked = true;
         }
+        /// <summary>
+        ///判断鼠标点位，生成选中列车和冲突点信息
+        /// </summary>
         private void TimetableViewCtrl_MouseMove(object sender, MouseEventArgs e)
         {
             pictureBox2.Size = new Size(TD_Width, TD_Height);
@@ -414,16 +403,14 @@ namespace Monkeys_Timetable
                                         if (YesOrNo)
                                         {
                                             pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
-                                        }
-                                        
+                                        }                                       
                                     }
                                     ShowInfoTooltip(ci.ConflictList[i], e.Location);
                                     Pen SelectedPen = new Pen(Color.Blue, 2);
                                     if(YesOrNo)
                                     {
                                         gs.DrawEllipse(SelectedPen, ci.ConflictList[i].ConflictLocation.X - 2, ci.ConflictList[i].ConflictLocation.Y - 2, 5, 5);
-                                    }
-                                    
+                                    }                                    
                                     break;
                                 }
                             }                            
@@ -480,8 +467,7 @@ namespace Monkeys_Timetable
                                         if (YesOrNo)
                                         {
                                             pt.ConflictDrawDown(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
-                                        }
-                                        
+                                        }                                        
                                     }
                                 }
                                 ShowInfoTooltip(train, e.Location);
@@ -556,8 +542,7 @@ namespace Monkeys_Timetable
                                     if (YesOrNo)
                                     {
                                         gs.DrawEllipse(SelectedPen, ci.ConflictList[i].ConflictLocation.X - 2, ci.ConflictList[i].ConflictLocation.Y - 2, 5, 5);
-                                    }
-                                    
+                                    }                                    
                                     break;
                                 }
                             }                           
@@ -600,8 +585,7 @@ namespace Monkeys_Timetable
                                         if (YesOrNo)
                                         {
                                             pt.ConflictDrawUp(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
-                                        }
-                                        
+                                        }                                        
                                     }
                                 }
                                 if (checkBox2.Checked)
@@ -614,8 +598,7 @@ namespace Monkeys_Timetable
                                         if (YesOrNo)
                                         {
                                             pt.ConflictDrawDown(gs, ConflictTable, dm.TrainDic, dm.stationStringList);
-                                        }
-                                        
+                                        }                                        
                                     }
                                 }
                                 ShowInfoTooltip(train, e.Location);
@@ -649,7 +632,6 @@ namespace Monkeys_Timetable
                                 break;
                             }
                         }
-
                     }
                     if ((c == 0) || (n == 0))
                     {
@@ -659,6 +641,9 @@ namespace Monkeys_Timetable
                 Refresh();
             }
         }
+        /// <summary>
+        ///显示选中列车信息
+        /// </summary>
         private void ShowInfoTooltip(Train train, Point location)
         {
             location.X += 15;
@@ -668,21 +653,11 @@ namespace Monkeys_Timetable
             dt.Columns.Add(train.TrainNo);
             dt.Columns.Add("车站");
             dt.Columns.Add("到达时刻");
-            dt.Columns.Add("出发时刻");
-           
-
+            dt.Columns.Add("出发时刻");           
             for (int i = 0; i < train.staList.Count; i++)
             {
                 dt.Rows.Add("",train.staList[i], train.staTimeDic[train.staList[i]][0], train.staTimeDic[train.staList[i]][1]);
             }
-
-
-            //if (ClientSize.Width - location.X < dataGridView1.Width && location.X >= dataGridView1.Width)
-            //location.X = dataGridView1.Width - location.X;
-
-            //if (ClientSize.Height - location.Y < dataGridView1.Height && location.Y >= dataGridView1.Height)
-            //location.Y = dataGridView1.Height - location.Y;
-
             location.X += this.AutoScrollPosition.X;
             location.Y += this.AutoScrollPosition.Y;
             dataGridView1.DataSource = dt;
@@ -692,7 +667,10 @@ namespace Monkeys_Timetable
                 dataGridView1.Visible = true;
             }
             dataGridView1.Location = location;
-        }//显示列车详细信息
+        }
+        /// <summary>
+        ///显示选中冲突信息
+        /// </summary>
         private void ShowInfoTooltip(Conflict con,Point location)
         {
             location.X += 15;
@@ -714,7 +692,7 @@ namespace Monkeys_Timetable
                 dataGridView2.Visible = true;
                 dataGridView2.Location = location;
             }
-        }//显示冲突详细信息
+        }
         private void 读取车站画图信息ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
@@ -725,10 +703,8 @@ namespace Monkeys_Timetable
             {
                 staFileName = dialog.FileName;
             }
-            dm.ReadDrawStation(staFileName);
-            
+            dm.ReadDrawStation(staFileName);           
         }
-
         private void 框架图ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog dialog = new SaveFileDialog();
@@ -741,8 +717,6 @@ namespace Monkeys_Timetable
                 {
                     string filename = Name.Substring(Name.LastIndexOf(".") + 1).ToString();
                     System.Drawing.Imaging.ImageFormat imgformat = null;
-
-
                     if (filename != "")
                     {
                         switch (filename)
@@ -775,18 +749,13 @@ namespace Monkeys_Timetable
                     }
                 }
             }
-
-
         }
-
         private void checkBox3_CheckedChanged(object sender, EventArgs e)
         {
             dataGridView2.Visible = false;
             dataGridView1.Visible = false;
             DrawPicture();
-
         }
-
         private void 上行运行图ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog dialog = new SaveFileDialog();
@@ -799,8 +768,6 @@ namespace Monkeys_Timetable
                 {
                     string filename = Name.Substring(Name.LastIndexOf(".") + 1).ToString();
                     System.Drawing.Imaging.ImageFormat imgformat = null;
-
-
                     if (filename != "")
                     {
                         switch (filename)
@@ -833,10 +800,7 @@ namespace Monkeys_Timetable
                     }
                 }
             }
-
-
         }
-
         private void 下行运行图ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog dialog = new SaveFileDialog();
@@ -849,8 +813,6 @@ namespace Monkeys_Timetable
                 {
                     string filename = Name.Substring(Name.LastIndexOf(".") + 1).ToString();
                     System.Drawing.Imaging.ImageFormat imgformat = null;
-
-
                     if (filename != "")
                     {
                         switch (filename)
@@ -883,10 +845,7 @@ namespace Monkeys_Timetable
                     }
                 }
             }
-
-
         }
-
         private void 上下行运行图ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog dialog = new SaveFileDialog();
@@ -933,20 +892,16 @@ namespace Monkeys_Timetable
                     }
                 }
             }
-
-
         }
-
         private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
         }
-
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
         }
-
+        /// <summary>
+        /////放大运行图
+        /// </summary>
         private void button1_Click(object sender, EventArgs e)
         {
             if (TD_Width < 6000 && TD_Height < 4000)
@@ -966,8 +921,10 @@ namespace Monkeys_Timetable
                 dm.downTrainList[ind].TrainPointList = new List<Dictionary<string, List<PointF>>>();
             }
             DrawPicture();
-        }//放大
-
+        }
+        /// <summary>
+        /////缩小运行图
+        /// </summary>
         private void button2_Click(object sender, EventArgs e)
         {
             if (TD_Width > 900 && TD_Height > 600)
@@ -987,6 +944,6 @@ namespace Monkeys_Timetable
                 dm.downTrainList[ind].TrainPointList = new List<Dictionary<string, List<PointF>>>();
             }
             DrawPicture();
-        }//缩小
+        }
     }
 }
