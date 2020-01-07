@@ -690,9 +690,11 @@ namespace Monkeys_Timetable
             DataTable dt = new DataTable();
             dt.Columns.Add("冲突类型");
             dt.Columns.Add("前车");
+            dt.Columns.Add("前车时刻");
             dt.Columns.Add("后车");
+            dt.Columns.Add("后车时刻");
             dt.Columns.Add("车站");
-            dt.Rows.Add(con.ConflictType, con.FrontTrain.TrainNo, con.LatterTrain.TrainNo, con.ConflictSta);
+            dt.Rows.Add(con.ConflictType, con.FrontTrain.TrainNo, con.FrontTime, con.LatterTrain.TrainNo, con.LatterTime, con.ConflictSta);
 
             location.X += this.AutoScrollPosition.X;
             location.Y += this.AutoScrollPosition.Y;
@@ -956,6 +958,11 @@ namespace Monkeys_Timetable
                 dm.downTrainList[ind].TrainPointList = new List<Dictionary<string, List<PointF>>>();
             }
             DrawPicture();
+        }
+
+        private void dataGridView2_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

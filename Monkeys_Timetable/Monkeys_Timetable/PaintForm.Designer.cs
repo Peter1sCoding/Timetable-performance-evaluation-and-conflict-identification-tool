@@ -82,7 +82,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(6, 1, 0, 1);
-            this.menuStrip1.Size = new System.Drawing.Size(580, 29);
+            this.menuStrip1.Size = new System.Drawing.Size(412, 29);
             this.menuStrip1.TabIndex = 6;
             this.menuStrip1.Text = "menuStrip1";
             this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
@@ -209,7 +209,7 @@
             // 显示开行方案数据ToolStripMenuItem
             // 
             this.显示开行方案数据ToolStripMenuItem.Name = "显示开行方案数据ToolStripMenuItem";
-            this.显示开行方案数据ToolStripMenuItem.Size = new System.Drawing.Size(238, 28);
+            this.显示开行方案数据ToolStripMenuItem.Size = new System.Drawing.Size(192, 28);
             this.显示开行方案数据ToolStripMenuItem.Text = "开行方案数据";
             this.显示开行方案数据ToolStripMenuItem.Click += new System.EventHandler(this.显示开行方案数据ToolStripMenuItem_Click);
             // 
@@ -339,9 +339,10 @@
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowHeadersWidth = 51;
             this.dataGridView2.RowTemplate.Height = 29;
-            this.dataGridView2.Size = new System.Drawing.Size(486, 107);
+            this.dataGridView2.Size = new System.Drawing.Size(674, 107);
             this.dataGridView2.TabIndex = 12;
             this.dataGridView2.Visible = false;
+            this.dataGridView2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellContentClick_1);
             // 
             // button1
             // 
