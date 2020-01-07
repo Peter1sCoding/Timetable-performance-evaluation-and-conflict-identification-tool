@@ -291,7 +291,7 @@ namespace Monkeys_Timetable
         }//下行运行图的绘制
         private void 开行方案数据ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            LinePlan lp = new LinePlan();
+            LinePlan lp = new LinePlan(pt.str1);
             lp.Show();
         }
         private void 检测ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -307,7 +307,7 @@ namespace Monkeys_Timetable
         }
         private void 显示开行方案数据ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            LinePlan lp = new LinePlan();
+            LinePlan lp = new LinePlan(pt.str1);
             lp.Show();
         }
         private void 运行图标记冲突ToolStripMenuItem_Click(object sender, EventArgs e)
