@@ -988,5 +988,10 @@ namespace Monkeys_Timetable
             }
             DrawPicture();
         }//缩小
+
+        private void 开行方案图ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
