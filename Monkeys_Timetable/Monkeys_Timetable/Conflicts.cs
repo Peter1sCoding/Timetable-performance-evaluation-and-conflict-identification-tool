@@ -87,5 +87,30 @@ namespace Monkeys_Timetable
                 m_ConflictSta = value;
             }
         }
+        private String m_FrontTime;
+        public String FrontTime
+        {
+            get
+            {
+                return m_FrontTime;
+            }
+            set
+            {
+                m_FrontTime = value;
+            }
+        }
+        private String m_LatterTime;
+        public String LatterTime
+        {
+            get
+            {
+                return m_LatterTime;
+            }
+            set
+            {
+                m_LatterTime = value;
+            }
+        }
+
     }
 }
