@@ -965,9 +965,10 @@ namespace Monkeys_Timetable
 
         }
 
-        private void 开行方案图ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
+        //private void 开行方案图ToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    LinePlanGraph lpg = new LinePlanGraph();
+        //    lpg.Show();
+        //}
     }
 }

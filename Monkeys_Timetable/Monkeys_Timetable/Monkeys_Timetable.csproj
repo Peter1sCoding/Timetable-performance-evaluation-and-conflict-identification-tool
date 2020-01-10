@@ -71,12 +71,6 @@
     <Compile Include="LinePlan.Designer.cs">
       <DependentUpon>LinePlan.cs</DependentUpon>
     </Compile>
-    <Compile Include="LinePlanGraph.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="LinePlanGraph.Designer.cs">
-      <DependentUpon>LinePlanGraph.cs</DependentUpon>
-    </Compile>
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -108,9 +102,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="LinePlan.resx">
       <DependentUpon>LinePlan.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="LinePlanGraph.resx">
-      <DependentUpon>LinePlanGraph.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
