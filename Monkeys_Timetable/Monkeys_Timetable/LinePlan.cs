@@ -45,7 +45,7 @@ namespace Monkeys_Timetable
                 m_StaX = value;
             }
         }
-        Bitmap bmp = new Bitmap(2480, 600);
+        Bitmap bmp = new Bitmap(2480, 1300);
         Pen pen = new Pen(Color.Black);
         SolidBrush brush = new SolidBrush(Color.Black);
         Font font = new Font("宋体", 8f);
