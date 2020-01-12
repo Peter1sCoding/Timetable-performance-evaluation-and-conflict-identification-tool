@@ -65,7 +65,6 @@ namespace Monkeys_Timetable
             this.DownStaLists = staLists;
             g = Graphics.FromImage(bmp);
             GetPlan();
-            DrawDownPlan();
         }
         public void DrawUpPlan()
         {
@@ -82,6 +81,10 @@ namespace Monkeys_Timetable
             }       
             DrawFrame(pictureBox1.Width, pictureBox1.Height, g, UpStaLists);
             DrawLine(g, UpPlanDic,UpStaLists,"up");
+            for (int i = 1; i < UpStaLists.Count + 1; i++)
+            {
+                UpStaLists[i].Reverse();
+            }
         }
         public void DrawDownPlan()
         {

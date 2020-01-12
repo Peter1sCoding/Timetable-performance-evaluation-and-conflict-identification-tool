@@ -62,6 +62,7 @@
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.下行开行方案ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -82,7 +83,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(6, 1, 0, 1);
-            this.menuStrip1.Size = new System.Drawing.Size(412, 29);
+            this.menuStrip1.Size = new System.Drawing.Size(580, 29);
             this.menuStrip1.TabIndex = 6;
             this.menuStrip1.Text = "menuStrip1";
             this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
@@ -201,16 +202,18 @@
             // 开行方案ToolStripMenuItem
             // 
             this.开行方案ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.显示开行方案数据ToolStripMenuItem});
+            this.显示开行方案数据ToolStripMenuItem,
+            this.下行开行方案ToolStripMenuItem});
             this.开行方案ToolStripMenuItem.Name = "开行方案ToolStripMenuItem";
             this.开行方案ToolStripMenuItem.Size = new System.Drawing.Size(90, 27);
             this.开行方案ToolStripMenuItem.Text = "开行方案";
+            this.开行方案ToolStripMenuItem.Click += new System.EventHandler(this.开行方案ToolStripMenuItem_Click);
             // 
             // 显示开行方案数据ToolStripMenuItem
             // 
             this.显示开行方案数据ToolStripMenuItem.Name = "显示开行方案数据ToolStripMenuItem";
-            this.显示开行方案数据ToolStripMenuItem.Size = new System.Drawing.Size(192, 28);
-            this.显示开行方案数据ToolStripMenuItem.Text = "开行方案数据";
+            this.显示开行方案数据ToolStripMenuItem.Size = new System.Drawing.Size(238, 28);
+            this.显示开行方案数据ToolStripMenuItem.Text = "上行开行方案";
             this.显示开行方案数据ToolStripMenuItem.Click += new System.EventHandler(this.显示开行方案数据ToolStripMenuItem_Click);
             // 
             // 导出ToolStripMenuItem
@@ -368,6 +371,13 @@
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // 下行开行方案ToolStripMenuItem
+            // 
+            this.下行开行方案ToolStripMenuItem.Name = "下行开行方案ToolStripMenuItem";
+            this.下行开行方案ToolStripMenuItem.Size = new System.Drawing.Size(238, 28);
+            this.下行开行方案ToolStripMenuItem.Text = "下行开行方案";
+            this.下行开行方案ToolStripMenuItem.Click += new System.EventHandler(this.下行开行方案ToolStripMenuItem_Click);
+            // 
             // PaintForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 17F);
@@ -437,5 +447,6 @@
         private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.ToolStripMenuItem 下行开行方案ToolStripMenuItem;
     }
 }

@@ -48,6 +48,7 @@ namespace Monkeys_Timetable
         ///PaintTool对象，用于绘图
         /// </summary>
         PaintTool pt = new PaintTool();
+        LinePlan lp;
         /// <summary>
         ///存放冲突信息
         /// </summary>
@@ -307,8 +308,8 @@ namespace Monkeys_Timetable
         }
         private void 显示开行方案数据ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            LinePlan lp = new LinePlan(pt.str1);
             lp.Show();
+            lp.DrawUpPlan();
         }
         private void 运行图标记冲突ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -963,6 +964,17 @@ namespace Monkeys_Timetable
         private void dataGridView2_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void 下行开行方案ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            lp.Show();
+            lp.DrawDownPlan();
+        }
+
+        private void 开行方案ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            lp = new LinePlan(pt.str1);
         }
     }
 }
