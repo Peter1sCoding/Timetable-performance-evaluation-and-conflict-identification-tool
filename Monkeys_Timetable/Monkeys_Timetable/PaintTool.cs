@@ -47,7 +47,7 @@ namespace Monkeys_Timetable
             SF1.Alignment = StringAlignment.Center;
             float Left = 55;//运行图左边留白
             float Right = 10;//运行图右边留白
-            float Up = 5;//运行图上边留白
+            float Up = 15;//运行图上边留白
             float Down = 15;//运行图下边留白
             PointF p1 = new PointF();
             PointF p2 = new PointF();
@@ -80,8 +80,18 @@ namespace Monkeys_Timetable
                         }
                         p1.X = (float)(p1.X + add);
                         p2.X = (float)(p2.X + add);
-                        gs.DrawString(Convert.ToString(Hour),font,brush,p2.X,p2.Y+5,SF1);//在这添加插入时间语句
-                        Hour++;
+                        if (indd == staY2.Count)
+                        {
+                            gs.DrawString(Convert.ToString(Hour), font, brush, p2.X, p2.Y + 5, SF1);//在这添加插入时间语句
+                            Hour++;
+                        }
+                        if (indd == 1)
+                        {
+                            gs.DrawString(Convert.ToString(Hour), font, brush, p1.X, p1.Y - 15, SF1);//在这添加插入时间语句
+                            Hour++;
+                        }
+                        //gs.DrawString(Convert.ToString(Hour),font,brush,p2.X,p2.Y+5,SF1);//在这添加插入时间语句
+                        //Hour++;
                     }
                     else if (j % 60 != 0 && j % 30 == 0)
                     {

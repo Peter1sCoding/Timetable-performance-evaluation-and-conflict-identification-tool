@@ -45,12 +45,13 @@ namespace Monkeys_Timetable
                 m_StaX = value;
             }
         }
-        Bitmap bmp = new Bitmap(1240, 600);
+        Bitmap bmp = new Bitmap(2480, 600);
         Pen pen = new Pen(Color.Black);
         SolidBrush brush = new SolidBrush(Color.Black);
         Font font = new Font("宋体", 8f);
         float curY;
         float curX;
+        StringFormat SF = new StringFormat();
 
         public LinePlan(Dictionary<int, List<String>> staLists)
         {
@@ -146,7 +147,8 @@ namespace Monkeys_Timetable
             }
         }
         public void DrawFrame(float Width,float Height,Graphics g, Dictionary<int, List<String>> StaLists)
-        {          
+        {
+            SF.Alignment = StringAlignment.Center;       
             float Left = 30;
             float Right = 5;
             float Up = 30;
@@ -161,10 +163,10 @@ namespace Monkeys_Timetable
             }
             float gapBetweenSta = (Width - Left - Right) / ((float)totalSta + (float)(StaLists.Count - 1));
             float gapBetweenSec = gapBetweenSta;
-            curX = 0;
+            curX = 20;
             curY = Up;
             bool UpDown = true;
-            g.DrawString("数量", font, brush, curX, curY);
+            g.DrawString("数量", font, brush, curX-20, curY-5);
             curX = Left;
             for (int i = 1; i < StaLists.Count + 1; i++)
             {
@@ -173,15 +175,16 @@ namespace Monkeys_Timetable
                 UpDown = true;              
                 for (int j = 0; j < StaLists[i].Count; j++)
                 {
-                    g.DrawEllipse(pen, curX, Up, 5, 5);
+                    g.DrawEllipse(pen, curX-(float)2.5, Up-(float)2.5, 5, 5);
+                    g.DrawEllipse(pen, curX-5, Up-5, 10, 10);
                     if (UpDown)
                     {
-                        g.DrawString(StaLists[i][j], font, brush, curX - 10, curY + 15);
+                        g.DrawString(StaLists[i][j], font, brush, curX, curY + 15,SF);
                         StaX[i - 1].Add(StaLists[i][j], curX);
                     }
                     if (!UpDown)
                     {
-                        g.DrawString(StaLists[i][j], font, brush, curX - 10, curY - 20);
+                        g.DrawString(StaLists[i][j], font, brush, curX, curY - 20,SF);
                         StaX[i - 1].Add(StaLists[i][j], curX);
                     }
                     UpDown = !UpDown;
@@ -201,7 +204,7 @@ namespace Monkeys_Timetable
                 {
                     stas.Reverse();
                 }
-                g.DrawString(Line.Value.ToString(), font, brush, 0, curY);
+                g.DrawString(Line.Value.ToString(), font, brush, 10, curY-4,SF);
                 for (int i = 0; i < stas.Count(); i++)
                 {
                     for (int j = 1; j <= StaLists.Count - 1; j++)
@@ -210,28 +213,28 @@ namespace Monkeys_Timetable
                         {
                             if ((StaLists[j].IndexOf(stas[i]) == StaLists[j].Count - 1)&&(i == 0))
                             {
-                                g.FillEllipse(brush, StaX[j][stas[i]], curY, 7, 7);
+                                g.FillEllipse(brush, StaX[j][stas[i]]-(float)3.5, curY-(float)3.5, 7, 7);
                             }
                             if(StaLists[j + 1].IndexOf(stas[i]) == 0)
                             {
                                 if (i == stas.Count() -1)
                                 {
-                                    g.FillEllipse(brush, StaX[j - 1][stas[i]], curY, 7, 7);
+                                    g.FillEllipse(brush, StaX[j - 1][stas[i]] - (float)3.5, curY - (float)3.5, 7, 7);
                                 }
                                 else if((i != stas.Count() - 1)&&(!StaLists[j].Contains(stas[i+1])))
                                 {
-                                    g.FillEllipse(brush, StaX[j - 1][stas[i]], curY, 7, 7);
-                                    g.FillEllipse(brush, StaX[j][stas[i]], curY, 7, 7);
+                                    g.FillEllipse(brush, StaX[j - 1][stas[i]] - (float)3.5, curY - (float)3.5, 7, 7);
+                                    g.FillEllipse(brush, StaX[j][stas[i]] - (float)3.5, curY - (float)3.5, 7, 7);
                                 }
                             }
                         }
                         else if(StaLists[j].Contains(stas[i]) && (!StaLists[j + 1].Contains(stas[i])))
                         {
-                            g.FillEllipse(brush, StaX[j - 1][stas[i]], curY, 7, 7);
+                            g.FillEllipse(brush, StaX[j - 1][stas[i]] - (float)3.5, curY - (float)3.5, 7, 7);
                         }
                         else if (StaLists[j + 1].Contains(stas[i]) && (!StaLists[j].Contains(stas[i])))
                         {
-                            g.FillEllipse(brush, StaX[j][stas[i]], curY, 7, 7);
+                            g.FillEllipse(brush, StaX[j][stas[i]] - (float)3.5, curY - (float)3.5, 7, 7);
                         }
                     }
                 }
@@ -245,7 +248,7 @@ namespace Monkeys_Timetable
                             {
                                 if (StaLists[i + 1].Contains(stas[m])&&((StaLists[i].Contains(stas[0]))))
                                 {
-                                    g.DrawLine(pen, StaX[i][StaLists[i][j]], curY + 3, StaX[i][stas[m]], curY + 3);                                    
+                                    g.DrawLine(pen, StaX[i][StaLists[i][j]], curY , StaX[i][stas[m]], curY );                                    
                                 }
                             }                           
                         }
@@ -261,7 +264,7 @@ namespace Monkeys_Timetable
                             {
                                 if ((StaLists[i].Contains(stas[m]))&& StaLists[i + 1].Contains(stas[stas.Count()-1]))
                                 {
-                                    g.DrawLine(pen, StaX[i - 1][stas[m]], curY + 3, StaX[i - 1][StaLists[i][j]], curY + 3);
+                                    g.DrawLine(pen, StaX[i - 1][stas[m]], curY , StaX[i - 1][StaLists[i][j]], curY );
                                     break;
                                 }
                             }
@@ -276,7 +279,7 @@ namespace Monkeys_Timetable
                         {
                             if (StaLists[i].Contains(stas[0]))
                             {
-                                g.DrawLine(pen, StaX[i - 1][stas[0]], curY + 3, StaX[i - 1][StaLists[i][j]], curY + 3);
+                                g.DrawLine(pen, StaX[i - 1][stas[0]], curY , StaX[i - 1][StaLists[i][j]], curY );
                             }       
                         }
                     }
@@ -289,7 +292,7 @@ namespace Monkeys_Timetable
                         {
                             if (StaLists[i + 1].Contains(stas[stas.Count() - 1]))
                             {
-                                g.DrawLine(pen, StaX[i][StaLists[i][j]], curY + 3, StaX[i][stas[stas.Count() - 1]], curY + 3);
+                                g.DrawLine(pen, StaX[i][StaLists[i][j]], curY , StaX[i][stas[stas.Count() - 1]], curY );
                             }
                         }
                     }
@@ -300,7 +303,7 @@ namespace Monkeys_Timetable
                     {
                         if ((StaLists[i].Contains(stas[j]) && (StaLists[i].Contains(stas[j + 1]))))
                         {
-                            g.DrawLine(pen, StaX[i - 1][stas[j]], curY + 3, StaX[i - 1][stas[j + 1]], curY + 3);
+                            g.DrawLine(pen, StaX[i - 1][stas[j]], curY , StaX[i - 1][stas[j + 1]], curY );
                         }
                     }
                 }
