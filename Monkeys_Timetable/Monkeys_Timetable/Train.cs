@@ -189,5 +189,14 @@ namespace Monkeys_Timetable
                 x_TrainPointList = value;
             }
         }
+        /// <summary>
+        /// 列车支线信息
+        /// 0表示仅为主线于
+        /// 1,2,3……表示支线号
+        /// 列车在多个支线则把支线号存在数组中
+        /// 支线号在读取车站画图信息的字典中读得
+        /// </summary>
+        public List<int> BranchNum;
+
     }
 }

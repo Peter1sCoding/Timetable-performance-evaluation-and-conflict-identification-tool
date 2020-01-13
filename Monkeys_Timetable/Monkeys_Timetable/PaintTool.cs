@@ -25,6 +25,12 @@ namespace Monkeys_Timetable
 
         public List<float> TimeX = new List<float>();
         List<float> staY = new List<float>();
+        public struct BranchY
+        {
+            public double UpY;
+            public double DownY;
+        }
+        List<BranchY> BranchYinf=new List<PaintTool.BranchY>();//存放跨线列车连接线坐标信息
         public Dictionary<int, List<float>> staY2 = new Dictionary<int, List<float>>();
         /// <summary>
         /// 存放冲突信息的DataTable
@@ -423,6 +429,13 @@ namespace Monkeys_Timetable
 
             return Math.Sqrt(x * x + y * y);
         }
+        /// <summary>
+        /// 将车站画图信息拆分成主线和支线几段
+        /// </summary>
+        /// <param name="StationStr"></param>
+        /// <param name="StationMile"></param>
+        /// <param name="Width"></param>
+        /// <param name="Height"></param>
         public void Branch(List<string> StationStr, List<double> StationMile, double Width, double Height)
         {
             //float divi = 5;
@@ -474,7 +487,11 @@ namespace Monkeys_Timetable
                 border1.down = border1.down + h[e];
             }//把picturebox分为k份，分别绘画支线
             border2.Add(border1);
+            /////////////////////////////////////////////以上为划分支线的程序
+
+            ///////////////////////////////////////////////以上为支线点的相关坐标信息
         }//关于支线实现
+
 
     }
 }
