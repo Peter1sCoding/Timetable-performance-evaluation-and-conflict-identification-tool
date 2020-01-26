@@ -22,15 +22,18 @@ namespace Monkeys_Timetable
         List<double> Mile = new List<double>();
         public Dictionary<int, List<string>> str1 = new Dictionary<int, List<string>>();
         public Dictionary<int, List<double>> Mile1 = new Dictionary<int, List<double>>();
-
+        public int MainLine = 0;
         public List<float> TimeX = new List<float>();
         List<float> staY = new List<float>();
+        /// <summary>
+        /// 存储支线分支点的坐标信息
+        /// </summary>
         public struct BranchY
         {
             public double UpY;
             public double DownY;
         }
-        List<BranchY> BranchYinf=new List<PaintTool.BranchY>();//存放跨线列车连接线坐标信息
+        public Dictionary<string,BranchY> BranchYinf=new Dictionary<string, BranchY>();//存放跨线列车连接线坐标信息
         public Dictionary<int, List<float>> staY2 = new Dictionary<int, List<float>>();
         /// <summary>
         /// 存放冲突信息的DataTable
@@ -468,6 +471,15 @@ namespace Monkeys_Timetable
                 Str = new List<string>();
                 Mile = new List<double>();
             }//将主线与支线分开
+            foreach(int ke in str1.Keys)
+            {
+                int c = 0;
+                if (str1[ke].Count >= c)
+                {
+                    MainLine = ke;
+                    c = str1[ke].Count;
+                }
+            }////找出站数最多的作为主线，得出主线的号
             double all = 0;
             for (int l = 1; l <= k; l++)
             {
@@ -489,9 +501,46 @@ namespace Monkeys_Timetable
             border2.Add(border1);
             /////////////////////////////////////////////以上为划分支线的程序
 
-            ///////////////////////////////////////////////以上为支线点的相关坐标信息
         }//关于支线实现
 
+        public void BranchXY(List<string> StationStr, Dictionary<int, List<float>> staY2, Dictionary<int, List<string>> str1)
+        {
+            List<string> RepititiveStation = new List<string>();
+            int k = StationStr.Count;
+            for (int i = 0; i < k; i++)
+            {
+                for (int j = i + 1; j < k; j++)
+                {
+                    if (StationStr[i] == StationStr[j])
+                    {
+                        RepititiveStation.Add(StationStr[i]);
+                    }
+                } ///找出分支点的车站并存放在List中
 
+                int a = staY2.Count;
+                for (int b = 1; b + 1 <= a; b++)
+                {
+                    
+                    for(int c = 0;c < RepititiveStation.Count; c++)
+                    {
+                        int ind1 = 0;
+                        int ind2 = 0;
+                        ind1 = str1[b].IndexOf(RepititiveStation[c]);
+                        ind2 = str1[b + 1].IndexOf(RepititiveStation[c]);
+                        BranchY Bran = new BranchY();
+                        Bran.UpY = staY2[b][ind1];
+                        Bran.DownY = staY2[b + 1][ind2];
+                        BranchYinf.Add(RepititiveStation[c], Bran);
+                    }///得出每个支点站在运行图上下两个的坐标
+                    
+                }
+                
+            }
+            ///////////////////////////////////////////////以上为支线点的相关坐标信息
+        }
+        public void DrawConLine()
+        {
+
+        }
     }
 }

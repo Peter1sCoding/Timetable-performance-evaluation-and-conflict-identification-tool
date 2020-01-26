@@ -652,5 +652,16 @@ namespace Monkeys_Timetable
                 });
             }
         }
+
+        public void GetLineNum()
+        {
+            foreach (Train t in TrainList)
+            {
+                foreach (string s in t.staList)
+                {
+                    
+                }
+            }
+        }
     }
 }
