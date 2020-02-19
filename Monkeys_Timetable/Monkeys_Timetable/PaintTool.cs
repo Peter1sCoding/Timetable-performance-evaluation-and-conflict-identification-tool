@@ -21,6 +21,7 @@ namespace Monkeys_Timetable
         List<string> Str = new List<string>();
         List<double> Mile = new List<double>();
         public Dictionary<int, List<string>> str1 = new Dictionary<int, List<string>>();
+        public Dictionary<int, List<string>> str2 = new Dictionary<int, List<string>>();//无重复的车站
         public Dictionary<int, List<double>> Mile1 = new Dictionary<int, List<double>>();
         public int MainLine = 0;
         public List<float> TimeX = new List<float>();

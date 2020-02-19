@@ -652,7 +652,23 @@ namespace Monkeys_Timetable
                 });
             }
         }
-
+        public int MainLine = 0;
+        int MainLineCount = 0;
+        PaintTool pt = new PaintTool();
+        /// <summary>
+        /// 找出线路中的主线，并得出主线的序号（站数最多的为主线）
+        /// </summary>
+        public void GetMainLine()
+        {
+            foreach (int l in pt.str1.Keys)
+            {
+                if (pt.str1[l].Count > MainLineCount)
+                {
+                    MainLine = l;
+                    MainLineCount = pt.str1[l].Count;
+                }
+            }
+        }
         public void GetLineNum()
         {
             foreach (Train t in TrainList)
