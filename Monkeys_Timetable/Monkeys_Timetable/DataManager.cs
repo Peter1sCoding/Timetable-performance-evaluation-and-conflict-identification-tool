@@ -652,32 +652,25 @@ namespace Monkeys_Timetable
                 });
             }
         }
-        public int MainLine = 0;
-        int MainLineCount = 0;
         PaintTool pt = new PaintTool();
         /// <summary>
-        /// 找出线路中的主线，并得出主线的序号（站数最多的为主线）
+        /// 获得列车的支线信息，与支线车站字典进行匹配获得支线号
         /// </summary>
-        public void GetMainLine()
-        {
-            foreach (int l in pt.str1.Keys)
-            {
-                if (pt.str1[l].Count > MainLineCount)
-                {
-                    MainLine = l;
-                    MainLineCount = pt.str1[l].Count;
-                }
-            }
-        }
         public void GetLineNum()
         {
             foreach (Train t in TrainList)
             {
                 foreach (string s in t.staList)
                 {
-                    
-                }
-            }
+                    foreach (int kk in pt.str2.Keys)
+                    {
+                        if (pt.str2[kk].IndexOf(s) != -1 && t.BranchNum.IndexOf(kk) == -1)
+                        {
+                            t.BranchNum.Add(kk);
+                        }//如果列车停站列表中有支线车站列表中的车站，则把支线号放入列车属性中
+                    }//遍历支线字典
+                }//遍历列车停站列表
+            }//遍历所有列车
         }
     }
 }

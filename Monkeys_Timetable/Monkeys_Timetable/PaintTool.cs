@@ -21,7 +21,7 @@ namespace Monkeys_Timetable
         List<string> Str = new List<string>();
         List<double> Mile = new List<double>();
         public Dictionary<int, List<string>> str1 = new Dictionary<int, List<string>>();
-        public Dictionary<int, List<string>> str2 = new Dictionary<int, List<string>>();//无重复的车站
+        public Dictionary<int, List<string>> str2 = new Dictionary<int, List<string>>();//无重复的支线车站列表
         public Dictionary<int, List<double>> Mile1 = new Dictionary<int, List<double>>();
         public int MainLine = 0;
         public List<float> TimeX = new List<float>();
@@ -504,6 +504,12 @@ namespace Monkeys_Timetable
 
         }//关于支线实现
 
+        /// <summary>
+        /// 找出运行图中的支点车站在运行图中的坐标关系,放入BranchYinf中
+        /// </summary>
+        /// <param name="StationStr"></param>
+        /// <param name="staY2"></param>
+        /// <param name="str1"></param>
         public void BranchXY(List<string> StationStr, Dictionary<int, List<float>> staY2, Dictionary<int, List<string>> str1)
         {
             List<string> RepititiveStation = new List<string>();
@@ -539,8 +545,70 @@ namespace Monkeys_Timetable
             }
             ///////////////////////////////////////////////以上为支线点的相关坐标信息
         }
-        public void DrawConLine()
+
+        public int MainLineNum = 0;
+        int MainLineCount = 0;
+        PaintTool pt = new PaintTool();
+        /// <summary>
+        /// 找出线路中的主线，并得出主线的序号（站数最多的为主线）
+        /// </summary>
+        public void GetMainLine()
         {
+            foreach (int l in str1.Keys)
+            {
+                if (pt.str1[l].Count > MainLineCount)
+                {
+                    MainLineNum = l;
+                    MainLineCount = str1[l].Count;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 画出线路间的连接线
+        /// </summary>
+        public void DrawConLine(Graphics gs, List<Train> TrainList)
+        {
+            DataManager dm = new DataManager();
+            BranchXY(dm.stationDrawStringList, staY2, str1);
+            GetBranchStation();
+            foreach (Train t in TrainList)
+            {
+                foreach (int k in t.BranchNum)
+                {
+                    if (t.BranchNum != null)
+                    {
+
+                    }
+                }
+                
+            }
+        }
+        /// <summary>
+        /// 获得支线车站字典，把主线删去，把支线中与主线连接的车站删去，放入str2中
+        /// </summary>
+        public void GetBranchStation()
+        {
+            GetMainLine();
+            foreach (int k2 in str1.Keys)
+            {
+                if (k2 != MainLineNum)
+                {
+                    str2.Add(k2, str1[k2]);
+                }
+            }//把支线放入支线字典
+          
+            foreach (int k3 in str2.Keys)
+            {
+                int ii = str2[k3].Count;
+                for (int jj = ii - 1; jj >= 0; jj--) 
+                {
+                    if (str1[MainLineNum].IndexOf(str2[k3][jj]) != -1)
+                    {
+                        str2[k3].Remove(str2[k3][jj]);
+                    }
+                }
+            }//把主线有的车站删去
 
         }
     }
